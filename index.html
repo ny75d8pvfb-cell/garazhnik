@@ -378,6 +378,11 @@ td:last-child{text-align:right}
 .enghelp summary{cursor:pointer;color:var(--amber);font-weight:600}
 .enghelp ul{margin:8px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px;color:var(--ink)}
 .fammenu{max-height:min(70vh,560px);overflow-y:auto}
+.cookiebar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:14;width:min(640px,calc(100% - 32px));display:flex;gap:12px;align-items:center;background:var(--raised);border:1px solid var(--line-2);border-radius:14px;padding:12px 14px;box-shadow:0 14px 40px rgba(0,0,0,.45)}
+.cookiebar p{margin:0;font-size:13.5px;color:var(--muted);flex:1}
+.cookiebar .linkbtn{font-size:13.5px}
+.cookiebar .btn{flex:none}
+@media (max-width:640px){.cookiebar{bottom:calc(78px + env(safe-area-inset-bottom,0px));flex-direction:column;align-items:stretch}}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--raised);border:1px solid var(--line-2);color:var(--ink);padding:10px 16px;border-radius:12px;font-size:14px;z-index:15;max-width:calc(100% - 32px);transition:opacity .2s,transform .2s}
 .toast.show{opacity:1;transform:translate(-50%,0)} .toast.err{border-color:var(--warn);color:var(--warn)}
 
@@ -474,6 +479,13 @@ body.locked{overflow:hidden}
 }
 @media (prefers-reduced-motion:no-preference){.card,.fam button,.tools button{transition:background-color .15s,border-color .15s,color .15s}}
 </style>
+<!-- Yandex.Metrika counter -->
+<script>
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(113852084,"init",{webvisor:true,clickmap:true,trackHash:true,accurateTrackBounce:true,trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113852084" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </head>
 <body>
 
@@ -499,6 +511,7 @@ body.locked{overflow:hidden}
 <input type="file" id="photoInput" accept="image/*" multiple hidden>
 <div class="lightbox" id="lightbox" hidden><button type="button" class="lbx" data-lbclose aria-label="Закрыть">×</button><div class="lbin" data-lbclose><img alt=""><p></p></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="cookiebar" id="cookiebar" hidden><p>Сайт использует cookies и Яндекс Метрику, чтобы понимать, какие инструкции полезны. <button type="button" class="linkbtn" data-goto="about">Подробнее</button></p><button type="button" class="btn" id="cookieOk">Понятно</button></div>
 <nav class="bottom" role="tablist" aria-label="Разделы">
   <button role="tab" data-tab="to"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6M9 4a1 1 0 0 0-1 1v1h8V5a1 1 0 0 0-1-1M8 5H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2M9 12l2 2 4-4M9 17h6"/></svg>Работы</button>
   <button role="tab" data-tab="garage"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M7 21v-8h10v8M7 17h10"/></svg>Гараж</button>
@@ -1519,7 +1532,7 @@ function renderAbout(){
       <article class="entry"><h3>Для кого</h3><p>Для тех, кто хочет сам обслуживать свою Ладу в гараже: поменять масло, свечи, колодки, понять, что стучит. Без капремонта и без сложного оборудования.</p></article>
       <article class="entry"><h3>Откуда цифры</h3><p>Объёмы, моменты затяжки, свечи и ключи взяты из заводских руководств по эксплуатации и ремонту АвтоВАЗа для каждой модели и двигателя. Рекомендации по колодкам и маслам — из лабораторных тестов журнала «За рулём». Бренды мы отбираем сами по опыту и отзывам владельцев.</p></article>
       <article class="entry"><h3>Нашёл ошибку или не хватает работы</h3><p>Напиши в Telegram-канал — поправим и добавим. Новые инструкции появляются по вопросам читателей.</p><p><a href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer">@garage4to</a></p></article>
-      <article class="entry"><h3>Твои данные</h3><p>Сайт не собирает персональные данные и не требует регистрации. Всё, что ты вносишь в «Мой гараж», хранится только в твоём браузере на этом устройстве.</p></article>
+      <article class="entry"><h3>Твои данные</h3><p>Сайт не требует регистрации. Всё, что ты вносишь в «Мой гараж», хранится только в твоём браузере на этом устройстве и никуда не отправляется.</p><p>Чтобы понимать, какие инструкции полезны, мы используем сервис статистики Яндекс Метрика. Он сохраняет cookies и собирает обезличенные данные о посещениях: страницы, устройство, браузер, город, источник перехода. Эти данные обрабатывает ООО «Яндекс» на серверах в России. Отключить сбор можно в настройках браузера, запретив cookies, или с помощью блокировщика.</p></article>
       <article class="entry"><h3>Важно</h3><p>Работы ты делаешь сам и под свою ответственность. Если сомневаешься — особенно с тормозами и ГРМ — лучше доверить работу мастеру или делать вместе с опытным человеком.</p></article>
     </div></div>`;
 }
@@ -2047,6 +2060,9 @@ async function initStore(){
 
 route();
 initStore();
+(function(){ let seen = false; try{ seen = localStorage.getItem("garazh-cookie") === "1"; }catch(e){}
+  const bar = document.getElementById("cookiebar"); if(!seen) bar.hidden = false;
+  document.getElementById("cookieOk").addEventListener("click", () => { bar.hidden = true; try{ localStorage.setItem("garazh-cookie", "1"); }catch(e){} }); })();
 if("serviceWorker" in navigator && location.protocol === "https:"){ window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {})); }
 </script>
 
