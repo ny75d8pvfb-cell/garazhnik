@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ny75d8pvfb-cell.github.io/garazhnik/sitemap.xml

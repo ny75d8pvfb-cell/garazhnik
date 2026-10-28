@@ -1,0 +1,2054 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Гаражник — твой помощник в ТО Лады</title>
+<meta name="description" content="Пошаговые инструкции по ТО Лады своими руками: замена масла, свечей, фильтров, колодок, антифриза. Точные объёмы и моменты затяжки под твою модель и двигатель, схемы, регламент ТО и личный гараж.">
+<meta name="theme-color" content="#0E1317">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="canonical" href="https://ny75d8pvfb-cell.github.io/garazhnik/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Гаражник — твой помощник в ТО Лады">
+<meta property="og:description" content="Инструкции, схемы и точные цифры для ТО Лады в гараже.">
+<meta property="og:image" content="https://ny75d8pvfb-cell.github.io/garazhnik/og.png">
+<meta property="og:url" content="https://ny75d8pvfb-cell.github.io/garazhnik/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{color-scheme:dark;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font:14px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<style>
+/* Layout: тёмный верстак с перфопанелью на фоне; шапка с выбором машины, сетка карточек-работ с иконками,
+   в работе — «приборная панель» с цифрами для выбранной машины; на телефоне нижнее меню разделов.
+   Гаражный стиль задуман тёмным в любой теме устройства. */
+:root{
+  color-scheme:dark;
+  --bg:#0E1317; --peg:#1A222A; --surface:#161D24; --raised:#1D2630; --line:#29343F; --line-2:#36434F;
+  --ink:#E7EDF2; --muted:#8C99A5; --dim:#5F6C78;
+  --blue:#4F8FEA; --blue-ink:#9CC2F7; --blue-soft:#17263A;
+  --amber:#F2B13A; --amber-ink:#0E1317; --amber-soft:#2E2412;
+  --warn:#F07B63; --warn-soft:#33191440; --ok:#6CC48C;
+  --f-display:"Russo One","Arial Black",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --r:14px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--bg)}
+body{background-color:var(--bg);background-image:radial-gradient(var(--peg) 1.6px,transparent 1.8px);background-size:22px 22px;color:var(--ink);font:15px/1.55 var(--f-body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.wrap{max-width:900px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--blue-ink)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+/* шапка */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.head{display:flex;flex-direction:column;gap:12px;padding-block:14px 10px}
+.brand{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{width:38px;height:38px;border-radius:11px;background:var(--amber);display:grid;place-items:center;flex:none}
+.logo svg{width:22px;height:22px;stroke:var(--amber-ink)}
+.brand h1{font:24px/1 var(--f-display);margin:0;letter-spacing:.02em}
+.brand .sub{color:var(--muted);font-size:13px;line-height:1.2}
+.brand .t{display:flex;flex-direction:column;gap:3px;margin-right:auto}
+.fam{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-inline:-4px;padding:2px 4px}
+.fam::-webkit-scrollbar{display:none}
+.fam button{flex:none;border:1px solid var(--line-2);background:var(--raised);border-radius:999px;padding:7px 14px;cursor:pointer;font-size:13.5px;white-space:nowrap;color:var(--muted);font-weight:500}
+.fam button:hover{color:var(--ink)}
+.fam button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
+.tabs{display:flex;gap:4px}
+.tabs button{border:0;background:none;padding:6px 12px 9px;cursor:pointer;color:var(--muted);font-weight:500;border-bottom:2px solid transparent}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--amber)}
+nav.bottom{display:none}
+
+main{padding-block:20px 56px}
+.search{position:relative;margin-bottom:14px}
+.search input{width:100%;padding:12px 14px 12px 42px;border:1px solid var(--line-2);border-radius:var(--r);background:var(--surface);color:var(--ink)}
+.search input::placeholder{color:var(--dim)}
+.search svg{position:absolute;left:14px;top:50%;width:18px;height:18px;transform:translateY(-50%);stroke:var(--muted)}
+.famnote{font-size:13px;color:var(--muted);margin:0 0 16px}
+.famnote b{color:var(--amber);font-weight:600}
+
+/* список работ */
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.card{display:flex;flex-direction:column;gap:8px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;cursor:pointer;min-width:0;color:var(--ink)}
+.card:hover{border-color:var(--line-2);background:var(--raised)}
+.ico{width:44px;height:44px;border-radius:12px;background:var(--blue-soft);display:grid;place-items:center;flex:none}
+.ico svg{width:24px;height:24px;stroke:var(--blue-ink)}
+.card h3{margin:2px 0 0;font-size:16.5px;font-weight:600;line-height:1.3;text-wrap:balance}
+.card p{margin:0;color:var(--muted);font-size:13.5px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.pill{font-size:12px;padding:3px 9px;border-radius:999px;background:var(--raised);color:var(--muted);white-space:nowrap;border:1px solid var(--line)}
+.pill.vid{background:var(--blue-soft);color:var(--blue-ink);border-color:transparent}
+.lvl1{color:var(--ok)} .lvl2{color:var(--amber)}
+.empty{color:var(--muted);padding:24px 0}
+
+/* работа */
+.back{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line-2);background:var(--raised);color:var(--ink);border-radius:999px;cursor:pointer;padding:6px 14px 6px 10px;margin-bottom:16px;font-weight:500;font-size:14px}
+.dhead{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px}
+.dhead .ico{width:54px;height:54px;border-radius:14px}
+.dhead .ico svg{width:28px;height:28px}
+.dhead > div{min-width:0}
+.detail h2{font:26px/1.15 var(--f-display);margin:2px 0 6px;text-wrap:balance}
+.lead{color:var(--muted);margin:0;max-width:65ch}
+.plate{background:linear-gradient(180deg,var(--raised),var(--surface));border:1px solid var(--line-2);border-radius:var(--r);padding:14px 16px;margin-bottom:24px}
+.plate .cap{display:flex;align-items:center;gap:8px;font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:12px}
+.plate .cap::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber)}
+.plate dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px 20px;margin:0}
+.plate dt{font-size:12.5px;color:var(--muted);margin-bottom:2px}
+.plate dd{margin:0;font:500 17px/1.3 var(--f-mono);color:var(--amber);font-variant-numeric:tabular-nums}
+.plate dd.txt{font:500 14px/1.45 var(--f-body);color:var(--ink)}
+.plate .approx{font-size:12px;color:var(--dim);margin:14px 0 0;padding-top:10px;border-top:1px solid var(--line)}
+section.blk{margin-bottom:26px}
+section.blk h4{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:0 0 10px}
+.tools{display:flex;flex-wrap:wrap;gap:8px}
+.tools button,.tools span{border:1px solid var(--line-2);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13.5px;color:var(--muted)}
+.tools button{cursor:pointer;color:var(--blue-ink);border-color:color-mix(in srgb,var(--blue) 45%,transparent)}
+.tools button:hover{background:var(--blue-soft)}
+ol.steps{list-style:none;counter-reset:s;margin:0;padding:0;display:flex;flex-direction:column;gap:0;max-width:70ch}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:32px 1fr;gap:12px;position:relative;padding-bottom:14px}
+ol.steps li:not(:last-child)::after{content:"";position:absolute;left:15px;top:32px;bottom:0;width:2px;background:var(--line)}
+ol.steps li::before{content:counter(s);font:14px/30px var(--f-display);text-align:center;width:32px;height:32px;border-radius:50%;border:2px solid var(--amber);color:var(--amber);background:var(--bg);box-sizing:border-box;line-height:28px}
+ol.steps li div{min-width:0;padding-top:4px}
+.n{font:500 14px var(--f-mono);background:var(--amber-soft);color:var(--amber);padding:1px 6px;border-radius:5px;white-space:nowrap}
+.warn{display:flex;gap:12px;background:color-mix(in srgb,var(--warn) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--warn) 35%,transparent);color:var(--ink);border-radius:var(--r);padding:12px 16px;max-width:70ch}
+.warn::before{content:"!";flex:none;width:22px;height:22px;border-radius:50%;background:var(--warn);color:var(--bg);font:14px/22px var(--f-display);text-align:center}
+.warn p{margin:0}
+.table{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+td:first-child{font-weight:600;min-width:180px}
+
+/* видео */
+.vids{display:flex;flex-direction:column;gap:8px}
+.vid-card{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;min-width:0}
+.vid-card:hover{border-color:var(--line-2)}
+.vid-card a{flex:1;min-width:0;text-decoration:none;color:var(--ink);display:flex;flex-direction:column}
+.vid-card a b{font-weight:600;overflow-wrap:anywhere}
+.vid-card a small{color:var(--muted)}
+.play{flex:none;width:40px;height:40px;border-radius:50%;background:var(--amber);display:grid;place-items:center}
+.play::after{content:"";border-left:12px solid var(--amber-ink);border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:4px}
+.del{border:0;background:none;color:var(--warn);cursor:pointer;font-size:13px;padding:4px}
+.nov{color:var(--muted);font-size:14px;margin:0}
+form.add{display:grid;gap:10px;background:var(--surface);border:1px dashed var(--blue);border-radius:var(--r);padding:14px;margin-top:12px}
+form.add .row{display:flex;gap:8px;flex-wrap:wrap}
+form.add input,form.add select{padding:10px 12px;border:1px solid var(--line-2);border-radius:10px;background:var(--bg);color:var(--ink);min-width:0;flex:1 1 200px}
+.btn{border:0;border-radius:10px;background:var(--blue);color:#fff;padding:10px 16px;cursor:pointer;font-weight:600}
+.btn:hover{filter:brightness(1.1)}
+.msg{font-size:13px;margin:0;color:var(--muted)}
+.msg.err{color:var(--warn)}
+.owner-badge{font-size:12px;color:var(--amber);background:var(--amber-soft);padding:3px 10px;border-radius:999px}
+
+/* инструмент и жидкости */
+.entry{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;scroll-margin-top:190px}
+.entry h3{margin:0 0 4px;font-size:18px;font-family:var(--f-display);font-weight:400;letter-spacing:.01em}
+.entry > p{margin:0 0 12px;color:var(--muted);max-width:68ch}
+.types{display:grid;gap:0;margin:0;padding:0;list-style:none}
+.types li{display:grid;grid-template-columns:minmax(130px,200px) 1fr;gap:14px;padding:9px 0;border-top:1px solid var(--line)}
+.types li b{font-weight:600}
+.types li span{min-width:0;color:var(--ink)}
+.tip{display:flex;gap:10px;margin:12px 0 0;font-size:13.5px;color:var(--ink);background:var(--amber-soft);border-radius:10px;padding:10px 12px}
+.tip::before{content:"Совет";flex:none;font:600 11px/1.9 var(--f-body);text-transform:uppercase;letter-spacing:.08em;color:var(--amber)}
+.stack{display:flex;flex-direction:column;gap:12px}
+.tools button.part{color:var(--amber);border-color:color-mix(in srgb,var(--amber) 45%,transparent)}
+.tools button.part:hover{background:var(--amber-soft)}
+.brands-cap{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:14px 0 8px}
+.brands{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}
+.brands li{display:flex;flex-direction:column;gap:2px;background:var(--raised);border:1px solid var(--line);border-radius:10px;padding:9px 12px;min-width:0}
+.brands li b{font-weight:600}
+.brands li span{font-size:12.5px;color:var(--muted)}
+.bad{margin-top:12px;font-size:13.5px;background:color-mix(in srgb,var(--warn) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--warn) 35%,transparent);border-radius:10px;padding:10px 12px}
+.bad b{color:var(--warn)}
+.bad span{color:var(--muted)}
+
+/* регламент, симптомы, гараж */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:16px}
+.feature,.logbtn{display:flex;align-items:center;gap:12px;text-align:left;background:linear-gradient(135deg,var(--amber-soft),var(--surface) 70%);border:1px solid color-mix(in srgb,var(--amber) 35%,transparent);border-radius:var(--r);padding:14px;cursor:pointer;color:var(--ink);min-width:0;width:100%}
+.feature .ico,.logbtn .ico{background:var(--amber);}
+.feature .ico svg,.logbtn .ico svg{stroke:var(--amber-ink)}
+.feature span:last-child,.logbtn span:last-child{display:flex;flex-direction:column;min-width:0}
+.feature b,.logbtn b{font-size:16px}
+.feature small,.logbtn small{color:var(--muted);font-size:13px}
+.feature:hover,.logbtn:hover{border-color:var(--amber)}
+.logbtn{margin-top:16px}
+.approx-note{font-size:12.5px;color:var(--dim);margin:12px 0 0;max-width:70ch}
+.linkbtn{border:0;background:none;color:var(--blue-ink);cursor:pointer;padding:2px 0;font-size:13.5px;font-weight:500;white-space:nowrap}
+.linkbtn:hover{text-decoration:underline}
+td:last-child{text-align:right}
+.entry.starter{border-color:color-mix(in srgb,var(--amber) 45%,transparent)}
+.sym h3{font-family:var(--f-body);font-weight:600;font-size:16.5px}
+.sym.danger{border-color:color-mix(in srgb,var(--warn) 45%,transparent)}
+.dangerpill{display:inline-block;margin:2px 0 6px;background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn);border-color:transparent}
+.causes{margin:6px 0 12px;padding-left:20px;color:var(--ink);display:flex;flex-direction:column;gap:4px;max-width:68ch}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chips button{border:1px solid var(--line-2);background:var(--raised);border-radius:999px;padding:7px 14px;cursor:pointer;color:var(--muted);font-weight:500}
+.chips button[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:var(--amber-ink);font-weight:600}
+.carcard{background:linear-gradient(180deg,var(--raised),var(--surface));border:1px solid var(--line-2);border-radius:var(--r);padding:16px;margin-bottom:24px;display:flex;flex-direction:column;gap:14px}
+.carhead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.carhead h3{margin:0;font:22px/1.15 var(--f-display);font-weight:400}
+.carhead p{margin:4px 0 0;color:var(--muted);font-size:13.5px}
+.carbtns{display:flex;gap:6px;align-items:flex-start}
+.kmrow{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--line)}
+.kmrow .cap{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.bigkm{font:500 28px/1.2 var(--f-mono);color:var(--amber);font-variant-numeric:tabular-nums}
+.kmset{display:flex;gap:8px;min-width:0;flex:0 1 300px}
+.kmset input{flex:1;min-width:0;padding:10px 12px;border:1px solid var(--line-2);border-radius:10px;background:var(--bg);color:var(--ink)}
+.ghost{border:1px solid var(--line-2);background:transparent;color:var(--ink);border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:500}
+.ghost.sm{padding:5px 10px;font-size:13px}
+.ghost.danger{color:var(--warn)}
+.duelist,.loglist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.due{display:flex;justify-content:space-between;gap:12px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--line-2);border-radius:10px;padding:10px 14px}
+.due-main{display:flex;flex-direction:column;min-width:0}
+.due-main small{color:var(--muted);font-size:12.5px}
+.due-side{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none}
+.stpill{font-size:12px;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.st-over{border-left-color:var(--warn)} .st-over .stpill{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+.st-soon{border-left-color:var(--amber)} .st-soon .stpill{background:var(--amber-soft);color:var(--amber)}
+.st-ok{border-left-color:var(--ok)} .st-ok .stpill{background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)}
+.st-none .stpill{background:var(--raised);color:var(--muted)}
+.gform{display:flex;flex-direction:column;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.gform h3{margin:0;font-size:17px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px 12px}
+.gform label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--muted);min-width:0}
+.gform label.wide{grid-column:1/-1}
+.gform input,.gform select{padding:10px 12px;border:1px solid var(--line-2);border-radius:10px;background:var(--bg);color:var(--ink);font-size:15px;min-width:0;width:100%}
+.gform .row{display:flex;gap:8px;flex-wrap:wrap}
+.due-empty{list-style:none;color:var(--muted);font-size:14px;background:var(--surface);border:1px dashed var(--line-2);border-radius:10px;padding:12px 14px}
+.duemore{list-style:none}
+.duemore summary{cursor:pointer;color:var(--muted);font-size:13.5px;padding:6px 2px}
+.duemore .duelist{margin-top:6px}
+.duelist > li:has(> .duemore){list-style:none}
+.loglist li{display:grid;grid-template-columns:110px 1fr auto;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;align-items:start}
+.logdate{display:flex;flex-direction:column;font-variant-numeric:tabular-nums}
+.logdate span{font:500 13px var(--f-mono);color:var(--amber)}
+.logbody{display:flex;flex-direction:column;min-width:0}
+.logbody span{font-size:13.5px;overflow-wrap:anywhere}
+.logbody small{color:var(--muted);font-size:12.5px;overflow-wrap:anywhere}
+.logside{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.cost{font:500 13.5px var(--f-mono);white-space:nowrap}
+.total{margin:12px 0 0;color:var(--muted)}
+.total b{color:var(--ink);font-family:var(--f-mono);font-weight:500}
+@media (max-width:640px){
+  .loglist li{grid-template-columns:1fr auto}
+  .logdate{grid-column:1/-1;flex-direction:row;gap:10px}
+  .due{flex-direction:column}
+  .due-side{flex-direction:row;align-items:center;justify-content:space-between}
+  .kmset{flex-basis:100%}
+  nav.bottom button{font-size:10.5px}
+}
+
+.tg{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid var(--line-2);color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:500}
+.tg svg{width:18px;height:18px;stroke:currentColor}
+.tg:hover{color:var(--blue-ink);border-color:color-mix(in srgb,var(--blue) 50%,transparent)}
+.tgcard{display:flex;align-items:center;gap:14px;margin-top:28px;padding:14px 16px;border-radius:var(--r);border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none}
+.tgcard:hover{border-color:color-mix(in srgb,var(--blue) 50%,transparent)}
+.tgico{flex:none;width:44px;height:44px;border-radius:50%;background:var(--blue-soft);display:grid;place-items:center}
+.tgico svg{width:22px;height:22px;stroke:var(--blue-ink)}
+.tgtext{display:flex;flex-direction:column;min-width:0;flex:1}
+.tgtext small{color:var(--muted);font-size:13px}
+.tgqr{flex:none;width:84px;height:84px;background:#fff;border-radius:8px;padding:3px;display:none}
+.tgqr svg{width:100%;height:100%;display:block}
+@media (min-width:760px){.tgqr:not(:empty){display:block}}
+
+/* схемы */
+.fig{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 14px 12px;overflow-x:auto}
+.fig svg{display:block;width:100%;height:auto;min-width:420px;max-width:640px;margin:0 auto}
+.fig.fig-sm svg{min-width:0;max-width:300px}
+.fig figcaption{font-size:13px;color:var(--muted);margin-top:8px;text-align:center}
+.fx-h{fill:var(--ink);font:600 15px var(--f-body)}
+.fx-s{fill:var(--muted);font:500 12.5px var(--f-body)}
+.fx-v{fill:var(--amber);font:500 14px var(--f-mono)}
+.fx-w{fill:var(--warn)} .fx-a{fill:var(--amber)} .fx-on{fill:#2a1d0a}
+.fx-b{fill:var(--blue-ink)} .fx-term{fill:#fff;font:700 12px var(--f-body)}
+.fx-num{fill:#fff;font:700 13px var(--f-body)} .fx-numd{fill:var(--amber-ink);font:700 15px var(--f-body)}
+.fx-shell{fill:#7d8790} .fx-thread{stroke:#5b646c;stroke-width:1.5}
+.fx-metal{stroke:#9aa3ab} .fx-metalf{fill:#9aa3ab}
+.fx-disc{fill:var(--line-2)} .fx-pad{fill:#8C6A3E} .fx-worn{fill:var(--warn)}
+.fx-dim{stroke:var(--muted);stroke-width:1.5;fill:none} .fx-dimw{stroke:var(--warn);stroke-width:1.5}
+.fx-arrow{fill:var(--muted)}
+.fx-ring{fill:var(--raised);stroke:var(--line-2);stroke-width:2} .fx-tooth{stroke:var(--line-2);stroke-width:3}
+.fx-hub{fill:var(--bg);stroke:var(--line-2);stroke-width:2}
+.fx-amberf{fill:var(--amber)} .fx-bluef{fill:var(--blue)}
+.fx-window{fill:var(--bg);stroke:var(--line-2);stroke-width:2} .fx-fly{fill:var(--raised)}
+.fx-tick{stroke:var(--muted);stroke-width:2} .fx-markline{stroke:var(--amber);stroke-width:4;stroke-linecap:round}
+.fx-batt{fill:var(--raised);stroke:var(--line-2);stroke-width:2} .fx-engine{fill:var(--sunk);stroke:var(--line-2);stroke-width:2}
+.fx-redf{fill:#D9473A} .fx-darkf{fill:#3a4550} .fx-blackn{fill:#2b333b;stroke:#7d8790;stroke-width:1.5}
+.fx-cable-r{stroke:#D9473A;stroke-width:5;fill:none;stroke-linecap:round} .fx-cable-b{stroke:#7d8790;stroke-width:5;fill:none;stroke-linecap:round;stroke-dasharray:1 0}
+.fx-bolt{fill:var(--amber)} .fx-car{fill:var(--raised);stroke:var(--line-2);stroke-width:2} .fx-glass{fill:var(--blue-soft)} .fx-wheel{fill:#2b333b;stroke:var(--line-2)}
+.fx-body{fill:var(--raised);stroke:var(--line-2);stroke-width:2} .fx-body2{fill:var(--surface);stroke:var(--line-2);stroke-width:2}
+.fx-lead{stroke:var(--muted);stroke-width:1.2;fill:none} .fx-dot{fill:var(--muted)}
+.fx-ring-a{fill:none;stroke:var(--amber);stroke-width:3} .fx-stick{stroke:var(--amber);stroke-width:4;stroke-linecap:round}
+.fx-oilf{fill:#C8952F} .fx-oilfilm{fill:#C8952F;opacity:.85} .fx-bucket{fill:none;stroke:var(--muted);stroke-width:2.5;stroke-linejoin:round}
+.fx-filterf{fill:var(--blue)} .fx-mark{stroke:var(--ink);stroke-width:2.5}
+.fx-glassbox{fill:color-mix(in srgb,var(--blue-soft) 60%,transparent);stroke:var(--line-2);stroke-width:2}
+.fx-coolant{fill:#D9567A;opacity:.85} .fx-brakefl{fill:#c9b56a;opacity:.6}
+.fx-wiper{stroke:#2b333b;stroke-width:5;stroke-linecap:round} .fx-hl{fill:color-mix(in srgb,var(--amber) 35%,transparent);stroke:var(--amber);stroke-width:2;stroke-dasharray:6 4}
+.fx-ground{fill:none;stroke:#9aa3ab;stroke-width:10;stroke-linejoin:round} .fx-feeler{fill:var(--amber);opacity:.9}
+.fx-pipe{stroke:var(--muted);stroke-width:8;stroke-linecap:round} .fx-arrw{stroke:#fff;stroke-width:4}
+.fx-disc2{fill:var(--sunk);stroke:var(--line-2);stroke-width:2} .fx-hose{fill:none;stroke:color-mix(in srgb,#cfe3ff 55%,transparent);stroke-width:7;stroke-linecap:round}
+.fx-bub{fill:none;stroke:#fff;stroke-width:1.4}
+.fx-axis{stroke:var(--muted);stroke-width:2} .fx-v2{fill:var(--muted);font:500 12px var(--f-mono)}
+.fx-zw{fill:color-mix(in srgb,var(--warn) 70%,transparent)} .fx-za{fill:color-mix(in srgb,var(--amber) 70%,transparent)} .fx-zo{fill:color-mix(in srgb,var(--ok) 75%,transparent)} .fx-zb{fill:color-mix(in srgb,var(--blue) 75%,transparent)}
+.fx-bulb{fill:color-mix(in srgb,#ffffff 14%,transparent);stroke:#b9c3cc;stroke-width:2} .fx-bulbA{fill:color-mix(in srgb,var(--amber) 35%,transparent);stroke:var(--amber);stroke-width:2}
+.fx-fil{fill:none;stroke:var(--amber);stroke-width:2} .fx-pin{stroke:#9aa3ab;stroke-width:4;stroke-linecap:round}
+.fx-pulley{fill:var(--raised);stroke:var(--line-2);stroke-width:3} .fx-beltp{fill:none;stroke:#3a4550;stroke-width:9;stroke-linecap:round} .fx-beltghost{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-dasharray:5 5}
+.fx-push{stroke:var(--amber);stroke-width:3} .fx-arrowA{fill:var(--amber)}
+.fx-beltok{fill:#2f3942;stroke:#4a5560;stroke-width:2} .fx-beltbad{fill:#2f3942;stroke:var(--warn);stroke-width:2}
+.fx-ok{fill:var(--ok)}
+.minifig{margin:6px 0 0;background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:8px;max-width:240px}
+.minisvg{display:block;width:100%;height:auto}
+.minifig figcaption{font-size:12.5px;color:var(--muted);text-align:center;margin-top:4px}
+
+.stepfig{margin:10px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 10px 10px;max-width:340px}
+.stepfig figcaption{font-size:12.5px;line-height:1.4;color:var(--muted);margin-top:6px}
+.stepsvg{display:block;width:100%;height:auto}
+.dstep .stepfig{max-width:440px}
+.fx-arA{stroke:var(--amber);stroke-width:2.5;fill:none;stroke-linecap:round} .fx-arM{stroke:var(--muted);stroke-width:2;fill:none;stroke-linecap:round}
+.fx-headA{fill:var(--amber)} .fx-headM{fill:var(--muted)}
+.fx-boltM{fill:#9aa3ab} .fx-boltA{fill:var(--amber)} .fx-strap{fill:#3a4550} .fx-handle{stroke:#9aa3ab;stroke-width:7;stroke-linecap:round;fill:none}
+.fx-oring{fill:none;stroke:var(--amber);stroke-width:4} .fx-funnel{fill:var(--raised);stroke:var(--line-2);stroke-width:2}
+.fx-body2line{stroke:var(--line-2);stroke-width:5} .fx-pourline{stroke:#C8952F;stroke-width:4;fill:none;stroke-linecap:round}
+.fx-clip{stroke:var(--amber);stroke-width:3;fill:none} .fx-sealbox{fill:none;stroke:var(--amber);stroke-width:4}
+.fx-wiperarm{stroke:#2b333b;stroke-width:8;stroke-linecap:round} .fx-boot{fill:#1d2328;stroke:#3a4550;stroke-width:2} .fx-wire{stroke:#3a4550;stroke-width:6;fill:none}
+.fx-cross{stroke:var(--warn);stroke-width:3} .fx-coil{fill:#3a4550;stroke:var(--line-2);stroke-width:2} .fx-plug{fill:#556170}
+.fx-well{fill:var(--sunk)} .fx-nozzle{stroke:#9aa3ab;stroke-width:6;stroke-linecap:round} .fx-ext{fill:#9aa3ab}
+.fx-tw{stroke:#9aa3ab;stroke-width:8;stroke-linecap:round} .fx-tw2{fill:#556170}
+.fx-radiator{fill:var(--raised);stroke:var(--line-2);stroke-width:2} .fx-fin{stroke:var(--line-2);stroke-width:1.5} .fx-coolf{fill:#D9567A}
+.fx-hosethick{stroke:#2b333b;stroke-width:16;fill:none;stroke-linecap:round}
+.fx-wheelc{fill:#2b333b;stroke:var(--line-2);stroke-width:3} .fx-spoke{stroke:#556170;stroke-width:8;stroke-linecap:round}
+.fx-light{stroke:rgba(255,226,140,.45);stroke-width:12;stroke-linecap:round} .fx-worn2{fill:var(--warn);opacity:.5} .fx-groove{stroke:#556170;stroke-width:2}
+.fx-ground2{stroke:var(--line-2);stroke-width:4} .fx-sill{stroke:#556170;stroke-width:14} .fx-jack{stroke:#9aa3ab;stroke-width:5;fill:none;stroke-linejoin:round}
+.fx-syr{fill:var(--glass, var(--blue-soft));stroke:var(--line-2);stroke-width:2} .fx-needle{stroke:#9aa3ab;stroke-width:3}
+.fx-clamp{stroke:#9aa3ab;stroke-width:6;fill:none} .fx-pedalarm{stroke:#556170;stroke-width:8;stroke-linecap:round} .fx-pedal{fill:#3a4550;stroke:var(--line-2);stroke-width:2}
+.fx-holeA{fill:var(--amber)} .fx-fuse{fill:#3a4550} .fx-quick{fill:#556170}
+.fx-meter{fill:#2b333b;stroke:var(--amber);stroke-width:2} .fx-lcd{fill:#b9d3a8} .fx-lcdt{fill:#1a2a10;font:600 17px var(--f-mono)}
+.fx-probeR{stroke:#D9473A;stroke-width:3;fill:none} .fx-probeB{stroke:#7d8790;stroke-width:3;fill:none}
+.fx-boot2{fill:#1d2328;stroke:#3a4550;stroke-width:6} .fx-springw{stroke:#9aa3ab;stroke-width:4;fill:none} .fx-float{fill:#e8e2c6} .fx-tread{stroke:#556170;stroke-width:6}
+.plugread{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.pcard{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.pcard.ok{border-color:color-mix(in srgb,var(--ok) 50%,transparent)}
+.plugsvg{width:64px;height:74px;flex:none;background:var(--sunk);border-radius:10px}
+.pcard div{display:flex;flex-direction:column;min-width:0}
+.pcard b{font-size:14px} .pcard span{font-size:12.5px;color:var(--muted)}
+/* фото */
+.photos{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.ph{margin:0;width:150px;display:flex;flex-direction:column;gap:4px}
+.phbtn{padding:0;border:1px solid var(--line-2);border-radius:10px;overflow:hidden;cursor:zoom-in;background:var(--sunk);aspect-ratio:4/3;width:100%;max-width:100%}
+.phbtn img{width:100%;height:100%;object-fit:cover;display:block}
+.ph.broken .phbtn::after{content:"Фото недоступно";display:grid;place-items:center;height:100%;font-size:12px;color:var(--muted)}
+.ph.broken img{display:none}
+.ph figcaption{font-size:12.5px;color:var(--muted);line-height:1.35}
+.phedit{display:flex;flex-direction:column;gap:2px}
+.phedit input{padding:5px 8px;border:1px solid var(--line-2);border-radius:8px;background:var(--bg);color:var(--ink);font-size:12.5px;width:100%}
+.phedit .del{align-self:flex-start;padding:2px 0;font-size:12px}
+.addph{width:150px;aspect-ratio:4/3;border:1.5px dashed color-mix(in srgb,var(--amber) 55%,transparent);border-radius:10px;background:transparent;color:var(--amber);cursor:pointer;font-size:12.5px;font-weight:500;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:8px;text-align:center}
+.addph span{font-size:22px;line-height:1}
+.addph:hover{background:var(--amber-soft)}
+.pair{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:start;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.pair-col{min-width:0}
+.pair-arrow{color:var(--dim);font-size:22px;padding-top:40px}
+.pair-h{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:600}
+.pair-h.prob{color:var(--warn)} .pair-h.sol{color:var(--ok)}
+.pair .nov{font-size:13px;margin-top:6px}
+.symvid{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.addwrap summary{cursor:pointer;color:var(--blue-ink);font-size:13.5px;font-weight:500}
+.lightbox{position:fixed;inset:0;z-index:20;background:rgba(5,8,10,.92);display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lightbox[hidden]{display:none!important}
+.lbin{display:flex;flex-direction:column;align-items:center;gap:10px;max-width:100%;max-height:100%}
+.lbin img{max-width:100%;max-height:80vh;border-radius:10px;object-fit:contain}
+.lbin p{margin:0;color:#E7EDF2;text-align:center}
+.lbx{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:#fff;font-size:26px;cursor:pointer}
+.vidblk:empty{display:none}
+.footlinks{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin-top:16px;color:var(--dim);font-size:13.5px}
+.footlinks a{color:var(--blue-ink);text-decoration:none}
+.about .entry p + p{margin-top:8px}
+.mcap{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding:8px 12px 4px}
+.engs{display:flex;flex-direction:column;gap:2px}
+.enghelp{margin:6px 6px 4px;padding:10px 12px;border-radius:10px;background:var(--surface);font-size:13px}
+.enghelp summary{cursor:pointer;color:var(--amber);font-weight:600}
+.enghelp ul{margin:8px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px;color:var(--ink)}
+.fammenu{max-height:min(70vh,560px);overflow-y:auto}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--raised);border:1px solid var(--line-2);color:var(--ink);padding:10px 16px;border-radius:12px;font-size:14px;z-index:15;max-width:calc(100% - 32px);transition:opacity .2s,transform .2s}
+.toast.show{opacity:1;transform:translate(-50%,0)} .toast.err{border-color:var(--warn);color:var(--warn)}
+
+/* выбор машины */
+.famsel{position:relative}
+.famrow{display:flex;align-items:center;gap:12px;min-width:0}
+.fambtn{display:inline-flex;align-items:center;gap:6px;flex:none;border:0;background:var(--blue);color:#fff;border-radius:10px;padding:8px 12px 8px 14px;cursor:pointer;font-weight:600;font-size:14px}
+.fambtn svg{width:16px;height:16px;stroke:#fff}
+.fambtn:hover{filter:brightness(1.1)}
+.famcur{display:flex;flex-direction:column;gap:1px;min-width:0;cursor:default;line-height:1.25}
+.famcur b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
+.famcur small{color:var(--amber);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.fammenu{position:absolute;top:calc(100% + 6px);left:0;z-index:8;width:min(520px,100%);background:var(--raised);border:1px solid var(--line-2);border-radius:12px;padding:6px;box-shadow:0 18px 40px rgba(0,0,0,.45);display:flex;flex-direction:column;gap:2px}
+.fammenu button{display:flex;flex-direction:column;align-items:flex-start;border:0;background:none;color:var(--ink);text-align:left;padding:9px 12px;border-radius:8px;cursor:pointer}
+.fammenu button small{color:var(--muted);font-size:12.5px}
+.fammenu button:hover{background:var(--surface)}
+.fammenu button[aria-pressed="true"]{background:var(--blue-soft)}
+.fammenu button[aria-pressed="true"] b{color:var(--blue-ink)}
+/* группы */
+.group{margin-bottom:22px}
+.gh{display:flex;align-items:center;gap:8px;font:400 17px/1.2 var(--f-display);letter-spacing:.02em;margin:0 0 10px}
+.gh span{font:500 12px var(--f-body);color:var(--muted);background:var(--raised);border:1px solid var(--line);border-radius:999px;padding:1px 8px}
+/* цифры */
+.numgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.numgrid .plate{margin:0}
+.numdl{grid-template-columns:1fr!important}
+.numdl div{display:grid;grid-template-columns:minmax(110px,40%) 1fr;gap:10px;padding-top:8px;border-top:1px solid var(--line)}
+.numdl div:first-child{border-top:0;padding-top:0}
+.numdl dt{margin:0}
+.numdl dd{font-size:15px!important}
+/* старт */
+.startbtn{display:flex;align-items:center;gap:12px;width:100%;margin:0 0 20px;padding:12px 16px;border:0;border-radius:var(--r);background:var(--amber);color:var(--amber-ink);cursor:pointer;text-align:left}
+.startbtn svg{width:30px;height:30px;fill:var(--amber-ink);flex:none}
+.startbtn span{display:flex;flex-direction:column}
+.startbtn b{font-size:17px} .startbtn small{font-size:13px;opacity:.75}
+.startbtn:hover{filter:brightness(1.06)}
+/* пошаговый режим */
+body.locked{overflow:hidden}
+.doer{position:fixed;inset:0;z-index:18;background:var(--bg);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.doer[hidden]{display:none!important}
+.dtop{display:flex;align-items:center;gap:12px;padding:12px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--line);background:var(--surface)}
+.dx{width:40px;height:40px;border-radius:50%;border:1px solid var(--line-2);background:var(--raised);color:var(--ink);font-size:24px;line-height:1;cursor:pointer;flex:none}
+.dtitle{display:flex;flex-direction:column;min-width:0}
+.dtitle b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dtitle small{color:var(--amber);font-weight:600}
+.dbar{height:4px;background:var(--line)} .dbar span{display:block;height:100%;background:var(--amber);transition:width .25s}
+.dbody{flex:1;overflow-y:auto;padding:20px max(16px,env(safe-area-inset-right,0px)) 20px max(16px,env(safe-area-inset-left,0px))}
+.dbody > *{max-width:720px;margin-left:auto;margin-right:auto}
+.dnums{margin-bottom:18px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.dnums summary{cursor:pointer;color:var(--amber);font-weight:600;font-size:14px}
+.dnums dl{display:grid;gap:8px;margin:10px 0 0}
+.dnums dt{font-size:12.5px;color:var(--muted)} .dnums dd{margin:0;font-size:14px}
+.dstep{display:flex;flex-direction:column;gap:16px}
+.dnum{width:56px;height:56px;border-radius:50%;border:3px solid var(--amber);color:var(--amber);display:grid;place-items:center;font:24px var(--f-display)}
+.dtext{font-size:22px;line-height:1.45;margin:0}
+.dtext .n{font-size:20px}
+.dstep .ph,.dstep .addph{width:min(320px,100%)}
+.dnav{display:flex;gap:10px;padding:12px max(16px,env(safe-area-inset-right,0px)) 14px max(16px,env(safe-area-inset-left,0px));border-top:1px solid var(--line);background:var(--surface)}
+.big{padding:16px 18px;font-size:17px;border-radius:14px}
+.dnav .ghost{flex:0 0 auto}
+.dnav .btn{flex:1}
+.btn.amber{background:var(--amber);color:var(--amber-ink)}
+.ghost:disabled{opacity:.35;cursor:default}
+.dfinish{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;padding-top:40px}
+.dfinish h3{font:26px var(--f-display);margin:0} .dfinish p{margin:0;color:var(--muted)}
+.dfinish .big{width:min(360px,100%)}
+.dcheck{width:84px;height:84px;border-radius:50%;background:color-mix(in srgb,var(--ok) 18%,transparent);display:grid;place-items:center}
+.dcheck svg{width:46px;height:46px;fill:none;stroke:var(--ok);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+
+@media (max-width:640px){
+  .tabs{display:none}
+  .features{grid-template-columns:repeat(3,1fr);gap:8px}
+  .feature{flex-direction:column;align-items:flex-start;gap:8px;padding:10px}
+  .feature .ico{width:34px;height:34px;border-radius:9px}
+  .feature .ico svg{width:19px;height:19px}
+  .feature small{display:none}
+  .feature b{font-size:13.5px;line-height:1.25}
+  .dtext{font-size:20px}
+  .numdl div{grid-template-columns:1fr;gap:0}
+  .pair{grid-template-columns:1fr}
+  .pair-arrow{display:none}
+  .ph,.addph{width:calc(50% - 4px)}
+  .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  .tg span{display:none}
+  .tg{padding:7px}
+  nav.bottom{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:6;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+  nav.bottom button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;border:0;background:none;color:var(--muted);font-size:11.5px;padding:6px 0;cursor:pointer;border-radius:10px}
+  nav.bottom svg{width:22px;height:22px;stroke:currentColor}
+  nav.bottom button[aria-selected="true"]{color:var(--amber)}
+  main{padding-bottom:110px}
+  .types li{grid-template-columns:1fr;gap:2px}
+  .detail h2{font-size:22px}
+  .brand .sub{display:none}
+}
+@media (prefers-reduced-motion:no-preference){.card,.fam button,.tools button{transition:background-color .15s,border-color .15s,color .15s}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap head">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.6 17.2a1.6 1.6 0 0 0 2.3 2.3l5.7-5.7a4 4 0 0 0 5.2-5.4l-2.4 2.4-2.2-.4-.4-2.2z"/></svg></div>
+      <div class="t"><h1>Гаражник</h1><span class="sub">справочник по ТО для Лады</span></div>
+      <span id="ownerBadge" class="owner-badge" hidden>редактор</span>
+      <a class="tg" href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer" aria-label="Telegram-канал Гаражника"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4 2.8 11.1c-.9.4-.9 1.2.1 1.5l4.6 1.4 1.8 5.5c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8L22.9 5.5c.3-1.3-.5-1.9-1.9-1.5z"/><path d="m7.5 14 9.5-6"/></svg><span>Канал</span></a>
+    </div>
+    <div class="famsel"><div class="famrow"><button type="button" id="famBtn" class="fambtn" aria-haspopup="true" aria-expanded="false">Моя машина<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><span class="famcur" id="famCur"></span></div><div id="famMenu" class="fammenu" hidden></div></div>
+    <div class="tabs" role="tablist">
+      <button role="tab" data-tab="to" id="tab-to">Работы</button>
+      <button role="tab" data-tab="garage" id="tab-garage">Мой гараж</button>
+      <button role="tab" data-tab="tools" id="tab-tools">Инструмент</button>
+      <button role="tab" data-tab="parts" id="tab-parts">Запчасти</button>
+    </div>
+  </div>
+</header>
+<main class="wrap" id="main"></main>
+<div class="doer" id="doer" role="dialog" aria-modal="true" aria-label="Пошаговый режим" hidden></div>
+<input type="file" id="photoInput" accept="image/*" multiple hidden>
+<div class="lightbox" id="lightbox" hidden><button type="button" class="lbx" data-lbclose aria-label="Закрыть">×</button><div class="lbin" data-lbclose><img alt=""><p></p></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<nav class="bottom" role="tablist" aria-label="Разделы">
+  <button role="tab" data-tab="to"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6M9 4a1 1 0 0 0-1 1v1h8V5a1 1 0 0 0-1-1M8 5H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2M9 12l2 2 4-4M9 17h6"/></svg>Работы</button>
+  <button role="tab" data-tab="garage"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M7 21v-8h10v8M7 17h10"/></svg>Гараж</button>
+  <button role="tab" data-tab="tools"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.6 17.2a1.6 1.6 0 0 0 2.3 2.3l5.7-5.7a4 4 0 0 0 5.2-5.4l-2.4 2.4-2.2-.4-.4-2.2z"/></svg>Инструмент</button>
+  <button role="tab" data-tab="parts"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg>Запчасти</button>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+/* ---------- данные ---------- */
+const FAM = {
+  classic:{name:"Классика",models:"2101–2107",engine:"8 клапанов, карбюратор или инжектор (поздние 2104–2107)",
+    oil:"3,75 л",coolant:"9,9 л",plugKey:"21",plugTorque:"31–39 Н·м",plugGap:"0,7–0,8 мм карбюратор · 1,0–1,1 мм инжектор",
+    wheelKey:"19",wheelTorque:"62–77 Н·м",cabin:"Штатного салонного фильтра нет",
+    air:"Карбюратор: круглый фильтр в корпусе над карбюратором. Инжектор: панельный фильтр в корпусе",
+    ign:"Трамблёр (или модуль на инжекторе), одна катушка, высоковольтные провода",brakes:"Перед: диски · зад: барабаны"},
+  niva:{name:"Нива",models:"2121, 21213, 21214, 4x4, Legend",engine:"8 клапанов, 1,6–1,7 л",
+    oil:"3,75 л",coolant:"10,7 л",plugKey:"21",plugTorque:"31–39 Н·м",plugGap:"1,0–1,1 мм (инжектор)",
+    wheelKey:"19",wheelTorque:"62–77 Н·м",cabin:"Зависит от года: на многих машинах его нет, на поздних Legend есть",
+    air:"Панельный фильтр в корпусе (инжектор)",ign:"Модуль зажигания и высоковольтные провода",brakes:"Перед: диски · зад: барабаны"},
+  samara:{name:"Самара",models:"2108, 2109, 21099, 2113, 2114, 2115",engine:"8 клапанов, 1,3–1,6 л",
+    oil:"3,5 л",coolant:"7,8 л",plugKey:"21",plugTorque:"31–39 Н·м",plugGap:"0,7–0,8 мм карбюратор · 1,0–1,1 мм инжектор",
+    wheelKey:"17",wheelTorque:"65–93 Н·м",cabin:"На большинстве машин нет; на части поздних 2113–2115 есть",
+    air:"Инжектор: панельный фильтр в корпусе. Карбюратор: круглый над карбюратором",
+    ign:"Модуль зажигания (или трамблёр на карбюраторе) и высоковольтные провода",brakes:"Перед: диски · зад: барабаны"},
+  ten:{name:"Десятка",models:"2110, 2111, 2112",engine:"8 или 16 клапанов",
+    oil:"3,5 л",coolant:"7,8 л",plugKey:"21 (8 кл.) · 16 (16 кл.)",plugTorque:"31–39 Н·м (8 кл.) · 25–30 Н·м (16 кл.)",plugGap:"1,0–1,1 мм",
+    wheelKey:"17",wheelTorque:"65–93 Н·м",cabin:"Есть, под жабо (пластик у лобового стекла)",
+    air:"Панельный фильтр в корпусе",ign:"8 кл. и 1,5 16 кл.: модуль и провода · 1,6 16 кл.: катушки на каждой свече",brakes:"Перед: диски · зад: барабаны"},
+  kpg:{name:"Калина · Приора · Гранта",models:"Калина, Приора, Гранта",engine:"8 или 16 клапанов",
+    oil:"3,2–3,5 л",coolant:"7,8 л",plugKey:"21 (8 кл.) · 16 (16 кл.)",plugTorque:"31–39 Н·м (8 кл.) · 25–30 Н·м (16 кл.)",plugGap:"1,0–1,1 мм",
+    wheelKey:"17",wheelTorque:"65–93 Н·м",cabin:"Есть, под жабо или за перчаточным ящиком (зависит от модели)",
+    air:"Панельный фильтр в корпусе",ign:"8 кл.: модуль и провода · 16 кл.: катушки на каждой свече",brakes:"Перед: диски · зад: барабаны"},
+  vesta:{name:"Веста · Ларгус · Иксрей",models:"Веста, Ларгус, Иксрей",engine:"16 клапанов (Ларгус бывает 8 кл.)",
+    oil:"см. двигатель",coolant:"7 л",plugKey:"16",plugTorque:"25–30 Н·м",plugGap:"по руководству (свечи обычно уже с заводским зазором)",
+    wheelKey:"17",wheelTorque:"90–110 Н·м, проверь по руководству",cabin:"Есть",
+    air:"Панельный фильтр в корпусе",ign:"Катушки на каждой свече (8 кл. Ларгус: модуль и провода)",brakes:"Перед: диски · зад: барабаны (на части версий диски)"}
+};
+const APPROX = new Set(["vesta","kpg"]);
+const CHAIN = new Set(["classic","niva"]);
+const FAM_EXTRA = {
+  classic:{grm:"Цепь. Меняют не по пробегу, а по износу: обычно на 80–100 тыс. км, когда появляется шум",
+    fuel:"Карбюратор: фильтр тонкой очистки в моторном отсеке перед бензонасосом. Инжектор: под днищем рядом с баком",
+    bleed:"правое заднее → левое заднее → правое переднее → левое переднее",battery:"55 А·ч",
+    alt:"Натяжение сдвигом генератора: ослабляешь гайку крепления, отводишь генератор и затягиваешь"},
+  niva:{grm:"Цепь. Меняют не по пробегу, а по износу: обычно на 80–100 тыс. км, когда появляется шум",
+    fuel:"Под днищем рядом с баком",
+    bleed:"правое заднее → левое заднее → правое переднее → левое переднее",battery:"55–60 А·ч",
+    alt:"Натяжение сдвигом генератора или натяжным роликом (зависит от года и кондиционера)"},
+  samara:{grm:"Ремень. Замена ориентировочно каждые 60 тыс. км. 8-клапанные моторы Самары при обрыве ремня клапаны обычно не гнут",
+    fuel:"Инжектор: под днищем справа у бака. Карбюратор: в моторном отсеке",
+    bleed:"правое заднее → левое переднее → левое заднее → правое переднее",battery:"55 А·ч",
+    alt:"Натяжение сдвигом генератора: ослабляешь гайку на планке, отводишь генератор и затягиваешь"},
+  ten:{grm:"Ремень. Ориентировочно каждые 60 тыс. км. 8 кл. при обрыве обычно не гнут клапаны, многие 16 кл. — гнут",
+    fuel:"Под днищем справа у бака",
+    bleed:"правое заднее → левое переднее → левое заднее → правое переднее",battery:"55 А·ч",
+    alt:"Сдвигом генератора; на машинах с кондиционером — натяжным роликом"},
+  kpg:{grm:"Ремень. Интервал зависит от мотора и года — от 60 до 180 тыс. км, смотри сервисную книжку. 8 кл. 11183 при обрыве обычно не гнёт клапаны; 8 кл. 21116 и 11186 и 16-клапанные 21126, 21127 — гнут",
+    fuel:"Под днищем справа у бака; на части новых Гранта — внутри бака в топливном модуле",
+    bleed:"правое заднее → левое переднее → левое заднее → правое переднее",battery:"55–60 А·ч",
+    alt:"С кондиционером — натяжной ролик. Без кондиционера на части Гранта и Калина-2 стоит эластичный ремень без натяжителя: его надевают специальным приспособлением"},
+  vesta:{grm:"Ремень. Моторы 21129 и 21179 при обрыве гнут клапаны. Интервал — по сервисной книжке, ремень и ролики проверяй на каждом ТО",
+    fuel:"Встроен в топливный модуль внутри бака, отдельно по регламенту не меняется",
+    bleed:"правое заднее → левое переднее → левое заднее → правое переднее (сверь с руководством: на машинах с ABS бывают особенности)",battery:"60 А·ч (Ларгус — до 70 А·ч)",
+    alt:"Автоматический натяжной ролик"}
+};
+for(const k in FAM_EXTRA) Object.assign(FAM[k], FAM_EXTRA[k]);
+
+/* Двигатели: точные цифры по руководствам АвтоВАЗа; перекрывают значения семейства. */
+const BAT55 = "55 А·ч — как у старого, смотри наклейку";
+const CHAIN_TXT = "Цепь. Меняют не по пробегу, а когда появляется шум: шелест или стук спереди мотора";
+const ENG = {
+  classic:[
+    {id:"carb",kind:"carb",name:"Карбюратор",sub:"2101–2107 — большинство машин",v:{plugGap:"0,7–0,8 мм",ign:"Трамблёр, катушка и высоковольтные провода",air:"Круглый фильтр в корпусе над карбюратором",fuel:"Фильтр тонкой очистки в моторном отсеке, на шланге перед бензонасосом"}},
+    {id:"inj",kind:"inj",name:"Инжектор",sub:"поздние 2104, 2105, 2107 (мотор 21067, 2000-е)",v:{plugGap:"1,0–1,1 мм",ign:"Модуль зажигания и высоковольтные провода",air:"Панельный фильтр в корпусе",fuel:"Под днищем рядом с баком"}}],
+  niva:[
+    {id:"inj",kind:"inj",name:"Инжектор 1,7",sub:"21214, 4x4, Legend — с 2000-х",v:{plugGap:"1,0–1,1 мм",ign:"Модуль зажигания и высоковольтные провода",air:"Панельный фильтр в корпусе",fuel:"Под днищем рядом с баком"}},
+    {id:"carb17",kind:"carb",name:"Карбюратор 1,7",sub:"21213, 1990-е",v:{plugGap:"0,7–0,8 мм",ign:"Трамблёр, катушка и высоковольтные провода",air:"Круглый фильтр в корпусе над карбюратором",fuel:"Фильтр тонкой очистки в моторном отсеке, на шланге перед бензонасосом"}},
+    {id:"carb",kind:"carb",name:"Карбюратор 1,6",sub:"2121, 1977–1993",v:{plugGap:"0,7–0,8 мм",ign:"Трамблёр, катушка и высоковольтные провода",air:"Круглый фильтр в корпусе над карбюратором",fuel:"Фильтр тонкой очистки в моторном отсеке, на шланге перед бензонасосом"}}],
+  samara:[
+    {id:"inj8",kind:"inj",name:"Инжектор",sub:"2113, 2114, большинство 2115; инжекторные 2108–21099",v:{plugGap:"1,0–1,1 мм",ign:"Модуль зажигания и высоковольтные провода",air:"Панельный фильтр в корпусе",fuel:"Под днищем справа у бака"}},
+    {id:"carb",kind:"carb",name:"Карбюратор",sub:"большинство 2108, 2109, 21099; ранние 2115",v:{plugGap:"0,7–0,8 мм",ign:"Трамблёр, катушка и высоковольтные провода",air:"Круглый фильтр в корпусе над карбюратором",fuel:"Фильтр тонкой очистки в моторном отсеке, на шланге перед бензонасосом"}}],
+  ten:[
+    {id:"inj8",kind:"inj",name:"Инжектор 8 кл.",sub:"моторы 2111, 21114",v:{plugKey:"21",plugTorque:"30,7–39,0 Н·м",ign:"Модуль зажигания и высоковольтные провода",grm:"Ремень, замена каждые 60 000 км. При обрыве клапаны не гнёт"}},
+    {id:"carb",kind:"carb",name:"Карбюратор 1,5",sub:"ранние 2110, 2111 (конец 1990-х)",v:{plugKey:"21",plugTorque:"30,7–39,0 Н·м",plugGap:"0,7–0,8 мм",ign:"Трамблёр, катушка и высоковольтные провода",air:"Круглый фильтр в корпусе над карбюратором",fuel:"Фильтр тонкой очистки в моторном отсеке, на шланге перед бензонасосом",grm:"Ремень, замена каждые 60 000 км. При обрыве клапаны не гнёт"}},
+    {id:"v16",kind:"inj",name:"Инжектор 16 кл.",sub:"2112, 21124",v:{plugKey:"16",plugTorque:"30,7–39,0 Н·м",ign:"Модуль и провода или катушки на свечах — зависит от года",grm:"Ремень, замена каждые 60 000 км. Мотор 2112 (1,5 л) при обрыве гнёт клапаны, у 21124 (1,6 л) поршни с выборками"}}],
+  kpg:[
+    {id:"e11183",kind:"inj",name:"8 кл. 11183",sub:"Калина, Гранта, 1,6 л 81–82 л.с.",v:{grmKm:60000,oil:"3,2 л (при замене с фильтром — 2,9 л)",plugKey:"21",plugTorque:"30,7–39,0 Н·м",ign:"Модуль зажигания и высоковольтные провода",grm:"Ремень, замена каждые 60 000 км. При обрыве клапаны не гнёт"}},
+    {id:"e11186",kind:"inj",name:"8 кл. 21116 / 11186",sub:"Гранта, Калина-2, 1,6 л 87 л.с.",v:{oil:"3,2 л (при замене с фильтром — 2,9 л)",plugKey:"21",plugTorque:"30,7–39,0 Н·м",ign:"Модуль зажигания и высоковольтные провода",grm:"Ремень. При обрыве гнёт клапаны. Интервал замены — по сервисной книжке, проверяй ремень на каждом ТО"}},
+    {id:"e16",kind:"inj",name:"16 кл. 21126 / 21127 / 11194",sub:"Приора, Калина, Гранта",v:{oil:"Приора — 3,5 л; Калина и Гранта — 3,2 л (при замене с фильтром 2,9 л); с АКПП — 4,4 л (4,1 л)",plugKey:"16",plugTorque:"25–30 Н·м",ign:"Катушки на каждой свече",grm:"Ремень. При обрыве гнёт клапаны. Интервал замены — по сервисной книжке, проверяй ремень на каждом ТО"}}],
+  vesta:[
+    {id:"e21129",kind:"inj",name:"1,6 16 кл. 21129",sub:"Веста, Иксрей, Ларгус с 2021",v:{oil:"4,4 л (при замене с фильтром — 4,1 л); ранние машины со штампованным поддоном — 3,2 л (2,9 л)",coolant:"7,0 л",plugKey:"16",plugTorque:"20–30 Н·м",plugGap:"1,0–1,1 мм",wheelKey:"17",wheelTorque:"90–120 Н·м",ign:"Катушки на каждой свече",grm:"Ремень. При обрыве гнёт клапаны. Интервал — по сервисной книжке, проверяй на каждом ТО",gear:"2,25 л (МКП 2180 и АМТ) · 2,34 л (МКП JH3)",tankFilter:true}},
+    {id:"e21179",kind:"inj",name:"1,8 16 кл. 21179",sub:"Веста, Иксрей",v:{oil:"4,4 л (при замене с фильтром — 4,1 л)",coolant:"7,0 л",plugKey:"16",plugTorque:"20–30 Н·м",plugGap:"1,0–1,1 мм",wheelKey:"17",wheelTorque:"90–120 Н·м",ign:"Катушки на каждой свече",grm:"Ремень. При обрыве гнёт клапаны. Интервал — по сервисной книжке, проверяй на каждом ТО",gear:"2,25 л (МКП 2180 и АМТ) · 2,34 л (МКП JH3)",tankFilter:true}},
+    {id:"k7m",kind:"inj",name:"Ларгус 8 кл. K7M",sub:"1,6 л, Renault",v:{grmKm:60000,oil:"3,3 л",coolant:"5,45 л с кондиционером · 4,5 л без",plugKey:"16",plugTorque:"25–30 Н·м",plugGap:"по маркировке на упаковке свечи",wheelKey:"по размеру своих болтов",wheelTorque:"105 Н·м",ign:"Модуль зажигания и высоковольтные провода",grm:"Ремень вместе с роликами и помпой каждые 60 000 км. При обрыве гнёт клапаны",gear:"по руководству Ларгуса",battery:"как у старого — смотри наклейку",fuel:"Под днищем рядом с баком",tankFilter:false}},
+    {id:"k4m",kind:"inj",name:"Ларгус 16 кл. K4M",sub:"1,6 л, Renault",v:{grmKm:120000,oil:"4,8 л",coolant:"5,45 л с кондиционером · 4,5 л без",plugKey:"16",plugTorque:"25–30 Н·м",plugGap:"по маркировке на упаковке свечи",wheelKey:"по размеру своих болтов",wheelTorque:"105 Н·м",ign:"Катушки на каждой свече",grm:"Ремень, по регламенту каждые 120 000 км. При обрыве гнёт клапаны",gear:"по руководству Ларгуса",battery:"как у старого — смотри наклейку",fuel:"Под днищем рядом с баком",tankFilter:false}}]
+};
+const FAM_BASE = {
+  classic:{oil:"3,75 л",coolant:"8,65 л (по руководству 2105/2107)",plugKey:"21",plugTorque:"30,7–39,0 Н·м",wheelKey:"19",wheelTorque:"58,8–72,0 Н·м",grm:CHAIN_TXT,gear:"1,35 л (4-ступ.) · 1,6 л (5-ступ.) · задний мост 1,3 л",battery:BAT55},
+  niva:{oil:"3,75 л",coolant:"10,7 л",plugKey:"21",plugTorque:"30,7–39,0 Н·м",wheelKey:"19",wheelTorque:"62,4–77,1 Н·м",grm:CHAIN_TXT,gear:"КПП 1,35 л · раздатка 0,75 л · передний мост 1,15 л · задний мост 1,3 л",battery:BAT55},
+  samara:{grmKm:60000,oil:"3,5 л",coolant:"7,8 л",plugKey:"21",plugTorque:"30,7–39,0 Н·м",wheelKey:"17",wheelTorque:"65,2–92,6 Н·м",grm:"Ремень, замена каждые 60 000 км. 8-клапанные моторы Самары при обрыве клапаны не гнут",gear:"3,3 л",battery:BAT55},
+  ten:{grmKm:60000,oil:"3,5 л",coolant:"7,8 л",plugGap:"1,0–1,1 мм",wheelKey:"17",wheelTorque:"65,2–92,6 Н·м",gear:"3,3 л",battery:BAT55},
+  kpg:{coolant:"7,84 л",plugGap:"1,0–1,1 мм",wheelKey:"17",wheelTorque:"65,2–92,6 Н·м",gear:"Тросовая КПП (Калина-2, Гранта) — 2,2 л · старая КПП (Приора, Калина-1) — 3,1 л",battery:BAT55},
+  vesta:{battery:"60 А·ч — как у старого, смотри наклейку"}
+};
+for(const k in FAM_BASE) Object.assign(FAM[k], FAM_BASE[k]);
+let engSel = {};
+try{ engSel = JSON.parse(localStorage.getItem("garazh-eng") || "{}") || {}; }catch(e){}
+const engOf = k => (ENG[k] || []).find(e => e.id === engSel[k]) || (ENG[k] || [])[0];
+const F = (k = fam) => { const e = engOf(k); return Object.assign({}, FAM[k], e ? e.v : {}, e ? {engName: e.name + (e.sub ? " (" + e.sub + ")" : "")} : {}); };
+const setEng = (k, id) => { engSel[k] = id; try{ localStorage.setItem("garazh-eng", JSON.stringify(engSel)); }catch(e){} };
+
+
+const TOOLS = [
+  {id:"starter",name:"Стартовый набор новичка",what:"Что купить в первую очередь, чтобы закрыть почти все работы из «Гаражника».",
+   types:[["Набор головок с трещотками","1/4\" и 1/2\", головки 8–24 мм, удлинители, кардан. Основа всего"],["Комбинированные ключи","8–19 мм. Самые нужные: 10, 13, 17, 19"],["Динамометрический ключ","Щелчковый, 20–110 Н·м: колёса, свечи, сливная пробка"],["Свечные головки","На 16 и на 21, с резинкой или магнитом"],["Отвёртки и биты","Крестовые, плоские и Torx"],["Домкрат, 2 подставки, упоры","Без подставок под машину не лезем"],["Съёмник фильтра, ёмкость, воронка","Для замены масла"],["Мультиметр","Аккумулятор, генератор, предохранители"],["Пассатижи и бокорезы","Хомуты, шплинты, фишки"],["Фонарик, перчатки, ветошь, проникающая смазка","Без них работа встанет на полпути"]],
+   tip:"Готовый набор головок и ключей на 80–100 предметов в чемодане закрывает большую часть списка и выходит дешевле, чем собирать по одному."},
+  {id:"ratchet",name:"Трещотка",what:"Ручка с храповым механизмом под головки: крутит в одну сторону, а в другую проворачивается вхолостую. Не нужно переставлять ключ на каждом обороте.",
+   types:[["Квадрат 1/4\"","Мелкий крепёж до 10–13 мм, тесные места под капотом"],["Квадрат 3/8\"","Самая ходовая: свечи, клапанная крышка, большинство работ по ТО"],["Квадрат 1/2\"","Крупный крепёж: колёса, ступицы, подвеска"],["Число зубьев 72–90","Чем больше зубьев, тем меньше нужен замах ручки — удобно в тесноте"],["С шарнирной головкой","Голова поворачивается, помогает подлезть под углом"]],
+   tip:"Трещоткой не срывают закисший болт: для этого есть вороток (длинная ручка без храповика), иначе храповик сломается."},
+  {id:"torque",name:"Динамометрический ключ",what:"Ключ, которым затягивают с нужным усилием в Н·м. Свечи, колёса, сливная пробка, поддон — всё, где перетяг срывает резьбу, а недотяг опасен.",
+   types:[["Щелчковый (предельный)","Выставляешь момент на шкале, ключ щёлкает при достижении. Самый удобный для гаража"],["Стрелочный","Пружинная стрелка показывает текущий момент. Дешёвый, но читать неудобно"],["Электронный","Цифровой экран и сигнал. Точный, но дорогой"],["Диапазон 5–25 Н·м","Мелкий крепёж, свечи 16 кл."],["Диапазон 20–110 Н·м","Свечи 8 кл., колёса, большинство работ"]],
+   tip:"После работы щелчковый ключ раскручивают до минимума шкалы, иначе пружина «садится» и ключ начинает врать. Откручивать им болты нельзя."},
+  {id:"wrenches",name:"Ключи",what:"Основа набора. Размеры на Ладе чаще всего 8, 10, 13, 17, 19.",
+   types:[["Рожковый","Открытый зев, быстро надевается сбоку. Слабо держит грани: на тугом болте может сорвать"],["Накидной","Охватывает все грани, держит надёжно. Для тугих и закисших болтов"],["Комбинированный","С одной стороны рожок, с другой накидной. Самый ходовой"],["Разрезной (тормозной)","Накидной с прорезью, надевается на трубку. Для штуцеров тормозных трубок"],["Трубчатый","Длинная труба с шестигранником. Для глубоких мест"],["Баллонный","Для колёсных болтов. Крестовой удобнее Г-образного"]],
+   tip:"Накидной или головка — первый выбор для тугого болта. Рожок — когда иначе не подлезть."},
+  {id:"sockets",name:"Головки и удлинители",what:"Сменные насадки на трещотку или вороток.",
+   types:[["6-гранная","Держит болт за плоскости граней, меньше риск сорвать. Лучший выбор для тугого крепежа"],["12-гранная","Легче надеть в тесноте, но на закисшем болте может сорвать грани"],["Глубокая (удлинённая)","Для гаек на длинных шпильках"],["Свечная","С резинкой или магнитом внутри, держит свечу. На 16 и на 21"],["Ударная (чёрная)","Для гайковёрта, толстые стенки"],["Удлинители и кардан","Удлинитель доводит головку до глубокого болта, кардан даёт угол"]],
+   tip:"Для свечей нужна именно свечная головка: обычная не удержит свечу, и керамический изолятор можно расколоть."},
+  {id:"extract",name:"Экстракторы",what:"Инструмент для выкручивания обломанных болтов и болтов с сорванными гранями.",
+   types:[["Винтовой (конический, левая резьба)","В обломке сверлят отверстие, вкручивают экстрактор против часовой, он закусывает и выкручивает болт"],["Для сорванных граней","Головка с насечками внутри: надевается на «облизанный» болт и вгрызается в него"],["Набор свёрл с левым вращением","Иногда выкручивают обломок уже при сверлении"]],
+   tip:"Перед работой обломок пролей проникающей смазкой и дай постоять. Сверли строго по центру. Сломанный в болте экстрактор из закалённой стали достать очень трудно."},
+  {id:"filterkey",name:"Съёмник масляного фильтра",what:"Масляный фильтр закручивают рукой, но со временем он прикипает.",
+   types:[["Ленточный или цепной","Подходит к фильтрам разного диаметра"],["Чашка (колпак)","Надевается на торец фильтра под трещотку. Нужен свой размер"],["Краб (трёхлапый)","Лапы сходятся при вращении. Удобен в тесноте"]],
+   tip:"Новый фильтр закручивают только рукой: после касания прокладки ещё на 3/4 оборота."},
+  {id:"jack",name:"Домкрат и подставки",what:"Поднять машину для снятия колеса или работы снизу.",
+   types:[["Штатный (ромбический или винтовой)","Только для замены колеса"],["Подкатной","Быстро поднимает, устойчивее"],["Страховочные подставки (козлы)","Ставятся под кузов после подъёма"],["Противооткатные упоры","Под колёса, которые остаются на земле"]],
+   tip:"Никогда не лезь под машину, которая стоит только на домкрате. Только на подставках."},
+  {id:"multimeter",name:"Мультиметр",what:"Прибор для измерения напряжения, сопротивления и прозвонки цепей. Самый дешёвый способ понять, жив ли аккумулятор и заряжает ли генератор.",
+   types:[["Постоянное напряжение (V⎓, DCV)","Аккумулятор: 12,6–12,7 В — заряжен, 12,4 В — наполовину, ниже 12,2 В — разряжен. На работающем моторе 13,8–14,5 В"],["Прозвонка (с пищалкой)","Найти обрыв провода или проверить предохранитель"],["Сопротивление (Ω)","Проверить катушку зажигания, датчики, высоковольтные провода"]],
+   tip:"Для машины хватит простого недорогого мультиметра. Перед замером выбери правильный режим: на сопротивлении к аккумулятору не подключайся."},
+  {id:"screwdrivers",name:"Отвёртки и биты",what:"Винты крепления фар, обшивок, хомутов, корпуса фильтров.",
+   types:[["Крестовые PH1–PH2","Самые ходовые на любой Ладе"],["Плоские","Хомуты, защёлки, поддеть крышку"],["Torx (звёздочка) T20–T30","Их много на Весте, Ларгусе и Иксрее"],["Ударная отвёртка","Бьёшь молотком — она проворачивает закисший винт и не срывает шлиц"]],
+   tip:"Отвёрткой не поддевают как монтажкой: ломается жало и срываются шлицы."},
+  {id:"grmtools",name:"Инструмент для ГРМ",what:"Нужен для замены ремня ГРМ с роликами.",
+   types:[["Ключ натяжного ролика","Двухштырьковый, поворачивает ролик для натяжения ремня"],["Фиксаторы валов","На 16-клапанных моторах удерживают распредвалы и коленвал по меткам"],["Головки и ключи 10, 15, 17, 19","Крышки, ролики, болт шкива коленвала"],["Маркер","Пометить положение меток перед снятием ремня"]],
+   tip:"Перед снятием старого ремня отметь маркером положение всех шкивов. Так легко проверить себя после установки."},
+  {id:"syringe",name:"Шприц, груша и ареометр",what:"Мелочи для работы с жидкостями.",
+   types:[["Шприц или груша","Откачать жидкость из бачка: тормозная, ГУР, лишнее масло"],["Ареометр для антифриза","Показывает, до какого мороза жидкость не замёрзнет"],["Тестер тормозной жидкости","Ручка-тестер показывает процент воды в жидкости"],["Прозрачный шланг","Для прокачки тормозов"]],
+   tip:"Для тормозной жидкости держи отдельный шприц: остатки масла в нём испортят тормозную систему."},
+  {id:"jump",name:"Пусковые провода и бустер",what:"Завести машину с севшим аккумулятором.",
+   types:[["Пусковые провода","Сечение не меньше 16 мм², длина от 2,5–3 м. Толстые медные лучше тонких алюминиевых"],["Пусковое устройство (бустер)","Компактный аккумулятор с проводами. Не нужен донор"]],
+   tip:"Дешёвые тонкие провода греются и не дают тока. Зимой на морозе на них рассчитывать не стоит."},
+  {id:"misc",name:"Расходники и мелочь",what:"То, без чего работа по ТО встанет на полпути.",
+   types:[["Ёмкость для слива","На 5+ литров для масла, на 10+ для антифриза"],["Воронка","С гибким носиком"],["Перчатки и ветошь","Отработка и антифриз вредны для кожи"],["Щуп зазора свечей","Набор пластин или проволочный"],["Проникающая смазка","Для закисших болтов"],["Фонарик","Налобный удобнее всего"]],
+   tip:""}
+];
+
+const FLUIDS = [
+  {name:"Моторное масло",does:"Смазывает и охлаждает детали двигателя, уносит продукты износа к фильтру.",
+   rows:[["Вязкость","5W-40 или 10W-40 — самые ходовые для Лады. Первая цифра показывает поведение на морозе (меньше — лучше холодный пуск)"],["Класс","API SL, SM или SN и выше"],["Замена","Обычно каждые 10–15 тыс. км или раз в год; при тяжёлых условиях чаще"],["Объём","Смотри шильдик своей машины вверху раздела «Работы»"]],
+   tip:"Уровень проверяют на холодном двигателе на ровной площадке: масло должно быть между отметками MIN и MAX на щупе."},
+  {name:"Охлаждающая жидкость (антифриз, тосол)",does:"Отводит тепло от двигателя, не замерзает зимой, защищает систему от коррозии.",
+   rows:[["Тосол / G11","Силикатные, обычно синие или зелёные. Стоят на старых Ладах"],["G12, G12+, G13","Карбоксилатные и гибридные, обычно красные или розовые. На современных Ладах"],["Замена","Примерно раз в 3–5 лет или по регламенту (у Весты — 90 тыс. км)"],["Смешивание","Разные типы не смешивают: могут выпасть хлопья и забить радиатор. При смене типа систему промывают"]],
+   tip:"Пробку расширительного бачка на горячем двигателе не открывают: жидкость под давлением и может обжечь."},
+  {name:"Тормозная жидкость",does:"Передаёт усилие от педали к тормозным механизмам.",
+   rows:[["Тип","DOT-4 — стандарт для Лады. DOT-4 и DOT-3 совместимы, DOT-5 (силиконовая) — нет"],["Почему меняют","Жидкость впитывает влагу из воздуха и закипает при меньшей температуре: педаль становится «ватной»"],["Замена","Раз в 2–3 года"],["Уровень","Медленно падает по мере износа колодок. Резкое падение — признак утечки"]],
+   tip:"Тормозная жидкость разъедает краску: пролитое сразу смывай водой."},
+  {name:"Трансмиссионное масло",does:"Смазывает шестерни коробки передач и редукторов.",
+   rows:[["МКПП Лады","75W-90 или 75W-85, класс GL-4"],["Нива","Кроме коробки есть раздатка и два моста — у каждого своё масло"],["Замена","По регламенту, обычно 60–75 тыс. км"]],
+   tip:""},
+  {name:"Жидкость ГУР",does:"Рабочая жидкость гидроусилителя руля. Стоит на машинах с ГУР (часть Приор, Нива 4x4 с усилителем и др.).",
+   rows:[["Тип","По руководству: обычно специальная жидкость PSF или ATF"],["Признак","Гул насоса при повороте руля — часто низкий уровень"]],
+   tip:"У многих поздних Лад стоит электроусилитель: там никакой жидкости нет."},
+  {name:"Омывающая жидкость",does:"Для бачка омывателя стекла.",
+   rows:[["Зимой","Незамерзайка с запасом по температуре"],["Летом","Летний омыватель или чистая вода"]],
+   tip:""}
+];
+
+/* Работы: tools — id из TOOLS или текст; steps — строки, {поле} подставляется из семейства;
+   объект {t, only:[семейства]} или {t, not:[...]} — шаг только для части машин. */
+const JOBS = [
+  {id:"oil",title:"Замена масла и масляного фильтра",lvl:1,time:"40–60 мин",
+   desc:"Главная работа ТО. Справится новичок с ямой, эстакадой или подставками.",
+   plate:["oil","engine"],
+   tools:["wrenches","sockets","filterkey","torque","Ёмкость для слива","Воронка","Перчатки"],
+   steps:[
+    "Купи масло (нужен объём {oil}), новый масляный фильтр и, если есть, новую прокладку или шайбу сливной пробки.",
+    "Прогрей двигатель 5 минут: тёплое масло стекает лучше. Заглуши мотор.",
+    "Открой маслозаливную горловину сверху, чтобы масло сливалось быстрее.",
+    "Поставь ёмкость под поддон и открути сливную пробку. Осторожно: масло горячее.",
+    "Пока стекает (10–15 минут), сними старый фильтр съёмником. Подставь под него ветошь.",
+    "Смажь резиновое кольцо нового фильтра свежим маслом и закрути его рукой: после касания ещё на 3/4 оборота.",
+    "Закрути сливную пробку с новой шайбой. Не перетягивай: резьба в поддоне мягкая.",
+    "Залей масло, немного не доливая до полного объёма. Подожди пару минут и проверь щупом.",
+    "Заведи мотор на 1–2 минуты: лампа масла должна погаснуть. Заглуши, через 5 минут долей до середины между MIN и MAX.",
+    "Проверь, не капает ли из-под пробки и фильтра. Отработку сдай в пункт приёма."],
+   warn:"Слитое масло нельзя выливать на землю или в канализацию."},
+  {id:"air",title:"Замена воздушного фильтра",lvl:1,time:"10–15 мин",
+   desc:"Самая простая работа. Грязный фильтр снижает мощность и увеличивает расход.",
+   plate:["air"],tools:["Отвёртка","wrenches"],
+   steps:[
+    "Открой капот и найди корпус воздушного фильтра. На твоей машине: {air}.",
+    "Отстегни защёлки или открути винты крышки корпуса.",
+    "Сними крышку и вытащи старый фильтр. Запомни, какой стороной он стоял.",
+    "Протри корпус изнутри влажной тряпкой от пыли и листьев. Пылесос — ещё лучше.",
+    "Положи новый фильтр той же стороной, проверь, что резиновый уплотнитель лёг ровно по краю.",
+    "Закрой крышку и затяни защёлки или винты. Щелей быть не должно: иначе пыль пойдёт мимо фильтра."],
+   warn:""},
+  {id:"cabin",title:"Замена салонного фильтра",lvl:1,time:"15–30 мин",
+   desc:"Фильтрует воздух, который идёт в салон через печку и вентиляцию.",
+   plate:["cabin"],tools:["Отвёртка","sockets"],
+   steps:[
+    {t:"На классике салонного фильтра с завода нет. Ставить его — уже доработка.",only:["classic"]},
+    {t:"Найди, где стоит фильтр: {cabin}.",not:["classic"]},
+    {t:"Фильтр под жабо: сними поводки дворников, уплотнитель капота и открути винты жабо.",not:["classic"]},
+    {t:"Сними крышку фильтра (обычно на защёлках) и вытащи старый фильтр. Сразу выгреби листья и мусор из ниши.",not:["classic"]},
+    {t:"Поставь новый фильтр. Стрелка на нём показывает направление воздуха, внутрь салона.",not:["classic"]},
+    {t:"Собери всё в обратном порядке. Щётки ставь в то же положение на стекле.",not:["classic"]}],
+   warn:"Угольный салонный фильтр дороже, но лучше держит запахи и выхлоп с дороги."},
+  {id:"plugs",title:"Замена свечей зажигания",lvl:1,time:"20–40 мин",
+   desc:"Плюс как прочитать старые свечи: по их цвету видно состояние смеси и двигателя.",
+   plate:["plugKey","plugTorque","plugGap","ign"],
+   tools:["ratchet","sockets","torque","Удлинитель","Щуп зазора"],
+   steps:[
+    "Работай только на холодном двигателе: на горячем резьбу головки блока можно сорвать.",
+    "Система зажигания на твоей машине: {ign}.",
+    {t:"Сними высоковольтные провода, взявшись за наконечник, а не за провод. Запомни или пометь порядок проводов.",only:["classic","niva","samara"]},
+    {t:"Провода снимай за наконечники. Катушки: открути крепление, отключи фишку, вытащи вверх.",only:["ten","kpg","vesta"]},
+    "Продуй колодцы свечей сжатым воздухом, чтобы мусор не упал в цилиндр.",
+    "Выкрути свечи свечной головкой на {plugKey} с удлинителем и трещоткой.",
+    "Посмотри на старые свечи (таблица ниже) и разложи их по порядку цилиндров.",
+    "Проверь зазор новых свечей щупом: {plugGap}.",
+    "Вкрути новую свечу сначала рукой (или головкой без трещотки), чтобы она не пошла криво.",
+    "Затяни динамометрическим ключом: {plugTorque}.",
+    "Верни провода или катушки на место строго в прежнем порядке. Заведи мотор: он должен работать ровно."],
+   extra:"plugread",
+   warn:"Свеча, которая идёт туго с первых оборотов, вкручена криво. Выкрути и начни заново, иначе испортишь резьбу в головке блока."},
+  {id:"coolant",title:"Замена антифриза",lvl:2,time:"1–1,5 часа",
+   desc:"Нужно чуть больше опыта: важно выгнать воздух из системы.",
+   plate:["coolant"],tools:["wrenches","sockets","Ёмкость на 10 л","Воронка","Перчатки"],
+   steps:[
+    "Двигатель должен быть холодным. Открой пробку расширительного бачка.",
+    "Поставь машину носом чуть выше, если есть возможность: так воздух лучше выходит.",
+    "Включи печку на максимум (на старых машинах открой кран печки), чтобы слилось и из радиатора отопителя.",
+    "Подставь ёмкость и открой сливную пробку радиатора (или сними нижний патрубок радиатора).",
+    {t:"Открути сливную пробку на блоке цилиндров, иначе часть старой жидкости останется в двигателе.",only:["classic","niva"]},
+    "Когда стечёт, закрой все пробки и патрубки. Если меняешь тип жидкости, промой систему дистиллированной водой.",
+    "Медленно заливай новую жидкость в бачок. Общий объём системы: {coolant}.",
+    "Заведи двигатель, дай прогреться до включения вентилятора, сжимая рукой верхний патрубок радиатора: так выходит воздух.",
+    "Заглуши, дай остыть и долей до отметки MAX (на холодном — чуть выше MIN).",
+    "Следующие пару дней проверяй уровень: он может немного уйти, пока выходит остаток воздуха."],
+   warn:"Антифриз ядовит и сладкий на вкус: не оставляй его там, где могут достать дети или животные."},
+  {id:"brakes",title:"Проверка износа тормозных колодок",lvl:1,time:"20–40 мин",
+   desc:"Как понять, сколько осталось накладки и когда менять колодки.",
+   plate:["brakes","wheelKey","wheelTorque"],tools:["jack","wrenches","torque","Фонарик","Линейка"],
+   steps:[
+    "Признаки износа: скрип или скрежет при торможении, педаль ниже обычного, уровень тормозной жидкости в бачке упал к MIN.",
+    "Передние колодки иногда видно через спицы диска. Посвети фонариком на суппорт: виден торец колодки с накладкой.",
+    "Для точной проверки сорви колёсные болты колёсным ключом (размер: {wheelKey}), подними машину, поставь на подставку и сними колесо.",
+    "Посмотри на накладку с торца суппорта. Меньше 1,5 мм — меняй колодки на обеих сторонах оси.",
+    "Посмотри на сам диск: глубокие борозды или кромка по краю — повод проверить и его толщину.",
+    "Задние барабанные колодки проверяют, сняв барабан. Изнашиваются они намного медленнее передних.",
+    "Поставь колесо на место. Затягивай крест-накрест: {wheelTorque}."],
+   warn:"Колодки меняют только парой на одной оси (левая и правая), иначе машину будет уводить при торможении."},
+  {id:"levels",title:"Проверка уровней жидкостей",lvl:1,time:"10 мин",
+   desc:"Быстрая проверка раз в пару недель и перед поездкой.",
+   plate:["oil","coolant"],tools:["Ветошь","Фонарик"],
+   steps:[
+    "Машина на ровной площадке, двигатель холодный (или заглушен минимум 5–10 минут для масла).",
+    "Масло: вытащи щуп, протри, вставь до упора, снова вытащи. Уровень должен быть между MIN и MAX.",
+    "Антифриз: по меткам на расширительном бачке. На холодном двигателе — чуть выше MIN.",
+    "Тормозная жидкость: по меткам на бачке над главным тормозным цилиндром. Бачок не открывай без нужды.",
+    "Омыватель: долей при необходимости.",
+    "Если уровень какой-то жидкости заметно падает между проверками, ищи утечку и не откладывай."],
+   warn:""},
+  {id:"wheel",title:"Замена колеса и сезонная переобувка",lvl:1,time:"15 мин на колесо",
+   desc:"Как правильно поднять машину и затянуть колёсные болты.",
+   plate:["wheelKey","wheelTorque"],tools:["jack","wrenches","torque"],
+   steps:[
+    "Поставь машину на ровное место, включи передачу и ручник, подложи упоры под колесо с другой стороны.",
+    "Пока колесо на земле, сорви болты (гайки) колёсным ключом (размер: {wheelKey}) на пол-оборота.",
+    "Подними машину домкратом за штатное место поддомкрачивания на пороге.",
+    "Выкрути болты полностью и сними колесо.",
+    "Очисти ступицу от ржавчины в месте контакта с диском.",
+    "Надень колесо, наживи все болты рукой, затем слегка затяни крест-накрест.",
+    "Опусти машину и дотяни динамометрическим ключом крест-накрест: {wheelTorque}.",
+    "Через 50–100 км проверь затяжку ещё раз."],
+   warn:"Не затягивай колёса ногой на баллонном ключе: так легко перетянуть и сорвать шпильку или повести диск."},
+  {id:"padsreplace",title:"Замена передних тормозных колодок",lvl:1,time:"1–1,5 часа",
+   desc:"Продолжение проверки износа: меняем колодки на передней оси.",
+   plate:["brakes","wheelKey","wheelTorque"],tools:["jack","wrenches","sockets","torque","Монтажка или струбцина","Щётка по металлу"],
+   steps:[
+    "Купи комплект колодок на ось (4 штуки) из проверенных брендов в разделе «Запчасти».",
+    "Если тормозная жидкость в бачке у MAX, откачай немного шприцем: при вдавливании поршней уровень поднимется.",
+    "Сорви болты колеса колёсным ключом (размер: {wheelKey}), подними машину, поставь на подставку и сними колесо.",
+    "Открути нижний болт суппорта (обычно ключ на 13, направляющую держи ключом на 17) и откинь суппорт вверх.",
+    "Вынь старые колодки и почисти щёткой места, где они стоят в скобе.",
+    "Медленно вдави поршень суппорта монтажкой или струбциной через старую колодку, чтобы влезли новые.",
+    "Поставь новые колодки, опусти суппорт и затяни болт. Если под болтом стопорная шайба, отогни её на грань болта.",
+    "Повтори то же на другой стороне оси.",
+    "Перед поездкой несколько раз нажми педаль тормоза, пока она не станет твёрдой: поршни должны подойти к колодкам.",
+    "Проверь уровень тормозной жидкости и затяни колёса крест-накрест: {wheelTorque}."],
+   warn:"Первые нажатия педали после замены проваливаются. Не трогайся, пока педаль не станет твёрдой."},
+  {id:"timing",title:"ГРМ: проверка и замена ремня",lvl:2,time:"2–4 часа",
+   desc:"Самая ответственная работа из списка: ошибка в метках может стоить ремонта мотора.",
+   plate:["grm"],tools:["grmtools","sockets","ratchet","wrenches","torque","jack"],
+   steps:[
+    {t:"У тебя цепь ГРМ. Её меняют не по пробегу, а по звуку: шелест или стук спереди мотора на холостых, особенно на холодную.",only:["classic","niva"]},
+    {t:"Подтяжка: ослабь колпачковую гайку натяжителя сбоку головки, проверни коленвал на 1–2 оборота по часовой и затяни гайку.",only:["classic","niva"]},
+    {t:"Шум не ушёл — цепь растянута. Меняют её с натяжителем, башмаком и успокоителем. Первый раз — с опытным человеком.",only:["classic","niva"]},
+    {t:"Сначала узнай, что будет при обрыве ремня на твоём моторе: {grm}.",not:["classic","niva"]},
+    {t:"Осмотр: сними верхнюю крышку ремня. Трещины, сколы зубьев, масло на ремне, гул роликов — меняй, даже если пробег не подошёл.",not:["classic","niva"]},
+    {t:"Замена: подними правую сторону машины, сними правое переднее колесо и подкрылок, ремень генератора и крышки ГРМ.",not:["classic","niva"]},
+    {t:"Проверни коленвал по часовой за болт шкива, пока не совпадут метки на распредвале и на маховике (схема ниже).",not:["classic","niva"]},
+    {t:"Ослабь натяжной ролик и сними ремень. Ролики и помпу меняй сразу вместе с ним.",not:["classic","niva"]},
+    {t:"Надень новый ремень, не сдвигая валы. Начинай с коленвала; ветвь от коленвала к распредвалу должна быть натянута.",not:["classic","niva"]},
+    {t:"Натяни ремень роликом — по указателю на ролике или по руководству — и затяни гайку.",not:["classic","niva"]},
+    {t:"Проверни коленвал рукой на два оборота и снова проверь метки. Ушла хоть одна — переставляй.",not:["classic","niva"]},
+    {t:"Собери всё обратно, заведи и послушай. Гул или вой ремня — признак перетяга.",not:["classic","niva"]}],
+   warn:"Если сомневаешься в метках, остановись и проверь ещё раз. На моторах, которые гнут клапаны, ошибка на один зуб может закончиться ремонтом головки блока."},
+  {id:"fuel",title:"Замена топливного фильтра",lvl:1,time:"20–40 мин",
+   desc:"Забитый фильтр: машина тупит под нагрузкой и плохо заводится.",
+   plate:["fuel"],tools:["wrenches","screwdrivers","Ёмкость","Перчатки"],
+   steps:[
+    "Где стоит фильтр на твоей машине: {fuel}.",
+    {t:"С этим мотором фильтр стоит внутри бака и отдельно не меняется. Машина тупит — это к сервису.",tank:"yes"},
+    {t:"Сбрось давление: вынь предохранитель бензонасоса, заведи мотор и дай ему заглохнуть.",tank:"no",kind:"inj"},
+    {t:"Отключи минус аккумулятора. Работай на улице или в проветриваемом гараже.",tank:"no"},
+    {t:"Подставь ёмкость и отсоедини трубки от фильтра: нажми защёлки или открути штуцеры.",tank:"no",kind:"inj"},
+    {t:"Ослабь хомут крепления и вынь фильтр.",tank:"no",kind:"inj"},
+    {t:"Подставь ветошь, ослабь оба хомута на шлангах и сними фильтр.",kind:"carb"},
+    {t:"Поставь новый фильтр стрелкой на корпусе по ходу топлива — к двигателю (схема ниже).",tank:"no"},
+    {t:"Подключи трубки до щелчка, верни предохранитель и минус. Включи зажигание 2–3 раза, чтобы насос накачал давление, и заводи.",tank:"no",kind:"inj"},
+    {t:"Надень шланги и затяни хомуты. Подкачай бензин рычагом ручной подкачки на бензонасосе и заводи.",kind:"carb"},
+    {t:"Проверь, нет ли подтёков у фильтра.",tank:"no"}],
+   warn:"Бензин и его пары легко вспыхивают. Никакого огня, искр и курения рядом."},
+  {id:"bleed",title:"Замена тормозной жидкости и прокачка",lvl:2,time:"1–1,5 часа, вдвоём",
+   desc:"Свежая жидкость и никакого воздуха в системе: педаль снова упругая.",
+   plate:["bleed"],tools:["wrenches","jack","syringe","Прозрачный шланг","Банка","Помощник"],
+   steps:[
+    "Нужен литр жидкости DOT-4, прозрачный шланг под размер штуцера, банка и помощник за рулём.",
+    "Откачай шприцем или грушей старую жидкость из бачка и залей свежую до MAX.",
+    "Порядок прокачки на твоей машине: {bleed}.",
+    "Надень шланг на штуцер прокачки (обычно ключ на 8), второй конец опусти в банку с небольшим количеством жидкости.",
+    "Помощник качает педаль и держит её. Ты откручиваешь штуцер на пол-оборота, затягиваешь — и только потом помощник отпускает педаль.",
+    "Повторяй, пока не пойдёт чистая жидкость без пузырей. Следи, чтобы бачок не опустел ниже MIN.",
+    "Переходи к следующему колесу по порядку.",
+    "В конце долей бачок до MAX и проверь педаль: она должна быть высокой и твёрдой."],
+   warn:"С мягкой или проваливающейся педалью ехать нельзя. Если после прокачки педаль не стала твёрдой, ищи утечку или вези машину в сервис на буксире."},
+  {id:"battery",title:"Аккумулятор: проверка, зарядка, прикурить",lvl:1,time:"15–30 мин",
+   desc:"Главная причина «не заводится» зимой. Плюс как правильно прикурить.",
+   plate:["battery"],tools:["multimeter","jump","wrenches","Зарядное устройство","Щётка для клемм"],
+   steps:[
+    "Замерь мультиметром на клеммах через пару часов после поездки: 12,6–12,7 В — заряжен, 12,4 В — наполовину, ниже 12,2 В — заряжай.",
+    "На заведённом моторе должно быть 13,8–14,5 В. Иначе проверяй генератор и ремень.",
+    "Белый или зелёный налёт на клеммах счищай щёткой и раствором соды, потом смажь клеммы техническим вазелином.",
+    "Зарядка: отключи минус, ток — десятая часть ёмкости (для 55 А·ч — 5,5 А). Заряжай в проветриваемом месте.",
+    "Снятие: сначала минусовая клемма (ключ на 10), потом плюсовая. Открути прижимную планку и вынь аккумулятор.",
+    "Новый аккумулятор бери той же ёмкости ({battery}) и полярности. Подключай сначала плюс, потом минус.",
+    "Прикурить: подключи провода по схеме ниже, заведи донора, подожди 3–5 минут и заводи свою."],
+   warn:"Не путай полярность: перепутанные провода сжигают предохранители и электронику."},
+  {id:"bulbs",title:"Замена ламп в фарах и фонарях",lvl:1,time:"5–20 мин",
+   desc:"Ближний свет, габариты, стоп-сигналы и поворотники.",
+   plate:[],tools:["screwdrivers","Чистые перчатки"],
+   steps:[
+    "Тип лампы смотри на старой лампе или в руководстве. Частые на Ладе: H4, H7, W5W (габариты), P21/5W (стоп), PY21W (поворот).",
+    "Фара: открой капот, сними резиновый пыльник сзади фары и отключи фишку.",
+    "Отстегни проволочный фиксатор и вынь лампу.",
+    "Новую галогенную лампу бери только за цоколь. Жир с пальцев на колбе перегревает стекло, и лампа быстро сгорает.",
+    "Поставь лампу по выступам цоколя, защёлкни фиксатор, надень фишку и пыльник.",
+    "Задние фонари: на большинстве Лад доступ из багажника, плата с лампами снимается на защёлках или барашках.",
+    "Новая лампа не горит — проверь предохранитель в монтажном блоке."],
+   warn:"Лампы ближнего света меняй парой: у новой и старой разная яркость и оттенок."},
+  {id:"altbelt",title:"Ремень генератора: проверка и замена",lvl:1,time:"20–40 мин",
+   desc:"Свистит при запуске или включении фар — первым делом смотрим этот ремень.",
+   plate:["alt"],tools:["sockets","ratchet","wrenches"],
+   steps:[
+    "Как натягивается ремень на твоей машине: {alt}.",
+    "Осмотр: поперечные трещины, расслоение, блестящая «застеклённая» рабочая сторона — ремень пора менять.",
+    "Нажми пальцем посередине длинной ветви: прогиб 10–15 мм — норма. Больше — свистит, меньше — перетянут.",
+    "Замена: ослабь натяжение (гайку генератора или натяжной ролик) и сними старый ремень.",
+    "Надень новый по той же схеме на все шкивы. Проверь, что ручьи ремня точно легли в канавки.",
+    "Натяни, затяни крепления, заведи мотор: ремень не должен свистеть."],
+   warn:"Работай только на заглушенном моторе, ключ вынут из замка."},
+  {id:"season",title:"Подготовка к зиме и к лету",lvl:1,time:"1–2 часа",
+   desc:"Короткий чек-лист перед сменой сезона.",
+   plate:[],tools:["multimeter","syringe","jack"],
+   steps:[
+    "Антифриз: проверь уровень и температуру замерзания ареометром. Для Урала и Сибири нужна защита не хуже −35…−40 °C.",
+    "Аккумулятор: замерь напряжение и подзаряди. Слабый аккумулятор — главная причина, почему машина не заводится в мороз.",
+    "Масло: если замена скоро, сделай её до морозов. Свежее масло лучше для холодного пуска.",
+    "Омыватель: перед зимой слей летний и залей незамерзайку, иначе замёрзнут бачок и трубки.",
+    "Щётки стеклоочистителя: размазывают, скрипят, резинка порвана — меняй.",
+    "Резина: переобувайся, когда среднесуточная температура держится около +5 °C. Проверь давление и протектор.",
+    "Свет: проверь все лампы, зимой темнеет рано.",
+    "Перед летом продуй соты радиатора от пуха и грязи, чтобы мотор не перегревался."],
+   warn:""}
+];
+
+/* Запчасти и расходники. params(f, key) — строки [параметр, значение] для семейства. */
+const OLD = new Set(["classic","niva","samara"]);
+const PARTS = [
+  {id:"oil",name:"Моторное масло",
+   params:(f,k) => [["Вязкость","5W-40 или 10W-40. Первая цифра — холодный пуск: чем она меньше, тем легче заводиться зимой. Для Урала и Сибири — 5W-40 или 0W-40"],["Класс","API SL, SM или SN и выше"],["Объём на замену",f.oil],["Замена",(CHAIN.has(k) ? "Каждые 10 000 км" : "Каждые 15 000 км") + " или раз в год; в городе с пробками и зимой — чаще"]],
+   brands:[["Роснефть Magnum","Заводская заливка АвтоВАЗа"],["Лукойл Genesis",""],["G-Energy","Газпромнефть"],["Sintec Premium","Один из лучших результатов в лабораторном тесте «За рулём»"],["ZIC X7",""]],
+   tip:"Ищи на канистре одобрение АвтоВАЗа: такие масла завод проверил на своих моторах."},
+  {id:"oilfilter",name:"Масляный фильтр",
+   params:(f,k) => [["Тип","Накручиваемый (картридж)"],["Подбор","По модели и году машины в каталоге магазина"]],
+   brands:[["Оригинал Лада",""],["Mann",""],["Big Filter",""],["Nevsky Filter",""],["Fortech",""]],
+   tip:"Меняй фильтр при каждой замене масла: старый фильтр сразу загрязнит свежее масло."},
+  {id:"air",name:"Воздушный фильтр",
+   params:(f,k) => [["Тип",f.air]],
+   brands:[["Оригинал Лада",""],["Mann",""],["Big Filter",""],["Fortech",""]],
+   tip:"Обычно меняют каждые 15–30 тыс. км. Если ездишь по грунтовкам, чаще."},
+  {id:"cabin",name:"Салонный фильтр",
+   params:(f,k) => [["На твоей машине",f.cabin],["Вариант","Обычный (пылевой) или угольный (держит запахи и выхлоп)"]],
+   brands:[["Mann",""],["Fortech",""],["Big Filter",""],["Nevsky Filter",""]],
+   tip:"У всех брендов из списка есть угольные версии. Для города они заметно лучше."},
+  {id:"plugs",name:"Свечи зажигания",
+   params:(f,k) => [["Ключ",f.plugKey],["Зазор",f.plugGap],["Момент затяжки",f.plugTorque],["Важно","У 8- и 16-клапанных моторов свечи разные: на 16 кл. свеча тоньше, под ключ на 16"]],
+   brands:[["NGK",""],["Denso",""],["Brisk","Часто стоят на Ладах с завода"],["Bosch",""]],
+   tip:"Свечи меняют комплектом, все сразу. Обычные служат 15–30 тыс. км, иридиевые и платиновые дольше."},
+  {id:"coolant",name:"Антифриз",
+   params:(f,k) => [["Тип", OLD.has(k) ? "Тосол или G11 на старых машинах. G12 можно, но только после промывки системы" : "G12, G12+ (карбоксилатный, обычно красный)"],["Объём системы",f.coolant]],
+   brands:[["Sintec Lux G12","Заводская заливка Весты"],["Felix Carbox",""],["Coolstream",""],["Лукойл G12",""]],
+   tip:"Разные типы антифриза не смешивают. Не знаешь, что залито, — сливай полностью и промывай."},
+  {id:"brakefluid",name:"Тормозная жидкость",
+   params:(f,k) => [["Тип","DOT-4. Смешивается с DOT-3, но не с силиконовой DOT-5"],["Замена","Раз в 2 года: жидкость набирает воду и закипает раньше"]],
+   brands:[["Rosdot",""],["Felix",""],["Sintec",""],["Лукойл",""]],
+   tip:"Покупай небольшую банку и не храни открытой: жидкость впитывает влагу из воздуха."},
+  {id:"gear",name:"Трансмиссионное масло",
+   params:(f,k) => (k === "niva"
+     ? [["Коробка и раздатка","75W-90, GL-4"],["Передний и задний мосты","75W-90, GL-5 (гипоидное)"]]
+     : [["Коробка (МКПП)","75W-90 или 75W-85, GL-4"]]).concat(f.gear ? [["Объём",f.gear]] : []),
+   brands:[["Лукойл ТМ-4","Для мостов Нивы — ТМ-5"],["Роснефть Kinetic",""],["G-Box","Газпромнефть"],["Sintec",""]],
+   tip:"GL-5 в коробку Лады не заливают: оно хуже для синхронизаторов. GL-4 и GL-5 — не «хуже» и «лучше», а для разных узлов."},
+  {id:"pads",name:"Тормозные колодки",
+   params:(f,k) => [["Тормоза",f.brakes],["Подбор","По модели, году и диаметру тормозного диска"]],
+   brands:[["Оригинал Лада","Прошли тест «За рулём»"],["Ferodo","Прошли тест «За рулём»"],["Trialli","Прошли тест «За рулём»"],["Höfer","Прошли тест «За рулём»"],["Dafmi","Прошли тест «За рулём»"],["Patron","Прошли тест «За рулём»"]],
+   bad:{list:"Автомагнат, Zommer, Ganz, Pilenga, Hi-Q",note:"Не прошли проверку в тесте колодок для Лады журнала «За рулём». Это результат для конкретных проверенных комплектов.",url:"https://www.zr.ru/content/articles/965864-tormoznye-kolodki-dlya-lady-ekspertiza-za-rulem"},
+   tip:"Колодки меняют комплектом на ось. Первые 200–300 км тормози плавно: колодки притираются к диску."}
+];
+PARTS.push(
+  {id:"grm",name:"Ремень ГРМ, ролики и помпа",
+   params:(f,k) => [["Привод на твоей машине",f.grm],["Что брать","Комплект: ремень + натяжной и обводной ролики. Помпу — если она приводится ремнём ГРМ и уже прошла один ремень"]],
+   brands:[["Оригинал Лада",""],["Gates","Ремни и комплекты"],["ContiTech","Ремни и комплекты"],["Dayco","Ремни и комплекты"]],
+   tip:"Ремень без роликов не меняют: заклинивший старый ролик порвёт новый ремень."},
+  {id:"fuelfilter",name:"Топливный фильтр",
+   params:(f,k) => [["Где стоит",f.fuel],["Важно","Для инжектора и карбюратора фильтры разные. Подбирай по модели и году"]],
+   brands:[["Оригинал Лада",""],["Mann",""],["Big Filter",""],["Fortech",""]],
+   tip:"На корпусе есть стрелка — направление топлива. Ставь стрелкой к двигателю."},
+  {id:"battery",name:"Аккумулятор",
+   params:(f,k) => [["Ёмкость",f.battery],["Полярность","Как у старого: смотри, где плюс — справа или слева, когда аккумулятор стоит клеммами к тебе"],["Пусковой ток","Для Урала и Сибири бери с запасом, от 450–500 А"]],
+   brands:[["Аком",""],["Tyumen Battery","Тюменский аккумуляторный завод"],["Topla",""]],
+   tip:"Смотри дату выпуска на корпусе: аккумулятор, который год пролежал на складе, мог подсесть."},
+  {id:"wires",name:"Высоковольтные провода и катушки",
+   params:(f,k) => [["Зажигание",f.ign]],
+   brands:[["Оригинал Лада",""],["СОАТЭ","Катушки и модули зажигания"],["Tesla","Провода и катушки"],["Finwhale","Провода и катушки"]],
+   tip:"Провода меняют комплектом. Признак пробоя — мотор троит в сырую погоду или видны искры в темноте под капотом."},
+  {id:"wipers",name:"Щётки стеклоочистителя",
+   params:(f,k) => [["Длина","По старым щёткам или по каталогу для своей модели: водительская и пассажирская обычно разные"],["Тип","Каркасные — дешевле; бескаркасные — лучше прижимаются и меньше обмерзают зимой"]],
+   brands:[["Bosch",""],["Denso",""],["Trico",""],["Alca",""]],
+   tip:"Зимой не включай дворники, пока щётки примёрзли к стеклу: порвёшь резинку."},
+  {id:"bulbs",name:"Лампы",
+   params:(f,k) => [["Самые частые","H4 (ближний и дальний), H7, W5W (габариты), P21/5W (стоп и габарит), PY21W (поворотник)"],["Подбор","По маркировке на старой лампе или по руководству"]],
+   brands:[["Osram",""],["Philips",""],["Narva",""],["Маяк",""]],
+   tip:"Лампы с повышенной яркостью (+50%, +100%) светят лучше, но служат меньше обычных."},
+  {id:"discs",name:"Тормозные диски",
+   params:(f,k) => [["Когда менять","Толщина меньше минимальной (выбита на диске или в руководстве), глубокие борозды, биение руля при торможении"],["Подбор","По модели и диаметру колеса (R13, R14, R15 — диски разные)"]],
+   brands:[["Оригинал Лада",""],["TRW",""],["Brembo",""],["Trialli",""]],
+   tip:"Диски меняют парой на ось и ставят с новыми колодками."}
+);
+const JOB_GROUPS = [["Масло и фильтры",["oil","air","cabin","fuel"]],["Двигатель",["plugs","altbelt","timing","coolant"]],["Тормоза",["brakes","padsreplace","bleed"]],["Электрика",["battery","bulbs"]],["Колёса и сезон",["wheel","levels","season"]]];
+const JOB_PARTS = {oil:["oil","oilfilter"],air:["air"],cabin:["cabin"],plugs:["plugs","wires"],coolant:["coolant"],brakes:["pads","discs","brakefluid"],levels:["oil","coolant","brakefluid"],
+  padsreplace:["pads","discs"],timing:["grm"],fuel:["fuelfilter"],bleed:["brakefluid"],battery:["battery"],bulbs:["bulbs"],season:["wipers","coolant","battery"]};
+
+/* Регламент: интервалы-ориентиры. km и years — числа или функция от семейства. */
+const SCHED = [
+  {id:"oil",name:"Масло и масляный фильтр",km:k => CHAIN.has(k) ? 10000 : 15000,years:1,job:"oil"},
+  {id:"air",name:"Воздушный фильтр",km:30000,job:"air"},
+  {id:"cabin",name:"Салонный фильтр",km:15000,years:1,job:"cabin",skip:k => k === "classic"},
+  {id:"plugs",name:"Свечи зажигания",km:30000,job:"plugs"},
+  {id:"fuel",name:"Топливный фильтр",km:30000,job:"fuel",skip:k => !!F(k).tankFilter},
+  {id:"brakes",name:"Проверка тормозных колодок",km:15000,job:"brakes"},
+  {id:"brakefluid",name:"Тормозная жидкость",years:2,job:"bleed"},
+  {id:"altbelt",name:"Ремень генератора",km:60000,job:"altbelt"},
+  {id:"timing",name:k => CHAIN.has(k) ? "Цепь ГРМ: проверка и подтяжка" : F(k).grmKm ? "Ремень ГРМ с роликами" : "Ремень ГРМ: осмотр",km:k => CHAIN.has(k) ? 30000 : (F(k).grmKm || 15000),job:"timing"},
+  {id:"coolant",name:"Антифриз",km:k => k === "vesta" ? 90000 : 75000,years:5,job:"coolant"},
+  {id:"gear",name:"Масло в коробке передач",km:75000,job:null}
+];
+const EXTRA_LOG = [["padsreplace","Замена колодок"],["battery","Аккумулятор"],["bulbs","Лампы"],["wheel","Колёса, шиномонтаж"],["repair","Ремонт"],["other","Другое"]];
+const JOB_LOG = {oil:"oil",air:"air",cabin:"cabin",plugs:"plugs",fuel:"fuel",brakes:"brakes",bleed:"brakefluid",coolant:"coolant",altbelt:"altbelt",timing:"timing",padsreplace:"padsreplace",battery:"battery",bulbs:"bulbs",wheel:"wheel"};
+const val = (v,k) => typeof v === "function" ? v(k) : v;
+const logName = (id,k) => { const s = SCHED.find(x => x.id === id); if(s) return val(s.name,k); const e = EXTRA_LOG.find(x => x[0] === id); return e ? e[1] : "Работа"; };
+
+/* Диагностика по симптомам */
+const SYMPTOMS = [
+  {t:"Горит красная лампа давления масла",danger:true,c:["Сразу заглуши мотор: без давления масла двигатель убивает себя за минуты","Проверь уровень масла щупом. Мало — долей и ищи, куда уходит","Уровень в норме, а лампа горит — неисправен датчик или масляный насос. Дальше только на буксире"],jobs:["levels","oil"]},
+  {t:"Стрелка температуры в красной зоне, из-под капота пар",danger:true,c:["Заглуши мотор, дай остыть. Пробку бачка на горячем не открывай","Низкий уровень антифриза или утечка","Не включается вентилятор радиатора, заклинил термостат","Порван ремень, который крутит помпу"],jobs:["levels","coolant","timing"]},
+  {t:"Педаль тормоза мягкая или проваливается",danger:true,c:["Ехать нельзя","Воздух в системе или старая жидкость с водой","Утечка жидкости: проверь уровень в бачке и мокрые места у колёс"],jobs:["levels","bleed"]},
+  {t:"Не заводится: стартер не крутит или еле крутит",c:["Разряжен аккумулятор (особенно в мороз)","Окислены или ослаблены клеммы","Неисправен стартер или его реле"],jobs:["battery"]},
+  {t:"Стартер крутит, но мотор не схватывает",c:["Залиты или изношены свечи","Нет топлива: забит топливный фильтр, не работает бензонасос","Проблема с зажиганием: провода, катушка, модуль"],jobs:["plugs","fuel"]},
+  {t:"Мотор троит, трясётся на холостых",c:["Не работает свеча, провод или катушка одного цилиндра","Подсос воздуха во впуске","Грязный дроссель или форсунки"],jobs:["plugs"]},
+  {t:"Свист из-под капота при запуске или включении фар",c:["Ослаб или износился ремень генератора","Шумит подшипник натяжного ролика"],jobs:["altbelt"]},
+  {t:"Горит лампа зарядки аккумулятора",c:["Порван или проскальзывает ремень генератора","Неисправен генератор или его регулятор напряжения"],jobs:["altbelt","battery"]},
+  {t:"Скрип или скрежет при торможении",c:["Износились колодки: скрежет — уже металл по металлу","Песок или ржавчина между колодкой и диском"],jobs:["brakes","padsreplace"]},
+  {t:"Машину тянет вбок",c:["При торможении: колодки или суппорт с одной стороны","При езде: разное давление в шинах, развал-схождение"],jobs:["brakes","wheel"]},
+  {t:"Металлический стук или шелест спереди мотора",c:["На классике и Ниве: растянута цепь ГРМ или изношен успокоитель","На ремённых моторах: шумит ролик ГРМ или помпа"],jobs:["timing"]},
+  {t:"Плохо дует печка, потеют стёкла",c:["Забит салонный фильтр","Мало антифриза или воздух в системе охлаждения"],jobs:["cabin","coolant"]},
+  {t:"Не горит фара, габарит или стоп",c:["Перегорела лампа","Сгорел предохранитель","Окислилась фишка"],jobs:["bulbs"]}
+];
+
+const PLUG_READ = [
+  ["Светло-коричневый, сухой нагар","Норма: смесь и двигатель в порядке"],
+  ["Чёрная сухая сажа","Богатая смесь: забит воздушный фильтр, проблемы с датчиками или карбюратором"],
+  ["Белый или светло-серый изолятор","Бедная смесь или перегрев: подсос воздуха, свеча не того калильного числа"],
+  ["Масляный, мокрый нагар","Масло попадает в цилиндр: износ колец или маслосъёмных колпачков"],
+  ["Красноватый налёт","Присадки в топливе (часто плохой бензин)"],
+  ["Оплавленный электрод, трещина изолятора","Сильный перегрев или детонация. Двигатель нужно проверить"]
+];
+const PLATE_LABEL = {oil:"Масло в двигатель",engine:"Двигатель",air:"Воздушный фильтр",cabin:"Салонный фильтр",
+  plugKey:"Свечной ключ",plugTorque:"Момент затяжки свечей",plugGap:"Зазор свечей",ign:"Зажигание",
+  coolant:"Объём системы охлаждения",brakes:"Тормоза",wheelKey:"Колёсный ключ",wheelTorque:"Момент затяжки колёс",
+  grm:"Привод ГРМ",fuel:"Топливный фильтр",bleed:"Порядок прокачки",battery:"Аккумулятор",alt:"Натяжение ремня генератора"};
+const TEXT_FIELDS = new Set(["engine","air","cabin","ign","brakes","grm","fuel","bleed","alt"]);
+const ICON_PATHS = {
+  oil:'<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/>',
+  air:'<path d="M3 8h11a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h7"/>',
+  cabin:'<circle cx="12" cy="12" r="2"/><path d="M12 10c0-4 1-6 4-6 2 0 2 3 0 4.5M14 12c4 0 6 1 6 4 0 2-3 2-4.5 0M12 14c0 4-1 6-4 6-2 0-2-3 0-4.5M10 12c-4 0-6-1-6-4 0-2 3-2 4.5 0"/>',
+  plugs:'<path d="M10 2h4v3h-4zM9 5h6v4H9zM11 9h2v6h-2zM12 15v3M9 21l3-3 3 3"/>',
+  coolant:'<path d="M14 14.8V4a2 2 0 1 0-4 0v10.8a4 4 0 1 0 4 0z"/><path d="M12 9v7"/>',
+  brakes:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M5.5 5.5 9 9M18.5 5.5 15 9"/>',
+  levels:'<path d="M4 18a8 8 0 1 1 16 0"/><path d="M12 18l4-6"/><path d="M4 18h16"/>',
+  wheel:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v5M12 16v5M3 12h5M16 12h5"/>',
+  padsreplace:'<path d="M4 15a8 8 0 0 1 16 0"/><path d="M7 15h10v4H7z"/>',
+  timing:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/>',
+  fuel:'<path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M6 8h6M14 10h2a2 2 0 0 1 2 2v4a1.5 1.5 0 0 0 3 0V8l-3-3"/>',
+  bleed:'<path d="M12 3s5 5.5 5 9.5a5 5 0 0 1-10 0C7 8.5 12 3 12 3z"/><path d="M12 10v5M10 13l2 2 2-2"/>',
+  battery:'<rect x="3" y="7" width="18" height="12" rx="2"/><path d="M7 7V5h3v2M14 7V5h3v2M6.5 13h3M15.5 11.5v3M14 13h3"/>',
+  bulbs:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/>',
+  altbelt:'<circle cx="7" cy="16" r="3"/><circle cx="17" cy="7" r="3"/><path d="M4.6 14.2 14.7 5.1M9.4 17.8l9.9-8.9"/>',
+  season:'<path d="M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7"/><path d="m9 4 3 2 3-2M9 20l3-2 3 2"/>',
+  schedule:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M7.5 14h2M11 14h2M14.5 14h2M7.5 17.5h2M11 17.5h2"/>',
+  symptoms:'<path d="M3 12h4l2-5 4 10 2-5h6"/>',
+  numbers:'<path d="M5 3h14a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M8 7h8M8 11h3M13 11h3M8 15h3M13 15h3M8 18.5h3M13 18.5h3"/>',
+  garage:'<path d="M3 21V9l9-6 9 6v12"/><path d="M7 21v-8h10v8M7 17h10"/>'
+};
+const icon = id => `<span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON_PATHS[id] || ""}</svg></span>`;
+
+
+/* ---------- схемы ---------- */
+const SYM_IDS = ["oillamp","overheat","softpedal","nostart","nocatch","misfire","whistle","chargelamp","brakenoise","pull","chainnoise","heater","lights"];
+SYMPTOMS.forEach((s,i) => s.id = SYM_IDS[i] || ("s" + i));
+const FIG_JOBS = {oil:["oilmap","dipstick"],levels:["dipstick","tank"],air:["air"],cabin:["cabin","air"],plugs:["gap","plugread"],coolant:["tank"],brakes:["pads"],padsreplace:["caliper","pads","star"],timing:["marks"],fuel:["fuelf"],bleed:["bleedorder","hose"],battery:["volt","jump"],bulbs:["bulbs"],altbelt:["belt"],wheel:["star"]};
+
+const PLUG_LOOK = [
+  {c:"#B98A57",l:"Светло-коричневый, сухой",m:"Норма: смесь и двигатель в порядке",ok:true},
+  {c:"#141414",l:"Чёрная сухая сажа",m:"Богатая смесь: забит воздушный фильтр, проблемы с датчиками или карбюратором"},
+  {c:"#ECEBE6",l:"Белый, светло-серый",m:"Бедная смесь или перегрев: подсос воздуха, не то калильное число"},
+  {c:"#3B2A14",l:"Масляный, мокрый",m:"Масло в цилиндре: износ колец или маслосъёмных колпачков",oil:true},
+  {c:"#B4502F",l:"Красноватый налёт",m:"Присадки в топливе, часто плохой бензин"},
+  {c:"#ECEBE6",l:"Оплавлен электрод, трещина",m:"Сильный перегрев или детонация. Двигатель нужно проверить",melt:true}
+];
+function plugSvg(p){
+  const ground = p.melt ? `<path d="M58 60 V80 Q58 86 52 86" class="fx-metal" stroke-width="4" fill="none"/><circle cx="51" cy="86" r="3.5" class="fx-metalf"/>`
+                        : `<path d="M58 60 V90 H41" class="fx-metal" stroke-width="4" fill="none" stroke-linejoin="round"/>`;
+  return `<svg viewBox="16 36 50 58" class="plugsvg" role="img" aria-label="${esc(p.l)}">
+    <rect x="18" y="6" width="44" height="54" rx="4" class="fx-shell"/>
+    ${[16,24,32,40,48].map(y => `<path d="M18 ${y} H62" class="fx-thread"/>`).join("")}
+    <path d="M28 60 L35 80 H45 L52 60 Z" fill="${p.c}" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+    ${p.oil ? `<ellipse cx="34" cy="68" rx="2.2" ry="3" fill="#6b5226"/><ellipse cx="46" cy="72" rx="1.8" ry="2.6" fill="#6b5226"/><path d="M32 63 L36 75" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>` : ""}
+    ${p.melt ? `<path d="M34 62 L39 70 L36 76" stroke="#3a3a3a" stroke-width="1.4" fill="none"/>` : ""}
+    <rect x="38" y="80" width="4" height="${p.melt ? 3 : 6}" class="fx-metalf"/>
+    ${ground}
+  </svg>`;
+}
+function figPlugs(){
+  return `<div class="plugread">${PLUG_LOOK.map(p => `<div class="pcard ${p.ok ? "ok" : ""}">${plugSvg(p)}<div><b>${esc(p.l)}</b><span>${esc(p.m)}</span></div></div>`).join("")}</div>`;
+}
+function figPads(){
+  return `<figure class="fig"><svg viewBox="0 0 560 230" role="img" aria-label="Толщина накладки новой и изношенной колодки">
+    <text x="140" y="24" class="fx-h" text-anchor="middle">Новая колодка</text>
+    <text x="420" y="24" class="fx-h" text-anchor="middle">Пора менять</text>
+    <rect x="186" y="50" width="22" height="150" rx="3" class="fx-disc"/><text x="197" y="218" class="fx-s" text-anchor="middle">диск</text>
+    <rect x="80" y="62" width="16" height="126" rx="2" class="fx-metalf"/>
+    <rect x="96" y="62" width="88" height="126" rx="3" class="fx-pad"/>
+    <path d="M96 48 H184" class="fx-dim"/><path d="M96 43 V53 M184 43 V53" class="fx-dim"/>
+    <text x="140" y="42" class="fx-v" text-anchor="middle">полный запас</text>
+    <text x="88" y="208" class="fx-s" text-anchor="middle">основа</text><text x="140" y="130" class="fx-s fx-on" text-anchor="middle">накладка</text>
+    <rect x="466" y="50" width="22" height="150" rx="3" class="fx-disc"/><text x="477" y="218" class="fx-s" text-anchor="middle">диск</text>
+    <rect x="440" y="62" width="16" height="126" rx="2" class="fx-metalf"/>
+    <rect x="456" y="62" width="8" height="126" rx="1" class="fx-worn"/>
+    <text x="420" y="50" class="fx-v fx-w" text-anchor="middle">меньше 1,5 мм</text>
+    <path d="M330 125 H425" class="fx-dim" marker-end="url(#ah)"/>
+    <text x="378" y="115" class="fx-s" text-anchor="middle">скрежет: металл</text><text x="378" y="148" class="fx-s" text-anchor="middle">по диску</text>
+    <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" class="fx-arrow"/></marker></defs>
+  </svg><figcaption>Смотри на накладку с торца суппорта. Меньше 1,5 мм — меняй колодки на обеих сторонах оси.</figcaption></figure>`;
+}
+function figMarks(){
+  if(CHAIN.has(fam)) return "";
+  const teeth = Array.from({length:36}, (_,i) => { const a = i*10*Math.PI/180; const x1 = 150+84*Math.sin(a), y1 = 140-84*Math.cos(a), x2 = 150+92*Math.sin(a), y2 = 140-92*Math.cos(a); return `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)} L${x2.toFixed(1)} ${y2.toFixed(1)}" class="fx-tooth"/>`; }).join("");
+  const ticks = [-40,-30,-20,-10,0,10,20,30,40].map(d => `<path d="M${450+d*1.9} 112 V${d===0?132:124}" class="fx-tick"/>`).join("");
+  return `<figure class="fig"><svg viewBox="0 0 600 290" role="img" aria-label="Метки ГРМ">
+    <text x="150" y="18" class="fx-h" text-anchor="middle">Шкив распредвала</text>
+    <path d="M150 50 l-8 -12 h16 z" class="fx-bluef"/><text x="166" y="46" class="fx-s fx-b">метка на крышке</text>
+    <circle cx="150" cy="140" r="84" class="fx-ring"/>${teeth}
+    <circle cx="150" cy="140" r="22" class="fx-hub"/>
+    <path d="M150 54 l-7 12 h14 z" class="fx-amberf"/><text x="150" y="92" class="fx-s fx-a" text-anchor="middle">метка на шкиве</text>
+    <path d="M232 92 A96 96 0 0 1 240 160" class="fx-dim" marker-end="url(#ah2)"/><text x="248" y="132" class="fx-s">по часовой</text>
+    <text x="450" y="20" class="fx-h" text-anchor="middle">Окно на картере сцепления</text>
+    <rect x="352" y="70" width="196" height="120" rx="14" class="fx-window"/>
+    <path d="M362 150 Q450 172 538 150 V190 H362 Z" class="fx-fly"/>
+    ${ticks}<text x="450" y="104" class="fx-s" text-anchor="middle">0</text>
+    <path d="M450 136 V172" class="fx-markline"/><text x="450" y="212" class="fx-s fx-a" text-anchor="middle">метка на маховике — напротив «0»</text>
+    <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" class="fx-arrow"/></marker></defs>
+    <text x="300" y="262" class="fx-s" text-anchor="middle">Обе метки совпали одновременно — валы стоят правильно.</text>
+    <text x="300" y="282" class="fx-s" text-anchor="middle">На 16-клапанных моторах метки есть на обоих шкивах распредвалов.</text>
+  </svg><figcaption>Схема упрощена: форма меток отличается по моторам, смотри руководство на свой двигатель.</figcaption></figure>`;
+}
+function figJump(){
+  const term = (x,plus) => `<rect x="${x-12}" y="78" width="24" height="12" rx="2" class="${plus?"fx-redf":"fx-darkf"}"/><text x="${x}" y="88.5" class="fx-term" text-anchor="middle">${plus?"+":"−"}</text>`;
+  const num = (x,y,n,red) => `<circle cx="${x}" cy="${y}" r="13" class="${red?"fx-redf":"fx-blackn"}"/><text x="${x}" y="${y+5}" class="fx-num" text-anchor="middle">${n}</text>`;
+  return `<figure class="fig"><svg viewBox="0 0 620 270" role="img" aria-label="Как подключать провода для прикуривания">
+    <path d="M360 84 C360 18 80 18 80 84" class="fx-cable-r"/>
+    <path d="M160 84 C160 40 560 40 560 116" class="fx-cable-b"/>
+    <rect x="30" y="90" width="180" height="100" rx="10" class="fx-batt"/>${term(80,1)}${term(160,0)}
+    <text x="120" y="148" class="fx-h" text-anchor="middle">Донор</text><text x="120" y="170" class="fx-s" text-anchor="middle">заведённая машина</text>
+    <rect x="310" y="90" width="180" height="100" rx="10" class="fx-batt"/>${term(360,1)}${term(440,0)}
+    <text x="400" y="148" class="fx-h" text-anchor="middle">Твой аккумулятор</text><text x="400" y="170" class="fx-s" text-anchor="middle">разряженный</text>
+    <rect x="520" y="116" width="80" height="74" rx="8" class="fx-engine"/><text x="560" y="150" class="fx-s" text-anchor="middle">металл</text><text x="560" y="168" class="fx-s" text-anchor="middle">мотора</text>
+    ${num(384,56,1,1)}${num(56,56,2,1)}${num(176,50,3,0)}${num(584,100,4,0)}
+    <text x="310" y="226" class="fx-s" text-anchor="middle">Подключай по порядку 1 → 2 → 3 → 4, снимай в обратном: 4 → 3 → 2 → 1.</text>
+    <text x="310" y="248" class="fx-s" text-anchor="middle">Минус к разряженной машине — на металл мотора, подальше от аккумулятора.</text>
+  </svg></figure>`;
+}
+function figStar(){
+  const B = [[130,46,1],[130,214,2],[214,130,3],[46,130,4]];
+  return `<figure class="fig fig-sm"><svg viewBox="0 0 260 260" role="img" aria-label="Порядок затяжки колёсных болтов">
+    <circle cx="130" cy="130" r="118" class="fx-ring"/><circle cx="130" cy="130" r="34" class="fx-hub"/>
+    <path d="M130 64 V196" class="fx-dim" marker-end="url(#ah3)"/><path d="M196 130 H64" class="fx-dim" marker-end="url(#ah3)"/>
+    ${B.map(([x,y,n]) => `<circle cx="${x}" cy="${y}" r="20" class="fx-bolt"/><text x="${x}" y="${y+6}" class="fx-numd" text-anchor="middle">${n}</text>`).join("")}
+    <defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" class="fx-arrow"/></marker></defs>
+  </svg><figcaption>Крест-накрест: 1 → 2 → 3 → 4. Сначала все слегка, потом в том же порядке динамометрическим ключом.</figcaption></figure>`;
+}
+function figBleed(){
+  const rear = CHAIN.has(fam);
+  const order = rear ? {RR:1,RL:2,FR:3,FL:4} : {RR:1,FL:2,RL:3,FR:4};
+  const W = {FL:[96,58],FR:[264,58],RL:[96,212],RR:[264,212]};
+  return `<figure class="fig fig-sm"><svg viewBox="0 0 360 300" role="img" aria-label="Порядок прокачки тормозов">
+    <text x="180" y="18" class="fx-s" text-anchor="middle">перёд машины</text>
+    <rect x="112" y="28" width="136" height="252" rx="40" class="fx-car"/>
+    <rect x="132" y="88" width="96" height="56" rx="10" class="fx-glass"/>
+    ${Object.entries(W).map(([k,[x,y]]) => `<rect x="${x-14}" y="${y}" width="28" height="52" rx="6" class="fx-wheel"/>
+      <circle cx="${x < 180 ? x-40 : x+40}" cy="${y+26}" r="16" class="fx-amberf"/><text x="${x < 180 ? x-40 : x+40}" y="${y+32}" class="fx-numd" text-anchor="middle">${order[k]}</text>`).join("")}
+    <text x="30" y="160" class="fx-s" text-anchor="middle">левые</text><text x="330" y="160" class="fx-s" text-anchor="middle">правые</text>
+  </svg><figcaption>Вид сверху. ${rear ? "Классика и Нива: сначала задние, потом передние, начиная с правого заднего." : "Переднеприводные Лады: по диагонали, начиная с правого заднего."}</figcaption></figure>`;
+}
+
+/* ---------- схемы к работам (вместо фото) ---------- */
+const lead = (x1,y1,x2,y2) => `<path d="M${x1} ${y1} L${x2} ${y2}" class="fx-lead"/><circle cx="${x2}" cy="${y2}" r="3" class="fx-dot"/>`;
+const T = (x,y,t,cls="fx-s",anc="start") => `<text x="${x}" y="${y}" class="${cls}" text-anchor="${anc}">${t}</text>`;
+const fig = (vb, body, cap, label, sm) => `<figure class="fig${sm ? " fig-sm" : ""}"><svg viewBox="${vb}" role="img" aria-label="${label}">${body}</svg>${cap ? `<figcaption>${cap}</figcaption>` : ""}</figure>`;
+
+function figOilMap(){
+  return fig("0 0 600 310", `
+    <rect x="170" y="38" width="220" height="30" rx="8" class="fx-body2"/>
+    <rect x="150" y="66" width="260" height="146" rx="10" class="fx-body"/>
+    <rect x="330" y="22" width="36" height="18" rx="4" class="fx-amberf"/>
+    <circle cx="200" cy="24" r="8" class="fx-ring-a"/><path d="M200 32 V150" class="fx-stick"/>
+    <path d="M170 212 H390 L372 252 H188 Z" class="fx-body"/>
+    <rect x="272" y="252" width="18" height="10" rx="2" class="fx-amberf"/>
+    <circle cx="281" cy="270" r="3" class="fx-oilf"/><circle cx="281" cy="281" r="2.5" class="fx-oilf"/>
+    <path d="M246 284 L254 304 H308 L316 284" class="fx-bucket"/>
+    <rect x="410" y="118" width="46" height="66" rx="9" class="fx-filterf"/><path d="M410 132 H456 M410 170 H456" class="fx-lead"/>
+    ${lead(366,30,420,30)}${T(426,28,"Горловина —")}${T(426,44,"сюда заливать")}
+    ${lead(192,24,150,24)}${T(144,28,"Щуп — уровень","fx-s","end")}
+    ${lead(456,150,480,150)}${T(486,154,"Масляный фильтр")}
+    ${lead(272,257,160,257)}${T(154,261,"Сливная пробка","fx-s","end")}
+    ${T(280,140,"двигатель","fx-s","middle")}${T(280,236,"поддон","fx-s","middle")}
+  `, "Сливаешь через пробку в поддоне, фильтр откручиваешь сбоку, заливаешь сверху через горловину, уровень проверяешь щупом.", "Где что при замене масла");
+}
+function figDipstick(){
+  return fig("0 0 560 120", `
+    <rect x="30" y="52" width="290" height="10" rx="5" class="fx-metalf"/>
+    <circle cx="26" cy="57" r="12" class="fx-ring-a"/>
+    <rect x="232" y="50" width="88" height="14" rx="6" class="fx-oilfilm"/>
+    <path d="M220 44 V72" class="fx-mark"/><path d="M270 44 V72" class="fx-mark"/>
+    ${T(220,90,"MAX","fx-v","middle")}${T(270,90,"MIN","fx-v","middle")}
+    ${T(330,61,"← конец щупа","fx-s")}
+    ${T(30,24,"Масло должно быть между отметками MIN и MAX","fx-h")}
+    ${T(30,112,"Проверяй на ровном месте, через 5–10 минут после остановки мотора")}
+  `, "", "Щуп: уровень масла");
+}
+function figTank(){
+  return fig("0 0 340 240", `
+    <rect x="110" y="14" width="44" height="18" rx="4" class="fx-darkf"/>
+    <rect x="70" y="30" width="124" height="180" rx="16" class="fx-glassbox"/>
+    <path d="M71 128 H193 V196 Q193 209 180 209 H84 Q71 209 71 196 Z" class="fx-coolant"/>
+    <path d="M62 86 H84 M62 146 H84" class="fx-mark"/>
+    ${T(56,90,"MAX","fx-v","end")}${T(56,150,"MIN","fx-v","end")}
+    ${lead(194,128,214,112)}${T(218,108,"на холодном —")}${T(218,124,"чуть выше MIN")}
+    ${T(132,234,"расширительный бачок","fx-s","middle")}
+  `, "Пробку на горячем моторе не открывай.", "Бачок антифриза", true);
+}
+function pleats(x,y,w,h,fill,line){ let p = `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="6" fill="${fill}" stroke="#2b333b" stroke-width="3"/>`; for(let i = x+12; i < x+w-6; i += 12) p += `<path d="M${i} ${y+6} V${y+h-6}" stroke="${line}" stroke-width="2"/>`; return p; }
+function figAir(){
+  return fig("0 0 520 210", `
+    ${pleats(40,30,180,120,"#E9E2C6","#c9bf98")}${pleats(300,30,180,120,"#5f594c","#4a453a")}
+    <circle cx="350" cy="70" r="7" fill="#3c372e"/><circle cx="420" cy="110" r="9" fill="#3c372e"/><path d="M330 120 l20 -8 l18 10" stroke="#7a7262" stroke-width="3" fill="none"/>
+    ${T(130,180,"Чистый","fx-h fx-ok","middle")}${T(390,180,"Пора менять","fx-h fx-w","middle")}
+    ${T(130,200,"светлый, свет проходит","fx-s","middle")}${T(390,200,"серый, забит пылью и листьями","fx-s","middle")}
+  `, "Посмотри фильтр на просвет: если свет почти не проходит — меняй, даже если пробег не подошёл.", "Чистый и грязный фильтр");
+}
+function figCabin(){
+  return fig("0 0 560 220", `
+    <path d="M120 20 H440 L500 120 H60 Z" class="fx-glassbox"/>
+    <path d="M60 120 H500 L512 150 H48 Z" class="fx-darkf"/>
+    <path d="M48 150 H512 L530 210 H30 Z" class="fx-body"/>
+    <path d="M150 118 L260 70 M330 118 L440 70" class="fx-wiper"/>
+    <rect x="300" y="124" width="150" height="22" rx="4" class="fx-hl"/>
+    ${T(280,62,"лобовое стекло","fx-s","middle")}${T(280,186,"капот","fx-s","middle")}
+    ${lead(450,135,500,96)}${T(506,92,"жабо","fx-s")}
+  `, "На большинстве переднеприводных Лад фильтр стоит под жабо — пластиковой решёткой у основания стекла. Снимаешь дворники и жабо — фильтр под ним.", "Где салонный фильтр");
+}
+function figPlugGap(){
+  const g = F().plugGap || "по руководству";
+  return fig("0 0 440 220", `
+    <rect x="150" y="10" width="140" height="54" rx="6" class="fx-shell"/>
+    ${[22,34,46].map(y => `<path d="M150 ${y} H290" class="fx-thread"/>`).join("")}
+    <path d="M190 64 L204 120 H236 L250 64 Z" fill="#B98A57"/>
+    <rect x="212" y="120" width="16" height="30" rx="2" class="fx-metalf"/>
+    <path d="M300 64 V188 H222 V168" class="fx-ground"/>
+    <rect x="160" y="152" width="140" height="10" rx="2" class="fx-feeler"/>
+    ${T(150,176,"щуп","fx-s fx-a","end")}
+    <path d="M330 150 V168" class="fx-dim"/><path d="M322 150 H338 M322 168 H338" class="fx-dim"/>
+    ${T(346,154,"зазор")}${T(346,172,esc(g),"fx-v")}
+    ${T(110,100,"центральный","fx-s","end")}${T(110,116,"электрод","fx-s","end")}${lead(114,108,210,132)}
+    ${T(372,110,"боковой")}${T(372,126,"электрод")}${lead(368,118,300,118)}
+  `, "Щуп должен проходить между электродами с лёгким трением. Зазор подгибают только боковым электродом.", "Зазор свечи");
+}
+function figFuelFilter(){
+  return fig("0 0 560 170", `
+    <rect x="20" y="50" width="110" height="70" rx="12" class="fx-body"/>${T(75,90,"бак","fx-h","middle")}
+    <rect x="430" y="50" width="110" height="70" rx="12" class="fx-body"/>${T(485,90,"двигатель","fx-h","middle")}
+    <path d="M130 85 H230 M330 85 H430" class="fx-pipe"/>
+    <rect x="230" y="60" width="100" height="50" rx="22" class="fx-filterf"/>
+    <path d="M250 85 H300" class="fx-arrw" marker-end="url(#ahf)"/>
+    ${T(280,140,"стрелка на корпусе — к двигателю","fx-s fx-a","middle")}
+    <defs><marker id="ahf" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#fff"/></marker></defs>
+  `, "", "Направление топливного фильтра");
+}
+function figBleedHose(){
+  return fig("0 0 520 240", `
+    <circle cx="110" cy="150" r="90" class="fx-disc2"/>
+    <rect x="150" y="80" width="90" height="120" rx="14" class="fx-body"/>
+    <rect x="186" y="62" width="18" height="20" rx="3" class="fx-amberf"/>
+    <path d="M195 62 C195 10 400 10 420 120" class="fx-hose"/>
+    <path d="M370 110 L380 220 H470 L480 110" class="fx-bucket"/>
+    <path d="M376 170 H474 L470 218 H380 Z" class="fx-brakefl"/>
+    <path d="M420 120 V182" class="fx-hose"/>
+    <circle cx="430" cy="160" r="4" class="fx-bub"/><circle cx="414" cy="150" r="3" class="fx-bub"/><circle cx="426" cy="140" r="2.5" class="fx-bub"/>
+    ${lead(186,70,120,40)}${T(16,24,"штуцер прокачки")}${T(16,40,"(ключ на 8)")}
+    ${T(195,150,"суппорт","fx-s","middle")}
+    ${T(425,236,"конец шланга — в жидкости","fx-s","middle")}
+  `, "Прокачиваешь, пока в шланге не перестанут идти пузыри.", "Прокачка: шланг в банку");
+}
+function figVolt(){
+  const X = v => 40 + (v - 11.8) * 150;
+  const zone = (a,b,cls,lab,below) => `<rect x="${X(a)}" y="70" width="${X(b)-X(a)}" height="18" rx="4" class="${cls}"/>${T((X(a)+X(b))/2, below ? 106 : 62, lab, "fx-s", "middle")}`;
+  return fig("0 0 560 190", `
+    <path d="M${X(11.8)} 130 H${X(15)}" class="fx-axis"/>
+    ${[12.0,12.4,12.8,13.2,13.6,14.0,14.4,14.8].map(v => `<path d="M${X(v)} 126 V134" class="fx-axis"/>${T(X(v),152,String(v).replace(".",","),"fx-v2","middle")}`).join("")}
+    ${zone(11.8,12.2,"fx-zw","разряжен")}${zone(12.2,12.55,"fx-za","наполовину",1)}${zone(12.55,12.75,"fx-zo","заряжен")}
+    ${zone(13.8,14.5,"fx-zb","мотор заведён — норма")}
+    ${T(300,180,"Вольты на клеммах аккумулятора","fx-s","middle")}
+  `, "Слева — замер на заглушенной машине через пару часов после поездки. Справа — на заведённом моторе.", "Напряжение аккумулятора");
+}
+function figBulbs(){
+  const glass = (x, amber) => `<ellipse cx="${x}" cy="62" rx="22" ry="30" class="${amber ? "fx-bulbA" : "fx-bulb"}"/>`;
+  const fil = x => `<path d="M${x-6} 70 V54 Q${x} 46 ${x+6} 54 V70" class="fx-fil"/>`;
+  return fig("0 0 600 200", `
+    ${glass(70)}${fil(70)}<rect x="52" y="90" width="36" height="16" rx="2" class="fx-metalf"/><path d="M60 106 V124 M70 106 V124 M80 106 V124" class="fx-pin"/>
+    ${glass(190)}${fil(190)}<rect x="174" y="90" width="32" height="16" rx="2" class="fx-metalf"/><path d="M184 106 V124 M196 106 V124" class="fx-pin"/>
+    <path d="M300 40 Q310 30 320 40 V84 H300 Z" class="fx-bulb"/><rect x="298" y="84" width="24" height="22" rx="2" class="fx-bulb"/>
+    ${glass(430)}${fil(430)}<rect x="414" y="90" width="32" height="26" rx="3" class="fx-metalf"/><path d="M405 102 h9 M446 98 h9" class="fx-pin"/>
+    ${glass(540,1)}${fil(540)}<rect x="524" y="90" width="32" height="26" rx="3" class="fx-metalf"/><path d="M515 100 h9 M556 100 h9" class="fx-pin"/>
+    ${T(70,150,"H4","fx-h","middle")}${T(70,168,"ближний и","fx-s","middle")}${T(70,184,"дальний","fx-s","middle")}
+    ${T(190,150,"H7","fx-h","middle")}${T(190,168,"ближний или","fx-s","middle")}${T(190,184,"дальний","fx-s","middle")}
+    ${T(310,150,"W5W","fx-h","middle")}${T(310,168,"габариты,","fx-s","middle")}${T(310,184,"подсветка","fx-s","middle")}
+    ${T(430,150,"P21/5W","fx-h","middle")}${T(430,168,"стоп +","fx-s","middle")}${T(430,184,"габарит","fx-s","middle")}
+    ${T(540,150,"PY21W","fx-h","middle")}${T(540,168,"поворотник","fx-s","middle")}${T(540,184,"(жёлтая)","fx-s","middle")}
+  `, "Название лампы выбито на её цоколе — сравни со старой перед покупкой.", "Типы ламп");
+}
+function figBelt(){
+  return fig("0 0 520 210", `
+    <circle cx="100" cy="120" r="52" class="fx-pulley"/><circle cx="100" cy="120" r="10" class="fx-hub"/>
+    <circle cx="420" cy="120" r="40" class="fx-pulley"/><circle cx="420" cy="120" r="9" class="fx-hub"/>
+    <path d="M100 68 Q260 92 420 80" class="fx-beltp"/><path d="M100 68 L420 80" class="fx-beltghost"/><path d="M100 172 L420 160" class="fx-beltp"/>
+    <path d="M260 22 V66" class="fx-push" marker-end="url(#ahb)"/>${T(270,32,"нажми пальцем")}
+    <path d="M300 74 V88" class="fx-dim"/><path d="M294 74 H306 M294 88 H306" class="fx-dim"/>${T(312,112,"10–15 мм","fx-v")}
+    ${T(100,200,"коленвал","fx-s","middle")}${T(420,200,"генератор","fx-s","middle")}
+    <defs><marker id="ahb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" class="fx-arrowA"/></marker></defs>
+  `, "Прогиб больше — ремень свистит и проскальзывает. Меньше — перетянут, быстрее умирают подшипники.", "Натяжение ремня");
+}
+function figCaliper(){
+  return fig("0 0 500 260", `
+    <circle cx="150" cy="140" r="110" class="fx-disc2"/><circle cx="150" cy="140" r="34" class="fx-hub"/>
+    <rect x="232" y="70" width="96" height="150" rx="16" class="fx-body"/>
+    <rect x="250" y="100" width="10" height="90" rx="2" class="fx-pad"/>
+    <circle cx="310" cy="92" r="11" class="fx-bolt"/><circle cx="310" cy="198" r="11" class="fx-bolt"/>
+    <path d="M352 196 A86 86 0 0 0 360 110" class="fx-dim" marker-end="url(#ahc)"/>
+    ${lead(321,92,372,62)}${T(378,58,"верхний болт —")}${T(378,74,"ось, не трогаем")}
+    ${lead(321,198,372,226)}${T(378,222,"нижний болт:")}${T(378,238,"ключ 13, палец — 17")}
+    ${T(394,150,"откинь вверх")}
+    <defs><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" class="fx-arrow"/></marker></defs>
+  `, "Открутил нижний болт — суппорт поворачивается вверх на верхнем, колодки вынимаются.", "Как откинуть суппорт");
+}
+
+/* мини-схемы «проблема → решение» */
+const mini = (body, label) => `<svg viewBox="0 0 200 120" class="minisvg" role="img" aria-label="${label}">${body}</svg>`;
+const padMini = worn => mini(`<rect x="120" y="10" width="16" height="100" rx="3" class="fx-disc"/><rect x="60" y="20" width="12" height="80" rx="2" class="fx-metalf"/><rect x="72" y="20" width="${worn ? 5 : 44}" height="80" rx="2" class="${worn ? "fx-worn" : "fx-pad"}"/>`, worn ? "Стёртая колодка" : "Новая колодка");
+const beltMini = bad => mini(`<rect x="10" y="44" width="180" height="32" rx="6" class="${bad ? "fx-beltbad" : "fx-beltok"}"/>${[30,60,90,120,150,170].map(x => bad ? `<path d="M${x} 46 l4 12 l-3 6 l4 10" stroke="var(--warn)" stroke-width="2" fill="none"/>` : `<path d="M${x} 48 V72" stroke="#3a4550" stroke-width="2"/>`).join("")}`, bad ? "Ремень в трещинах" : "Целый ремень");
+const termMini = bad => mini(`<rect x="40" y="58" width="120" height="52" rx="6" class="fx-batt"/><rect x="80" y="40" width="40" height="20" rx="3" class="fx-redf"/>${bad ? `<circle cx="84" cy="40" r="10" fill="#d9e7d3"/><circle cx="100" cy="34" r="12" fill="#bfe0b8"/><circle cx="116" cy="42" r="9" fill="#e6efe0"/><circle cx="92" cy="50" r="7" fill="#9fd19a"/>` : `<path d="M88 40 V24 H112 V40" stroke="#9aa3ab" stroke-width="6" fill="none"/>`}`, bad ? "Окисленная клемма" : "Чистая клемма");
+const bulbMini = bad => mini(`<ellipse cx="100" cy="52" rx="34" ry="42" class="fx-bulb"/>${bad ? `<ellipse cx="100" cy="40" rx="28" ry="22" fill="rgba(0,0,0,.35)"/>` : ""}<rect x="78" y="90" width="44" height="24" rx="3" class="fx-metalf"/>${bad ? `<path d="M88 72 V56 Q92 46 97 52 M103 48 Q108 46 112 56 V72" class="fx-fil"/><path d="M98 50 l4 -4" stroke="var(--warn)" stroke-width="2"/>` : `<path d="M88 72 V56 Q100 40 112 56 V72" class="fx-fil"/><circle cx="100" cy="50" r="22" fill="rgba(242,177,58,.25)"/>`}`, bad ? "Перегоревшая нить" : "Целая нить");
+const filterMini = bad => mini(pleats(20,15,160,90, bad ? "#5f594c" : "#E9E2C6", bad ? "#4a453a" : "#c9bf98"), bad ? "Забитый фильтр" : "Чистый фильтр");
+const stickMini = bad => mini(`<rect x="10" y="54" width="180" height="10" rx="5" class="fx-metalf"/><path d="M120 44 V74 M160 44 V74" class="fx-mark"/>${bad ? "" : `<rect x="138" y="52" width="52" height="14" rx="6" class="fx-oilfilm"/>`}${T(120,94,"MAX","fx-v2","middle")}${T(160,94,"MIN","fx-v2","middle")}${bad ? T(100,30,"на щупе сухо","fx-s fx-w","middle") : T(100,30,"между метками","fx-s fx-ok","middle")}`, bad ? "Масла нет" : "Масло в норме");
+const tankMini = bad => mini(`<rect x="60" y="12" width="80" height="100" rx="10" class="fx-glassbox"/><path d="M61 ${bad ? 98 : 62} H139 V102 Q139 111 130 111 H70 Q61 111 61 102 Z" class="fx-coolant"/><path d="M48 40 H64 M48 80 H64" class="fx-mark"/>${T(44,44,"MAX","fx-v2","end")}${T(44,84,"MIN","fx-v2","end")}`, bad ? "Антифриз ниже MIN" : "Антифриз в норме");
+const plugMini = i => mini(`<g transform="translate(60 4) scale(1.1)">${plugSvg(PLUG_LOOK[i]).replace(/<svg[^>]*>|<\/svg>/g, "")}</g>`, PLUG_LOOK[i].l);
+let _symFigs = null;
+const symFigs = () => _symFigs || (_symFigs = {
+  brakenoise:[padMini(1), padMini(0)], whistle:[beltMini(1), beltMini(0)], chargelamp:[beltMini(1), beltMini(0)],
+  nostart:[termMini(1), termMini(0)], lights:[bulbMini(1), bulbMini(0)], heater:[filterMini(1), filterMini(0)],
+  oillamp:[stickMini(1), stickMini(0)], overheat:[tankMini(1), tankMini(0)], misfire:[plugMini(1), plugMini(0)], nocatch:[plugMini(3), plugMini(0)]
+});
+const SYM_CAP = {brakenoise:["Накладка стёрлась до металла","Новые колодки"],whistle:["Ремень в трещинах","Новый ремень"],chargelamp:["Ремень порван или в трещинах","Новый ремень"],
+  nostart:["Клемма в окислах","Клемма зачищена"],lights:["Нить перегорела","Новая лампа"],heater:["Салонный фильтр забит","Новый фильтр"],
+  oillamp:["На щупе сухо","Масло между метками"],overheat:["Антифриз ниже MIN","Уровень в норме"],misfire:["Свеча в саже","Нормальная свеча"],nocatch:["Свеча мокрая, залита","Нормальная свеча"]};
+
+const FIGS = {plugread:figPlugs, pads:figPads, marks:figMarks, jump:figJump, star:figStar, bleedorder:figBleed,
+  oilmap:figOilMap, dipstick:figDipstick, tank:figTank, air:figAir, cabin:figCabin, gap:figPlugGap, fuelf:figFuelFilter, hose:figBleedHose, volt:figVolt, bulbs:figBulbs, belt:figBelt, caliper:figCaliper};
+const FIG_TITLE = {plugread:"Как читать старые свечи", pads:"Схема: износ колодки", marks:"Схема: метки ГРМ", jump:"Схема: как прикурить", star:"Схема: порядок затяжки колёс", bleedorder:"Схема: порядок прокачки",
+  oilmap:"Схема: где что", dipstick:"Схема: уровень масла", tank:"Схема: уровень антифриза", air:"Схема: когда менять фильтр", cabin:"Схема: где фильтр", gap:"Схема: зазор свечи", fuelf:"Схема: как ставить фильтр", hose:"Схема: прокачка", volt:"Схема: напряжение аккумулятора", bulbs:"Схема: какие бывают лампы", belt:"Схема: проверка натяжения", caliper:"Схема: суппорт"};
+function renderFigs(j){
+  return (FIG_JOBS[j.id] || []).filter(id => !(j.id === "cabin" && fam === "classic") && !(id === "fuelf" && F().tankFilter)).map(id => { const html = FIGS[id](); return html ? `<section class="blk"><h4>${FIG_TITLE[id]}</h4>${html}</section>` : ""; }).join("");
+}
+
+
+/* ---------- схемы к шагам: рисунок + подпись под ним ---------- */
+const sv = (body, label) => `<svg viewBox="0 0 260 130" class="stepsvg" role="img" aria-label="${label}">${body}</svg>`;
+function head(x, y, ang, cls = "fx-headA"){ const a = ang * Math.PI / 180, s = 9;
+  const p = (dx, dy) => `${(x + dx*Math.cos(a) - dy*Math.sin(a)).toFixed(1)} ${(y + dx*Math.sin(a) + dy*Math.cos(a)).toFixed(1)}`;
+  return `<path d="M${p(0,0)} L${p(-s,-s*0.6)} L${p(-s,s*0.6)} Z" class="${cls}"/>`; }
+function arr(x1,y1,x2,y2,cls="fx-arA"){ const ang = Math.atan2(y2-y1, x2-x1)*180/Math.PI; return `<path d="M${x1} ${y1} L${x2} ${y2}" class="${cls}"/>${head(x2,y2,ang, cls === "fx-arA" ? "fx-headA" : "fx-headM")}`; }
+function arc(cx,cy,r,a0,a1,cls="fx-arA"){
+  const P = a => [cx + r*Math.cos(a*Math.PI/180), cy + r*Math.sin(a*Math.PI/180)];
+  const [x0,y0] = P(a0), [x1,y1] = P(a1), large = Math.abs(a1-a0) > 180 ? 1 : 0, sw = a1 > a0 ? 1 : 0;
+  const tang = a1 > a0 ? a1 + 90 : a1 - 90;
+  return `<path d="M${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 ${large} ${sw} ${x1.toFixed(1)} ${y1.toFixed(1)}" class="${cls}"/>${head(x1,y1,tang, cls === "fx-arA" ? "fx-headA" : "fx-headM")}`; }
+const t = (x,y,s,cls="fx-s",anc="middle") => `<text x="${x}" y="${y}" class="${cls}" text-anchor="${anc}">${s}</text>`;
+const hexBolt = (x,y,r=9,cls="fx-boltM") => `<path d="${Array.from({length:6},(_,i)=>{const a=(60*i+30)*Math.PI/180;return (i?"L":"M")+(x+r*Math.cos(a)).toFixed(1)+" "+(y+r*Math.sin(a)).toFixed(1);}).join(" ")}Z" class="${cls}"/>`;
+const bucket = (x,y,w=60,h=30) => `<path d="M${x} ${y} L${x+6} ${y+h} H${x+w-6} L${x+w} ${y}" class="fx-bucket"/>`;
+const drops = (x,y,n=2) => Array.from({length:n},(_,i)=>`<circle cx="${x}" cy="${y+i*10}" r="${3-i*0.4}" class="fx-oilf"/>`).join("");
+const resv = (x,y,w,h,level,cls="fx-brakefl") => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" class="fx-glassbox"/><rect x="${x+1}" y="${y+level}" width="${w-2}" height="${h-level-1}" rx="7" class="${cls}"/><path d="M${x+w} ${y+h*0.25} H${x+w+12} M${x+w} ${y+h*0.65} H${x+w+12}" class="fx-mark"/>${t(x+w+16,y+h*0.25+4,"MAX","fx-v2","start")}${t(x+w+16,y+h*0.65+4,"MIN","fx-v2","start")}`;
+const NO = (x,y,s=14) => `<path d="M${x-s} ${y-s} L${x+s} ${y+s} M${x+s} ${y-s} L${x-s} ${y+s}" class="fx-cross"/>`;
+
+const STEP_SVG = {
+  drain: [() => sv(`<path d="M50 14 H210 L192 62 H68 Z" class="fx-body"/><rect x="122" y="62" width="16" height="12" rx="2" class="fx-amberf"/>${arc(130,68,24,200,330)}${drops(130,84)}${bucket(100,100,60,24)}`, "Слив масла"), "Пробка на поддоне — откручивай против часовой, масло горячее"],
+  filterOff: [() => sv(`<rect x="70" y="18" width="70" height="94" rx="12" class="fx-filterf"/><rect x="64" y="58" width="82" height="10" rx="3" class="fx-strap"/><path d="M146 63 H230" class="fx-handle"/>${arc(105,63,70,-25,25)}`, "Съёмник фильтра"), "Съёмник на фильтр, рукоятку — против часовой"],
+  filterOn: [() => sv(`<rect x="90" y="36" width="80" height="80" rx="12" class="fx-filterf"/><ellipse cx="130" cy="36" rx="34" ry="8" class="fx-oring"/>${arc(130,60,62,-150,-30)}`, "Новый фильтр"), "Кольцо смазать маслом, крутить рукой: после касания ещё ¾ оборота"],
+  pour: [() => sv(`<path d="M90 20 H170 L138 72 H122 Z" class="fx-funnel"/><rect x="122" y="72" width="16" height="22" class="fx-funnel"/><path d="M80 98 H180" class="fx-body2line"/><path d="M150 4 Q140 30 132 66" class="fx-pourline"/>`, "Залить масло"), "Лей через воронку, не доливая до полного объёма"],
+  clips: [() => sv(`<rect x="40" y="46" width="180" height="70" rx="10" class="fx-body"/><rect x="40" y="30" width="180" height="20" rx="8" class="fx-body2"/>${[70,130,190].map(x => `<path d="M${x-8} 44 V58 H${x+8} V44" class="fx-clip"/>`).join("")}${arr(130,24,130,4)}`, "Защёлки корпуса"), "Отстегни защёлки и подними крышку"],
+  seal: [() => sv(`<rect x="40" y="22" width="180" height="88" rx="8" class="fx-sealbox"/>${pleats(54,34,152,64,"#E9E2C6","#c9bf98")}`, "Уплотнитель"), "Резиновый край должен лечь ровно по всему периметру"],
+  wiper: [() => sv(`<path d="M40 104 L240 34" class="fx-wiperarm"/>${hexBolt(56,98,11,"fx-boltA")}${arc(56,98,24,200,330)}`, "Поводок дворника"), "Сними колпачок и открути гайку поводка"],
+  cabinArrow: [() => sv(`${pleats(55,14,150,64,"#E9E2C6","#c9bf98")}${arr(130,40,130,122)}`, "Стрелка фильтра"), "Стрелка на фильтре — по ходу воздуха, в салон"],
+  wirePull: [() => sv(`<rect x="70" y="80" width="60" height="46" rx="4" class="fx-body"/><rect x="84" y="52" width="32" height="30" rx="6" class="fx-boot"/><path d="M100 52 Q100 18 180 22" class="fx-wire"/>${arr(124,50,124,14)}${NO(200,60)}`, "Снять провод"), "Тяни за наконечник, а не за провод"],
+  coilPull: [() => sv(`<rect x="90" y="86" width="60" height="40" rx="4" class="fx-body"/><rect x="104" y="24" width="32" height="70" rx="6" class="fx-coil"/><rect x="136" y="32" width="24" height="16" rx="3" class="fx-plug"/>${arr(168,40,204,40)}${arr(72,78,72,24)}`, "Снять катушку"), "Отключи фишку, открути крепление и тяни катушку вверх"],
+  blow: [() => sv(`<rect x="90" y="40" width="60" height="86" rx="4" class="fx-body"/><rect x="108" y="40" width="24" height="86" class="fx-well"/><path d="M210 8 L150 32" class="fx-nozzle"/>${arr(146,30,126,46,"fx-arM")}`, "Продуть колодец"), "Сдуй мусор из колодца, пока свеча ещё стоит"],
+  socket: [() => sv(`<rect x="80" y="74" width="60" height="52" rx="4" class="fx-body"/><rect x="98" y="74" width="24" height="52" class="fx-well"/><rect x="100" y="16" width="20" height="78" rx="3" class="fx-ext"/><path d="M110 16 H220" class="fx-handle"/><circle cx="110" cy="16" r="9" class="fx-boltM"/>${arc(110,16,64,-25,25)}`, "Выкрутить свечу"), () => "Свечная головка на " + F().plugKey + " с удлинителем, трещотка — против часовой"],
+  byHand: [() => sv(`<rect x="60" y="84" width="140" height="42" rx="4" class="fx-body"/><rect x="116" y="28" width="28" height="58" rx="4" class="fx-shell"/>${arc(130,50,42,-200,20)}`, "Наживить рукой"), "Первые 2–3 оборота — рукой. Идёт туго — значит криво, выкрути"],
+  torque: [() => sv(`<path d="M30 70 H230" class="fx-tw"/><rect x="160" y="60" width="70" height="20" rx="6" class="fx-tw2"/><circle cx="36" cy="70" r="13" class="fx-boltM"/>${t(195,106,"щёлк","fx-v")}`, "Динамометрический ключ"), () => "Выставь " + F().plugTorque + " и тяни до щелчка — дальше не тянуть"],
+  radDrain: [() => sv(`<rect x="40" y="10" width="170" height="88" rx="6" class="fx-radiator"/>${Array.from({length:13},(_,i)=>`<path d="M${52+i*12} 16 V92" class="fx-fin"/>`).join("")}${hexBolt(196,104,8,"fx-boltA")}${arc(196,104,18,200,330)}<circle cx="196" cy="120" r="3" class="fx-coolf"/>`, "Слив антифриза"), "Сливная пробка — внизу радиатора, подставь ёмкость"],
+  squeeze: [() => sv(`<path d="M20 66 C80 44 170 88 240 60" class="fx-hosethick"/>${arr(130,14,130,50)}${arr(130,120,130,84)}`, "Сжать патрубок"), "Сжимай верхний патрубок радиатора — так выходит воздух"],
+  peek: [() => sv(`<circle cx="120" cy="65" r="58" class="fx-wheelc"/>${[0,72,144,216,288].map(a=>`<path d="M${(120+20*Math.cos(a*Math.PI/180)).toFixed(1)} ${(65+20*Math.sin(a*Math.PI/180)).toFixed(1)} L${(120+52*Math.cos(a*Math.PI/180)).toFixed(1)} ${(65+52*Math.sin(a*Math.PI/180)).toFixed(1)}" class="fx-spoke"/>`).join("")}<rect x="142" y="42" width="20" height="30" rx="4" class="fx-amberf"/><path d="M250 22 L178 52" class="fx-light"/>`, "Колодки через диск"), "Посвети между спиц на суппорт — видно торец колодки"],
+  discLip: [() => sv(`<rect x="100" y="16" width="30" height="100" class="fx-disc"/><rect x="130" y="16" width="10" height="100" class="fx-disc"/><rect x="130" y="28" width="10" height="76" class="fx-worn2"/>${[40,56,72,88].map(y=>`<path d="M100 ${y} H130" class="fx-groove"/>`).join("")}`, "Износ диска"), "Борозды на диске и бортик по краю — диск пора проверить"],
+  brakeRes: [() => sv(`${resv(80,16,80,100,44)}`, "Тормозной бачок"), "Уровень тормозной жидкости — между MIN и MAX"],
+  chock: [() => sv(`<circle cx="110" cy="66" r="46" class="fx-wheelc"/><path d="M40 112 H230" class="fx-ground2"/><path d="M152 112 L182 112 L152 82 Z" class="fx-amberf"/>`, "Упор"), "Упор — под колесо на другой стороне машины"],
+  loosen: [() => sv(`<circle cx="100" cy="68" r="48" class="fx-wheelc"/>${hexBolt(100,42,8)}<path d="M100 42 L210 12" class="fx-handle"/>${arc(100,42,48,-60,-10)}<path d="M30 116 H230" class="fx-ground2"/>`, "Сорвать болты"), "Колесо ещё на земле — сорви болты на пол-оборота"],
+  jack: [() => sv(`<path d="M10 40 H250" class="fx-sill"/><rect x="110" y="34" width="40" height="12" class="fx-amberf"/><path d="M106 124 L130 86 L154 124 M108 86 H152 M130 86 V48" class="fx-jack"/>`, "Домкрат"), "Домкрат — только под штатное место на пороге"],
+  syringe: [() => sv(`${resv(30,24,70,86,24)}<rect x="160" y="40" width="70" height="22" rx="6" class="fx-glassbox"/><path d="M160 51 L86 60" class="fx-needle"/><path d="M230 51 H252" class="fx-handle"/>`, "Шприц"), "Откачай шприцем немного жидкости из бачка"],
+  piston: [() => sv(`<rect x="40" y="30" width="80" height="80" rx="12" class="fx-body"/><circle cx="80" cy="70" r="26" class="fx-hub"/><rect x="120" y="44" width="10" height="52" class="fx-pad"/><path d="M220 20 V120 M134 70 H220" class="fx-clamp"/>${arr(182,56,140,56)}`, "Вдавить поршень"), "Вдави поршень струбциной через старую колодку"],
+  pedal: [() => sv(`<path d="M160 8 L128 78" class="fx-pedalarm"/><rect x="100" y="76" width="56" height="16" rx="4" class="fx-pedal"/>${arr(196,40,160,76)}`, "Педаль"), "Нажми педаль 4–5 раз, пока она не станет твёрдой"],
+  tensioner: [() => sv(`<rect x="30" y="20" width="160" height="90" rx="8" class="fx-body"/><rect x="190" y="52" width="26" height="26" rx="4" class="fx-amberf"/>${arc(203,65,26,-70,40)}`, "Натяжитель цепи"), "Колпачковая гайка натяжителя — сбоку головки блока"],
+  rollerKey: [() => sv(`<circle cx="110" cy="66" r="44" class="fx-pulley"/><circle cx="110" cy="66" r="10" class="fx-hub"/><circle cx="92" cy="50" r="5" class="fx-holeA"/><circle cx="128" cy="82" r="5" class="fx-holeA"/><path d="M92 50 L128 82 M110 66 L236 66" class="fx-handle"/>${arc(110,66,58,-30,30)}`, "Натяжной ролик"), "Ключ с двумя штырями поворачивает натяжной ролик"],
+  rollerMark: [() => sv(`<circle cx="130" cy="66" r="50" class="fx-pulley"/><path d="M130 66 L130 24" class="fx-markline"/><path d="M124 6 h12 l-6 10 z" class="fx-bluef"/><circle cx="130" cy="66" r="10" class="fx-hub"/>`, "Метка ролика"), "Указатель на ролике — напротив выреза: натяжение правильное"],
+  fuse: [() => sv(`<rect x="30" y="22" width="200" height="90" rx="8" class="fx-body"/>${Array.from({length:10},(_,i)=>`<rect x="${46+(i%5)*36}" y="${36+Math.floor(i/5)*38}" width="20" height="26" rx="3" class="${i===3?"fx-amberf":"fx-fuse"}"/>`).join("")}${arr(164,32,164,6)}`, "Предохранитель"), "Вынь предохранитель бензонасоса (по схеме на крышке блока)"],
+  quick: [() => sv(`<path d="M10 70 H110" class="fx-pipe"/><rect x="110" y="54" width="50" height="32" rx="6" class="fx-quick"/><path d="M160 70 H250" class="fx-pipe"/><rect x="122" y="44" width="26" height="10" rx="3" class="fx-amberf"/>${arr(135,12,135,40)}`, "Разъём"), "Нажми на защёлку разъёма и тяни трубку"],
+  primer: [() => sv(`<rect x="60" y="40" width="100" height="70" rx="12" class="fx-body"/><path d="M160 60 L220 36" class="fx-handle"/>${arc(160,60,52,-40,-5)}`, "Подкачка"), "Покачай рычаг ручной подкачки на бензонасосе"],
+  bleedHold: [() => sv(`<rect x="24" y="76" width="56" height="16" rx="4" class="fx-pedal"/>${arr(52,30,52,70)}<rect x="150" y="60" width="80" height="56" rx="10" class="fx-body"/>${hexBolt(190,50,9,"fx-boltA")}${arc(190,50,22,190,320)}`, "Прокачка вдвоём"), "Помощник держит педаль → ты открываешь штуцер на ½ оборота и закрываешь → помощник отпускает"],
+  meter: [() => sv(`<rect x="30" y="56" width="120" height="64" rx="8" class="fx-batt"/><rect x="50" y="46" width="20" height="12" class="fx-redf"/><rect x="110" y="46" width="20" height="12" class="fx-darkf"/><rect x="170" y="10" width="80" height="104" rx="10" class="fx-meter"/><rect x="180" y="20" width="60" height="30" rx="4" class="fx-lcd"/>${t(210,42,"12,6","fx-lcdt")}<path d="M60 46 Q90 6 196 64" class="fx-probeR"/><path d="M120 46 Q150 24 222 64" class="fx-probeB"/>`, "Мультиметр"), "Красный щуп — на плюс, чёрный — на минус, режим «V⎓»"],
+  terminals: [() => sv(`<rect x="40" y="56" width="180" height="64" rx="8" class="fx-batt"/><rect x="60" y="40" width="30" height="18" class="fx-redf"/><rect x="170" y="40" width="30" height="18" class="fx-darkf"/>${t(75,53,"+","fx-term")}${t(185,53,"−","fx-term")}<circle cx="185" cy="20" r="13" class="fx-amberf"/>${t(185,25,"1","fx-numd")}<circle cx="75" cy="20" r="13" class="fx-amberf"/>${t(75,25,"2","fx-numd")}`, "Порядок клемм"), "Снимать: 1 — минус, 2 — плюс. Ставить — наоборот"],
+  boot: [() => sv(`<circle cx="120" cy="64" r="50" class="fx-boot2"/><circle cx="120" cy="64" r="18" class="fx-hub"/>${arc(120,64,62,200,250)}`, "Пыльник"), "Резиновый пыльник сзади фары снимается поворотом или стягивается"],
+  spring: [() => sv(`<circle cx="120" cy="64" r="44" class="fx-hub"/><ellipse cx="120" cy="64" rx="14" ry="22" class="fx-bulb"/><path d="M84 32 Q120 108 156 32" class="fx-springw"/>${arr(156,32,196,14)}`, "Фиксатор"), "Отожми проволочный фиксатор и отведи в сторону"],
+  noTouch: [() => sv(`<ellipse cx="100" cy="50" rx="30" ry="38" class="fx-bulb"/><rect x="82" y="86" width="36" height="26" rx="3" class="fx-metalf"/>${NO(100,50,22)}${arr(176,99,124,99)}`, "Лампа"), "Бери за металлический цоколь, колбу пальцами не трогай"],
+  altNut: [() => sv(`<circle cx="100" cy="68" r="42" class="fx-pulley"/>${hexBolt(166,36,10,"fx-boltA")}${arc(166,36,22,200,330)}${arr(52,68,16,68)}`, "Генератор"), "Ослабь гайку на планке и сдвинь генератор к мотору"],
+  hydro: [() => sv(`<rect x="110" y="8" width="40" height="114" rx="18" class="fx-glassbox"/><rect x="111" y="58" width="38" height="62" rx="16" class="fx-coolant"/><rect x="124" y="38" width="12" height="52" rx="5" class="fx-float"/>`, "Ареометр"), "Набери антифриз: поплавок покажет, до какого мороза он не замёрзнет"],
+  temp: [() => sv(`<rect x="70" y="10" width="16" height="92" rx="8" class="fx-glassbox"/><circle cx="78" cy="106" r="14" class="fx-redf"/><rect x="74" y="60" width="8" height="46" class="fx-redf"/>${t(96,64,"+5 °C","fx-v","start")}<circle cx="200" cy="66" r="46" class="fx-wheelc"/><circle cx="200" cy="66" r="20" class="fx-hub"/>`, "Переобувка"), "Около +5 °C днём и ночью — пора менять резину"]
+};
+const STEP_MAP = {
+  oil:{3:"drain",4:"filterOff",5:"filterOn",7:"pour"},
+  air:{1:"clips",4:"seal"},
+  cabin:{2:"wiper",4:"cabinArrow"},
+  plugs:{2:"wirePull",3:"coilPull",4:"blow",5:"socket",8:"byHand",9:"torque"},
+  coolant:{3:"radDrain",7:"squeeze"},
+  brakes:{1:"peek",4:"discLip"},
+  levels:{3:"brakeRes"},
+  wheel:{0:"chock",1:"loosen",2:"jack"},
+  padsreplace:{1:"syringe",5:"piston",8:"pedal"},
+  timing:{1:"tensioner",7:"rollerKey",9:"rollerMark"},
+  fuel:{2:"fuse",4:"quick",9:"primer"},
+  bleed:{1:"syringe",4:"bleedHold"},
+  battery:{0:"meter",4:"terminals"},
+  bulbs:{1:"boot",2:"spring",3:"noTouch"},
+  altbelt:{3:"altNut"},
+  season:{0:"hydro",5:"temp"}
+};
+const stepFig = (jobId, i) => { const k = STEP_MAP[jobId]?.[i], d = k && STEP_SVG[k]; if(!d) return "";
+  const cap = typeof d[1] === "function" ? d[1]() : d[1];
+  return `<figure class="stepfig">${d[0]()}<figcaption>${esc(cap)}</figcaption></figure>`; };
+
+/* ---------- состояние ---------- */
+let fam = "kpg", tab = "to", view = "list", openJob = null, query = "";
+let videos = [];       // [{id, instr, url, title, family}]
+let db = null, isOwner = false, dbReady = false, assets = null;
+let photos = [], photoTarget = null;
+let garage = {cars:[], log:[]}, activeCar = null, gStore = "local", gUid = null, gEditing = null, prefillType = null, gMsg = "";
+try{ const s = localStorage.getItem("garazh-fam"); if(s && FAM[s]) fam = s; }catch(e){}
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fill = s => { const f = F(); return esc(s).replace(/\{(\w+)\}/g, (m,k) => f[k] ? `<span class="n">${esc(f[k])}</span>` : m); };
+const stepOk = st => { if(typeof st === "string") return true; const e = engOf(fam), f = F();
+  return (!st.only || st.only.includes(fam)) && (!st.not || !st.not.includes(fam)) && (!st.kind || st.kind === (e?.kind || "inj")) && (!st.tank || (st.tank === "yes") === !!f.tankFilter); };
+const vidsFor = id => videos.filter(v => v.instr === id && (!v.family || v.family === "all" || v.family === fam));
+const km = n => Number(n).toLocaleString("ru-RU") + " км";
+const rub = n => Number(n).toLocaleString("ru-RU") + " ₽";
+const isoToday = () => { const d = new Date(); return new Date(d - d.getTimezoneOffset()*60000).toISOString().slice(0,10); };
+const ruDate = iso => iso ? iso.split("-").reverse().join(".") : "";
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+const setFam = k => { if(!FAM[k]) return; fam = k; try{ localStorage.setItem("garazh-fam", fam); }catch(_){} };
+
+function platform(url){
+  try{
+    const h = new URL(url).hostname.replace(/^www\.|^m\./,"");
+    if(/(^|\.)youtube\.com$|^youtu\.be$/.test(h)) return "YouTube";
+    if(/rutube\.ru$/.test(h)) return "Rutube";
+    if(/^vk\.com$|vkvideo\.ru$|^vk\.ru$/.test(h)) return "VK Видео";
+    return h;
+  }catch(e){ return null; }
+}
+
+/* ---------- отрисовка ---------- */
+function renderFam(){
+  const f = F();
+  const e = engOf(fam);
+  $("#famCur").innerHTML = `<b>${esc(f.name)}</b><small>${esc(e ? e.name : f.models)}</small>`;
+  $("#famMenu").innerHTML = `<div class="mcap">Модель</div>` + Object.entries(FAM).map(([k,x]) =>
+    `<button type="button" data-fam="${k}" aria-pressed="${k===fam}"><b>${esc(x.name)}</b><small>${esc(x.models)}</small></button>`).join("") +
+    `<div class="mcap">Двигатель · ${esc(f.name)}</div><div class="engs">` + (ENG[fam] || []).map(x =>
+    `<button type="button" data-eng="${x.id}" aria-pressed="${e && x.id===e.id}"><b>${esc(x.name)}</b><small>${esc(x.sub)}</small></button>`).join("") + `</div>` +
+    ((ENG[fam] || []).some(x => x.kind === "carb") ? `<details class="enghelp"><summary>Как понять: карбюратор или инжектор?</summary><ul>
+      <li><b>Карбюратор:</b> в салоне есть ручка подсоса (обычно слева под рулём), сверху мотора большой круглый корпус воздушного фильтра.</li>
+      <li><b>Инжектор:</b> ручки подсоса нет, при включении зажигания на панели загорается лампа «Check Engine», корпус фильтра сбоку, от него гофра к дроссельному узлу.</li>
+      <li>Точно — по номеру двигателя в ПТС.</li></ul></details>` : "");
+}
+function famMenu(open){ $("#famMenu").hidden = !open; $("#famBtn").setAttribute("aria-expanded", open); }
+function renderTabs(){
+  document.querySelectorAll("[role=tab][data-tab]").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === tab));
+}
+function famNote(){
+  const f = F();
+  return `<p class="famnote">Цифры показаны для: <b>${esc(f.name)}</b>, ${esc(f.engName || f.models)}. Поменять — кнопка «Моя машина» вверху.</p>`;
+}
+function searchBox(ph){
+  return `<div class="search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="${ph}" value="${esc(query)}" autocomplete="off" aria-label="Поиск"></div>`;
+}
+const match = (...parts) => !query || parts.join(" ").toLowerCase().includes(query.toLowerCase());
+const backBtn = (to, label) => `<button type="button" class="back" data-goto="${to}">← ${label}</button>`;
+
+function renderList(){
+  const jobs = JOBS.filter(j => match(j.title, j.desc, j.steps.map(s => s.t || s).join(" ")));
+  const features = query ? "" : `<div class="features">
+    <button type="button" class="feature" data-goto="schedule">${icon("schedule")}<span><b>Регламент ТО</b><small>Что и когда менять по пробегу</small></span></button>
+    <button type="button" class="feature" data-goto="symptoms">${icon("symptoms")}<span><b>Что случилось?</b><small>Найти причину по симптому</small></span></button>
+    <button type="button" class="feature" data-goto="numbers">${icon("numbers")}<span><b>Цифры моей машины</b><small>Объёмы, моменты, ключи — на одной странице</small></span></button>
+  </div>`;
+  return searchBox("Найти работу: масло, свечи, ГРМ…") + features +
+    (jobs.length ? JOB_GROUPS.map(([gname, ids]) => { const gj = jobs.filter(j => ids.includes(j.id)); return gj.length ? `<section class="group"><h2 class="gh">${esc(gname)}<span>${gj.length}</span></h2><div class="list">${gj.map(j => {
+      const n = vidsFor(j.id).length;
+      return `<button type="button" class="card" data-job="${j.id}">
+        ${icon(j.id)}<h3>${esc(j.title)}</h3><p>${esc(j.desc)}</p>
+        <div class="meta"><span class="pill ${j.lvl===1?"lvl1":"lvl2"}">${j.lvl===1?"Для новичка":"Нужен опыт"}</span>
+        <span class="pill">${esc(j.time)}</span>${n?`<span class="pill vid">Видео: ${n}</span>`:""}</div></button>`;
+    }).join("")}</div></section>` : ""; }).join("") : `<p class="empty">Ничего не нашлось. Попробуй другое слово.</p>`) + (query ? "" : tgCard() + aboutLinks());
+}
+function tgCard(){
+  return `<a class="tgcard" href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer">
+    <span class="tgico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4 2.8 11.1c-.9.4-.9 1.2.1 1.5l4.6 1.4 1.8 5.5c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8L22.9 5.5c.3-1.3-.5-1.9-1.9-1.5z"/><path d="m7.5 14 9.5-6"/></svg></span>
+    <span class="tgtext"><b>Новости Гаражника в Telegram</b><small>Новые инструкции, обновления сайта и ответы на вопросы · @garage4to</small></span>
+    <span class="tgqr" id="tgqr" aria-hidden="true"></span></a>`;
+}
+function aboutLinks(){
+  return `<div class="footlinks"><button type="button" class="linkbtn" data-goto="about">О сайте</button><span>·</span><a href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer">Нашёл ошибку? Напиши</a></div>`;
+}
+function renderAbout(){
+  return `<div class="detail">${backBtn("to","Все работы")}
+    <div class="dhead"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg></span><div><h2>О сайте</h2><p class="lead">Гаражник — твой помощник в ТО Лады.</p></div></div>
+    <div class="stack about">
+      <article class="entry"><h3>Для кого</h3><p>Для тех, кто хочет сам обслуживать свою Ладу в гараже: поменять масло, свечи, колодки, понять, что стучит. Без капремонта и без сложного оборудования.</p></article>
+      <article class="entry"><h3>Откуда цифры</h3><p>Объёмы, моменты затяжки, свечи и ключи взяты из заводских руководств по эксплуатации и ремонту АвтоВАЗа для каждой модели и двигателя. Рекомендации по колодкам и маслам — из лабораторных тестов журнала «За рулём». Бренды мы отбираем сами по опыту и отзывам владельцев.</p></article>
+      <article class="entry"><h3>Нашёл ошибку или не хватает работы</h3><p>Напиши в Telegram-канал — поправим и добавим. Новые инструкции появляются по вопросам читателей.</p><p><a href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer">@garage4to</a></p></article>
+      <article class="entry"><h3>Твои данные</h3><p>Сайт не собирает персональные данные и не требует регистрации. Всё, что ты вносишь в «Мой гараж», хранится только в твоём браузере на этом устройстве.</p></article>
+      <article class="entry"><h3>Важно</h3><p>Работы ты делаешь сам и под свою ответственность. Если сомневаешься — особенно с тормозами и ГРМ — лучше доверить работу мастеру или делать вместе с опытным человеком.</p></article>
+    </div></div>`;
+}
+function fillQr(){
+  const el = document.getElementById("tgqr");
+  if(!el || el.firstChild || typeof qrcode !== "function") return;
+  try{ const q = qrcode(0, "M"); q.addData("https://t.me/garage4to"); q.make(); el.innerHTML = q.createSvgTag({cellSize:3, margin:2, scalable:true}); }catch(e){}
+}
+
+function renderJob(j){
+  const f = F();
+  const plate = j.plate.length ? `<div class="plate"><div class="cap">${esc(f.name)} · ${esc(f.engName || f.models)}</div><dl>${
+    j.plate.map(k => `<div><dt>${PLATE_LABEL[k]}</dt><dd class="${TEXT_FIELDS.has(k)?"txt":""}">${esc(f[k])}</dd></div>`).join("")}</dl>
+    <p class="approx">По руководству по эксплуатации АвтоВАЗа. Нашёл ошибку — напиши в Telegram-канал @garage4to.</p></div>` : "";
+  const tools = j.tools.map(t => { const T = TOOLS.find(x => x.id === t);
+    return T ? `<button type="button" data-tool="${T.id}">${esc(T.name)}</button>` : `<span>${esc(t)}</span>`; }).join("");
+  const steps = j.steps.map((s,i) => [s,i]).filter(([s]) => stepOk(s)).map(([s,i]) => `<li><div>${fill(s.t || s)}${stepFig(j.id, i)}${photoStrip(j.id, String(i), "", true)}</div></li>`).join("");
+  const extra = renderFigs(j);
+  const logBtn = JOB_LOG[j.id] ? `<section class="blk"><button type="button" class="logbtn" data-logjob="${JOB_LOG[j.id]}">${icon("garage")}<span><b>Сделал? Запиши в «Мой гараж»</b><small>Дата, пробег и что использовал. Гаражник подскажет, когда следующая замена</small></span></button></section>` : "";
+  return `<div class="detail">
+    ${backBtn("to","Все работы")}
+    <div class="dhead">${icon(j.id)}<div><h2>${esc(j.title)}</h2><p class="lead">${esc(j.desc)} · ${esc(j.time)}</p></div></div>
+    <button type="button" class="startbtn" data-start="${j.id}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span><b>Начать работу</b><small>По одному шагу, крупно, экран не гаснет</small></span></button>
+    ${plate}
+    <section class="blk"><h4>Понадобится</h4><div class="tools">${tools}</div></section>
+    ${JOB_PARTS[j.id] ? `<section class="blk"><h4>Запчасти и расходники</h4><div class="tools">${
+      JOB_PARTS[j.id].map(p => `<button type="button" class="part" data-part="${p}">${esc(PARTS.find(x => x.id === p).name)}</button>`).join("")}</div></section>` : ""}
+    <section class="blk"><h4>Порядок работы</h4><ol class="steps">${steps}</ol></section>
+    ${extra}
+    ${j.warn ? `<section class="blk"><div class="warn"><p>${esc(j.warn)}</p></div></section>` : ""}
+    <section class="blk vidblk" id="vidblk">${renderVideos(j.id)}</section>
+    ${logBtn}
+  </div>`;
+}
+
+function renderVideos(target, compact){
+  const list = vidsFor(target);
+  if(!list.length && !isOwner) return "";
+  const cards = list.length ? `<div class="vids">${list.map(v => `
+    <div class="vid-card"><span class="play" aria-hidden="true"></span>
+      <a href="${esc(v.url)}" target="_blank" rel="noopener noreferrer"><b>${esc(v.title || "Видео")}</b>
+        <small>${esc(platform(v.url) || "")}${v.family && v.family!=="all" ? " · только для " + esc(FAM[v.family]?.name || "") : ""}</small></a>
+      ${isOwner ? `<button type="button" class="del" data-del="${esc(v.id)}">Удалить</button>` : ""}
+    </div>`).join("")}</div>`
+    : `<p class="nov">${dbReady ? "Видео к этой работе пока нет." : "Видео загружаются…"}</p>`;
+  const form = isOwner ? `<form class="add" ${compact ? "" : `id="addform"`} data-job="${target}" data-vform>
+      <div class="row"><input name="url" ${compact?"":`id="v-url"`} type="url" placeholder="Ссылка: YouTube, Rutube или VK Видео" required>
+      <input name="title" ${compact?"":`id="v-title"`} type="text" placeholder="Название, например «Меняем свечи на Гранте»" maxlength="120"></div>
+      <div class="row"><select name="fam" ${compact?"":`id="v-fam"`}><option value="all">Для всех машин</option>${
+        Object.entries(FAM).map(([k,f]) => `<option value="${k}">Только: ${esc(f.name)}</option>`).join("")}</select>
+      <button class="btn" type="submit">Добавить видео</button></div>
+      <p class="msg" data-vmsg role="status"></p></form>` : "";
+  if(compact) return `<div class="symvid"><div class="pair-h">Видео</div>${list.length ? cards : ""}${isOwner ? `<details class="addwrap"><summary>+ Добавить видео</summary>${form}</details>` : ""}</div>`;
+  return `<h4>Видео</h4>${cards}${form}`;
+}
+
+function renderSchedule(){
+  const rows = SCHED.filter(s => !(s.skip && s.skip(fam))).map(s => {
+    const k = val(s.km, fam), y = val(s.years, fam);
+    const when = [k ? "каждые " + km(k) : "", y ? (y === 1 ? "раз в год" : `раз в ${y} ${y < 5 ? "года" : "лет"}`) : ""].filter(Boolean).join(" или ");
+    return `<tr><td>${esc(val(s.name, fam))}</td><td>${esc(when)}</td><td>${s.job ? `<button type="button" class="linkbtn" data-job="${s.job}">Инструкция</button>` : ""}</td></tr>`;
+  }).join("");
+  return `<div class="detail">${backBtn("to","Все работы")}
+    <div class="dhead">${icon("schedule")}<div><h2>Регламент ТО</h2><p class="lead">Что менять и проверять, по пробегу или по времени — что наступит раньше.</p></div></div>
+    ${famNote()}
+    <div class="table"><table><thead><tr><th>Что</th><th>Когда</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>
+    <p class="approx-note">Это ориентир по типовому регламенту АвтоВАЗа. При тяжёлых условиях (пробки, короткие поездки зимой, пыль, такси) интервалы сокращают примерно в полтора раза. Точный регламент для своей машины смотри в сервисной книжке.</p>
+    <button type="button" class="logbtn" data-tab="garage">${icon("garage")}<span><b>Вести учёт в «Моём гараже»</b><small>Гаражник сам посчитает, что пора делать на твоём пробеге</small></span></button>
+  </div>`;
+}
+
+function renderNumbers(){
+  const f = F();
+  const gear = (fam === "niva" ? "КПП и раздатка: 75W-90 GL-4 · мосты: 75W-90 GL-5" : "75W-90 или 75W-85, GL-4") + (f.gear ? " · объём: " + f.gear : "");
+  const G = [
+    ["Двигатель",[["Масло, объём",f.oil,1],["Масло, вязкость","5W-40 или 10W-40",1],["Антифриз, объём",f.coolant,1],["Антифриз, тип",OLD.has(fam) ? "Тосол / G11 (G12 — после промывки)" : "G12 / G12+",0],["Привод ГРМ",f.grm,0]]],
+    ["Зажигание",[["Система",f.ign,0]]],
+    ["Свечи",[["Ключ",f.plugKey,1],["Зазор",f.plugGap,1],["Момент затяжки",f.plugTorque,1]]],
+    ["Колёса",[["Ключ",f.wheelKey,1],["Момент затяжки",f.wheelTorque,1],["Порядок","Крест-накрест",0]]],
+    ["Тормоза",[["Механизмы",f.brakes,0],["Жидкость","DOT-4",1],["Колодки, минимум","1,5 мм накладки",1],["Порядок прокачки",f.bleed,0]]],
+    ["Электрика",[["Аккумулятор",f.battery,1],["Напряжение, заряжен","12,6–12,7 В",1],["Заряд от генератора","13,8–14,5 В",1],["Частые лампы","H4, H7, W5W, P21/5W, PY21W",1]]],
+    ["Трансмиссия",[["Масло",gear,1]]]
+  ];
+  return `<div class="detail">${backBtn("to","Все работы")}
+    <div class="dhead">${icon("numbers")}<div><h2>Цифры моей машины</h2><p class="lead">Всё, что ищут в гараже, на одной странице.</p></div></div>
+    <div class="numgrid">${G.map(([t, rows]) => `<div class="plate"><div class="cap">${esc(t)}</div><dl class="numdl">${rows.map(([k,v,mono]) => `<div><dt>${esc(k)}</dt><dd class="${mono?"":"txt"}">${esc(v)}</dd></div>`).join("")}</dl></div>`).join("")}</div>
+    <p class="approx-note">Для: ${esc(f.name)}, ${esc(f.engName || f.models)}. Цифры — по руководствам по эксплуатации и ремонту АвтоВАЗа. Нашёл ошибку — напиши в Telegram-канал @garage4to.</p>
+  </div>`;
+}
+function renderSymptoms(){
+  const items = SYMPTOMS.filter(s => match(s.t, s.c.join(" ")));
+  return `<div class="detail">${backBtn("to","Все работы")}
+    <div class="dhead">${icon("symptoms")}<div><h2>Что случилось?</h2><p class="lead">Найди свой симптом: возможные причины и что проверить в первую очередь.</p></div></div>
+    ${searchBox("Например: свистит, не заводится, лампа…")}
+    ${items.length ? `<div class="stack">${items.map(s => `<article class="entry sym ${s.danger ? "danger" : ""}">
+      <h3>${esc(s.t)}</h3>${s.danger ? `<span class="pill dangerpill">Опасно ехать</span>` : ""}
+      <ul class="causes">${s.c.map(c => `<li>${esc(c)}</li>`).join("")}</ul>
+      <div class="tools">${s.jobs.map(id => { const j = JOBS.find(x => x.id === id); return j ? `<button type="button" data-job="${id}">${esc(j.title)}</button>` : ""; }).join("")}</div>
+      ${pairBlock("sym-" + s.id)}
+      ${renderVideos("sym-" + s.id, true)}
+    </article>`).join("")}</div>` : `<p class="empty">Ничего не нашлось. Попробуй другое слово.</p>`}
+    <p class="approx-note">Это подсказка, а не диагноз. Если причина не нашлась или не уверен в себе — лучше к мастеру.</p>
+  </div>`;
+}
+
+function renderTools(){
+  const items = TOOLS.filter(t => match(t.name, t.what, t.types.flat().join(" ")));
+  return searchBox("Найти инструмент: трещотка, мультиметр…") +
+    (items.length ? `<div class="stack">${items.map(t => `<article class="entry ${t.id === "starter" ? "starter" : ""}" id="tool-${t.id}">
+      <h3>${esc(t.name)}</h3><p>${esc(t.what)}</p>
+      <ul class="types">${t.types.map(x => `<li><b>${esc(x[0])}</b><span>${esc(x[1])}</span></li>`).join("")}</ul>
+      ${t.tip ? `<p class="tip">${esc(t.tip)}</p>` : ""}</article>`).join("")}</div>` : `<p class="empty">Ничего не нашлось.</p>`);
+}
+function renderParts(){
+  const f = F();
+  const items = PARTS.filter(p => match(p.name, p.brands.flat().join(" "), p.params(f, fam).flat().join(" ")));
+  return searchBox("Найти: масло, свечи, ГРМ, Mann…") + famNote() +
+    (items.length ? `<div class="stack">${items.map(p => `<article class="entry" id="part-${p.id}">
+      <h3>${esc(p.name)}</h3>
+      <ul class="types">${p.params(f, fam).map(x => `<li><b>${esc(x[0])}</b><span>${esc(x[1])}</span></li>`).join("")}</ul>
+      <div class="brands-cap">Проверенные бренды</div>
+      <ul class="brands">${p.brands.map(b => `<li><b>${esc(b[0])}</b>${b[1] ? `<span>${esc(b[1])}</span>` : ""}</li>`).join("")}</ul>
+      ${p.bad ? `<div class="bad"><b>Не рекомендуем:</b> ${esc(p.bad.list)}. <span>${esc(p.bad.note)}</span> <a href="${p.bad.url}" target="_blank" rel="noopener noreferrer">Читать тест</a></div>` : ""}
+      ${p.tip ? `<p class="tip">${esc(p.tip)}</p>` : ""}</article>`).join("")}
+      <p class="famnote">Бренды — ориентир: ассортимент и качество со временем меняются. Деталь подбирай по модели, году и двигателю машины.</p></div>`
+      : `<p class="empty">Ничего не нашлось.</p>`);
+}
+function renderFluids(){
+  const items = FLUIDS.filter(t => match(t.name, t.does, t.rows.flat().join(" ")));
+  return searchBox("Найти жидкость: антифриз, DOT-4…") +
+    (items.length ? `<div class="stack">${items.map(t => `<article class="entry">
+      <h3>${esc(t.name)}</h3><p>${esc(t.does)}</p>
+      <ul class="types">${t.rows.map(x => `<li><b>${esc(x[0])}</b><span>${esc(x[1])}</span></li>`).join("")}</ul>
+      ${t.tip ? `<p class="tip">${esc(t.tip)}</p>` : ""}</article>`).join("")}</div>` : `<p class="empty">Ничего не нашлось.</p>`);
+}
+
+/* ---------- Мой гараж ---------- */
+const curCar = () => garage.cars.find(c => c.id === activeCar) || garage.cars[0] || null;
+const engOptions = (k, sel) => (ENG[k] || []).map(e => `<option value="${e.id}" ${e.id===sel?"selected":""}>${esc(e.name)} — ${esc(e.sub)}</option>`).join("");
+document.addEventListener("change", e => { if(e.target.id === "g-fam"){ const s2 = $("#g-engine"); if(s2) s2.innerHTML = engOptions(e.target.value); } });
+
+function carForm(car){
+  const c = car || {name:"",fam,year:"",eng:engOf(fam)?.id,mileage:""};
+  return `<form class="gform" id="carform">
+    <h3>${car ? "Изменить машину" : "Добавь свою машину"}</h3>
+    <div class="grid2">
+      <label>Название<input id="g-name" type="text" maxlength="40" placeholder="Например, «Моя семёрка»" value="${esc(c.name)}" required></label>
+      <label>Семейство<select id="g-fam">${Object.entries(FAM).map(([k,f]) => `<option value="${k}" ${k===c.fam?"selected":""}>${esc(f.name)} (${esc(f.models)})</option>`).join("")}</select></label>
+      <label>Год выпуска<input id="g-year" type="number" inputmode="numeric" min="1970" max="2030" placeholder="2012" value="${esc(c.year)}"></label>
+      <label>Двигатель<select id="g-engine">${engOptions(c.fam, c.eng)}</select></label>
+      <label>Пробег сейчас, км<input id="g-km" type="number" inputmode="numeric" min="0" max="2000000" placeholder="125000" value="${esc(c.mileage)}" required></label>
+    </div>
+    <div class="row"><button class="btn" type="submit">${car ? "Сохранить" : "Добавить машину"}</button>${garage.cars.length ? `<button type="button" class="ghost" data-gcancel>Отмена</button>` : ""}</div>
+  </form>`;
+}
+
+function dueList(car){
+  const now = new Date(isoToday());
+  return SCHED.filter(s => !(s.skip && s.skip(car.fam))).map(s => {
+    const last = garage.log.filter(l => l.car === car.id && l.type === s.id).sort((a,b) => (b.km - a.km) || (b.date > a.date ? 1 : -1))[0];
+    const iv = val(s.km, car.fam), yrs = val(s.years, car.fam);
+    let status = "none", left = null, dueDate = null;
+    if(last){
+      status = "ok";
+      if(iv){ left = last.km + iv - car.mileage; if(left <= 0) status = "over"; else if(left <= 2000) status = "soon"; }
+      if(yrs && last.date){ const d = new Date(last.date); d.setFullYear(d.getFullYear() + yrs); dueDate = d;
+        const days = (d - now) / 864e5; if(days <= 0) status = "over"; else if(days <= 30 && status === "ok") status = "soon"; }
+    }
+    return {s, last, iv, left, dueDate, status};
+  }).sort((a,b) => ({over:0,soon:1,none:2,ok:3}[a.status] - {over:0,soon:1,none:2,ok:3}[b.status]));
+}
+const STATUS = {over:["Пора делать","st-over"],soon:["Скоро","st-soon"],ok:["В норме","st-ok"],none:["Нет записей","st-none"]};
+
+function renderGarage(){
+  const car = curCar();
+  const storeNote = gStore === "account"
+    ? "Записи сохраняются в твоём аккаунте и видны только тебе."
+    : "Записи хранятся только в этом браузере на этом устройстве. Если очистить данные браузера, они пропадут.";
+  if(!car || gEditing === "new") return `<div class="detail"><div class="dhead">${icon("garage")}<div><h2>Мой гараж</h2><p class="lead">Твоя машина, пробег и журнал всего, что ты с ней делал. Гаражник по регламенту подскажет, что пора менять.</p></div></div>${carForm()}<p class="approx-note">${storeNote}</p></div>`;
+  if(gEditing === "edit") return `<div class="detail"><div class="dhead">${icon("garage")}<div><h2>Мой гараж</h2></div></div>${carForm(car)}</div>`;
+  const f = FAM[car.fam]; const eg = (ENG[car.fam] || []).find(e => e.id === car.eng);
+  const chips = `<div class="chips">${garage.cars.map(c => `<button type="button" data-car="${c.id}" aria-pressed="${c.id===car.id}">${esc(c.name)}</button>`).join("")}<button type="button" data-gnew>+ Машина</button></div>`;
+  const dl = dueList(car), shown = dl.filter(d => d.status !== "none"), hiddenN = dl.length - shown.length;
+  const dueRow = d => {
+    const [label, cls] = STATUS[d.status];
+    const lastTxt = d.last ? `Последний раз: ${ruDate(d.last.date)}, ${km(d.last.km)}` : "Добавь запись, когда делал это последний раз";
+    const next = d.last ? [d.iv ? `на ${km(d.last.km + d.iv)}` + (d.left > 0 ? ` (через ${km(d.left)})` : "") : "", d.dueDate ? `до ${d.dueDate.toLocaleDateString("ru-RU",{month:"2-digit",year:"numeric"})}` : ""].filter(Boolean).join(" или ") : "";
+    return `<li class="due ${cls}"><div class="due-main"><b>${esc(val(d.s.name, car.fam))}</b><small>${esc(lastTxt)}</small>${next ? `<small>Следующий раз: ${esc(next)}</small>` : ""}</div>
+      <div class="due-side"><span class="stpill">${label}</span>${d.s.job ? `<button type="button" class="linkbtn" data-job="${d.s.job}">Как сделать</button>` : ""}</div></li>`;
+  };
+  const due = (shown.length ? shown.map(dueRow).join("") : `<li class="due-empty">Добавь в журнал последнюю замену масла — и здесь появится, когда следующая.</li>`)
+    + (hiddenN ? `<li><details class="duemore"><summary>Ещё ${hiddenN} ${hiddenN === 1 ? "пункт" : hiddenN < 5 ? "пункта" : "пунктов"} без записей</summary><ul class="duelist">${dl.filter(d => d.status === "none").map(dueRow).join("")}</ul></details></li>` : "");
+  const entries = garage.log.filter(l => l.car === car.id).sort((a,b) => (b.date > a.date ? 1 : b.date < a.date ? -1 : b.km - a.km));
+  const total = entries.reduce((s,l) => s + (Number(l.cost) || 0), 0);
+  const types = [...SCHED.filter(s => !(s.skip && s.skip(car.fam))).map(s => [s.id, val(s.name, car.fam)]), ...EXTRA_LOG];
+  const sel = prefillType || "oil";
+  return `<div class="detail">
+    <div class="dhead">${icon("garage")}<div><h2>Мой гараж</h2></div></div>
+    ${chips}
+    <div class="carcard">
+      <div class="carhead"><div><h3>${esc(car.name)}</h3><p>Лада · ${esc(f.name)}${car.year ? " · " + esc(car.year) : ""}${eg ? " · " + esc(eg.name) : car.engine ? " · " + esc(car.engine) : ""}</p></div>
+        <div class="carbtns"><button type="button" class="ghost sm" data-gedit>Изменить</button><button type="button" class="ghost sm danger" data-delcar="${car.id}">Удалить</button></div></div>
+      <form class="kmrow" id="kmform"><div><span class="cap">Пробег</span><span class="bigkm">${km(car.mileage)}</span></div>
+        <div class="kmset"><input id="g-mileage" type="number" inputmode="numeric" min="0" placeholder="Новый пробег" aria-label="Новый пробег"><button class="btn" type="submit">Обновить</button></div></form>
+      ${gMsg ? `<p class="msg" role="status">${esc(gMsg)}</p>` : ""}
+    </div>
+    <section class="blk"><h4>Что пора делать</h4><ul class="duelist">${due}</ul>
+      <p class="approx-note">Считается по типовому регламенту (раздел «Регламент ТО») от твоих записей и текущего пробега.</p></section>
+    <section class="blk" id="logblk"><h4>Добавить запись</h4>
+      <form class="gform" id="logform"><div class="grid2">
+        <label>Что сделал<select id="g-type">${types.map(([id,n]) => `<option value="${id}" ${id===sel?"selected":""}>${esc(n)}</option>`).join("")}</select></label>
+        <label>Дата<input id="g-date" type="date" value="${isoToday()}" required></label>
+        <label>Пробег, км<input id="g-lkm" type="number" inputmode="numeric" min="0" value="${esc(car.mileage)}" required></label>
+        <label>Стоимость, ₽<input id="g-cost" type="number" inputmode="numeric" min="0" placeholder="Необязательно"></label>
+        <label class="wide">Что использовал<input id="g-what" type="text" maxlength="200" placeholder="Например: Лукойл Genesis 5W-40, 4 л; фильтр Mann"></label>
+        <label class="wide">Заметка<input id="g-note" type="text" maxlength="300" placeholder="Необязательно"></label>
+      </div><div class="row"><button class="btn" type="submit">Сохранить запись</button></div></form></section>
+    <section class="blk"><h4>Журнал${entries.length ? ` · ${entries.length}` : ""}</h4>
+      ${entries.length ? `<ul class="loglist">${entries.map(l => `<li><div class="logdate"><b>${ruDate(l.date)}</b><span>${km(l.km)}</span></div>
+        <div class="logbody"><b>${esc(logName(l.type, car.fam))}</b>${l.what ? `<span>${esc(l.what)}</span>` : ""}${l.note ? `<small>${esc(l.note)}</small>` : ""}</div>
+        <div class="logside">${l.cost ? `<span class="cost">${rub(l.cost)}</span>` : ""}<button type="button" class="del" data-dellog="${l.id}">Удалить</button></div></li>`).join("")}</ul>
+        ${total ? `<p class="total">Потрачено на обслуживание: <b>${rub(total)}</b></p>` : ""}`
+        : `<p class="nov">Записей пока нет. Добавь последнюю замену масла — и Гаражник посчитает, когда следующая.</p>`}
+    </section>
+    <p class="approx-note">${storeNote}</p>
+  </div>`;
+}
+
+function loadLocal(){ try{ const g = JSON.parse(localStorage.getItem("garazh-garage") || "null"); if(g && Array.isArray(g.cars) && Array.isArray(g.log)) return g; }catch(e){} return null; }
+function saveLocal(){ try{ localStorage.setItem("garazh-garage", JSON.stringify(garage)); }catch(e){} }
+async function saveGarage(){
+  if(gStore === "account" || gStore === "try"){
+    try{ await db.doc(`data/users/${gUid}/garage`).set(JSON.parse(JSON.stringify(garage))); gStore = "account"; return; }
+    catch(e){ gStore = "local"; }
+  }
+  saveLocal();
+}
+async function initGarage(u){
+  const local = loadLocal();
+  if(local) garage = local;
+  try{ const a = localStorage.getItem("garazh-car"); if(a) activeCar = a; }catch(e){}
+  if(!db || !u) return;
+  gUid = await u.id();
+  if(!gUid) return;
+  try{
+    const snap = await db.doc(`data/users/${gUid}/garage`).get();
+    if(snap.exists){ const d = snap.data(); if(Array.isArray(d.cars)) garage = JSON.parse(JSON.stringify({cars:d.cars, log:d.log || []})); gStore = "account"; }
+    else gStore = "try";
+  }catch(e){ gStore = "local"; }
+}
+function selectCar(id){
+  activeCar = id; try{ localStorage.setItem("garazh-car", id); }catch(e){}
+  const c = curCar(); if(c){ setFam(c.fam); if(c.eng) setEng(c.fam, c.eng); }
+}
+
+function render(keepFocus){
+  renderFam(); renderTabs();
+  const job = openJob && JOBS.find(j => j.id === openJob);
+  $("#main").innerHTML = job ? renderJob(job)
+    : view === "about" ? renderAbout() : view === "schedule" ? renderSchedule() : view === "symptoms" ? renderSymptoms() : view === "numbers" ? renderNumbers()
+    : tab === "garage" ? renderGarage() : tab === "tools" ? renderTools() : tab === "parts" ? renderParts() : tab === "fluids" ? renderFluids() : renderList();
+  fillQr();
+  if(keepFocus){ const q = $("#q"); if(q){ q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
+}
+function rerenderVideos(){
+  const blk = $("#vidblk"); const job = openJob && JOBS.find(j => j.id === openJob);
+  if(blk && job){
+    const u = $("#v-url")?.value || "", t = $("#v-title")?.value || "", f = $("#v-fam")?.value;
+    blk.innerHTML = renderVideos(job.id);
+    if($("#v-url")){ $("#v-url").value = u; $("#v-title").value = t; if(f) $("#v-fam").value = f; }
+  } else if(!job && tab === "to" && view === "list"){ render(document.activeElement?.id === "q"); }
+  else if(view === "symptoms"){ softRender(); }
+}
+
+/* ---------- навигация ---------- */
+const TABS = ["to","garage","tools","parts"];
+function go(hash){ if(location.hash.slice(1) !== hash) location.hash = hash; else route(); }
+function route(){
+  const h = location.hash.slice(1);
+  openJob = null; view = "list";
+  if(JOBS.some(j => j.id === h)){ openJob = h; tab = "to"; }
+  else if(h === "schedule" || h === "symptoms" || h === "numbers" || h === "about"){ view = h; tab = "to"; }
+  else if(h === "fluids") tab = "parts";
+  else if(TABS.includes(h)) tab = h;
+  else tab = "to";
+  if(tab !== "garage"){ gEditing = null; }
+  render(); window.scrollTo(0,0);
+}
+window.addEventListener("hashchange", route);
+
+function arm(b, label, fn){
+  if(b.dataset.armed !== "1"){ const old = b.textContent; b.dataset.armed = "1"; b.textContent = label;
+    setTimeout(() => { if(b.isConnected){ b.dataset.armed = ""; b.textContent = old; } }, 4000); return; }
+  fn();
+}
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if(!b){ if(!e.target.closest(".famsel")) famMenu(false); return; }
+  const d = b.dataset;
+  if(b.id === "famBtn"){ famMenu($("#famMenu").hidden); return; }
+  if(!b.closest(".famsel")) famMenu(false);
+  if(d.fam){ setFam(d.fam); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $("#famMenu .engs button")?.focus(); }
+  else if(d.eng){ setEng(fam, d.eng); famMenu(false); const y = scrollY; render(); scrollTo(0,y); }
+  else if(d.tab){ query = ""; go(d.tab); }
+  else if(d.goto){ query = ""; go(d.goto); }
+  else if(d.job){ query = ""; go(d.job); }
+  else if(d.tool){ query = ""; go("tools"); requestAnimationFrame(() => document.getElementById("tool-" + d.tool)?.scrollIntoView({block:"start"})); }
+  else if(d.part){ query = ""; go("parts"); requestAnimationFrame(() => document.getElementById("part-" + d.part)?.scrollIntoView({block:"start"})); }
+  else if(d.del){ delVideo(b); }
+  else if(d.start){ startDoer(d.start); }
+  else if("dnext" in d){ doer.cur++; renderDoer(); }
+  else if("dprev" in d){ if(doer.cur > 0){ doer.cur--; renderDoer(); } }
+  else if("dclose" in d){ closeDoer(); }
+  else if(d.dlog){ closeDoer(); prefillType = d.dlog; go("garage"); requestAnimationFrame(() => document.getElementById("logblk")?.scrollIntoView({block:"start"})); }
+  else if(d.addphoto){ photoTarget = d.addphoto; $("#photoInput").click(); }
+  else if(d.delphoto){ arm(b, "Удалить?", () => delPhoto(d.delphoto)); }
+  else if(d.zoom){ openLightbox(d.zoom); }
+  else if("lbclose" in d){ closeLightbox(); }
+  else if(d.logjob){ prefillType = d.logjob; go("garage"); requestAnimationFrame(() => document.getElementById("logblk")?.scrollIntoView({block:"start"})); }
+  else if(d.car){ selectCar(d.car); gMsg = ""; render(); }
+  else if("gnew" in d){ gEditing = "new"; render(); }
+  else if("gedit" in d){ gEditing = "edit"; render(); }
+  else if("gcancel" in d){ gEditing = null; render(); }
+  else if(d.delcar){ arm(b, "Точно удалить машину и её журнал?", async () => {
+      garage.cars = garage.cars.filter(c => c.id !== d.delcar); garage.log = garage.log.filter(l => l.car !== d.delcar);
+      activeCar = garage.cars[0]?.id || null; gMsg = ""; render(); await saveGarage(); render(); }); }
+  else if(d.dellog){ arm(b, "Точно?", async () => { garage.log = garage.log.filter(l => l.id !== d.dellog); render(); await saveGarage(); }); }
+});
+document.addEventListener("input", e => { if(e.target.id === "q"){ query = e.target.value; render(true); } });
+
+document.addEventListener("submit", async e => {
+  if("vform" in e.target.dataset){ e.preventDefault(); if(db) addVideo(e.target); return; }
+  const id = e.target.id; if(!["carform","kmform","logform"].includes(id)) return;
+  e.preventDefault();
+  if(id === "carform"){
+    const data = {name: $("#g-name").value.trim().slice(0,40) || "Моя Лада", fam: $("#g-fam").value, year: $("#g-year").value.trim().slice(0,4),
+      eng: $("#g-engine").value, mileage: Math.max(0, Math.round(Number($("#g-km").value) || 0))};
+    if(gEditing === "edit"){ Object.assign(curCar(), data); }
+    else { const c = {id: uid(), ...data}; garage.cars.push(c); prefillType = "oil"; gMsg = "Машина добавлена. Теперь запиши, когда последний раз менял масло — ниже."; }
+    selectCar(gEditing === "edit" ? curCar().id : garage.cars[garage.cars.length-1].id);
+    const wasNew = gEditing !== "edit"; gEditing = null; if(!wasNew) gMsg = ""; render(); await saveGarage(); render();
+    if(wasNew) requestAnimationFrame(() => document.getElementById("logblk")?.scrollIntoView({block:"start"})); return;
+  }
+  const car = curCar(); if(!car) return;
+  if(id === "kmform"){
+    const v = Math.round(Number($("#g-mileage").value));
+    if(!v || v < 0){ gMsg = "Введи пробег числом, например 125000."; render(); return; }
+    if(v < car.mileage){ gMsg = "Новый пробег меньше текущего. Если это не ошибка, поправь машину через «Изменить»."; render(); return; }
+    car.mileage = v; gMsg = "Пробег обновлён."; render(); await saveGarage(); return;
+  }
+  if(id === "logform"){
+    const kmv = Math.max(0, Math.round(Number($("#g-lkm").value) || 0));
+    const entry = {id: uid(), car: car.id, type: $("#g-type").value, date: $("#g-date").value || isoToday(), km: kmv,
+      what: $("#g-what").value.trim().slice(0,200), note: $("#g-note").value.trim().slice(0,300), cost: Math.max(0, Math.round(Number($("#g-cost").value) || 0))};
+    garage.log.push(entry);
+    if(kmv > car.mileage) car.mileage = kmv;
+    prefillType = null; gMsg = "Запись добавлена."; render(); await saveGarage(); render();
+  }
+});
+
+
+
+/* ---------- режим «Делаю сейчас» ---------- */
+let doer = null, wake = null;
+async function keepAwake(){ try{ if(navigator.wakeLock && doer) wake = await navigator.wakeLock.request("screen"); }catch(e){ wake = null; } }
+document.addEventListener("visibilitychange", () => { if(document.visibilityState === "visible" && doer) keepAwake(); });
+function startDoer(id){
+  const j = JOBS.find(x => x.id === id); if(!j) return;
+  doer = {j, steps: j.steps.map((s,i) => [s,i]).filter(([s]) => stepOk(s)), cur: 0};
+  document.body.classList.add("locked"); keepAwake(); renderDoer();
+}
+function closeDoer(){ doer = null; $("#doer").hidden = true; document.body.classList.remove("locked"); try{ wake && wake.release(); }catch(e){} wake = null; }
+function renderDoer(){
+  const el = $("#doer"); if(!doer){ el.hidden = true; return; }
+  const {j, steps, cur} = doer, n = steps.length, f = F();
+  const done = cur >= n;
+  const nums = j.plate.length ? `<details class="dnums"><summary>Цифры для ${esc(f.name)}</summary><dl>${j.plate.map(k => `<div><dt>${PLATE_LABEL[k]}</dt><dd>${esc(f[k])}</dd></div>`).join("")}</dl></details>` : "";
+  const body = done
+    ? `<div class="dfinish"><div class="dcheck" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div><h3>Работа сделана</h3><p>${esc(j.title)}</p>
+        ${JOB_LOG[j.id] ? `<button type="button" class="btn big" data-dlog="${JOB_LOG[j.id]}">Записать в «Мой гараж»</button>` : ""}
+        <button type="button" class="ghost big" data-dclose>Закрыть</button></div>`
+    : `<div class="dstep"><div class="dnum">${cur + 1}</div><p class="dtext">${fill(steps[cur][0].t || steps[cur][0])}</p>${stepFig(j.id, steps[cur][1])}${photoStrip(j.id, String(steps[cur][1]), "", true)}</div>`;
+  el.innerHTML = `<div class="dtop"><button type="button" class="dx" data-dclose aria-label="Закрыть">×</button>
+      <div class="dtitle"><b>${esc(j.title)}</b><small>${done ? "Готово" : `Шаг ${cur + 1} из ${n}`}</small></div></div>
+    <div class="dbar"><span style="width:${Math.round(Math.min(cur, n) / n * 100)}%"></span></div>
+    <div class="dbody">${nums}${body}</div>
+    ${done ? "" : `<div class="dnav"><button type="button" class="ghost big" data-dprev ${cur === 0 ? "disabled" : ""}>Назад</button><button type="button" class="btn big amber" data-dnext>${cur === n - 1 ? "Готово" : "Сделал, дальше"}</button></div>`}`;
+  el.hidden = false;
+  el.querySelector(".dbody").scrollTop = 0;
+}
+document.addEventListener("keydown", e => {
+  if(!doer) return;
+  if(e.target.tagName === "INPUT") return;
+  if(e.key === "Escape") closeDoer();
+  else if(e.key === "ArrowRight" || e.key === "Enter"){ if(doer.cur < doer.steps.length){ doer.cur++; renderDoer(); } }
+  else if(e.key === "ArrowLeft"){ if(doer.cur > 0){ doer.cur--; renderDoer(); } }
+});
+
+/* ---------- фото ---------- */
+const photosFor = (target, slot) => photos.filter(p => p.target === target && String(p.slot) === String(slot));
+const photoSrc = p => p.file ? p.file : "/_blob/" + p.assetId;
+function photoStrip(target, slot, addLabel, noAdd){
+  const list = photosFor(target, slot);
+  const canAdd = isOwner && assets && !noAdd;
+  if(!list.length && !canAdd) return "";
+  return `<div class="photos">${list.map(p => `<figure class="ph">
+      <button type="button" class="phbtn" data-zoom="${esc(p.id)}" aria-label="Открыть фото"><img src="${esc(photoSrc(p))}" alt="${esc(p.caption || "Фото")}" loading="lazy" onerror="this.closest('.ph').classList.add('broken')"></button>
+      ${p.caption ? `<figcaption>${esc(p.caption)}</figcaption>` : ""}
+      ${isOwner ? `<div class="phedit"><input type="text" maxlength="120" placeholder="Подпись" value="${esc(p.caption || "")}" data-capfor="${esc(p.id)}" aria-label="Подпись к фото"><button type="button" class="del" data-delphoto="${esc(p.id)}">Удалить</button></div>` : ""}
+    </figure>`).join("")}
+    ${canAdd ? `<button type="button" class="addph" data-addphoto="${esc(target)}|${esc(slot)}"><span>+</span>${esc(addLabel)}</button>` : ""}</div>`;
+}
+function pairBlock(target){
+  const pr = photosFor(target, "problem"), so = photosFor(target, "solution");
+  const sid = target.replace(/^sym-/, ""), sf = symFigs()[sid], sc = SYM_CAP[sid] || ["",""];
+  if(!pr.length && !so.length && !sf && !(isOwner && assets)) return "";
+  const col = (slot, list, i, add) => {
+    const scheme = sf && !list.length ? `<figure class="minifig">${sf[i]}<figcaption>${esc(sc[i])}</figcaption></figure>` : "";
+    return scheme + (photoStrip(target, slot, add) || (scheme ? "" : `<p class="nov">Фото пока нет</p>`));
+  };
+  return `<div class="pair"><div class="pair-col"><div class="pair-h prob">Проблема</div>${col("problem", pr, 0, "+ Фото проблемы")}</div>
+    <div class="pair-arrow" aria-hidden="true">→</div>
+    <div class="pair-col"><div class="pair-h sol">Решение</div>${col("solution", so, 1, "+ Фото решения")}</div></div>`;
+}
+function softRender(){
+  const a = document.activeElement;
+  if(a && a.closest && a.closest("#main") && a.id !== "q" && (a.tagName === "INPUT" || a.tagName === "SELECT" || a.tagName === "TEXTAREA")) return;
+  if(doer){ renderDoer(); return; }
+  if(openJob || view === "symptoms"){ const y = scrollY; render(); scrollTo(0, y); }
+}
+async function shrink(file){
+  try{
+    const bmp = await createImageBitmap(file);
+    const k = Math.min(1, 1600 / Math.max(bmp.width, bmp.height));
+    const c = document.createElement("canvas"); c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+    c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
+    return await new Promise(r => c.toBlob(b => r(b || file), "image/jpeg", 0.85));
+  }catch(e){ return file; }
+}
+function toast(t, err){ const el = $("#toast"); el.textContent = t; el.className = "toast show" + (err ? " err" : ""); clearTimeout(toast.t); toast.t = setTimeout(() => el.className = "toast", 3500); }
+async function uploadPhotos(files){
+  if(!assets || !db || !photoTarget) return;
+  const [target, slot] = photoTarget.split("|");
+  for(const f of files){
+    if(!/^image\//.test(f.type)){ toast("Это не картинка. Выбери фото в формате JPG, PNG или WebP.", true); continue; }
+    toast("Загружаю фото…");
+    try{
+      const blob = await shrink(f);
+      const r = await assets.upload(blob, {type: blob.type && /^image\/(jpeg|png|webp|gif)$/.test(blob.type) ? blob.type : "image/jpeg"});
+      await db.collection("photos").add({target, slot, assetId: r.id, caption: "", createdAt: Date.now()});
+      toast("Фото добавлено.");
+    }catch(err){
+      const c = err && err.code;
+      toast(c === "too_large" ? "Фото слишком большое, максимум 20 МБ." : c === "quota_or_state" ? "Место для файлов закончилось. Удали ненужные фото." : "Не удалось загрузить фото. Попробуй ещё раз.", true);
+    }
+  }
+}
+async function delPhoto(id){
+  const p = photos.find(x => x.id === id); if(!p) return;
+  try{ await db.doc("photos/" + id).delete(); if(assets) await assets.delete(p.assetId).catch(() => {}); toast("Фото удалено."); }
+  catch(e){ toast("Не удалось удалить фото.", true); }
+}
+document.addEventListener("change", async e => {
+  if(e.target.id === "photoInput"){ const files = [...e.target.files]; e.target.value = ""; await uploadPhotos(files); }
+  else if(e.target.dataset.capfor){ try{ await db.doc("photos/" + e.target.dataset.capfor).update({caption: e.target.value.trim().slice(0,120)}); toast("Подпись сохранена."); }catch(_){ toast("Не удалось сохранить подпись.", true); } }
+});
+function openLightbox(id){
+  const p = photos.find(x => x.id === id); if(!p) return;
+  const lb = $("#lightbox"); lb.querySelector("img").src = photoSrc(p); lb.querySelector("img").alt = p.caption || "Фото";
+  lb.querySelector("p").textContent = p.caption || ""; lb.hidden = false; lb.querySelector("button").focus();
+}
+function closeLightbox(){ $("#lightbox").hidden = true; }
+document.addEventListener("keydown", e => { if(e.key === "Escape" && !$("#lightbox").hidden) closeLightbox(); });
+
+/* ---------- видео: хранилище ---------- */
+async function addVideo(form){
+  const msg = form.querySelector("[data-vmsg]"); const url = form.elements.url.value.trim(); const title = form.elements.title.value.trim();
+  const p = platform(url);
+  if(!p || !/^https:\/\//.test(url)){ msg.className = "msg err"; msg.textContent = "Ссылка должна начинаться с https://. Скопируй её из адресной строки или кнопки «Поделиться»."; return; }
+  msg.className = "msg"; msg.textContent = "Сохраняю…";
+  try{
+    await db.collection("videos").add({instr: form.dataset.job, url, title: title || ("Видео с " + p), family: form.elements.fam.value, createdAt: Date.now()});
+    form.elements.url.value = ""; form.elements.title.value = "";
+    msg.textContent = "Добавлено.";
+  }catch(err){
+    msg.className = "msg err";
+    msg.textContent = err && err.code === "quota_exceeded" ? "Хранилище заполнено, удали старые видео." : "Не удалось сохранить. Проверь подключение и попробуй ещё раз.";
+  }
+}
+async function delVideo(b){
+  arm(b, "Точно удалить?", async () => {
+    b.disabled = true;
+    try{ await db.doc("videos/" + b.dataset.del).delete(); }catch(err){ b.disabled = false; b.textContent = "Не удалось удалить"; }
+  });
+}
+
+async function initStore(){
+  const local = loadLocal(); if(local){ garage = local; try{ const a = localStorage.getItem("garazh-car"); if(a) activeCar = a; }catch(e){} }
+  if(!window.claude?.use){
+    try{ const [v, ph] = await Promise.all([fetch("videos.json", {cache:"no-cache"}).then(r => r.ok ? r.json() : []).catch(() => []), fetch("photos.json", {cache:"no-cache"}).then(r => r.ok ? r.json() : []).catch(() => [])]);
+      videos = (Array.isArray(v) ? v : []).filter(x => x && x.url && x.instr).map((x,i) => ({id: "v" + i, family: "all", ...x}));
+      photos = (Array.isArray(ph) ? ph : []).filter(x => x && x.file && x.target).map((x,i) => ({id: "p" + i, ...x}));
+    }catch(e){}
+    dbReady = true; const y = scrollY; render(); scrollTo(0, y); return; }
+  try{
+    const [d, u] = await Promise.all([claude.use("db"), claude.use("user")]);
+    isOwner = u ? await u.isOwner() : false;
+    $("#ownerBadge").hidden = !isOwner;
+    db = d;
+    if(isOwner){ try{ assets = await claude.use("assets"); }catch(_){ assets = null; } }
+    await initGarage(u);
+    if(tab === "garage" && !gEditing) render();
+    if(!db){ dbReady = true; rerenderVideos(); return; }
+    db.collection("photos").orderBy("createdAt").onSnapshot(snap => {
+      photos = snap.docs.map(d => ({id: d.id, ...d.data()}));
+      softRender();
+    }, () => {});
+    db.collection("videos").orderBy("createdAt").onSnapshot(snap => {
+      videos = snap.docs.map(d => ({id: d.id, ...d.data()}));
+      dbReady = true; rerenderVideos();
+    }, () => { dbReady = true; rerenderVideos(); });
+  }catch(e){ dbReady = true; rerenderVideos(); }
+}
+
+route();
+initStore();
+if("serviceWorker" in navigator && location.protocol === "https:"){ window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {})); }
+</script>
+
+</body>
+</html>
