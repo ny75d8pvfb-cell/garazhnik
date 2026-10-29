@@ -97,6 +97,7 @@ main{padding-block:20px 56px}
 .dhead .ico{width:54px;height:54px;border-radius:14px}
 .dhead .ico svg{width:28px;height:28px}
 .dhead > div{min-width:0}
+.dmeta{margin-top:8px;padding-top:0}
 .detail h2{font:26px/1.15 var(--f-display);margin:2px 0 6px;text-wrap:balance}
 .lead{color:var(--muted);margin:0;max-width:65ch}
 .plate{background:linear-gradient(180deg,var(--raised),var(--surface));border:1px solid var(--line-2);border-radius:var(--r);padding:14px 16px;margin-bottom:24px}
@@ -118,7 +119,7 @@ ol.steps li{counter-increment:s;display:grid;grid-template-columns:32px 1fr;gap:
 ol.steps li:not(:last-child)::after{content:"";position:absolute;left:15px;top:32px;bottom:0;width:2px;background:var(--line)}
 ol.steps li::before{content:counter(s);font:14px/30px var(--f-display);text-align:center;width:32px;height:32px;border-radius:50%;border:2px solid var(--amber);color:var(--amber);background:var(--bg);box-sizing:border-box;line-height:28px}
 ol.steps li div{min-width:0;padding-top:4px}
-.n{font:500 14px var(--f-mono);background:var(--amber-soft);color:var(--amber);padding:1px 6px;border-radius:5px;white-space:nowrap}
+.n{font:500 14px var(--f-mono);background:var(--amber-soft);color:var(--amber);padding:1px 6px;border-radius:5px;overflow-wrap:anywhere;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .warn{display:flex;gap:12px;background:color-mix(in srgb,var(--warn) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--warn) 35%,transparent);color:var(--ink);border-radius:var(--r);padding:12px 16px;max-width:70ch}
 .warn::before{content:"!";flex:none;width:22px;height:22px;border-radius:50%;background:var(--warn);color:var(--bg);font:14px/22px var(--f-display);text-align:center}
 .warn p{margin:0}
@@ -182,7 +183,7 @@ form.add input,form.add select{padding:10px 12px;border:1px solid var(--line-2);
 .feature:hover,.logbtn:hover{border-color:var(--amber)}
 .logbtn{margin-top:16px}
 .approx-note{font-size:12.5px;color:var(--dim);margin:12px 0 0;max-width:70ch}
-.linkbtn{border:0;background:none;color:var(--blue-ink);cursor:pointer;padding:2px 0;font-size:13.5px;font-weight:500;white-space:nowrap}
+.linkbtn{border:0;background:none;color:var(--blue-ink);cursor:pointer;padding:9px 4px;margin:-7px 0;font-size:13.5px;font-weight:500;white-space:nowrap}
 .linkbtn:hover{text-decoration:underline}
 td:last-child{text-align:right}
 .entry.starter{border-color:color-mix(in srgb,var(--amber) 45%,transparent)}
@@ -271,7 +272,22 @@ td:last-child{text-align:right}
 
 /* схемы */
 .fig{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 14px 12px;overflow-x:auto}
-.fig svg{display:block;width:100%;height:auto;min-width:420px;max-width:640px;margin:0 auto}
+.fig svg{display:block;width:100%;height:auto;max-width:640px;margin:0 auto}
+.fig{position:relative}
+.zoomhint{display:none}
+@media (max-width:700px){
+  .fig:not(.fig-sm):has(> svg){cursor:zoom-in}
+  .fig:not(.fig-sm):has(> svg){display:flex;flex-direction:column}
+  .fig:not(.fig-sm):has(> svg) > svg{order:0}
+  .fig:not(.fig-sm):has(> svg) .zoomhint{order:1;display:inline-flex;align-self:center;align-items:center;gap:5px;margin-top:8px;font-size:12px;color:var(--blue-ink);background:var(--blue-soft);border-radius:999px;padding:4px 11px;pointer-events:none}
+  .fig:not(.fig-sm):has(> svg) figcaption{order:2}
+}
+.zoomov{position:fixed;inset:0;z-index:60;background:var(--bg);display:flex;flex-direction:column}
+.zoomov[hidden]{display:none}
+.zoombar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 10px;color:var(--muted);font-size:13.5px}
+.zoombar button{border:1px solid var(--line-2);background:var(--raised);color:var(--ink);border-radius:999px;padding:8px 16px;font-weight:600;cursor:pointer}
+.zoomsc{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:10px 14px 30px;display:flex;align-items:center}
+.zoomsc svg{width:min(760px,190vw);min-width:600px;height:auto;flex:none;margin:auto}
 .fig.fig-sm svg{min-width:0;max-width:300px}
 .fig figcaption{font-size:13px;color:var(--muted);margin-top:8px;text-align:center}
 .fx-h{fill:var(--ink);font:600 15px var(--f-body)}
@@ -379,7 +395,8 @@ td:last-child{text-align:right}
 .lbx{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:#fff;font-size:26px;cursor:pointer}
 .vidblk:empty{display:none}
 .footlinks{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin-top:16px;color:var(--dim);font-size:13.5px}
-.footlinks a{color:var(--blue-ink);text-decoration:none}
+.footlinks a{color:var(--blue-ink);text-decoration:none;padding:9px 4px}
+.footlinks .linkbtn{margin:0}
 .about .entry p + p{margin-top:8px}
 .mcap{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding:8px 12px 4px}
 .engs{display:flex;flex-direction:column;gap:2px}
@@ -486,6 +503,15 @@ body.locked{overflow:hidden}
   .detail h2{font-size:22px}
   .brand .sub{display:none}
 }
+@media (max-width:640px){
+  .list{gap:10px}
+  .list .card{display:grid;grid-template-columns:42px 1fr;column-gap:14px;row-gap:3px;padding:14px;align-items:start}
+  .list .card > .ico{grid-row:1 / span 3;width:42px;height:42px;border-radius:11px}
+  .list .card > :not(.ico){grid-column:2}
+  .list .card h3{margin:0;font-size:16px}
+  .list .card p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .list .card .meta{padding-top:5px}
+}
 @media (prefers-reduced-motion:no-preference){.card,.fam button,.tools button{transition:background-color .15s,border-color .15s,color .15s}}
 </style>
 <!-- Yandex.Metrika counter -->
@@ -502,7 +528,7 @@ ym(113852084,"init",{webvisor:true,clickmap:true,trackHash:true,accurateTrackBou
   <div class="wrap head">
     <div class="brand">
       <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.6 17.2a1.6 1.6 0 0 0 2.3 2.3l5.7-5.7a4 4 0 0 0 5.2-5.4l-2.4 2.4-2.2-.4-.4-2.2z"/></svg></div>
-      <div class="t"><h1>Гаражник</h1><span class="sub">справочник по ТО для Лады</span></div>
+      <div class="t"><h1>Гаражник</h1><span class="sub">твой помощник в ТО Лады</span></div>
       <span id="ownerBadge" class="owner-badge" hidden>редактор</span>
       <a class="tg tg-art" href="stati/" aria-label="Статьи"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5M8 7h8M8 11h6"/></svg><span>Статьи</span></a>
       <a class="tg" href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer" aria-label="Telegram-канал Гаражника"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4 2.8 11.1c-.9.4-.9 1.2.1 1.5l4.6 1.4 1.8 5.5c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8L22.9 5.5c.3-1.3-.5-1.9-1.9-1.5z"/><path d="m7.5 14 9.5-6"/></svg><span>Канал</span></a>
@@ -1102,7 +1128,7 @@ function figPlugs(){
   return `<div class="plugread">${PLUG_LOOK.map(p => `<div class="pcard ${p.ok ? "ok" : ""}">${plugSvg(p)}<div><b>${esc(p.l)}</b><span>${esc(p.m)}</span></div></div>`).join("")}</div>`;
 }
 function figPads(){
-  return `<figure class="fig"><svg viewBox="0 0 560 230" role="img" aria-label="Толщина накладки новой и изношенной колодки">
+  return `<figure class="fig">${ZOOM_HINT}<svg viewBox="0 0 560 230" role="img" aria-label="Толщина накладки новой и изношенной колодки">
     <text x="140" y="24" class="fx-h" text-anchor="middle">Новая колодка</text>
     <text x="420" y="24" class="fx-h" text-anchor="middle">Пора менять</text>
     <rect x="186" y="50" width="22" height="150" rx="3" class="fx-disc"/><text x="197" y="218" class="fx-s" text-anchor="middle">диск</text>
@@ -1124,7 +1150,7 @@ function figMarks(){
   if(CHAIN.has(fam)) return "";
   const teeth = Array.from({length:36}, (_,i) => { const a = i*10*Math.PI/180; const x1 = 150+84*Math.sin(a), y1 = 140-84*Math.cos(a), x2 = 150+92*Math.sin(a), y2 = 140-92*Math.cos(a); return `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)} L${x2.toFixed(1)} ${y2.toFixed(1)}" class="fx-tooth"/>`; }).join("");
   const ticks = [-40,-30,-20,-10,0,10,20,30,40].map(d => `<path d="M${450+d*1.9} 112 V${d===0?132:124}" class="fx-tick"/>`).join("");
-  return `<figure class="fig"><svg viewBox="0 0 600 290" role="img" aria-label="Метки ГРМ">
+  return `<figure class="fig">${ZOOM_HINT}<svg viewBox="0 0 600 290" role="img" aria-label="Метки ГРМ">
     <text x="150" y="18" class="fx-h" text-anchor="middle">Шкив распредвала</text>
     <path d="M150 50 l-8 -12 h16 z" class="fx-bluef"/><text x="166" y="46" class="fx-s fx-b">метка на крышке</text>
     <circle cx="150" cy="140" r="84" class="fx-ring"/>${teeth}
@@ -1144,7 +1170,7 @@ function figMarks(){
 function figJump(){
   const term = (x,plus) => `<rect x="${x-12}" y="78" width="24" height="12" rx="2" class="${plus?"fx-redf":"fx-darkf"}"/><text x="${x}" y="88.5" class="fx-term" text-anchor="middle">${plus?"+":"−"}</text>`;
   const num = (x,y,n,red) => `<circle cx="${x}" cy="${y}" r="13" class="${red?"fx-redf":"fx-blackn"}"/><text x="${x}" y="${y+5}" class="fx-num" text-anchor="middle">${n}</text>`;
-  return `<figure class="fig"><svg viewBox="0 0 620 270" role="img" aria-label="Как подключать провода для прикуривания">
+  return `<figure class="fig">${ZOOM_HINT}<svg viewBox="0 0 620 270" role="img" aria-label="Как подключать провода для прикуривания">
     <path d="M360 84 C360 18 80 18 80 84" class="fx-cable-r"/>
     <path d="M160 84 C160 40 560 40 560 116" class="fx-cable-b"/>
     <rect x="30" y="90" width="180" height="100" rx="10" class="fx-batt"/>${term(80,1)}${term(160,0)}
@@ -1183,7 +1209,7 @@ function figBleed(){
 /* ---------- схемы к работам (вместо фото) ---------- */
 const lead = (x1,y1,x2,y2) => `<path d="M${x1} ${y1} L${x2} ${y2}" class="fx-lead"/><circle cx="${x2}" cy="${y2}" r="3" class="fx-dot"/>`;
 const T = (x,y,t,cls="fx-s",anc="start") => `<text x="${x}" y="${y}" class="${cls}" text-anchor="${anc}">${t}</text>`;
-const fig = (vb, body, cap, label, sm) => `<figure class="fig${sm ? " fig-sm" : ""}"><svg viewBox="${vb}" role="img" aria-label="${label}">${body}</svg>${cap ? `<figcaption>${cap}</figcaption>` : ""}</figure>`;
+const fig = (vb, body, cap, label, sm) => `<figure class="fig${sm ? " fig-sm" : ""}">${sm ? "" : ZOOM_HINT}<svg viewBox="${vb}" role="img" aria-label="${label}">${body}</svg>${cap ? `<figcaption>${cap}</figcaption>` : ""}</figure>`;
 
 function figOilMap(){
   return fig("0 0 600 310", `
@@ -1360,6 +1386,19 @@ const SYM_CAP = {brakenoise:["Накладка стёрлась до метал�
   nostart:["Клемма в окислах","Клемма зачищена"],lights:["Нить перегорела","Новая лампа"],heater:["Салонный фильтр забит","Новый фильтр"],
   oillamp:["На щупе сухо","Масло между метками"],overheat:["Антифриз ниже MIN","Уровень в норме"],misfire:["Свеча в саже","Нормальная свеча"],nocatch:["Свеча мокрая, залита","Нормальная свеча"]};
 
+const ZOOM_HINT = `<span class="zoomhint" aria-hidden="true">⤢ Нажми, чтобы увеличить</span>`;
+document.addEventListener("click", e => {
+  const fig = e.target.closest(".fig:not(.fig-sm)"); if(!fig || innerWidth > 700) return;
+  const svg = fig.querySelector(":scope > svg"); if(!svg) return;
+  let ov = document.getElementById("zoomov");
+  if(!ov){ ov = document.createElement("div"); ov.id = "zoomov"; ov.className = "zoomov"; ov.setAttribute("role","dialog"); ov.setAttribute("aria-modal","true");
+    ov.innerHTML = `<div class="zoombar"><span>Листай схему пальцем</span><button type="button" id="zoomClose">Закрыть</button></div><div class="zoomsc"></div>`;
+    document.body.appendChild(ov);
+    ov.addEventListener("click", ev => { if(ev.target.id === "zoomClose" || ev.target === ov) { ov.hidden = true; document.body.style.overflow = ""; } }); }
+  const sc = ov.querySelector(".zoomsc"); sc.innerHTML = ""; sc.appendChild(svg.cloneNode(true));
+  ov.hidden = false; document.body.style.overflow = "hidden"; sc.scrollLeft = 0; ov.querySelector("#zoomClose").focus();
+});
+document.addEventListener("keydown", e => { const ov = document.getElementById("zoomov"); if(e.key === "Escape" && ov && !ov.hidden){ ov.hidden = true; document.body.style.overflow = ""; } });
 const FIGS = {plugread:figPlugs, pads:figPads, marks:figMarks, jump:figJump, star:figStar, bleedorder:figBleed,
   oilmap:figOilMap, dipstick:figDipstick, tank:figTank, air:figAir, cabin:figCabin, gap:figPlugGap, fuelf:figFuelFilter, hose:figBleedHose, volt:figVolt, bulbs:figBulbs, belt:figBelt, caliper:figCaliper};
 const FIG_TITLE = {plugread:"Как читать старые свечи", pads:"Схема: износ колодки", marks:"Схема: метки ГРМ", jump:"Схема: как прикурить", star:"Схема: порядок затяжки колёс", bleedorder:"Схема: порядок прокачки",
@@ -1533,7 +1572,7 @@ function tgCard(){
     <span class="tgqr" id="tgqr" aria-hidden="true"></span></a>`;
 }
 function aboutLinks(){
-  return `<div class="footlinks"><button type="button" class="linkbtn" data-goto="about">О сайте</button><span>·</span><a href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer">Нашёл ошибку? Напиши</a></div>`;
+  return `<div class="footlinks"><a href="stati/">Статьи</a><span>·</span><button type="button" class="linkbtn" data-goto="about">О сайте</button><span>·</span><a href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer">Нашёл ошибку? Напиши</a></div>`;
 }
 function renderAbout(){
   return `<div class="detail">${backBtn("to","Все работы")}
@@ -1554,7 +1593,7 @@ function fillQr(){
 
 function renderJob(j){
   const f = F();
-  const plate = j.plate.length ? `<div class="plate"><div class="cap">${esc(f.name)} · ${esc(f.engName || f.models)}</div><dl>${
+  const plate = j.plate.length ? `<div class="plate"><div class="cap">${esc(f.name)} · ${esc(String(f.engName || f.models).replace(/\s*\(.*\)\s*$/, ""))}</div><dl>${
     j.plate.map(k => `<div><dt>${PLATE_LABEL[k]}</dt><dd class="${TEXT_FIELDS.has(k)?"txt":""}">${esc(f[k])}</dd></div>`).join("")}</dl>
     <p class="approx">По руководству по эксплуатации АвтоВАЗа. Нашёл ошибку — напиши в Telegram-канал @garage4to.</p></div>` : "";
   const tools = j.tools.map(t => { const T = TOOLS.find(x => x.id === t);
@@ -1564,7 +1603,7 @@ function renderJob(j){
   const logBtn = JOB_LOG[j.id] ? `<section class="blk"><button type="button" class="logbtn" data-logjob="${JOB_LOG[j.id]}">${icon("garage")}<span><b>Сделал? Запиши в «Мой гараж»</b><small>Дата, пробег и что использовал. Гаражник подскажет, когда следующая замена</small></span></button></section>` : "";
   return `<div class="detail">
     ${backBtn("to","Все работы")}
-    <div class="dhead">${icon(j.id)}<div><h2>${esc(j.title)}</h2><p class="lead">${esc(j.desc)} · ${esc(j.time)}</p></div></div>
+    <div class="dhead">${icon(j.id)}<div><h2>${esc(j.title)}</h2><p class="lead">${esc(j.desc)}</p><div class="meta dmeta"><span class="pill ${j.lvl===1?"lvl1":"lvl2"}">${j.lvl===1?"Для новичка":"Нужен опыт"}</span><span class="pill">${esc(j.time)}</span></div></div></div>
     <button type="button" class="startbtn" data-start="${j.id}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span><b>Начать работу</b><small>По одному шагу, крупно, экран не гаснет</small></span></button>
     ${plate}
     <section class="blk"><h4>Понадобится</h4><div class="tools">${tools}</div></section>
