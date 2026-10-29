@@ -168,6 +168,18 @@ form.add input,form.add select{padding:10px 12px;border:1px solid var(--line-2);
 .brands li{display:flex;flex-direction:column;gap:2px;background:var(--raised);border:1px solid var(--line);border-radius:10px;padding:9px 12px;min-width:0}
 .brands li b{font-weight:600}
 .brands li span{font-size:12.5px;color:var(--muted)}
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:14px}
+.tier{border:1px solid var(--line);border-radius:var(--r);padding:10px;background:var(--surface)}
+.tier.prem{border-top:3px solid var(--amber)}
+.tier.eco{border-top:3px solid var(--ok)}
+.tier-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:0 2px 8px}
+.tier-h b{font:600 15px var(--f-head,var(--f-body));text-transform:uppercase;letter-spacing:.05em}
+.tier.prem .tier-h b{color:var(--amber)} .tier.eco .tier-h b{color:var(--ok)}
+.tier-h span{font:500 11px var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--dim)}
+.tier .brands{grid-template-columns:1fr}
+.tier .brands li{border-radius:2px;background:var(--raised)}
+.tiernote{font-size:13.5px;color:var(--muted);margin:0 0 16px;max-width:75ch}
+.tiernote b{color:var(--ink)}
 .bad{margin-top:12px;font-size:13.5px;background:color-mix(in srgb,var(--warn) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--warn) 35%,transparent);border-radius:10px;padding:10px 12px}
 .bad b{color:var(--warn)}
 .bad span{color:var(--muted)}
@@ -1077,72 +1089,88 @@ const OLD = new Set(["classic","niva","samara"]);
 const PARTS = [
   {id:"oil",name:"Моторное масло",
    params:(f,k) => [["Вязкость","5W-40 или 10W-40. Первая цифра — холодный пуск: чем она меньше, тем легче заводиться зимой. Для Урала и Сибири — 5W-40 или 0W-40"],["Класс","API SL, SM или SN и выше"],["Объём на замену",f.oil],["Замена",(CHAIN.has(k) ? "Каждые 10 000 км" : "Каждые 15 000 км") + " или раз в год; в городе с пробками и зимой — чаще"]],
-   brands:[["Роснефть Magnum","Заводская заливка АвтоВАЗа"],["Лукойл Genesis",""],["G-Energy","Газпромнефть"],["Sintec Premium","Один из лучших результатов в лабораторном тесте «За рулём»"],["ZIC X7",""]],
+   prem:[["Liqui Moly","Molygen, Top Tec. Германия; в продаже по параллельному импорту — проверяй подлинность"],["Motul","8100. Франция"],["Mobil","Mobil 1, Super 3000"],["Bardahl","XTC — без замечаний в лабораторном тесте «За рулём»"]],
+   eco:[["Лукойл Genesis","Самый популярный бренд у читателей «За рулём» в 2025"],["Sintec Premium 9000","Лучший результат в лабораторном тесте 5W-40 «За рулём»"],["Роснефть Magnum","Заводская заливка АвтоВАЗа"],["G-Energy","Газпромнефть"]],
    tip:"Ищи на канистре одобрение АвтоВАЗа: такие масла завод проверил на своих моторах."},
   {id:"oilfilter",name:"Масляный фильтр",
    params:(f,k) => [["Тип","Накручиваемый (картридж)"],["Подбор","По модели и году машины в каталоге магазина"]],
-   brands:[["Оригинал Лада",""],["Mann",""],["Big Filter",""],["Nevsky Filter",""],["Fortech",""]],
+   prem:[["Mann",""],["Mahle",""],["Bosch",""]],
+   eco:[["Оригинал Лада",""],["Big Filter","Санкт-Петербург"],["Nevsky Filter",""],["Fortech",""]],
    tip:"Меняй фильтр при каждой замене масла: старый фильтр сразу загрязнит свежее масло."},
   {id:"air",name:"Воздушный фильтр",
    params:(f,k) => [["Тип",f.air]],
-   brands:[["Оригинал Лада",""],["Mann",""],["Big Filter",""],["Fortech",""]],
+   prem:[["Mann",""],["Mahle",""],["Bosch",""]],
+   eco:[["Оригинал Лада",""],["Big Filter",""],["Nevsky Filter",""]],
    tip:"Обычно меняют каждые 15–30 тыс. км. Если ездишь по грунтовкам, чаще."},
   {id:"cabin",name:"Салонный фильтр",
    params:(f,k) => [["На твоей машине",f.cabin],["Вариант","Обычный (пылевой) или угольный (держит запахи и выхлоп)"]],
-   brands:[["Mann",""],["Fortech",""],["Big Filter",""],["Nevsky Filter",""]],
+   prem:[["Mann","Угольные — серия CUK"],["Mahle",""],["Bosch",""]],
+   eco:[["Fortech",""],["Big Filter",""],["Nevsky Filter",""]],
    tip:"У всех брендов из списка есть угольные версии. Для города они заметно лучше."},
   {id:"plugs",name:"Свечи зажигания",
    params:(f,k) => [["Ключ",f.plugKey],["Зазор",f.plugGap],["Момент затяжки",f.plugTorque],["Важно","У 8- и 16-клапанных моторов свечи разные: на 16 кл. свеча тоньше, под ключ на 16"]],
-   brands:[["NGK",""],["Denso",""],["Brisk","Часто стоят на Ладах с завода"],["Bosch",""]],
+   prem:[["NGK","Иридиевые служат в 2–3 раза дольше обычных"],["Denso","Иридиевые"],["Bosch",""]],
+   eco:[["Brisk","Часто стоят на Ладах с завода"],["NGK V-Line","Недорогая линейка NGK для наших машин"]],
    tip:"Свечи меняют комплектом, все сразу. Обычные служат 15–30 тыс. км, иридиевые и платиновые дольше."},
   {id:"coolant",name:"Антифриз",
    params:(f,k) => [["Тип", OLD.has(k) ? "Тосол или G11 на старых машинах. G12 можно, но только после промывки системы" : "G12, G12+ (карбоксилатный, обычно красный)"],["Объём системы",f.coolant]],
-   brands:[["Sintec Lux G12","Заводская заливка Весты"],["Felix Carbox",""],["Coolstream",""],["Лукойл G12",""]],
+   prem:[["Liqui Moly","KFS 12+"],["Coolstream","Premium"]],
+   eco:[["Felix Carbox","Лидер «Бренда года» «За рулём» 2025"],["Sintec Lux G12","Заводская заливка Весты"],["Лукойл G12 Red",""]],
    tip:"Разные типы антифриза не смешивают. Не знаешь, что залито, — сливай полностью и промывай."},
   {id:"brakefluid",name:"Тормозная жидкость",
    params:(f,k) => [["Тип","DOT-4. Смешивается с DOT-3, но не с силиконовой DOT-5"],["Замена","Раз в 2 года: жидкость набирает воду и закипает раньше"]],
-   brands:[["Rosdot",""],["Felix",""],["Sintec",""],["Лукойл",""]],
+   prem:[["ATE","Германия"],["Bosch",""]],
+   eco:[["Rosdot",""],["Felix",""],["Sintec",""],["Лукойл",""]],
    tip:"Покупай небольшую банку и не храни открытой: жидкость впитывает влагу из воздуха."},
   {id:"gear",name:"Трансмиссионное масло",
    params:(f,k) => (k === "niva"
      ? [["Коробка и раздатка","75W-90, GL-4"],["Передний и задний мосты","75W-90, GL-5 (гипоидное)"]]
      : [["Коробка (МКПП)","75W-90 или 75W-85, GL-4"]]).concat(f.gear ? [["Объём",f.gear]] : []),
-   brands:[["Лукойл ТМ-4","Для мостов Нивы — ТМ-5"],["Роснефть Kinetic",""],["G-Box","Газпромнефть"],["Sintec",""]],
+   prem:[["Liqui Moly",""],["Motul",""]],
+   eco:[["Лукойл ТМ-4","Для мостов Нивы — ТМ-5"],["Роснефть Kinetic",""],["G-Box","Газпромнефть"]],
    tip:"GL-5 в коробку Лады не заливают: оно хуже для синхронизаторов. GL-4 и GL-5 — не «хуже» и «лучше», а для разных узлов."},
   {id:"pads",name:"Тормозные колодки",
    params:(f,k) => [["Тормоза",f.brakes],["Подбор","По модели, году и диаметру тормозного диска"]],
-   brands:[["Оригинал Лада","Прошли тест «За рулём»"],["Ferodo","Прошли тест «За рулём»"],["Trialli","Прошли тест «За рулём»"],["Höfer","Прошли тест «За рулём»"],["Dafmi","Прошли тест «За рулём»"],["Patron","Прошли тест «За рулём»"]],
+   prem:[["Ferodo","Прошли тест «За рулём»"],["TRW",""],["Brembo",""]],
+   eco:[["Оригинал Лада","Прошли тест «За рулём»"],["Trialli","Прошли тест «За рулём»"],["Höfer","Прошли тест «За рулём»"],["Dafmi","Прошли тест «За рулём»"],["Patron","Прошли тест «За рулём»"]],
    bad:{list:"Автомагнат, Zommer, Ganz, Pilenga, Hi-Q",note:"Не прошли проверку в тесте колодок для Лады журнала «За рулём». Это результат для конкретных проверенных комплектов.",url:"https://www.zr.ru/content/articles/965864-tormoznye-kolodki-dlya-lady-ekspertiza-za-rulem"},
    tip:"Колодки меняют комплектом на ось. Первые 200–300 км тормози плавно: колодки притираются к диску."}
 ];
 PARTS.push(
   {id:"grm",name:"Ремень ГРМ, ролики и помпа",
    params:(f,k) => [["Привод на твоей машине",f.grm],["Что брать","Комплект: ремень + натяжной и обводной ролики. Помпу — если она приводится ремнём ГРМ и уже прошла один ремень"]],
-   brands:[["Оригинал Лада",""],["Gates","Ремни и комплекты"],["ContiTech","Ремни и комплекты"],["Dayco","Ремни и комплекты"]],
+   prem:[["Gates","Ремни и комплекты"],["ContiTech","Ремни и комплекты"],["Dayco","Ремни и комплекты"]],
+   eco:[["Оригинал Лада","Комплект с роликами. На ГРМ не экономь: на моторах, которые гнут клапаны, обрыв — это ремонт головки"]],
    tip:"Ремень без роликов не меняют: заклинивший старый ролик порвёт новый ремень."},
   {id:"fuelfilter",name:"Топливный фильтр",
    params:(f,k) => [["Где стоит",f.fuel],["Важно","Для инжектора и карбюратора фильтры разные. Подбирай по модели и году"]],
-   brands:[["Оригинал Лада",""],["Mann",""],["Big Filter",""],["Fortech",""]],
+   prem:[["Mann",""],["Bosch",""]],
+   eco:[["Оригинал Лада",""],["Big Filter",""],["Fortech",""]],
    tip:"На корпусе есть стрелка — направление топлива. Ставь стрелкой к двигателю."},
   {id:"battery",name:"Аккумулятор",
    params:(f,k) => [["Ёмкость",f.battery],["Полярность","Как у старого: смотри, где плюс — справа или слева, когда аккумулятор стоит клеммами к тебе"],["Пусковой ток","Для Урала и Сибири бери с запасом, от 450–500 А"]],
-   brands:[["Аком",""],["Tyumen Battery","Тюменский аккумуляторный завод"],["Topla",""]],
+   prem:[["Varta","Параллельный импорт"],["Bosch",""],["Topla","Словения"]],
+   eco:[["Аком",""],["Tyumen Battery","Тюменский аккумуляторный завод"],["Forse","Лидер «Бренда года» «За рулём» 2025"]],
    tip:"Смотри дату выпуска на корпусе: аккумулятор, который год пролежал на складе, мог подсесть."},
   {id:"wires",name:"Высоковольтные провода и катушки",
    params:(f,k) => [["Зажигание",f.ign]],
-   brands:[["Оригинал Лада",""],["СОАТЭ","Катушки и модули зажигания"],["Tesla","Провода и катушки"],["Finwhale","Провода и катушки"]],
+   prem:[["Bosch",""],["Janmor","Силиконовые провода, Польша"]],
+   eco:[["Оригинал Лада",""],["СОАТЭ","Катушки и модули зажигания"],["Tesla","Провода и катушки"],["Finwhale","Провода и катушки"]],
    tip:"Провода меняют комплектом. Признак пробоя — мотор троит в сырую погоду или видны искры в темноте под капотом."},
   {id:"wipers",name:"Щётки стеклоочистителя",
    params:(f,k) => [["Длина","По старым щёткам или по каталогу для своей модели: водительская и пассажирская обычно разные"],["Тип","Каркасные — дешевле; бескаркасные — лучше прижимаются и меньше обмерзают зимой"]],
-   brands:[["Bosch",""],["Denso",""],["Trico",""],["Alca",""]],
+   prem:[["Bosch","Aerotwin — бескаркасные"],["Denso",""]],
+   eco:[["Alca",""],["Trico",""]],
    tip:"Зимой не включай дворники, пока щётки примёрзли к стеклу: порвёшь резинку."},
   {id:"bulbs",name:"Лампы",
    params:(f,k) => [["Самые частые","H4 (ближний и дальний), H7, W5W (габариты), P21/5W (стоп и габарит), PY21W (поворотник)"],["Подбор","По маркировке на старой лампе или по руководству"]],
-   brands:[["Osram",""],["Philips",""],["Narva",""],["Маяк",""]],
+   prem:[["Osram","Night Breaker — ярче штатных"],["Philips",""]],
+   eco:[["Narva",""],["Маяк",""]],
    tip:"Лампы с повышенной яркостью (+50%, +100%) светят лучше, но служат меньше обычных."},
   {id:"discs",name:"Тормозные диски",
    params:(f,k) => [["Когда менять","Толщина меньше минимальной (выбита на диске или в руководстве), глубокие борозды, биение руля при торможении"],["Подбор","По модели и диаметру колеса (R13, R14, R15 — диски разные)"]],
-   brands:[["Оригинал Лада",""],["TRW",""],["Brembo",""],["Trialli",""]],
+   prem:[["Brembo",""],["TRW",""]],
+   eco:[["Оригинал Лада",""],["Trialli",""]],
    tip:"Диски меняют парой на ось и ставят с новыми колодками."}
 );
 const JOB_GROUPS = [["Масло и фильтры",["oil","air","cabin","fuel"]],["Двигатель",["plugs","altbelt","timing","coolant"]],["Тормоза",["brakes","padsreplace","bleed"]],["Электрика",["battery","bulbs"]],["Колёса и сезон",["wheel","levels","season"]]];
@@ -1832,13 +1860,17 @@ function renderTools(){
 }
 function renderParts(){
   const f = F();
-  const items = PARTS.filter(p => match(p.name, p.brands.flat().join(" "), p.params(f, fam).flat().join(" ")));
+  const items = PARTS.filter(p => match(p.name, p.prem.flat().join(" "), p.eco.flat().join(" "), p.params(f, fam).flat().join(" ")));
+  const blist = a => `<ul class="brands">${a.map(b => `<li><b>${esc(b[0])}</b>${b[1] ? `<span>${esc(b[1])}</span>` : ""}</li>`).join("")}</ul>`;
   return searchBox("Найти: масло, свечи, ГРМ, Mann…") + famNote() +
+    `<p class="tiernote">У каждой запчасти — два списка: <b>премиум</b> и <b>доступные аналоги</b>. Оба подходят по допускам и нормально служат, премиум обычно дороже в 1,5–2 раза и служит дольше. Многие импортные бренды сейчас ввозят по параллельному импорту — покупай их в крупных магазинах, там меньше подделок.</p>` +
     (items.length ? `<div class="stack">${items.map(p => `<article class="entry" id="part-${p.id}">
       <h3>${esc(p.name)}</h3>
       <ul class="types">${p.params(f, fam).map(x => `<li><b>${esc(x[0])}</b><span>${esc(x[1])}</span></li>`).join("")}</ul>
-      <div class="brands-cap">Проверенные бренды</div>
-      <ul class="brands">${p.brands.map(b => `<li><b>${esc(b[0])}</b>${b[1] ? `<span>${esc(b[1])}</span>` : ""}</li>`).join("")}</ul>
+      <div class="tiers">
+        <div class="tier prem"><div class="tier-h"><b>Премиум</b><span>дороже · максимум ресурса</span></div>${blist(p.prem)}</div>
+        <div class="tier eco"><div class="tier-h"><b>Доступные аналоги</b><span>дешевле · тоже хорошие</span></div>${blist(p.eco)}</div>
+      </div>
       ${p.bad ? `<div class="bad"><b>Не рекомендуем:</b> ${esc(p.bad.list)}. <span>${esc(p.bad.note)}</span> <a href="${p.bad.url}" target="_blank" rel="noopener noreferrer">Читать тест</a></div>` : ""}
       ${p.tip ? `<p class="tip">${esc(p.tip)}</p>` : ""}</article>`).join("")}
       <p class="famnote">Бренды — ориентир: ассортимент и качество со временем меняются. Деталь подбирай по модели, году и двигателю машины.</p></div>`
