@@ -187,6 +187,46 @@ form.add input,form.add select{padding:10px 12px;border:1px solid var(--line-2);
 .checks li div span{font-size:13.5px;color:var(--muted)}
 @media (max-width:640px){.checks{gap:0;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}.checks li{border:0;border-radius:0;background:none;padding:10px 12px}.checks li+li{border-top:1px solid var(--line)}}
 .checks-note{font-size:12.5px;color:var(--dim);margin:10px 0 0;max-width:75ch}
+.notfor{margin-bottom:16px}
+.cstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:12px}
+.cstats div{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:var(--r);padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.cstats span{font:500 11px var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.cstats b{font:500 20px var(--f-mono);color:var(--ink);font-variant-numeric:tabular-nums}
+.cchart,.ccats{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;margin-bottom:12px}
+.cchart-h{font:500 11px var(--f-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px}
+.cchart svg{display:block;width:100%;height:auto}
+.cb{fill:color-mix(in srgb,var(--amber) 55%,var(--surface))} .cb-now{fill:var(--amber)} .cb-zero{fill:var(--line-2)}
+.cb-axis{stroke:var(--line-2);stroke-width:1}
+.cb-v{fill:var(--ink);font:500 12px var(--f-mono)} .cb-l{fill:var(--muted);font:500 12px var(--f-mono)}
+.ccats ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ccat-t{display:flex;justify-content:space-between;gap:10px;font-size:14px;margin-bottom:4px}
+.ccat-t b{font:500 13.5px var(--f-mono);white-space:nowrap}
+.ccat-bar{height:6px;background:var(--raised);border-radius:1px;overflow:hidden}
+.ccat-bar i{display:block;height:100%;background:var(--amber)}
+.printbtn{display:flex;align-items:center;gap:12px;width:100%;margin:0 0 16px;padding:12px 14px;border:1px solid var(--line-2);border-left:3px solid var(--amber);background:var(--surface);color:var(--ink);border-radius:var(--r);cursor:pointer;text-align:left}
+.printbtn:hover{background:var(--raised)}
+.printbtn svg{width:26px;height:26px;stroke:var(--amber);flex:none}
+.printbtn span{display:flex;flex-direction:column}
+.printbtn b{font-size:15.5px} .printbtn small{color:var(--muted);font-size:13px}
+.printhead,.printfoot{display:none}
+@media print{
+  @page{size:A4;margin:12mm}
+  html,body{background:#fff!important;background-image:none!important;color:#000!important}
+  body::before,header,header::after,nav.bottom,.cookiebar,#zoomov,.back,.printbtn,.footlinks,.tgcard,.dhead .ico,.approx-note{display:none!important}
+  main{padding:0!important} .wrap{max-width:none!important;padding:0 3px!important}
+  .printhead{display:flex!important;justify-content:space-between;align-items:baseline;gap:12px;font:700 17px var(--f-head,sans-serif);text-transform:uppercase;letter-spacing:.04em;border-bottom:3px solid #000;padding-bottom:6px;margin-bottom:8px;color:#000}
+  .printhead span{font:500 12px var(--f-mono);text-transform:none;letter-spacing:0}
+  .dhead{display:none!important}
+  .numgrid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6px!important}
+  .plate{background:#fff!important;border:1px solid #000!important;border-left:4px solid #000!important;border-radius:0!important;padding:6px 9px!important;margin:0!important;break-inside:avoid}
+  .plate .cap{color:#000!important;margin-bottom:5px!important;font-weight:700}
+  .plate .cap::before{background:#000!important;box-shadow:none!important}
+  .plate dl{gap:4px 12px!important}
+  .plate dt{color:#333!important;font-size:10.5px!important;margin:0!important}
+  .plate dd,.plate dd.txt{color:#000!important;font-size:12.5px!important}
+  .printfoot{display:block!important;margin-top:8px;font-size:10px;color:#333}
+  *{box-shadow:none!important;text-shadow:none!important}
+}
 .tiernote{font-size:13.5px;color:var(--muted);margin:0 0 16px;max-width:75ch}
 .tiernote b{color:var(--ink)}
 .bad{margin-top:12px;font-size:13.5px;background:color-mix(in srgb,var(--warn) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--warn) 35%,transparent);border-radius:10px;padding:10px 12px}
@@ -758,7 +798,7 @@ const FAM_EXTRA = {
   vesta:{grm:"Ремень. Моторы 21129 и 21179 при обрыве гнут клапаны. Интервал — по сервисной книжке, ремень и ролики проверяй на каждом ТО",
     fuel:"Встроен в топливный модуль внутри бака, отдельно по регламенту не меняется",
     bleed:"правое заднее → левое переднее → левое заднее → правое переднее (сверь с руководством: на машинах с ABS бывают особенности)",battery:"60 А·ч (Ларгус — до 70 А·ч)",
-    alt:"Автоматический натяжной ролик"}
+    alt:"Эксцентриковый натяжной ролик: гайка на 13, ролик поворачивают ключом Torx T55"}
 };
 for(const k in FAM_EXTRA) Object.assign(FAM[k], FAM_EXTRA[k]);
 
@@ -799,6 +839,15 @@ const FAM_BASE = {
   vesta:{battery:"60 А·ч — как у старого, смотри наклейку"}
 };
 for(const k in FAM_BASE) Object.assign(FAM[k], FAM_BASE[k]);
+const FAM_SUSP = {
+  classic:{valveGap:"0,15 мм на холодном моторе, впуск и выпуск"},
+  niva:{valveGap:"0,15 мм на холодном моторе (если нет гидроопор)"},
+  samara:{hubNut:"225–247 Н·м, головка на 30"},
+  ten:{hubNut:"225–247 Н·м, головка на 30"},
+  kpg:{hubNut:"225–247 Н·м, головка на 30",linkTorque:"43–52 Н·м (гайка стойки к рычагу)",knuckle:"78–96 Н·м (гайки болтов стойки к кулаку)"},
+  vesta:{hubNut:"Веста и Иксрей: 238–322 Н·м; Ларгус — по руководству",linkTorque:"53–71 Н·м (гайки пальцев стойки)",knuckle:"90–120 Н·м"}
+};
+for(const k in FAM_SUSP) Object.assign(FAM[k], FAM_SUSP[k]);
 let engSel = {};
 try{ engSel = JSON.parse(localStorage.getItem("garazh-eng") || "{}") || {}; }catch(e){}
 const engOf = k => (ENG[k] || []).find(e => e.id === engSel[k]) || (ENG[k] || [])[0];
@@ -1074,9 +1123,12 @@ const JOBS = [
     "Как натягивается ремень на твоей машине: {alt}.",
     "Осмотр: поперечные трещины, расслоение, блестящая «застеклённая» рабочая сторона — ремень пора менять.",
     "Нажми пальцем посередине длинной ветви: прогиб 10–15 мм — норма. Больше — свистит, меньше — перетянут.",
-    "Замена: ослабь натяжение (гайку генератора или натяжной ролик) и сними старый ремень.",
+    {t:"Гранта и Калина-2 с кондиционером: ремень проходит сквозь правую опору двигателя. Для замены подопри мотор снизу (через брусок под поддон), сними правое колесо, подкрылок и опору. Натяжение — винтом натяжителя, прогиб 6–7 мм между шкивами двигателя и компрессора.",only:["kpg"]},
+    {t:"Замена: ослабь натяжение (гайку генератора или натяжной ролик) и сними старый ремень.",not:["vesta"]},
+    {t:"Веста: доступ к ролику — через подкрылок, частично отогни или сними его. Ослабь гайку натяжного ролика ключом на 13, поверни ролик ключом Torx T55, отпуская ремень, и сними ремень.",only:["vesta"]},
     "Надень новый по той же схеме на все шкивы. Проверь, что ручьи ремня точно легли в канавки.",
-    "Натяни, затяни крепления, заведи мотор: ремень не должен свистеть."],
+    {t:"Натяни, затяни крепления, заведи мотор: ремень не должен свистеть.",not:["vesta"]},
+    {t:"Поверни ролик ключом T55, натягивая ремень, и затяни гайку ролика: 30–36 Н·м. Заведи мотор — ремень не должен свистеть.",only:["vesta"]}],
    warn:"Работай только на заглушенном моторе, ключ вынут из замка."},
   {id:"season",title:"Подготовка к зиме и к лету",lvl:1,time:"1–2 часа",
    desc:"Короткий чек-лист перед сменой сезона.",
@@ -1091,6 +1143,55 @@ const JOBS = [
     "Свет: проверь все лампы, зимой темнеет рано.",
     "Перед летом продуй соты радиатора от пуха и грязи, чтобы мотор не перегревался."],
    warn:""}
+  ,{id:"valves",title:"Регулировка клапанов",lvl:2,time:"1,5–2 часа",fams:["classic","niva"],
+   desc:"Цокает сверху мотора, особенно на холодную, — пора проверить тепловые зазоры клапанов. На классике — каждые 15 тыс. км.",
+   plate:["valveGap"],tools:["wrenches","sockets","Щуп 0,15 мм (длинная пластина)","Ключ для проворачивания коленвала за храповик","Новая прокладка крышки клапанов"],
+   steps:[
+    {t:"Сначала проверь, есть ли что регулировать. На многих Нивах стоят гидроопоры рычагов: если вместо регулировочного болта с контргайкой стоит гладкий цилиндр без гайки — зазор выставляется сам.",only:["niva"]},
+    "Работай только на холодном моторе — после поездки подожди несколько часов. Нужный зазор: {valveGap}.",
+    {t:"Сними корпус воздушного фильтра с карбюратора и отсоедини тягу привода дроссельных заслонок.",kind:"carb"},
+    {t:"Отсоедини шланги вентиляции картера и трос газа, если они мешают снять крышку.",kind:"inj"},
+    "Открути гайки крышки клапанов ключом на 10 и сними крышку вместе с прокладкой.",
+    "Выставь 4-й цилиндр в верхнюю мёртвую точку: проворачивай коленвал по часовой за храповик, пока метка на шкиве не встанет напротив длинной метки на крышке, а метка на звёздочке распредвала — напротив метки на корпусе подшипников (схема ниже).",
+    "В этом положении регулируй клапаны 8 и 6. Клапаны считают от передней части мотора — от цепи.",
+    "Вставь щуп 0,15 мм между кулачком распредвала и рычагом. Он должен проходить с лёгким прижатием — не болтаться и не застревать.",
+    "Если туго или свободно: держи регулировочный болт ключом на 13, ослабь контргайку ключом на 17, вращай болт до нужного зазора и затяни контргайку, не отпуская болт. Перепроверь щупом — при затяжке зазор может уйти.",
+    "Поверни коленвал на пол-оборота (180°) — регулируй клапаны 4 и 7. Ещё на 180° — 1 и 3. Ещё на 180° — 5 и 2.",
+    "Поставь крышку с новой прокладкой. Гайки затягивай равномерно и без большого усилия, иначе прокладку выдавит и потечёт масло.",
+    "Собери всё обратно и заведи мотор: цоканье должно уйти, по крышке нет подтёков масла."],
+   warn:"Зазор меньше нормы опаснее, чем больше: клапан неплотно закрывается и прогорает. Если сомневаешься — оставь чуть больше 0,15 мм, но не меньше."},
+  {id:"stablink",title:"Замена стоек стабилизатора",lvl:1,time:"30–60 мин на сторону",fams:["kpg","vesta"],
+   desc:"Глухой стук спереди на мелких кочках и при перекладке руля — частая причина в стойках стабилизатора.",
+   plate:["linkTorque","wheelKey","wheelTorque"],tools:["jack","wrenches","sockets","torque","Шестигранник или второй ключ, чтобы держать палец","Проникающая смазка и щётка по металлу"],
+   steps:[
+    "Проверь: подними переднюю часть машины и покачай стойку рукой. Люфт, стук или порванный пыльник — меняй. Обычно меняют сразу обе стойки, левую и правую.",
+    "Сорви болты колеса (ключ {wheelKey}), подними сторону, поставь машину на подставку и сними колесо.",
+    {t:"Стойка соединяет стабилизатор с нижним рычагом подвески.",only:["kpg"]},
+    {t:"Стойка соединяет стабилизатор с амортизаторной стойкой.",only:["vesta"]},
+    "Очисти резьбу щёткой по металлу и залей проникающей смазкой. Подожди 10–15 минут.",
+    "Открути обе гайки стойки. Если палец крутится вместе с гайкой — держи его шестигранником в торце пальца или вторым ключом за лыски.",
+    "Прикипевший палец не бей молотком напрямую — только через деревянную проставку. Совсем не идёт — гайку срезают.",
+    "Поставь новую стойку и затяни гайки: {linkTorque}. Затягивай, удерживая палец от проворачивания.",
+    "Поставь колесо, опусти машину и затяни болты крест-накрест: {wheelTorque}. Повтори с другой стороны."],
+   warn:""},
+  {id:"hub",title:"Замена переднего ступичного подшипника",lvl:2,time:"3–5 часов на сторону",fams:["samara","ten","kpg","vesta"],
+   desc:"Гул, который растёт со скоростью и меняется в поворотах, — признак изношенного ступичного подшипника.",
+   plate:["hubNut","knuckle","wheelTorque"],tools:["jack","wrenches","sockets","torque","Головка под гайку ступицы и длинный вороток","Съёмник ступичного подшипника или пресс","Оправки для запрессовки","Съёмник стопорных колец"],
+   steps:[
+    "Проверь: вывеси колесо и покачай его за верх и низ, потом покрути рукой. Люфт, хруст или гул — подшипник пора менять. Если гудит в повороте направо — обычно виноват левый подшипник, налево — правый.",
+    "Пока машина стоит на колёсах, сними колпачок, раскерни гайку ступицы и сорви её длинным воротком. Помощник держит педаль тормоза.",
+    "Подними сторону, поставь машину на подставку и сними колесо.",
+    "Сними суппорт и подвесь его на проволоке — не на тормозном шланге. Сними тормозной диск.",
+    "Открути гайку ступицы до конца. Дальше два пути: выпрессовать ступицу и подшипник специальным съёмником прямо на машине или снять поворотный кулак и работать на прессе.",
+    "Выпрессуй ступицу из подшипника. Если половина внутреннего кольца осталась на ступице — сними её съёмником.",
+    "Сними оба стопорных кольца и выпрессуй старый подшипник из кулака.",
+    "Очисти посадочное место от грязи и ржавчины. Новый подшипник запрессовывай только через наружное кольцо, ровно и до упора (схема ниже), затем поставь стопорные кольца.",
+    "Запрессуй ступицу, подпирая подшипник за внутреннее кольцо, — иначе испортишь его при установке.",
+    {t:"Собери всё в обратном порядке. Болты амортизаторной стойки к кулаку: {knuckle}.",only:["kpg","vesta"]},
+    {t:"Собери всё в обратном порядке, затягивая соединения по руководству к своей модели.",not:["kpg","vesta"]},
+    "Поставь новую гайку ступицы и затяни на машине, стоящей на колёсах: {hubNut}. Если у гайки есть бурт — закерни его в паз.",
+    "Прокрути колесо: вращается тихо и без люфта. Через 50–100 км проверь ещё раз."],
+   warn:"Не запрессовывай подшипник через внутреннее кольцо и не бей по нему молотком — испортишь новый. Нет пресса или съёмника — сними кулак и запрессуй подшипник в сервисе: это недорого."}
 ];
 
 /* Запчасти и расходники. params(f, key) — строки [параметр, значение] для семейства. */
@@ -1146,6 +1247,16 @@ const PARTS = [
    tip:"Колодки меняют комплектом на ось. Первые 200–300 км тормози плавно: колодки притираются к диску."}
 ];
 PARTS.push(
+  {id:"stablink",name:"Стойки стабилизатора",
+   params:(f,k) => [["Где стоят", k === "kpg" ? "Соединяют стабилизатор с нижними рычагами" : k === "vesta" ? "Соединяют стабилизатор с амортизаторными стойками" : "На твоей машине стабилизатор крепится к рычагам через резиновые втулки, отдельных стоек нет"]].concat(f.linkTorque ? [["Момент затяжки", f.linkTorque]] : []),
+   prem:[["Lemförder","ZF, Германия"],["CTR","Корея"]],
+   eco:[["Оригинал Лада",""],["SS20",""],["Trialli",""]],
+   tip:"Меняй стойки парой — левую и правую. Пыльник порван — стойка скоро застучит, даже если люфта пока нет."},
+  {id:"hubbearing",name:"Передний ступичный подшипник",
+   params:(f,k) => [["Тип","Двухрядный, запрессован в поворотный кулак"]].concat(f.hubNut ? [["Гайка ступицы", f.hubNut]] : []),
+   prem:[["SKF","Швеция"],["FAG","Schaeffler, Германия"]],
+   eco:[["Оригинал Лада",""],["СПЗ","Самарский подшипниковый завод"],["ВБФ","Вологодский подшипниковый завод"]],
+   tip:"Гайку ступицы ставь новую. Подшипник не роняй и держи в упаковке до запрессовки, чтобы внутрь не попала грязь."},
   {id:"grm",name:"Ремень ГРМ, ролики и помпа",
    params:(f,k) => [["Привод на твоей машине",f.grm],["Что брать","Комплект: ремень + натяжной и обводной ролики. Помпу — если она приводится ремнём ГРМ и уже прошла один ремень"]],
    prem:[["Gates","Ремни и комплекты"],["ContiTech","Ремни и комплекты"],["Dayco","Ремни и комплекты"]],
@@ -1247,6 +1358,20 @@ const CHECKS = {
     ["Маркировка", "Тип на цоколе совпадает со старой лампой: H4, H7, W5W и так далее."],
     ["Не трогай колбу", "Галогенную лампу бери только за цоколь: жир с пальцев на колбе сокращает её срок службы."]
   ],
+  valves: [
+    ["Прокладка", "Новая прокладка крышки клапанов эластичная, без надрывов, подходит по форме."],
+    ["Щуп", "Пластина 0,15 мм ровная, без загибов и ржавчины."]
+  ],
+  stablink: [
+    ["Пыльники", "Резиновые пыльники шарниров целые, без трещин, внутри смазка."],
+    ["Шарниры", "Пальцы поворачиваются с усилием, плавно, без люфта и хруста."],
+    ["Резьба и гайки", "Резьба целая, гайки в комплекте. Левая и правая стойки бывают разными — сверь с каталогом."]
+  ],
+  hub: [
+    ["Подшипник", "Вращается плавно, без заеданий и хруста. Уплотнения с обеих сторон целые."],
+    ["Комплект", "Новая гайка ступицы и стопорные кольца — в комплекте или купи отдельно."],
+    ["Размер", "Сверь размер с каталогом: у разных моделей и годов подшипники отличаются."]
+  ],
   wheel: [
     ["Дата шины", "На боковине четыре цифры в овале: неделя и год выпуска. Шина старше 5–6 лет хуже держит дорогу."],
     ["Шина", "Без грыж, порезов и трещин на боковине; протектор не меньше 1,6 мм для летних и 4 мм для зимних."],
@@ -1259,8 +1384,8 @@ function renderChecks(id){
     `<li><span class="chk" aria-hidden="true"></span><div><b>${esc(t)}</b><span>${esc(d)}</span></div></li>`).join("")}</ul>
     <p class="checks-note">Нашёл дефект — не ставь деталь, а верни её в магазин: на брак действует гарантия. Неустановленную деталь без следов использования обычно можно вернуть или обменять в течение 14 дней — сохраняй чек и упаковку.</p></section>`;
 }
-const JOB_GROUPS = [["Масло и фильтры",["oil","air","cabin","fuel"]],["Двигатель",["plugs","altbelt","timing","coolant"]],["Тормоза",["brakes","padsreplace","bleed"]],["Электрика",["battery","bulbs"]],["Колёса и сезон",["wheel","levels","season"]]];
-const JOB_PARTS = {oil:["oil","oilfilter"],air:["air"],cabin:["cabin"],plugs:["plugs","wires"],coolant:["coolant"],brakes:["pads","discs","brakefluid"],levels:["oil","coolant","brakefluid"],
+const JOB_GROUPS = [["Масло и фильтры",["oil","air","cabin","fuel"]],["Двигатель",["plugs","altbelt","timing","coolant","valves"]],["Тормоза",["brakes","padsreplace","bleed"]],["Подвеска",["stablink","hub"]],["Электрика",["battery","bulbs"]],["Колёса и сезон",["wheel","levels","season"]]];
+const JOB_PARTS = {stablink:["stablink"],hub:["hubbearing"],oil:["oil","oilfilter"],air:["air"],cabin:["cabin"],plugs:["plugs","wires"],coolant:["coolant"],brakes:["pads","discs","brakefluid"],levels:["oil","coolant","brakefluid"],
   padsreplace:["pads","discs"],timing:["grm"],fuel:["fuelfilter"],bleed:["brakefluid"],battery:["battery"],bulbs:["bulbs"],season:["wipers","coolant","battery"]};
 
 /* Регламент: интервалы-ориентиры. km и years — числа или функция от семейства. */
@@ -1277,8 +1402,8 @@ const SCHED = [
   {id:"coolant",name:"Антифриз",km:k => k === "vesta" ? 90000 : 75000,years:5,job:"coolant"},
   {id:"gear",name:"Масло в коробке передач",km:75000,job:null}
 ];
-const EXTRA_LOG = [["padsreplace","Замена колодок"],["battery","Аккумулятор"],["bulbs","Лампы"],["wheel","Колёса, шиномонтаж"],["repair","Ремонт"],["other","Другое"]];
-const JOB_LOG = {oil:"oil",air:"air",cabin:"cabin",plugs:"plugs",fuel:"fuel",brakes:"brakes",bleed:"brakefluid",coolant:"coolant",altbelt:"altbelt",timing:"timing",padsreplace:"padsreplace",battery:"battery",bulbs:"bulbs",wheel:"wheel"};
+const EXTRA_LOG = [["valves","Регулировка клапанов"],["stablink","Стойки стабилизатора"],["hub","Ступичный подшипник"],["padsreplace","Замена колодок"],["battery","Аккумулятор"],["bulbs","Лампы"],["wheel","Колёса, шиномонтаж"],["repair","Ремонт"],["other","Другое"]];
+const JOB_LOG = {valves:"valves",stablink:"stablink",hub:"hub",oil:"oil",air:"air",cabin:"cabin",plugs:"plugs",fuel:"fuel",brakes:"brakes",bleed:"brakefluid",coolant:"coolant",altbelt:"altbelt",timing:"timing",padsreplace:"padsreplace",battery:"battery",bulbs:"bulbs",wheel:"wheel"};
 const val = (v,k) => typeof v === "function" ? v(k) : v;
 const logName = (id,k) => { const s = SCHED.find(x => x.id === id); if(s) return val(s.name,k); const e = EXTRA_LOG.find(x => x[0] === id); return e ? e[1] : "Работа"; };
 
@@ -1310,9 +1435,12 @@ const PLUG_READ = [
 const PLATE_LABEL = {oil:"Масло в двигатель",engine:"Двигатель",air:"Воздушный фильтр",cabin:"Салонный фильтр",
   plugKey:"Свечной ключ",plugTorque:"Момент затяжки свечей",plugGap:"Зазор свечей",ign:"Зажигание",
   coolant:"Объём системы охлаждения",brakes:"Тормоза",wheelKey:"Колёсный ключ",wheelTorque:"Момент затяжки колёс",
-  grm:"Привод ГРМ",fuel:"Топливный фильтр",bleed:"Порядок прокачки",battery:"Аккумулятор",alt:"Натяжение ремня генератора"};
-const TEXT_FIELDS = new Set(["engine","air","cabin","ign","brakes","grm","fuel","bleed","alt"]);
+  grm:"Привод ГРМ",fuel:"Топливный фильтр",bleed:"Порядок прокачки",battery:"Аккумулятор",alt:"Натяжение ремня генератора",valveGap:"Зазор клапанов",linkTorque:"Гайки стойки стабилизатора",hubNut:"Гайка ступицы",knuckle:"Стойка к кулаку"};
+const TEXT_FIELDS = new Set(["engine","air","cabin","ign","brakes","grm","fuel","bleed","alt","valveGap","linkTorque","hubNut","knuckle"]);
 const ICON_PATHS = {
+  valves:'<path d="M12 3v11"/><path d="M8 14h8l-1.5 4h-5z"/><path d="M9 6.5h6M9 9.5h6"/><path d="M6 21h12"/>',
+  stablink:'<circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M7.7 7.7l8.6 8.6"/><path d="M2.5 6h1.1M20.4 18h1.1"/>',
+  hub:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3"/><path d="M12 3.5v2.5M12 18v2.5M3.5 12H6M18 12h2.5"/>',
   oil:'<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/>',
   air:'<path d="M3 8h11a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h7"/>',
   cabin:'<circle cx="12" cy="12" r="2"/><path d="M12 10c0-4 1-6 4-6 2 0 2 3 0 4.5M14 12c4 0 6 1 6 4 0 2-3 2-4.5 0M12 14c0 4-1 6-4 6-2 0-2-3 0-4.5M10 12c-4 0-6-1-6-4 0-2 3-2 4.5 0"/>',
@@ -1340,7 +1468,7 @@ const icon = id => `<span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24
 /* ---------- схемы ---------- */
 const SYM_IDS = ["oillamp","overheat","softpedal","nostart","nocatch","misfire","whistle","chargelamp","brakenoise","pull","chainnoise","heater","lights"];
 SYMPTOMS.forEach((s,i) => s.id = SYM_IDS[i] || ("s" + i));
-const FIG_JOBS = {oil:["oilmap","dipstick"],levels:["dipstick","tank"],air:["air"],cabin:["cabin","air"],plugs:["gap","plugread"],coolant:["tank"],brakes:["pads"],padsreplace:["caliper","pads","star"],timing:["marks"],fuel:["fuelf"],bleed:["bleedorder","hose"],battery:["volt","jump"],bulbs:["bulbs"],altbelt:["belt"],wheel:["star"]};
+const FIG_JOBS = {oil:["oilmap","dipstick"],levels:["dipstick","tank"],air:["air"],cabin:["cabin","air"],plugs:["gap","plugread"],coolant:["tank"],brakes:["pads"],padsreplace:["caliper","pads","star"],timing:["marks"],fuel:["fuelf"],bleed:["bleedorder","hose"],battery:["volt","jump"],bulbs:["bulbs"],altbelt:["belt","tens"],wheel:["star"],valves:["valvefig"],stablink:["linkfig"],hub:["hubfig"]};
 
 const PLUG_LOOK = [
   {c:"#B98A57",l:"Светло-коричневый, сухой",m:"Норма: смесь и двигатель в порядке",ok:true},
@@ -1625,6 +1753,84 @@ const SYM_CAP = {brakenoise:["Накладка стёрлась до метал�
   nostart:["Клемма в окислах","Клемма зачищена"],lights:["Нить перегорела","Новая лампа"],heater:["Салонный фильтр забит","Новый фильтр"],
   oillamp:["На щупе сухо","Масло между метками"],overheat:["Антифриз ниже MIN","Уровень в норме"],misfire:["Свеча в саже","Нормальная свеча"],nocatch:["Свеча мокрая, залита","Нормальная свеча"]};
 
+/* ---------- новые схемы: клапаны, стойка стабилизатора, ступица, натяжитель Весты ---------- */
+function figValves(){
+  const order = [["ВМТ 4-го цилиндра","8 и 6"],["+ 180°","4 и 7"],["+ 180°","1 и 3"],["+ 180°","5 и 2"]];
+  const rows = order.map(([a,b],i) => { const y = 64 + i*50;
+    return `<rect x="352" y="${y}" width="230" height="40" rx="3" class="fx-window"/>
+      <text x="366" y="${y+25}" class="fx-s">${a}</text><text x="566" y="${y+26}" class="fx-v" text-anchor="end">${b}</text>`; }).join("");
+  const spring = Array.from({length:6}, (_,i) => `<path d="M${226} ${178+i*9} L${264} ${182+i*9}" class="fx-thread"/>`).join("");
+  return fig("0 0 600 300", `
+    <text x="160" y="22" class="fx-h" text-anchor="middle">Где мерить зазор</text>
+    <circle cx="150" cy="92" r="34" class="fx-ring"/><path d="M150 58 q30 -6 34 30" class="fx-dim"/><circle cx="150" cy="92" r="9" class="fx-hub"/>
+    <text x="198" y="70" class="fx-s">кулачок распредвала</text>
+    <rect x="52" y="134" width="210" height="16" rx="6" class="fx-body"/>
+    <text x="150" y="168" class="fx-s" text-anchor="middle">рычаг</text>
+    <rect x="114" y="127" width="72" height="6" rx="1" class="fx-feeler"/>
+    <path d="M186 130 L230 112" class="fx-lead"/><text x="234" y="112" class="fx-s fx-a">щуп 0,15 мм</text>
+    <rect x="62" y="150" width="14" height="96" class="fx-metalf"/>
+    <path d="M56 186 h26 l5 9 -5 9 h-26 l-5 -9z" class="fx-bolt"/>
+    <path d="M51 196 L18 220" class="fx-lead"/><text x="16" y="236" class="fx-s">контргайка — ключ 17</text>
+    <path d="M70 246 L70 262" class="fx-lead"/><text x="16" y="278" class="fx-s">регулировочный болт — ключ 13</text>
+    <rect x="240" y="150" width="10" height="110" class="fx-metalf"/>${spring}
+    <text x="276" y="232" class="fx-s">клапан</text>
+    <text x="467" y="22" class="fx-h" text-anchor="middle">Порядок регулировки</text>
+    <text x="467" y="46" class="fx-s" text-anchor="middle">положение коленвала → какие клапаны</text>
+    ${rows}`,
+    "Клапаны считают от передней части мотора, от цепи. Каждый следующий шаг — поворот коленвала на пол-оборота по часовой.",
+    "Регулировка клапанов: где мерить зазор и порядок");
+}
+function figLink(){
+  const kpg = fam === "kpg";
+  return fig("0 0 560 250", `
+    <path d="M30 60 H300 Q330 60 336 84" class="fx-ground"/>
+    <text x="40" y="44" class="fx-s">стабилизатор</text>
+    <circle cx="340" cy="92" r="13" class="fx-blackn"/><rect x="333" y="104" width="14" height="96" rx="4" class="fx-metalf"/><circle cx="340" cy="208" r="13" class="fx-blackn"/>
+    <path d="M330 92 h-26" class="fx-pin"/><path d="M350 208 h26" class="fx-pin"/>
+    <path d="M296 84 h-12 v16 h12z" class="fx-bolt"/><path d="M384 200 h12 v16 h-12z" class="fx-bolt"/>
+    <path d="M284 92 L230 130" class="fx-lead"/><text x="100" y="146" class="fx-s fx-a">гайка — ключом</text>
+    <path d="M362 150 L420 150" class="fx-lead"/><text x="426" y="146" class="fx-s">стойка стабилизатора</text>
+    <text x="426" y="166" class="fx-s">(два шарнира)</text>
+    <path d="M386 214 L344 238" class="fx-lead"/><text x="96" y="244" class="fx-s fx-a">палец держи шестигранником в торце</text>
+    <rect x="420" y="190" width="120" height="40" rx="6" class="fx-body2"/><text x="480" y="215" class="fx-s" text-anchor="middle">${kpg ? "нижний рычаг" : "аморт. стойка"}</text>`,
+    "Гайку откручивают ключом, а палец держат шестигранником или ключом за лыски, чтобы он не крутился вместе с гайкой.",
+    "Стойка стабилизатора: что откручивать");
+}
+function figHub(){
+  const balls = (x, y) => [0,1].map(i => `<circle cx="${x + i*34}" cy="${y}" r="9" class="fx-blackn"/>`).join("");
+  return fig("0 0 600 300", `
+    <rect x="150" y="40" width="200" height="56" class="fx-body"/><rect x="150" y="204" width="200" height="56" class="fx-body"/>
+    <text x="250" y="74" class="fx-s" text-anchor="middle">поворотный кулак</text>
+    <rect x="186" y="96" width="128" height="14" class="fx-metalf"/><rect x="186" y="190" width="128" height="14" class="fx-metalf"/>
+    ${balls(233, 120)}${balls(233, 180)}
+    <rect x="186" y="130" width="128" height="40" class="fx-disc"/>
+    <rect x="60" y="138" width="430" height="24" rx="4" class="fx-hub"/>
+    <text x="520" y="155" class="fx-s">ступица</text>
+    <rect x="178" y="92" width="6" height="20" class="fx-amberf"/><rect x="316" y="92" width="6" height="20" class="fx-amberf"/>
+    <rect x="178" y="188" width="6" height="20" class="fx-amberf"/><rect x="316" y="188" width="6" height="20" class="fx-amberf"/>
+    <path d="M322 100 L392 70" class="fx-lead"/><text x="396" y="66" class="fx-s fx-a">стопорные кольца</text>
+    <path d="M314 104 L392 100" class="fx-lead"/><text x="396" y="104" class="fx-s">наружное кольцо</text>
+    <path d="M314 150 L392 128" class="fx-lead"/><text x="396" y="128" class="fx-s">внутреннее кольцо</text>
+    <rect x="96" y="92" width="22" height="20" class="fx-amberf"/><rect x="96" y="188" width="22" height="20" class="fx-amberf"/>
+    <path d="M70 102 H92" class="fx-arA"/><path d="M70 198 H92" class="fx-arA"/>
+    <text x="20" y="34" class="fx-s fx-a">оправка жмёт</text><text x="20" y="50" class="fx-s fx-a">на наружное кольцо</text>
+    <path d="M40 270 L60 290 M60 270 L40 290" class="fx-dimw"/><text x="70" y="286" class="fx-s">через внутреннее кольцо и молотком — нельзя</text>`,
+    "Подшипник запрессовывают в кулак только через наружное кольцо, ступицу в подшипник — подпирая внутреннее кольцо.",
+    "Ступичный подшипник: разрез и как запрессовывать");
+}
+function figTens(){
+  if(fam !== "vesta") return "";
+  return fig("0 0 360 240", `
+    <circle cx="180" cy="120" r="70" class="fx-pulley"/>
+    <circle cx="198" cy="112" r="22" class="fx-hub"/>
+    <path d="M198 98 l12 7 v14 l-12 7 l-12 -7 v-14z" class="fx-bolt"/><text x="198" y="116" class="fx-numd" text-anchor="middle" style="font-size:11px">13</text>
+    <path d="M150 152 l5 -8 5 8 -5 8z M150 152" class="fx-amberf"/><circle cx="155" cy="152" r="10" class="fx-dim"/>
+    <path d="M140 152 L60 200" class="fx-lead"/><text x="12" y="218" class="fx-s fx-a">Torx T55 — поворот ролика</text>
+    <path d="M212 104 L290 50" class="fx-lead"/><text x="230" y="40" class="fx-s">гайка — ключ 13</text>
+    <path d="M110 70 A80 80 0 0 1 250 70" class="fx-arA"/>`,
+    "Ослабь гайку на 13, поверни ролик ключом T55 — ремень ослабнет или натянется. Затем затяни гайку: 30–36 Н·м.",
+    "Натяжной ролик ремня генератора Весты", true);
+}
 const ZOOM_HINT = `<span class="zoomhint" aria-hidden="true">⤢ Нажми, чтобы увеличить</span>`;
 document.addEventListener("click", e => {
   const fig = e.target.closest(".fig:not(.fig-sm)"); if(!fig || innerWidth > 700) return;
@@ -1638,9 +1844,9 @@ document.addEventListener("click", e => {
   ov.hidden = false; document.body.style.overflow = "hidden"; sc.scrollLeft = 0; ov.querySelector("#zoomClose").focus();
 });
 document.addEventListener("keydown", e => { const ov = document.getElementById("zoomov"); if(e.key === "Escape" && ov && !ov.hidden){ ov.hidden = true; document.body.style.overflow = ""; } });
-const FIGS = {plugread:figPlugs, pads:figPads, marks:figMarks, jump:figJump, star:figStar, bleedorder:figBleed,
+const FIGS = {valvefig:figValves, linkfig:figLink, hubfig:figHub, tens:figTens, plugread:figPlugs, pads:figPads, marks:figMarks, jump:figJump, star:figStar, bleedorder:figBleed,
   oilmap:figOilMap, dipstick:figDipstick, tank:figTank, air:figAir, cabin:figCabin, gap:figPlugGap, fuelf:figFuelFilter, hose:figBleedHose, volt:figVolt, bulbs:figBulbs, belt:figBelt, caliper:figCaliper};
-const FIG_TITLE = {plugread:"Как читать старые свечи", pads:"Схема: износ колодки", marks:"Схема: метки ГРМ", jump:"Схема: как прикурить", star:"Схема: порядок затяжки колёс", bleedorder:"Схема: порядок прокачки",
+const FIG_TITLE = {valvefig:"Схема: регулировка клапанов", linkfig:"Схема: стойка стабилизатора", hubfig:"Схема: ступичный подшипник", tens:"Схема: натяжной ролик Весты", plugread:"Как читать старые свечи", pads:"Схема: износ колодки", marks:"Схема: метки ГРМ", jump:"Схема: как прикурить", star:"Схема: порядок затяжки колёс", bleedorder:"Схема: порядок прокачки",
   oilmap:"Схема: где что", dipstick:"Схема: уровень масла", tank:"Схема: уровень антифриза", air:"Схема: когда менять фильтр", cabin:"Схема: где фильтр", gap:"Схема: зазор свечи", fuelf:"Схема: как ставить фильтр", hose:"Схема: прокачка", volt:"Схема: напряжение аккумулятора", bulbs:"Схема: какие бывают лампы", belt:"Схема: проверка натяжения", caliper:"Схема: суппорт"};
 function renderFigs(j){
   return (FIG_JOBS[j.id] || []).filter(id => !(j.id === "cabin" && fam === "classic") && !(id === "fuelf" && F().tankFilter)).map(id => { const html = FIGS[id](); return html ? `<section class="blk"><h4>${FIG_TITLE[id]}</h4>${html}</section>` : ""; }).join("");
@@ -1799,7 +2005,7 @@ const match = (...parts) => !query || parts.join(" ").toLowerCase().includes(que
 const backBtn = (to, label) => `<button type="button" class="back" data-goto="${to}">← ${label}</button>`;
 
 function renderList(){
-  const jobs = JOBS.filter(j => match(j.title, j.desc, j.steps.map(s => s.t || s).join(" ")));
+  const jobs = JOBS.filter(j => (!j.fams || j.fams.includes(fam)) && match(j.title, j.desc, j.steps.map(s => s.t || s).join(" ")));
   const features = query ? "" : `<div class="features">
     <button type="button" class="feature" data-goto="schedule">${icon("schedule")}<span><b>Регламент ТО</b><small>Что и когда менять по пробегу</small></span></button>
     <button type="button" class="feature" data-goto="symptoms">${icon("symptoms")}<span><b>Что случилось?</b><small>Найти причину по симптому</small></span></button>
@@ -1843,7 +2049,7 @@ function fillQr(){
 function renderJob(j){
   const f = F();
   const plate = j.plate.length ? `<div class="plate"><div class="cap">${esc(f.name)} · ${esc(String(f.engName || f.models).replace(/\s*\(.*\)\s*$/, ""))}</div><dl>${
-    j.plate.map(k => `<div><dt>${PLATE_LABEL[k]}</dt><dd class="${TEXT_FIELDS.has(k)?"txt":""}">${esc(f[k])}</dd></div>`).join("")}</dl>
+    j.plate.filter(k => f[k]).map(k => `<div><dt>${PLATE_LABEL[k]}</dt><dd class="${TEXT_FIELDS.has(k)?"txt":""}">${esc(f[k])}</dd></div>`).join("")}</dl>
     <p class="approx">По руководству по эксплуатации АвтоВАЗа. Нашёл ошибку — напиши в Telegram-канал @garage4to.</p></div>` : "";
   const tools = j.tools.map(t => { const T = TOOLS.find(x => x.id === t);
     return T ? `<button type="button" data-tool="${T.id}">${esc(T.name)}</button>` : `<span>${esc(t)}</span>`; }).join("");
@@ -1852,6 +2058,7 @@ function renderJob(j){
   const logBtn = JOB_LOG[j.id] ? `<section class="blk"><button type="button" class="logbtn" data-logjob="${JOB_LOG[j.id]}">${icon("garage")}<span><b>Сделал? Запиши в «Мой гараж»</b><small>Дата, пробег и что использовал. Гаражник подскажет, когда следующая замена</small></span></button></section>` : "";
   return `<div class="detail">
     ${backBtn("to","Все работы")}
+    ${j.fams && !j.fams.includes(fam) ? `<div class="warn notfor"><p>Эта работа для: ${esc(j.fams.map(k => FAM[k].name).join(", "))}. У выбранной машины (${esc(F().name)}) устроено иначе — выбери другую в «Моя машина».</p></div>` : ""}
     <div class="dhead">${icon(j.id)}<div><h2>${esc(j.title)}</h2><p class="lead">${esc(j.desc)}</p><div class="meta dmeta"><span class="pill ${j.lvl===1?"lvl1":"lvl2"}">${j.lvl===1?"Для новичка":"Нужен опыт"}</span><span class="pill">${esc(j.time)}</span></div></div></div>
     <button type="button" class="startbtn" data-start="${j.id}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span><b>Начать работу</b><small>По одному шагу, крупно, экран не гаснет</small></span></button>
     ${plate}
@@ -1916,9 +2123,12 @@ function renderNumbers(){
     ["Трансмиссия",[["Масло",gear,1]]]
   ];
   return `<div class="detail">${backBtn("to","Все работы")}
+    <div class="printhead">Гаражник · цифры моей машины<span>${esc(f.name)} · ${esc(String(f.engName || f.models).replace(/\s*\(.*\)\s*$/, ""))}</span></div>
     <div class="dhead">${icon("numbers")}<div><h2>Цифры моей машины</h2><p class="lead">Всё, что ищут в гараже, на одной странице.</p></div></div>
+    <button type="button" class="printbtn" data-print><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3h10v6"/><rect x="3" y="9" width="18" height="8" rx="1"/><path d="M7 14h10v7H7z"/></svg><span><b>Распечатать или сохранить PDF</b><small>Шпаргалка в бардачок или на стену гаража — на одном листе</small></span></button>
     <div class="numgrid">${G.map(([t, rows]) => `<div class="plate"><div class="cap">${esc(t)}</div><dl class="numdl">${rows.map(([k,v,mono]) => `<div><dt>${esc(k)}</dt><dd class="${mono?"":"txt"}">${esc(v)}</dd></div>`).join("")}</dl></div>`).join("")}</div>
     <p class="approx-note">Для: ${esc(f.name)}, ${esc(f.engName || f.models)}. Цифры — по руководствам по эксплуатации и ремонту АвтоВАЗа. Нашёл ошибку — напиши в Telegram-канал @garage4to.</p>
+    <p class="printfoot">garazhnik-lada.ru — инструкции по ТО Лады своими руками. Цифры по руководствам АвтоВАЗа; перед работой сверяйся с руководством к своей машине.</p>
   </div>`;
 }
 function renderSymptoms(){
@@ -1972,6 +2182,46 @@ function renderFluids(){
       ${t.tip ? `<p class="tip">${esc(t.tip)}</p>` : ""}</article>`).join("")}</div>` : `<p class="empty">Ничего не нашлось.</p>`);
 }
 
+/* ---------- расходы на машину ---------- */
+const MON = ["янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"];
+const kRub = n => n >= 1000 ? (Math.round(n / 100) / 10).toLocaleString("ru-RU") + "к" : String(Math.round(n));
+function renderCosts(car, entries){
+  const paid = entries.filter(l => Number(l.cost) > 0 && l.date);
+  if(!paid.length) return `<section class="blk"><h4>Расходы</h4><p class="nov">Указывай стоимость в записях журнала — здесь появятся расходы за месяц и год и на что уходят деньги.</p></section>`;
+  const now = new Date(isoToday()), y = now.getFullYear(), m = now.getMonth();
+  const sum = a => a.reduce((s,l) => s + Number(l.cost), 0);
+  const ym = l => { const [Y, M] = l.date.split("-").map(Number); return [Y, M - 1]; };
+  const month = sum(paid.filter(l => { const [Y,M] = ym(l); return Y === y && M === m; }));
+  const year = sum(paid.filter(l => ym(l)[0] === y));
+  const all = sum(paid);
+  const kms = entries.map(l => Number(l.km)).filter(n => n > 0);
+  const span = kms.length > 1 ? Math.max(...kms) - Math.min(...kms) : 0;
+  const per1000 = span >= 1000 ? Math.round(all / span * 1000) : 0;
+  const months = Array.from({length:12}, (_, i) => { const d = new Date(y, m - 11 + i, 1); return [d.getFullYear(), d.getMonth()]; });
+  const vals = months.map(([Y,M]) => sum(paid.filter(l => { const [a,b] = ym(l); return a === Y && b === M; })));
+  const max = Math.max(...vals, 1), W = 600, H = 190, bw = 34, gap = (W - 24 - 12*bw) / 11;
+  const bars = vals.map((v,i) => { const x = 12 + i*(bw + gap), h = v ? Math.max(4, (v / max) * 120) : 2, yy = 150 - h;
+    return `<g><title>${MON[months[i][1]]} ${months[i][0]}: ${rub(v)}</title><rect x="${x.toFixed(1)}" y="${yy.toFixed(1)}" width="${bw}" height="${h.toFixed(1)}" class="${i === 11 ? "cb-now" : v ? "cb" : "cb-zero"}"/>
+      ${v ? `<text x="${(x + bw/2).toFixed(1)}" y="${(yy - 6).toFixed(1)}" class="cb-v" text-anchor="middle">${kRub(v)}</text>` : ""}
+      <text x="${(x + bw/2).toFixed(1)}" y="170" class="cb-l" text-anchor="middle">${MON[months[i][1]]}</text></g>`; }).join("");
+  const byType = {};
+  paid.forEach(l => { byType[l.type] = (byType[l.type] || 0) + Number(l.cost); });
+  const cats = Object.entries(byType).sort((a,b) => b[1] - a[1]);
+  const top = cats[0][1];
+  return `<section class="blk"><h4>Расходы</h4>
+    <div class="cstats">
+      <div><span>${MON[m]} ${y}</span><b>${rub(month)}</b></div>
+      <div><span>${y} год</span><b>${rub(year)}</b></div>
+      <div><span>Всё время</span><b>${rub(all)}</b></div>
+      ${per1000 ? `<div><span>На 1000 км</span><b>≈ ${rub(per1000)}</b></div>` : ""}
+    </div>
+    <div class="cchart"><div class="cchart-h">По месяцам, последние 12</div>
+      <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Расходы по месяцам за последний год"><path d="M0 150.5 H${W}" class="cb-axis"/>${bars}</svg></div>
+    <div class="ccats"><div class="cchart-h">На что уходят деньги</div>
+      <ul>${cats.map(([t,v]) => `<li><div class="ccat-t"><span>${esc(logName(t, car.fam))}</span><b>${rub(v)}</b></div><div class="ccat-bar"><i style="width:${Math.max(3, v / top * 100).toFixed(1)}%"></i></div></li>`).join("")}</ul></div>
+    <p class="approx-note">Считается по стоимости, которую ты указываешь в записях журнала.</p>
+  </section>`;
+}
 /* ---------- Мой гараж ---------- */
 const curCar = () => garage.cars.find(c => c.id === activeCar) || garage.cars[0] || null;
 const engOptions = (k, sel) => (ENG[k] || []).map(e => `<option value="${e.id}" ${e.id===sel?"selected":""}>${esc(e.name)} — ${esc(e.sub)}</option>`).join("");
@@ -2057,9 +2307,10 @@ function renderGarage(){
       ${entries.length ? `<ul class="loglist">${entries.map(l => `<li><div class="logdate"><b>${ruDate(l.date)}</b><span>${km(l.km)}</span></div>
         <div class="logbody"><b>${esc(logName(l.type, car.fam))}</b>${l.what ? `<span>${esc(l.what)}</span>` : ""}${l.note ? `<small>${esc(l.note)}</small>` : ""}</div>
         <div class="logside">${l.cost ? `<span class="cost">${rub(l.cost)}</span>` : ""}<button type="button" class="del" data-dellog="${l.id}">Удалить</button></div></li>`).join("")}</ul>
-        ${total ? `<p class="total">Потрачено на обслуживание: <b>${rub(total)}</b></p>` : ""}`
+        ${total ? `<p class="total">Потрачено на обслуживание: <b>${rub(total)}</b> — подробнее в разделе «Расходы» ниже</p>` : ""}`
         : `<p class="nov">Записей пока нет. Добавь последнюю замену масла — и Гаражник посчитает, когда следующая.</p>`}
     </section>
+    ${renderCosts(car, entries)}
     <p class="approx-note">${storeNote}</p>
   </div>`;
 }
@@ -2142,6 +2393,7 @@ document.addEventListener("click", e => {
   else if(d.kind){ const x = (ENG[fam] || []).find(x => x.kind === d.kind); if(x){ setEng(fam, x.id); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $(`#famMenu [data-kind="${d.kind}"]`)?.focus(); } }
   else if(d.eng){ setEng(fam, d.eng); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $(`#famMenu [data-eng="${d.eng}"]`)?.focus(); }
   else if(b.hasAttribute("data-famclose")){ famMenu(false); }
+  else if(b.hasAttribute("data-print")){ window.print(); }
   else if(d.tab){ query = ""; go(d.tab); }
   else if(d.goto){ query = ""; go(d.goto); }
   else if(d.job){ query = ""; go(d.job); }
@@ -2215,7 +2467,7 @@ function renderDoer(){
   const el = $("#doer"); if(!doer){ el.hidden = true; return; }
   const {j, steps, cur} = doer, n = steps.length, f = F();
   const done = cur >= n;
-  const nums = j.plate.length ? `<details class="dnums"><summary>Цифры для ${esc(f.name)}</summary><dl>${j.plate.map(k => `<div><dt>${PLATE_LABEL[k]}</dt><dd>${esc(f[k])}</dd></div>`).join("")}</dl></details>` : "";
+  const nums = j.plate.length ? `<details class="dnums"><summary>Цифры для ${esc(f.name)}</summary><dl>${j.plate.filter(k => f[k]).map(k => `<div><dt>${PLATE_LABEL[k]}</dt><dd>${esc(f[k])}</dd></div>`).join("")}</dl></details>` : "";
   const body = done
     ? `<div class="dfinish"><div class="dcheck" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div><h3>Работа сделана</h3><p>${esc(j.title)}</p>
         ${JOB_LOG[j.id] ? `<button type="button" class="btn big" data-dlog="${JOB_LOG[j.id]}">Записать в «Мой гараж»</button>` : ""}

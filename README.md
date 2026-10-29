@@ -23,6 +23,7 @@ Telegram-канал: https://t.me/garage4to
 `oil` масло, `air` воздушный фильтр, `cabin` салонный фильтр, `fuel` топливный фильтр,
 `plugs` свечи, `altbelt` ремень генератора, `timing` ГРМ, `coolant` антифриз,
 `brakes` проверка колодок, `padsreplace` замена колодок, `bleed` тормозная жидкость,
+`valves` регулировка клапанов, `stablink` стойки стабилизатора, `hub` ступичный подшипник,
 `battery` аккумулятор, `bulbs` лампы, `wheel` колёса, `levels` уровни, `season` зима/лето.
 
 Для симптомов — `sym-` и код: `sym-oillamp`, `sym-overheat`, `sym-softpedal`, `sym-nostart`,
