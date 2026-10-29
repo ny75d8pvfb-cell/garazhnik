@@ -400,6 +400,19 @@ td:last-child{text-align:right}
 .about .entry p + p{margin-top:8px}
 .mcap{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding:8px 12px 4px}
 .engs{display:flex;flex-direction:column;gap:2px}
+.mstep{padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.mcap{display:flex;align-items:center;gap:8px}
+.mcap span{display:inline-grid;place-items:center;width:18px;height:18px;border:1px solid var(--amber);color:var(--amber);font:600 11px var(--f-mono);border-radius:2px}
+.mfams{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px}
+.mfams button small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.fammenu button[aria-pressed="true"]{background:var(--surface);box-shadow:inset 3px 0 0 var(--amber)}
+.mseg{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:2px 6px}
+.fammenu .mseg button{align-items:center;justify-content:center;border:1px solid var(--line-2);padding:10px 8px;font-weight:600}
+.fammenu .mseg button[aria-pressed="true"]{border-color:var(--amber);color:var(--amber);box-shadow:none}
+.fammenu .mseg button:disabled{opacity:.35;cursor:default}
+.mnote{margin:6px 12px 0;font-size:12.5px;color:var(--dim)}
+.mdone{padding:6px 6px 4px}
+.mdone .btn{width:100%}
 .enghelp{margin:6px 6px 4px;padding:10px 12px;border-radius:10px;background:var(--surface);font-size:13px}
 .enghelp summary{cursor:pointer;color:var(--amber);font-weight:600}
 .enghelp ul{margin:8px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px;color:var(--ink)}
@@ -1638,11 +1651,21 @@ function renderFam(){
   const f = F();
   const e = engOf(fam);
   $("#famCur").innerHTML = `<b>${esc(f.name)}</b><small>${esc(e ? e.name : f.models)}</small>`;
-  $("#famMenu").innerHTML = `<div class="mcap">Модель</div>` + Object.entries(FAM).map(([k,x]) =>
-    `<button type="button" data-fam="${k}" aria-pressed="${k===fam}"><b>${esc(x.name)}</b><small>${esc(x.models)}</small></button>`).join("") +
-    `<div class="mcap">Двигатель · ${esc(f.name)}</div><div class="engs">` + (ENG[fam] || []).map(x =>
-    `<button type="button" data-eng="${x.id}" aria-pressed="${e && x.id===e.id}"><b>${esc(x.name)}</b><small>${esc(x.sub)}</small></button>`).join("") + `</div>` +
-    ((ENG[fam] || []).some(x => x.kind === "carb") ? `<details class="enghelp"><summary>Как понять: карбюратор или инжектор?</summary><ul>
+  const engs = ENG[fam] || [], kind = e ? e.kind : "inj";
+  const hasCarb = engs.some(x => x.kind === "carb"), hasInj = engs.some(x => x.kind === "inj");
+  const ofKind = engs.filter(x => x.kind === kind);
+  const short = x => x.name.replace(/^(Карбюратор|Инжектор)\s*/i, "") || "Стандартный";
+  $("#famMenu").innerHTML =
+    `<div class="mstep"><div class="mcap"><span>1</span>Машина</div><div class="mfams">` + Object.entries(FAM).map(([k,x]) =>
+      `<button type="button" data-fam="${k}" aria-pressed="${k===fam}"><b>${esc(x.name)}</b><small>${esc(x.models)}</small></button>`).join("") + `</div></div>` +
+    `<div class="mstep"><div class="mcap"><span>2</span>Питание</div><div class="mseg">` +
+      `<button type="button" data-kind="carb" aria-pressed="${kind==="carb"}" ${hasCarb ? "" : "disabled"}>Карбюратор</button>` +
+      `<button type="button" data-kind="inj" aria-pressed="${kind==="inj"}" ${hasInj ? "" : "disabled"}>Инжектор</button></div>` +
+      (hasCarb ? "" : `<p class="mnote">У ${esc(f.name)} только инжектор.</p>`) + `</div>` +
+    `<div class="mstep"><div class="mcap"><span>3</span>Двигатель</div><div class="engs">` + ofKind.map(x =>
+      `<button type="button" data-eng="${x.id}" aria-pressed="${e && x.id===e.id}"><b>${esc(short(x))}</b><small>${esc(x.sub)}</small></button>`).join("") + `</div></div>` +
+    `<div class="mdone"><button type="button" class="btn" data-famclose>Готово</button></div>` +
+    (hasCarb ? `<details class="enghelp"><summary>Как понять: карбюратор или инжектор?</summary><ul>
       <li><b>Карбюратор:</b> в салоне есть ручка подсоса (обычно слева под рулём), сверху мотора большой круглый корпус воздушного фильтра.</li>
       <li><b>Инжектор:</b> ручки подсоса нет, при включении зажигания на панели загорается лампа «Check Engine», корпус фильтра сбоку, от него гофра к дроссельному узлу.</li>
       <li>Точно — по номеру двигателя в ПТС.</li></ul></details>` : "");
@@ -1842,7 +1865,7 @@ function carForm(car){
     <div class="grid2">
       <label>Название<input id="g-name" type="text" maxlength="40" placeholder="Например, «Моя семёрка»" value="${esc(c.name)}" required></label>
       <label>Семейство<select id="g-fam">${Object.entries(FAM).map(([k,f]) => `<option value="${k}" ${k===c.fam?"selected":""}>${esc(f.name)} (${esc(f.models)})</option>`).join("")}</select></label>
-      <label>Год выпуска<input id="g-year" type="number" inputmode="numeric" min="1970" max="2030" placeholder="2012" value="${esc(c.year)}"></label>
+      <label>Год выпуска<select id="g-year"><option value="">Не указан</option>${Array.from({length:new Date().getFullYear() - 1969}, (_, i) => new Date().getFullYear() - i).map(y => `<option value="${y}" ${String(c.year)===String(y)?"selected":""}>${y}</option>`).join("")}</select></label>
       <label>Двигатель<select id="g-engine">${engOptions(c.fam, c.eng)}</select></label>
       <label>Пробег сейчас, км<input id="g-km" type="number" inputmode="numeric" min="0" max="2000000" placeholder="125000" value="${esc(c.mileage)}" required></label>
     </div>
@@ -1997,7 +2020,9 @@ document.addEventListener("click", e => {
   if(b.id === "famBtn"){ famMenu($("#famMenu").hidden); return; }
   if(!b.closest(".famsel")) famMenu(false);
   if(d.fam){ setFam(d.fam); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $("#famMenu .engs button")?.focus(); }
-  else if(d.eng){ setEng(fam, d.eng); famMenu(false); const y = scrollY; render(); scrollTo(0,y); }
+  else if(d.kind){ const x = (ENG[fam] || []).find(x => x.kind === d.kind); if(x){ setEng(fam, x.id); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $(`#famMenu [data-kind="${d.kind}"]`)?.focus(); } }
+  else if(d.eng){ setEng(fam, d.eng); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $(`#famMenu [data-eng="${d.eng}"]`)?.focus(); }
+  else if(b.hasAttribute("data-famclose")){ famMenu(false); }
   else if(d.tab){ query = ""; go(d.tab); }
   else if(d.goto){ query = ""; go(d.goto); }
   else if(d.job){ query = ""; go(d.job); }
