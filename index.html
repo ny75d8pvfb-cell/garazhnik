@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Гаражник — твой помощник в ТО Лады</title>
 <meta name="description" content="Пошаговые инструкции по ТО Лады своими руками: замена масла, свечей, фильтров, колодок, антифриза. Точные объёмы и моменты затяжки под твою модель и двигатель, схемы, регламент ТО и личный гараж.">
-<meta name="theme-color" content="#0E1317">
+<meta name="theme-color" content="#101316">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://garazhnik-lada.ru/og.png">
 <meta property="og:url" content="https://garazhnik-lada.ru/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Russo+One&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 :root{color-scheme:dark;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{-webkit-text-size-adjust:100%}
@@ -521,6 +521,118 @@ ym(113852084,"init",{webvisor:true,clickmap:true,trackHash:true,accurateTrackBou
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/113852084" style="position:absolute;left:-9999px" alt=""></div></noscript>
 <!-- /Yandex.Metrika counter -->
+<style id="strict">
+/* ===== Строгий стиль: сталь, жёлтый «осторожно», прямые углы ===== */
+:root{
+  --bg:#0A0C0E; --peg:#15191D; --surface:#101316; --raised:#171B1F; --line:#252A30; --line-2:#3A4148;
+  --ink:#EEF0F2; --muted:#979EA6; --dim:#646B73;
+  --blue:#2A3037; --blue-ink:#D5DBE0; --blue-soft:#1B2026;
+  --amber:#FFB400; --amber-ink:#0A0C0E; --amber-soft:#211A06;
+  --warn:#FF5A3C; --ok:#7BC96F;
+  --f-head:"Oswald","Arial Narrow","Roboto Condensed",system-ui,sans-serif;
+  --r:3px;
+  --hazard:repeating-linear-gradient(-45deg,var(--amber) 0 9px,#0A0C0E 9px 18px);
+}
+body{background-image:linear-gradient(var(--peg) 1px,transparent 1px),linear-gradient(90deg,var(--peg) 1px,transparent 1px);background-size:40px 40px}
+a{color:var(--amber)}
+
+/* шапка */
+header{background:var(--surface);backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:0}
+header::after{content:"";display:block;height:5px;background:var(--hazard)}
+.logo{border-radius:2px}
+.brand h1{font:700 27px/1 var(--f-head);text-transform:uppercase;letter-spacing:.04em}
+.brand .sub{font:500 11.5px var(--f-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
+.tg{border-radius:2px;text-transform:uppercase;font:500 12px var(--f-mono);letter-spacing:.06em;border-color:var(--line-2)}
+.tg:hover{color:var(--amber);border-color:var(--amber)}
+.fambtn{background:var(--amber);color:var(--amber-ink);border-radius:2px;font:600 15px var(--f-head);text-transform:uppercase;letter-spacing:.05em}
+.fambtn svg{stroke:var(--amber-ink)}
+.famcur b,.famcur{font-family:var(--f-head);letter-spacing:.02em}
+.fammenu{border-radius:3px;border-color:var(--amber)}
+.fammenu button{border-radius:2px}
+.tabs button{font:500 15px var(--f-head);text-transform:uppercase;letter-spacing:.07em}
+.tabs button[aria-selected="true"]{border-bottom-width:3px}
+
+/* поиск, плашки, кнопки */
+.search input{border-radius:2px;background:var(--bg);border-color:var(--line-2)}
+.search input:focus{border-color:var(--amber);outline:0}
+.pill{border-radius:2px;font:500 11px/1.6 var(--f-mono);text-transform:uppercase;letter-spacing:.05em}
+.gh{font:600 19px/1.2 var(--f-head);text-transform:uppercase;letter-spacing:.06em;padding-left:12px;border-left:4px solid var(--amber)}
+.gh span{border-radius:2px;font-family:var(--f-mono)}
+.btn{border-radius:2px;background:var(--amber);color:var(--amber-ink);font-family:var(--f-head);text-transform:uppercase;letter-spacing:.05em;font-size:15px}
+.ghost,.back{border-radius:2px}
+.back{font:500 13.5px var(--f-head);text-transform:uppercase;letter-spacing:.06em;background:transparent}
+.back:hover{border-color:var(--amber);color:var(--amber)}
+.linkbtn{color:var(--amber)}
+
+/* карточки */
+.card,.entry,.plate,.fig,.tgcard,.artstrip{border-radius:3px}
+.card{border-color:var(--line-2);background:var(--surface);position:relative}
+.card:hover{border-color:var(--amber);background:var(--raised)}
+.card h3{font:600 18px/1.2 var(--f-head);text-transform:uppercase;letter-spacing:.03em}
+.ico{border-radius:2px;background:var(--raised);border:1px solid var(--line-2)}
+.ico svg{stroke:var(--amber)}
+.feature,.logbtn{border-radius:3px;background:var(--raised);border:1px solid var(--line-2);border-top:3px solid var(--amber)}
+.feature:hover,.logbtn:hover{background:var(--amber-soft)}
+.feature .ico,.logbtn .ico{border:0}
+.feature b,.logbtn b,.artstrip b,.tgcard b{font:600 16.5px/1.2 var(--f-head);text-transform:uppercase;letter-spacing:.04em}
+.artstrip .ico{background:var(--raised)}
+.artstrip .ico svg{stroke:var(--amber)}
+.tgcard:hover,.artstrip:hover{border-color:var(--amber)}
+.entry h3{font:600 20px/1.2 var(--f-head);text-transform:uppercase;letter-spacing:.04em}
+.sym h3{font:600 18px/1.25 var(--f-head);text-transform:uppercase;letter-spacing:.03em}
+
+/* страница работы */
+.detail h2,.dhead h2{font:700 30px/1.1 var(--f-head);text-transform:uppercase;letter-spacing:.03em}
+.dhead .ico{border-radius:2px}
+.startbtn{border-radius:2px;background:var(--amber);position:relative;overflow:hidden}
+.startbtn b{font:700 20px/1.1 var(--f-head);text-transform:uppercase;letter-spacing:.06em}
+.startbtn::after{content:"";position:absolute;right:0;top:0;bottom:0;width:56px;background:var(--hazard);opacity:.9;-webkit-mask:linear-gradient(90deg,transparent,#000 60%);mask:linear-gradient(90deg,transparent,#000 60%)}
+.plate{background:var(--raised);border:1px solid var(--line-2);border-left:4px solid var(--amber)}
+.plate .cap{font-family:var(--f-mono);letter-spacing:.08em}
+.plate .cap::before{border-radius:0;box-shadow:none}
+.blk h4{font:500 12px var(--f-mono);letter-spacing:.12em;color:var(--amber);display:flex;align-items:center;gap:10px}
+.blk h4::after{content:"";flex:1;height:1px;background:var(--line-2)}
+.tools button,.tools span{border-radius:2px}
+.tools button{color:var(--ink);border-color:var(--line-2);background:var(--raised)}
+.tools button:hover{border-color:var(--amber);background:var(--raised)}
+ol.steps li::before{border-radius:2px;background:var(--amber);color:var(--amber-ink);border-color:var(--amber);font:700 16px/28px var(--f-head)}
+ol.steps li:not(:last-child)::after{background:var(--line-2)}
+.n{border-radius:2px}
+.warn{border-radius:3px;background:color-mix(in srgb,var(--warn) 10%,var(--surface));border:1px solid color-mix(in srgb,var(--warn) 45%,transparent);border-left:6px solid var(--warn)}
+.warn::before{border-radius:2px}
+.tip{border-radius:2px;border-left:4px solid var(--amber)}
+.fig{background:var(--bg)}
+.zoomhint{border-radius:2px!important;color:var(--amber)!important;background:var(--amber-soft)!important;font-family:var(--f-mono)!important;text-transform:uppercase}
+
+/* нижнее меню на телефоне */
+nav.bottom{background:var(--surface);backdrop-filter:none;-webkit-backdrop-filter:none;border-top:2px solid var(--line-2)}
+nav.bottom button{border-radius:0;font-family:var(--f-head);text-transform:uppercase;letter-spacing:.06em}
+nav.bottom button[aria-selected="true"]{box-shadow:inset 0 3px 0 var(--amber)}
+.cookiebar{border-radius:3px;border-top:3px solid var(--amber)}
+
+/* ===== Сдержаннее: меньше жёлтого, без «игрушечности» ===== */
+:root{--amber:#E8A317; --amber-soft:#1E1909; --hazard:repeating-linear-gradient(-45deg,#B98212 0 7px,#0A0C0E 7px 14px)}
+header::after{height:3px;opacity:.85}
+.startbtn::after{display:none}
+.startbtn{background:var(--amber);box-shadow:inset 0 -3px 0 rgba(0,0,0,.25)}
+.fambtn{background:transparent;color:var(--amber);border:1px solid var(--amber)}
+.fambtn svg{stroke:var(--amber)}
+.logo{background:var(--amber)}
+.ico svg{stroke:var(--ink)}
+.ico{background:transparent}
+.feature .ico,.logbtn .ico{background:transparent;border:1px solid var(--line-2)}
+.feature .ico svg,.logbtn .ico svg{stroke:var(--amber)}
+.feature,.logbtn{border-top:1px solid var(--line-2);border-left:3px solid var(--amber);background:var(--surface)}
+.feature:hover,.logbtn:hover{background:var(--raised);border-color:var(--line-2);border-left-color:var(--amber)}
+.card:hover{border-color:var(--line-2);background:var(--raised);box-shadow:inset 3px 0 0 var(--amber)}
+.card h3,.feature b,.logbtn b,.artstrip b,.tgcard b,.sym h3{text-transform:none;letter-spacing:.01em;font-weight:500}
+.card h3{font-size:19px}
+.gh{border-left-width:3px}
+ol.steps li::before{background:transparent;color:var(--amber);border:2px solid var(--amber)}
+.pill.lvl1{color:var(--ok)} .pill.lvl2{color:var(--amber)}
+.plate{border-left-width:3px}
+body{background-size:48px 48px}
+</style>
 </head>
 <body>
 
