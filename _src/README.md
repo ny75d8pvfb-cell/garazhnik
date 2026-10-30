@@ -6,7 +6,7 @@
 - `index.html` — всё приложение в одном файле, роутинг по хешу (#to, #faults, #symptoms, #lamps, #codes, #fuses, #garage, #tools, #parts, #schedule, #numbers, #about, #<id работы>).
 - Две темы (data-theme, localStorage `garazh-theme`), гараж хранится только в браузере (localStorage), персональные данные не собираем.
 - `stati/` — 50 страниц: 38 статей (в т.ч. «Какое масло заливать» и предохранители Иксрея и Шевроле Нивы), 6 страниц семейств `obsluzhivanie-*` (все цифры) и 6 страниц современных моделей `lada-*` (поколения, история, новости, проблемы); генерируются скриптом, `sitemap.xml` тоже.
-- `sw.js` — при изменениях index.html повышай CACHE (сейчас garazhnik-v12).
+- `sw.js` — при изменениях index.html повышай CACHE (сейчас garazhnik-v13).
 - НЕ удалять: CNAME, yandex_5841f4e2fd5a3a59.html, googleb7db3b655183b61b.html.
 
 ## Сборка статей
@@ -37,6 +37,12 @@ cd _src/art && python3 build.py ../..     # пересобирает stati/*.htm
 
 ## Telegram-канал
 - `.github/workflows/telegram.yml` + `_src/tg_post.py`: после пуша в main новые `stati/*.html` публикуются в канал (ждёт, пока страница откроется на сайте; не больше 5 за раз). Секреты репозитория: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` (@garage4to). Без секретов просто пропускает. Ручной запуск: Actions → «Статьи в Telegram» → Run workflow.
+
+## Схемы (волна 3, исходник `_src/feat/figs3.js`, вставлен в index.html после строки `for(const k in STEP_T)…`)
+- `SYM_MINI` / `SYM_MINI_CAP` — пары «проблема → решение» для 17 симптомов (pairBlock берёт их, если нет старых symFigs).
+- `STEP3` — шаги клапанов (vcover…vseq), стоек (lcheck, lhold, lwood), ступицы (hrock…hpressIn), ремня генератора (bcrack, bdefl, bribs); привязка в STEP_MAP.
+- Крупные: `figHood` (под капотом, поперечный/продольный мотор), `figUnder` (низ, точки домкрата), `figCyl` (цилиндры 1-3-4-2, коды P030x — ещё в «Кодах ошибок»), `figTyre`, `figOilCan` (в блоке «Какое масло купить»), `figBattery`. Расположение под капотом — «типичное», с оговоркой.
+- figs3.js — копия кода из index.html (синхронизирована 30.10); правь в index.html.
 
 ## Масло
 - `OIL_KIND`/`OIL_SPEC` в index.html: carb (карбюратор), oldinj (заднеприводные инжекторы с цепью), vaz (все вазовские инжекторы, в т.ч. 1,8 Нивы), renault (K7M/K4M). Показывается в справочнике по машине, в «Запчастях» и блоком «Какое масло купить» + «Как читать надписи на канистре» в работе «Замена масла». Статья — `articles7.py` (kakoe-maslo-zalivat).
