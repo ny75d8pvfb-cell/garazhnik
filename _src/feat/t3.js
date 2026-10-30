@@ -1,0 +1,16 @@
+const {chromium}=require('playwright');
+(async()=>{const b=await chromium.launch();const errs=[];
+const ctx=await b.newContext({viewport:{width:390,height:844}});
+await ctx.addInitScript(()=>{try{localStorage.setItem('garazh-cookie','1')}catch(e){}});
+const p=await ctx.newPage();p.on('pageerror',e=>errs.push(e.message));await p.route(/mc\.yandex|fonts\.g/,r=>r.abort());
+await p.goto('http://localhost:8767/#garage');await p.waitForTimeout(300);
+await p.fill('#g-name','Гранта');await p.selectOption('#g-fam','kpg');await p.fill('#g-km','98000');await p.click('#carform button[type=submit]');await p.waitForTimeout(200);
+const add=async(type,date,km,cost)=>{await p.selectOption('#g-type',type);await p.fill('#g-date',date);await p.fill('#g-lkm',String(km));await p.fill('#g-cost',String(cost));await p.click('#logform button[type=submit]');await p.waitForTimeout(150);};
+await add('oil','2026-10-12',97500,3900);await add('plugs','2026-08-03',95000,1600);await add('stablink','2026-06-20',92000,2400);
+await add('oil','2026-02-10',85000,3700);await add('padsreplace','2025-12-05',82000,2900);await add('hub','2026-10-25',97900,5200);
+const c=await p.$('text=Расходы');await (await p.$('.cstats')).scrollIntoViewIfNeeded();
+const sec=await p.$('section.blk:has(.cstats)');await sec.screenshot({path:'costs-m.png'});
+await p.goto('http://localhost:8767/#numbers');await p.waitForTimeout(300);await p.screenshot({path:'num-m.png'});
+const p2=await b.newPage();await p2.route(/mc\.yandex|fonts\.g/,r=>r.abort());await p2.goto('http://localhost:8767/#numbers');await p2.waitForTimeout(400);
+await p2.emulateMedia({media:'print'});await p2.pdf({path:'numbers.pdf',format:'A4',printBackground:true});
+console.log(errs);await b.close();})();
