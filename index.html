@@ -2881,8 +2881,11 @@ function tgCard(){
     <span class="tgtext"><b>Новости Гаражника в Telegram</b><small>Новые инструкции, обновления сайта и ответы на вопросы · @garage4to</small></span>
     <span class="tgqr" id="tgqr" aria-hidden="true"></span></a>`;
 }
+/* почта собирается в браузере — в исходнике сайта целого адреса нет, спам-боты его не соберут */
+const MAIL = ["garazhnik.lada", "gmail.com"].join("@");
+const mailA = (txt, subj) => `<a href="mailto:${MAIL}${subj ? "?subject=" + encodeURIComponent(subj) : ""}">${esc(txt || MAIL)}</a>`;
 function aboutLinks(){
-  return `<div class="footlinks"><a href="stati/">Статьи</a><span>·</span><button type="button" class="linkbtn" data-goto="about">О сайте</button><span>·</span><a href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer">Нашёл ошибку? Напиши</a></div>`;
+  return `<div class="footlinks"><a href="stati/">Статьи</a><span>·</span><button type="button" class="linkbtn" data-goto="about">О сайте</button><span>·</span><a href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer">Нашёл ошибку? Напиши</a><span>·</span>${mailA("Почта для связи")}</div>`;
 }
 function renderAbout(){
   return `<div class="detail">${backBtn("to","Все работы")}
@@ -2890,7 +2893,8 @@ function renderAbout(){
     <div class="stack about">
       <article class="entry"><h3>Для кого</h3><p>Для тех, кто хочет сам обслуживать свою Ладу в гараже: поменять масло, свечи, колодки, понять, что стучит. Без капремонта и без сложного оборудования.</p></article>
       <article class="entry"><h3>Откуда цифры</h3><p>Объёмы, моменты затяжки, свечи и ключи взяты из заводских руководств по эксплуатации и ремонту АвтоВАЗа для каждой модели и двигателя. Рекомендации по колодкам и маслам — из лабораторных тестов журнала «За рулём». Бренды мы отбираем сами по опыту и отзывам владельцев.</p></article>
-      <article class="entry"><h3>Нашёл ошибку или не хватает работы</h3><p>Напиши в Telegram-канал — поправим и добавим. Новые инструкции появляются по вопросам читателей.</p><p><a href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer">@garage4to</a></p></article>
+      <article class="entry"><h3>Нашёл ошибку или не хватает работы</h3><p>Напиши в Telegram-канал или на почту — поправим и добавим. Новые инструкции появляются по вопросам читателей.</p><p><a href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer">@garage4to</a> · ${mailA("", "Гаражник: ошибка или предложение")}</p></article>
+      <article class="entry"><h3>Сотрудничество и реклама</h3><p>Магазины запчастей и инструмента, сервисы, производители масел и автохимии, авторы видео про ремонт Лады — пишите на почту, ответим.</p><p>${mailA("", "Сотрудничество с Гаражником")}</p></article>
       <article class="entry"><h3>Твои данные</h3><p>Сайт не требует регистрации. Всё, что ты вносишь в «Мой гараж», хранится только в твоём браузере на этом устройстве и никуда не отправляется.</p><p>Чтобы понимать, какие инструкции полезны, мы используем сервис статистики Яндекс Метрика. Он сохраняет cookies и собирает обезличенные данные о посещениях: страницы, устройство, браузер, город, источник перехода. Эти данные обрабатывает ООО «Яндекс» на серверах в России. Отключить сбор можно в настройках браузера, запретив cookies, или с помощью блокировщика.</p></article>
       <article class="entry"><h3>Важно</h3><p>Работы ты делаешь сам и под свою ответственность. Если сомневаешься — особенно с тормозами и ГРМ — лучше доверить работу мастеру или делать вместе с опытным человеком.</p></article>
     </div></div>`;
