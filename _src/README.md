@@ -6,7 +6,7 @@
 - `index.html` — всё приложение в одном файле, роутинг по хешу (#to, #faults, #symptoms, #lamps, #codes, #fuses, #garage, #tools, #parts, #schedule, #numbers, #about, #<id работы>).
 - Две темы (data-theme, localStorage `garazh-theme`), гараж хранится только в браузере (localStorage), персональные данные не собираем.
 - `stati/` — 47 страниц: 35 статей, 6 страниц семейств `obsluzhivanie-*` (все цифры) и 6 страниц современных моделей `lada-*` (поколения, история, новости, проблемы); генерируются скриптом, `sitemap.xml` тоже.
-- `sw.js` — при изменениях index.html повышай CACHE (сейчас garazhnik-v10).
+- `sw.js` — при изменениях index.html повышай CACHE (сейчас garazhnik-v11).
 - НЕ удалять: CNAME, yandex_5841f4e2fd5a3a59.html, googleb7db3b655183b61b.html.
 
 ## Сборка статей

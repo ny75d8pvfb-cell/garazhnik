@@ -36,7 +36,7 @@ def _gens(mid):
             rows = [("Масло на замену", _numcell(_v(g, e, "oil"))), ("Свечи: ключ и момент", _numcell(plug)), ("Привод ГРМ", E(_v(g, e, "grm")))]
             cards += f'<div class="ecard"><b>{E(e["name"])}</b><small>{E(e["sub"])}</small><dl>' + "".join(f"<dt>{a}</dt><dd>{b}</dd>" for a, b in rows) + "</dl></div>"
         out += f'<div class="ecards">{cards}</div>'
-        out += f'<p><a class="inlink" href="../?gen={g["id"]}#numbers">Все цифры для «{E(g["name"])}» в Гаражнике →</a></p>'
+        out += f'<p><a class="inlink" href="../?gen={g["id"]}#numbers">Справочник по «{E(g["name"])}» в Гаражнике →</a></p>'
     return out
 
 
@@ -161,14 +161,14 @@ _PAGES = [
 for _p in _PAGES:
     _m = _M[_p["mid"]]
     secs = [
-        ("motory", "Поколения и моторы", "<p>Найди свой мотор — ниже главные цифры для ТО. Полный список (антифриз, колёса, тормоза, коробка) — по ссылке под карточками: откроется сразу для твоей модели.</p>" + _gens(_p["mid"])),
+        ("motory", "Поколения и моторы", "<p>Найди свой мотор — ниже главные цифры для ТО. Полный список (антифриз, колёса, тормоза, коробка) — в справочнике по машине, ссылка ниже: откроется сразу для твоей модели.</p>" + _gens(_p["mid"])),
         ("istoriya", "Что менялось по годам", _timeline(_p["history"])),
         ("problemy", "Частые проблемы", ul([f"<b>{E(a)}</b> — {E(b)}" for a, b in _p["problems"]]) +
          "<p>Источники: " + ", ".join(_src(u, n) for u, n in _p["psrc"]) + ".</p>"),
         ("reglament", "Регламент ТО", _sched(_p["fam"])),
         ("instrukcii", "Пошаговые инструкции", _jobs(_p["gid"], _p["fam"])),
     ]
-    add(_p["slug"], "Модель", _p["title"], _p["desc"], 6, "numbers", "Цифры для моей машины в Гаражнике", _p["lead"], secs,
+    add(_p["slug"], "Модель", _p["title"], _p["desc"], 6, "numbers", "Справочник по машине в Гаражнике", _p["lead"], secs,
         ["to-po-reglamentu", "skolko-masla", "momenty-zatyazhki"])
     A[-1]["fam"] = _p["fam"]
     A[-1]["gen"] = _p["gid"]
