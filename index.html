@@ -626,6 +626,7 @@ ym(113852084,"init",{webvisor:true,clickmap:true,trackHash:true,accurateTrackBou
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/113852084" style="position:absolute;left:-9999px" alt=""></div></noscript>
 <!-- /Yandex.Metrika counter -->
+<script>(function(){var t=null;try{t=localStorage.getItem("garazh-theme")}catch(e){}if(!t){t=(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches)?"light":"dark"}document.documentElement.setAttribute("data-theme",t);})();</script>
 <style id="strict">
 /* ===== Строгий стиль: сталь, жёлтый «осторожно», прямые углы ===== */
 :root{
@@ -737,6 +738,184 @@ ol.steps li::before{background:transparent;color:var(--amber);border:2px solid v
 .pill.lvl1{color:var(--ok)} .pill.lvl2{color:var(--amber)}
 .plate{border-left-width:3px}
 body{background-size:48px 48px}
+
+/* ===== Строгий спокойный стиль (обе темы) ===== */
+header::after{display:none}
+body{background-image:none}
+.brand h1{text-transform:none;letter-spacing:.01em}
+.brand .sub{text-transform:none;letter-spacing:.02em;font:500 12.5px var(--f-body);color:var(--muted)}
+.tabs button,.fambtn,.back,.btn,nav.bottom button,.fseg button,.gh,.detail h2,.dhead h2,.startbtn b,.entry h3,.feature b,.logbtn b,.artstrip b,.tg{text-transform:none;letter-spacing:.01em}
+.tabs button{font:500 15.5px var(--f-body)}
+nav.bottom button{font:500 11px var(--f-body)}
+.fseg button{font:500 14px var(--f-body)}
+.gh{font:600 18px/1.2 var(--f-body);border-left:0;padding-left:0}
+.detail h2.gh{font:600 18px/1.2 var(--f-body);text-transform:none;letter-spacing:0}
+.tg{font:500 13px var(--f-body)}
+.feature,.logbtn{border:1px solid var(--line-2);border-top:1px solid var(--line-2);border-left:1px solid var(--line-2)}
+.feature .ico svg,.logbtn .ico svg{stroke:var(--amber)}
+.card:hover{box-shadow:none;border-color:var(--amber)}
+.plate{border-left:1px solid var(--line-2)}
+.pill.lvl1,.pill.lvl2{color:var(--muted)}
+/* страница работы — как в руководстве */
+.jcrumbs{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13.5px;color:var(--dim);margin-bottom:10px}
+.jcrumbs button{border:0;background:none;padding:4px 0;color:var(--amber);cursor:pointer;font:inherit;font-weight:500}
+.jtitle{font:700 28px/1.15 var(--f-head,var(--f-body))!important;margin:0 0 8px!important;letter-spacing:.005em!important}
+.job .lead{margin-bottom:16px}
+.passport{border:1px solid var(--line-2);border-radius:var(--r);background:var(--surface);margin-bottom:16px}
+.pp-row{padding:12px 14px;border-top:1px solid var(--line)}
+.pp-row:first-child{border-top:0}
+.pp-top{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px 18px}
+.pp-k{display:block;font:500 11px var(--f-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--dim);margin-bottom:5px}
+.pp-v{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:14.5px}
+.diff{display:inline-flex;gap:3px}
+.diff i{width:14px;height:8px;border-radius:1px;background:var(--line-2)}
+.diff i.on{background:var(--amber)}
+.pp-nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 18px;margin:0}
+.pp-nums dt{font-size:12.5px;color:var(--muted)}
+.pp-nums dd{margin:2px 0 0;font:500 16px/1.3 var(--f-mono);color:var(--amber)}
+.pp-nums dd.txt{font:500 14px/1.45 var(--f-body);color:var(--ink)}
+.cattbl{width:100%;border-collapse:collapse;margin-top:8px;font-size:13.5px}
+.cattbl td{padding:6px 0;border-top:1px solid var(--line)}
+.cattbl td.mono{white-space:nowrap;padding-left:12px;font:500 13.5px var(--f-mono);text-align:right;color:var(--ink)}
+.jsec{margin-top:22px}
+.jh{display:flex;align-items:center;gap:10px;font:600 19px/1.25 var(--f-body);margin:0 0 12px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.jh span{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 6px;background:var(--ink);color:var(--bg);font:600 13px var(--f-mono);border-radius:2px}
+.keytag{display:inline-block;margin-left:8px;font:500 11.5px var(--f-mono);color:var(--muted);border:1px solid var(--line-2);border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+.callout{margin:8px 0 0;padding:8px 12px;font-size:14px;border-radius:2px;border-left:3px solid}
+.callout.att{background:var(--amber-soft);border-color:var(--amber)}
+.callout.dang{background:color-mix(in srgb,var(--warn) 10%,var(--surface));border-color:var(--warn)}
+.callout b{font-weight:700}
+.job > .callout{margin-top:18px}
+.figwrap{margin-bottom:14px}
+.fignum{font:500 11.5px var(--f-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--dim);margin-bottom:5px}
+.mist{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.srcs{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.legend li{break-inside:avoid}
+.legend{margin:8px 0 0;padding-left:20px;text-align:left;columns:2;column-gap:24px;font-size:13px;color:var(--ink)}
+.tl-body{fill:none;stroke:var(--ink);stroke-width:1.6}
+:root{--tl-fill:#20262c;--tl-fill2:#2c333b;--tl-pad:#6b5a43;--tl-oil:#b98a2e;--tl-cool:#b34d6d;--tl-brk:#b8a45c;--tl-glass:#1b2836}
+:root[data-theme="light"]{--tl-fill:#EDEAE3;--tl-fill2:#D9D5CB;--tl-pad:#C9B596;--tl-oil:#D7A84A;--tl-cool:#E79AB0;--tl-brk:#E4D598;--tl-glass:#E6EEF6}
+.tl-fill{fill:var(--tl-fill)} .tl-fill2{fill:var(--tl-fill2)}
+.fx-zb{fill:color-mix(in srgb,var(--ok) 70%,transparent)}
+.fx-bluef{fill:var(--ink)}
+.fx-filterf{fill:var(--tl-fill2);stroke:var(--ink);stroke-width:1.4}
+.tl-xs{fill:var(--muted);font:500 10px var(--f-body)}
+.stepsvg .tl-v{font-size:12px}
+.tl-handle{stroke:var(--ink);stroke-width:7;stroke-linecap:round;fill:none;opacity:.85}
+.tl-oring{fill:none;stroke:var(--amber);stroke-width:4}
+.tl-oilline{stroke:var(--tl-oil);stroke-width:4;fill:none;stroke-linecap:round}
+.tl-coolline{stroke:var(--tl-cool);stroke-width:4;fill:none;stroke-linecap:round}
+.tl-wiperarm{stroke:var(--ink);stroke-width:6;stroke-linecap:round}
+.tl-wire{stroke:var(--ink);stroke-width:5;fill:none;stroke-linecap:round}
+.tl-tyre{fill:var(--tl-fill2);stroke:var(--ink);stroke-width:1.6}
+.tl-spoke{stroke:var(--ink);stroke-width:5;stroke-linecap:round;opacity:.8}
+.tl-beam{stroke:var(--amber);stroke-width:1.4;stroke-dasharray:4 3}
+.tl-warnl{fill:none;stroke:var(--warn);stroke-width:2}
+.tl-jack{stroke:var(--ink);stroke-width:4;fill:none;stroke-linejoin:round}
+.tl-needle{stroke:var(--ink);stroke-width:2.5}
+.tl-clamp{stroke:var(--ink);stroke-width:5;fill:none;stroke-linecap:round}
+.tl-pedalarm{stroke:var(--ink);stroke-width:7;stroke-linecap:round}
+.tl-pipeT{stroke:var(--muted);stroke-width:7;stroke-linecap:round}
+.tl-lcdT{fill:#cfd8c0;stroke:var(--ink);stroke-width:1.2}
+.tl-lcdt{fill:#1a2a10;font:600 17px var(--f-mono)}
+.tl-probeR{stroke:#C0392B;stroke-width:3;fill:none}
+.tl-probeB{stroke:var(--ink);stroke-width:3;fill:none}
+.tl-redf{fill:#C0392B}
+.tl-term{fill:#fff;font:700 13px var(--f-body);text-anchor:middle}
+.tl-term2{fill:var(--ink);font:700 13px var(--f-body);text-anchor:middle}
+.tl-spring{stroke:var(--ink);stroke-width:3;fill:none}
+.tl-bar{stroke:var(--ink);stroke-width:14;fill:none;stroke-linecap:round;opacity:.25}
+.tl-slot{stroke:var(--ink);stroke-width:3;fill:none;stroke-linecap:round}
+.tl-hosethick{stroke:var(--ink);stroke-width:14;fill:none;stroke-linecap:round;opacity:.35}
+.tl-stickT{stroke:var(--ink);stroke-width:3}
+.tl-cableR{stroke:#C0392B;stroke-width:5;fill:none;stroke-linecap:round}
+.tl-cableB{stroke:var(--ink);stroke-width:5;fill:none;stroke-linecap:round}
+.stepfig svg .fx-arA{stroke:var(--amber)}
+
+.tl-thin{stroke:var(--ink);stroke-width:1;fill:none;opacity:.75}
+.tl-dot{fill:var(--ink)}
+.tl-acc{stroke:var(--amber);stroke-width:2.6;fill:none;stroke-linecap:round}
+.tl-accline{stroke:var(--amber);stroke-width:2;fill:none;stroke-dasharray:6 4}
+.tl-accf{fill:var(--amber);stroke:var(--ink);stroke-width:1.2}
+.tl-arrf{fill:var(--amber)}
+.tl-mark{stroke:var(--amber);stroke-width:4;stroke-linecap:round}
+.tl-dim{stroke:var(--ink);stroke-width:1.2;fill:none}
+.tl-v{fill:var(--amber);font:600 13px var(--f-mono)}
+.tl-warnt{fill:var(--warn)}
+.tl-h{fill:var(--ink);font:600 14px var(--f-body)}
+.tl-belt{stroke:var(--ink);stroke-width:7;fill:none;stroke-linecap:round;opacity:.8}
+.tl-hose{stroke:var(--muted);stroke-width:5;fill:none;stroke-linecap:round}
+.tl-hosec{stroke:var(--blue-ink);stroke-width:6;fill:none;stroke-linecap:round;opacity:.55}
+.tl-pipe{stroke:var(--muted);stroke-width:6;stroke-linecap:round}
+.tl-stick{stroke:var(--ink);stroke-width:5;stroke-linecap:round}
+.tl-padf{fill:var(--tl-pad)} .tl-padf2{fill:var(--tl-pad);opacity:.55}
+.tl-warnf{fill:var(--warn)}
+.tl-oilf{fill:var(--tl-oil)} .tl-coolf{fill:var(--tl-cool)} .tl-brakef{fill:var(--tl-brk)}
+.tl-glass{fill:var(--tl-glass)}
+.tl-seal{fill:none;stroke:var(--amber);stroke-width:3;stroke-dasharray:2 3}
+.tl-wiper{stroke:var(--ink);stroke-width:5;stroke-linecap:round}
+.tl-ghost{display:none}
+.figcap2{margin:6px 0 0;font-size:13px;color:var(--muted);text-align:left}
+.fig figcaption{text-align:left}
+.tl-part{fill:var(--surface);stroke:var(--ink);stroke-width:1.6}
+.tl-part-l{stroke:var(--ink);stroke-width:1.6}
+.tl-hid{stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 4;fill:none}
+.tl-lead{stroke:var(--ink);stroke-width:1}
+.tl-num{fill:var(--surface);stroke:var(--ink);stroke-width:1.4}
+.tl-numt2{fill:var(--amber-ink);font:700 14px var(--f-mono)}
+:root:not([data-theme="light"]) .tl-numt2{fill:#0A0C0E}
+.tl-numt{fill:var(--ink);font:600 12px var(--f-mono)}
+.tl-s{fill:var(--muted);font:500 12px var(--f-body)}
+.cdiff{display:inline-flex;align-items:center;gap:6px}
+.cdiff .diff i{width:10px;height:6px}
+.cdiff b{font-weight:500}
+.zoomhint{text-transform:none!important;font-family:var(--f-body)!important;font-size:12.5px!important}
+.ghits .hits{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
+.hit{display:flex;flex-direction:column;gap:2px;text-align:left;border:1px solid var(--line-2);background:var(--surface);border-radius:var(--r);padding:10px 12px;cursor:pointer;color:var(--ink)}
+.hit:hover{border-color:var(--amber)}
+.hit small{font:500 11px var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--dim)}
+.hit b{font-weight:500;font-size:14.5px}
+@media (max-width:640px){.jtitle{font-size:24px!important}.legend{columns:1}.tabs button{font-size:14.5px}}
+
+/* ===== Светлая тема «как руководство» ===== */
+:root[data-theme="light"]{
+  color-scheme:light;
+  --bg:#F4F3EF; --peg:#E9E7E1; --surface:#FFFFFF; --raised:#F7F6F2; --sunk:#ECEAE4; --line:#E3E0D8; --line-2:#CDC9BE;
+  --ink:#1A1C1F; --muted:#585D64; --dim:#80858C;
+  --blue:#E9E7E1; --blue-ink:#1F4E8C; --blue-soft:#EEF2F8;
+  --amber:#A35C00; --amber-ink:#FFFFFF; --amber-soft:#FBF2E2;
+  --warn:#B4380F; --ok:#2E7A3A;
+}
+:root[data-theme="light"] html,:root[data-theme="light"] body{background:var(--bg)}
+:root[data-theme="light"] header,:root[data-theme="light"] nav.bottom{background:var(--surface);border-bottom:1px solid var(--line-2)}
+:root[data-theme="light"] nav.bottom{border-top:1px solid var(--line-2)}
+:root[data-theme="light"] body::before{background:var(--surface)}
+:root[data-theme="light"] .logo{background:var(--ink)}
+:root[data-theme="light"] .logo svg{stroke:#fff}
+:root[data-theme="light"] .startbtn{background:var(--ink);color:#fff;box-shadow:none}
+:root[data-theme="light"] .startbtn svg{fill:#fff}
+:root[data-theme="light"] .startbtn small{color:#d6d6d6}
+:root[data-theme="light"] .btn{background:var(--ink);color:#fff}
+:root[data-theme="light"] .fambtn{color:var(--ink);border-color:var(--ink)}
+:root[data-theme="light"] .fambtn svg{stroke:var(--ink)}
+:root[data-theme="light"] .tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+:root[data-theme="light"] nav.bottom button[aria-selected="true"]{color:var(--ink);box-shadow:inset 0 3px 0 var(--ink)}
+:root[data-theme="light"] .fseg button[aria-selected="true"]{color:var(--ink);box-shadow:inset 0 -3px 0 var(--ink);background:var(--raised)}
+:root[data-theme="light"] .ico{border-color:var(--line-2)}
+:root[data-theme="light"] .ico svg{stroke:var(--ink)}
+:root[data-theme="light"] .feature .ico svg,:root[data-theme="light"] .logbtn .ico svg,:root[data-theme="light"] .artstrip .ico svg{stroke:var(--amber)}
+:root[data-theme="light"] .card,:root[data-theme="light"] .entry,:root[data-theme="light"] .feature,:root[data-theme="light"] .artstrip,:root[data-theme="light"] .logbtn{box-shadow:0 1px 0 rgba(0,0,0,.03)}
+:root[data-theme="light"] .fig{background:var(--surface)}
+:root[data-theme="light"] .search input{background:var(--surface)}
+:root[data-theme="light"] .cookiebar{background:var(--surface);box-shadow:0 10px 30px rgba(0,0,0,.15)}
+:root[data-theme="light"] .tools button{background:var(--surface);color:var(--ink)}
+:root[data-theme="light"] .tools button.part{color:var(--amber)}
+:root[data-theme="light"] .pill{background:var(--raised)}
+:root[data-theme="light"] ol.steps li::before{background:var(--surface);color:var(--ink);border-color:var(--ink)}
+:root[data-theme="light"] .warn{background:#FDF0EB}
+:root[data-theme="light"] .tip{background:var(--amber-soft)}
+:root[data-theme="light"] .lampc-ico,:root[data-theme="light"] .lamp-ico{background:#16181b}
+:root[data-theme="light"] .zoomov{background:var(--bg)}
 </style>
 </head>
 <body>
@@ -748,6 +927,7 @@ body{background-size:48px 48px}
       <div class="t"><h1>Гаражник</h1><span class="sub">твой помощник в ТО</span></div>
       <span id="ownerBadge" class="owner-badge" hidden>редактор</span>
       <a class="tg tg-art" href="stati/" aria-label="Статьи"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5M8 7h8M8 11h6"/></svg><span>Статьи</span></a>
+      <button type="button" class="tg themebtn" id="themeBtn" aria-label="Сменить тему"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span>Тема</span></button>
       <a class="tg" href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer" aria-label="Telegram-канал Гаражника"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4 2.8 11.1c-.9.4-.9 1.2.1 1.5l4.6 1.4 1.8 5.5c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8L22.9 5.5c.3-1.3-.5-1.9-1.9-1.5z"/><path d="m7.5 14 9.5-6"/></svg><span>Канал</span></a>
     </div>
     <div class="famsel"><div class="famrow"><button type="button" id="famBtn" class="fambtn" aria-haspopup="true" aria-expanded="false">Моя машина<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><span class="famcur" id="famCur"></span></div><div id="famMenu" class="fammenu" hidden></div></div>
@@ -957,21 +1137,34 @@ const FLUIDS = [
 /* Работы: tools — id из TOOLS или текст; steps — строки, {поле} подставляется из семейства;
    объект {t, only:[семейства]} или {t, not:[...]} — шаг только для части машин. */
 const JOBS = [
-  {id:"oil",title:"Замена масла и масляного фильтра",lvl:1,time:"40–60 мин",
-   desc:"Главная работа ТО. Справится новичок с ямой, эстакадой или подставками.",
+  {id:"oil",title:"Замена масла и масляного фильтра",lvl:1,diff:2,time:"40–60 мин",
+   desc:"Главная работа ТО. Понадобится яма, эстакада или подставки.",
    plate:["oil","engine"],
    tools:["wrenches","sockets","filterkey","torque","Ёмкость для слива","Воронка","Перчатки"],
-   steps:[
-    "Купи масло (нужен объём {oil}), новый масляный фильтр и, если есть, новую прокладку или шайбу сливной пробки.",
-    "Прогрей двигатель 5 минут: тёплое масло стекает лучше. Заглуши мотор.",
-    "Открой маслозаливную горловину сверху, чтобы масло сливалось быстрее.",
-    "Поставь ёмкость под поддон и открути сливную пробку. Осторожно: масло горячее.",
-    "Пока стекает (10–15 минут), сними старый фильтр съёмником. Подставь под него ветошь.",
-    "Смажь резиновое кольцо нового фильтра свежим маслом и закрути его рукой: после касания ещё на 3/4 оборота.",
-    "Закрути сливную пробку с новой шайбой. Не перетягивай: резьба в поддоне мягкая.",
-    "Залей масло, немного не доливая до полного объёма. Подожди пару минут и проверь щупом.",
-    "Заведи мотор на 1–2 минуты: лампа масла должна погаснуть. Заглуши, через 5 минут долей до середины между MIN и MAX.",
-    "Проверь, не капает ли из-под пробки и фильтра. Отработку сдай в пункт приёма."],
+   cat:{kpg:[["Масляный фильтр, оригинал АвтоВАЗ","21080-1012005"],["Аналог по размерам","MANN W 914/2"]],samara:[["Масляный фильтр, оригинал АвтоВАЗ","21080-1012005"],["Аналог по размерам","MANN W 914/2"]],ten:[["Масляный фильтр, оригинал АвтоВАЗ","21080-1012005"],["Аналог по размерам","MANN W 914/2"]]},
+   sections:[
+    {h:"Подготовка",steps:[
+     {t:"Купи масло нужного объёма ({oil}), новый масляный фильтр и уплотнительную шайбу сливной пробки."},
+     {t:"Поставь машину ровно на яму, эстакаду или подставки. Прогрей двигатель 5 минут — тёплое масло стекает лучше — и заглуши.",att:"Под машиной не касайся приёмной трубы глушителя — она горячая."},
+     {t:"Открой маслозаливную горловину на крышке головки блока (1 на рис. 1) — так масло сольётся быстрее."}]},
+    {h:"Слив масла и снятие фильтра",steps:[
+     {t:"Поставь ёмкость под поддон и выкрути сливную пробку (4 на рис. 1).",key:"ключ под сливную пробку",att:"Масло горячее — работай в перчатках."},
+     {t:"Нива: не перепутай пробку двигателя со сливной пробкой переднего моста — она рядом.",only:["niva"]},
+     {t:"Дай маслу стечь 10–15 минут."},
+     {t:"Сними старый масляный фильтр (3 на рис. 1), подставив под него ветошь.",key:"съёмник фильтра"}]},
+    {h:"Установка",steps:[
+     {t:"Протри посадочную площадку фильтра на блоке. Старое резиновое кольцо не должно остаться на блоке."},
+     {t:"Сверь резьбу нового фильтра со штуцером: фильтр с другой резьбой накрутится, но под давлением его сорвёт."},
+     {t:"Смажь резиновое кольцо нового фильтра свежим маслом и закрути фильтр рукой: после касания кольцом — ещё на 3/4 оборота.",key:"руками"},
+     {t:"Вкрути сливную пробку с новой шайбой. Не перетягивай: резьба в поддоне мягкая.",key:"ключ под сливную пробку"},
+     {t:"Залей масло через горловину, немного не доливая до полного объёма ({oil}).",key:"воронка"}]},
+    {h:"Проверка",steps:[
+     {t:"Заведи мотор на 1–2 минуты: лампа давления масла должна погаснуть за пару секунд.",warnx:"Лампа не гаснет — сразу заглуши мотор и ищи причину."},
+     {t:"Заглуши, через 5 минут проверь уровень щупом (2 на рис. 1) и долей до середины между MIN и MAX."},
+     {t:"Осмотри пробку и фильтр: подтёков быть не должно. Через 50–100 км проверь ещё раз."},
+     {t:"Отработку слей в канистру и сдай в пункт приёма."}]}],
+   mistakes:["Перетянули сливную пробку и сорвали резьбу в поддоне.","Не сменили шайбу пробки — подтекает.","Старое кольцо фильтра осталось на блоке — новый фильтр не уплотнится, масло выдавит.","Сразу залили полный объём и перелили выше MAX.","Нива: слили масло из переднего моста вместо двигателя."],
+   src:[["Руководство по эксплуатации АвтоВАЗа — объёмы и интервалы",""],["«За рулём»: замена масла — советы и типичные ошибки","https://www.zr.ru/content/articles/979926-zamena-masla/"]],
    warn:"Слитое масло нельзя выливать на землю или в канализацию."},
   {id:"air",title:"Замена воздушного фильтра",lvl:1,time:"10–15 мин",
    desc:"Самая простая работа. Грязный фильтр снижает мощность и увеличивает расход.",
@@ -1417,6 +1610,55 @@ function renderChecks(id){
     `<li><span class="chk" aria-hidden="true"></span><div><b>${esc(t)}</b><span>${esc(d)}</span></div></li>`).join("")}</ul>
     <p class="checks-note">Нашёл дефект — не ставь деталь, а верни её в магазин: на брак действует гарантия. Неустановленную деталь без следов использования обычно можно вернуть или обменять в течение 14 дней — сохраняй чек и упаковку.</p></section>`;
 }
+JOBS.forEach(j => { if(j.sections) j.steps = j.sections.flatMap(x => x.steps); });
+/* формат руководства для работ: разделы по номерам шагов, ключи, «Внимание», ошибки, источники */
+const ZR_GRANTA_GRM = "https://www.zr.ru/content/articles/583063-lada-granta-proverka-i-zamena-remnya-grm/";
+const JOB_META = {
+ air:{diff:1,secs:[["Снятие",0],["Установка",4]],
+  mistakes:["Поставили фильтр другой стороной — уплотнитель не прилегает.","Не почистили корпус — мусор сразу лёг на новый фильтр.","Закрыли крышку со щелью — пыль идёт мимо фильтра."]},
+ cabin:{diff:2,secs:[["Где фильтр",0],["Снятие",2],["Установка",4]],
+  mistakes:["Поставили фильтр против стрелки направления воздуха.","Не выгребли листья из ниши — они гниют и пахнут в салоне.","Сдвинули поводки дворников — щётки бьют по уплотнителю капота."]},
+ plugs:{diff:2,secs:[["Подготовка",0],["Снятие",2],["Установка",7],["Сборка и проверка",10]],keys:{5:"свечная головка + удлинитель",9:"динамометрический ключ"},
+  mistakes:["Выкручивали на горячем моторе и сорвали резьбу в головке блока.","Вкручивали сразу трещоткой — свеча пошла криво.","Перепутали провода или катушки по цилиндрам — мотор троит.","Не проверили зазор новых свечей."],
+  src:[["Руководство АвтоВАЗа — моменты затяжки и зазоры свечей",""]]},
+ coolant:{diff:3,secs:[["Подготовка",0],["Слив",3],["Заливка",5],["Удаление воздуха и проверка",7]],atts:{0:"Пробку бачка на горячем моторе не открывай — брызнет кипяток."},
+  mistakes:["Открыли пробку на горячем моторе.","Смешали разные типы антифриза.","Не удалили воздух — перегрев и холодная печка.","На классике не слили жидкость из блока цилиндров."],
+  src:[["Руководство АвтоВАЗа — объём системы охлаждения и тип жидкости",""]]},
+ brakes:{diff:1,secs:[["Признаки",0],["Осмотр",1],["Сборка",6]],keys:{2:"баллонный ключ"},
+  mistakes:["Проверили только одну сторону оси.","Не обратили внимания на износ диска.","Не заметили, что уровень тормозной жидкости упал к MIN."]},
+ levels:{diff:1,secs:[["Подготовка",0],["Проверка",1]]},
+ wheel:{diff:1,secs:[["Подготовка",0],["Снятие",2],["Установка",4],["Проверка",7]],keys:{1:"баллонный ключ",6:"динамометрический ключ"},
+  mistakes:["Срывали болты на поднятой машине — колесо крутится.","Подняли не за штатное место и помяли порог.","Дотягивали ногой на ключе и сорвали шпильку."]},
+ padsreplace:{diff:3,secs:[["Подготовка",0],["Снятие",2],["Установка",5],["Проверка",8]],keys:{3:"ключи 13 и 17"},atts:{5:"Пока суппорт откинут, не нажимай педаль тормоза — поршень может выйти из цилиндра."},
+  mistakes:["Поменяли колодки только с одной стороны — машину уводит.","Не откачали жидкость — она вытекла из бачка при утапливании поршня.","Поехали, не прокачав педалью поршни, — первые нажатия проваливаются.","Не загнули стопорную пластину болта."],
+  src:[["«За рулём»: Lada Granta — механика торможения","https://www.zr.ru/content/articles/540223-lada_granta_mehanika_tormozhenija/"]]},
+ timing:{diff:4,secs:[["Цепь: проверка и подтяжка",0],["Подготовка",3],["Снятие",5],["Установка",8],["Проверка",10]],
+  mistakes:["Провернули вал без ремня на моторе, который гнёт клапаны.","Перетянули ремень — гул и износ роликов и помпы.","Поставили новый ремень на старые ролики.","Не проверили метки после двух оборотов коленвала."],
+  src:[["«За рулём»: Lada Granta — проверка и замена ремня ГРМ",ZR_GRANTA_GRM],["Руководство АвтоВАЗа к своему мотору — метки и натяжение",""]]},
+ fuel:{diff:2,secs:[["Подготовка",0],["Снятие",4],["Установка",7],["Проверка",10]],
+  mistakes:["Поставили фильтр против стрелки.","Не сбросили давление — облились бензином.","Не дощёлкнули быстросъёмные разъёмы — течь."]},
+ bleed:{diff:3,secs:[["Подготовка",0],["Прокачка",3],["Проверка",7]],keys:{3:"ключ на 8"},
+  mistakes:["Бачок опустел ниже MIN — в систему попал воздух.","Помощник отпустил педаль при открытом штуцере.","Нарушили порядок прокачки колёс."]},
+ battery:{diff:1,secs:[["Проверка",0],["Обслуживание и зарядка",2],["Замена",4],["Прикуривание",6]],keys:{0:"мультиметр",4:"ключ на 10"},
+  mistakes:["Снимали сначала плюс — можно замкнуть ключом на кузов.","Заряжали в закрытом помещении без проветривания.","Купили аккумулятор с другой полярностью."]},
+ bulbs:{diff:1,secs:[["Подготовка",0],["Фары",1],["Задние фонари",5],["Если не горит",6]],
+  mistakes:["Взялись за колбу пальцами — лампа быстро сгорит.","Поменяли одну лампу ближнего света вместо пары."]},
+ altbelt:{diff:3,secs:[["Осмотр",0],["Снятие",3],["Установка",6]],
+  mistakes:["Перетянули ремень — убили подшипники генератора и ролика.","Ремень лёг не во все ручьи шкива.","Сняли ремень на неостывшем моторе и обожглись."],
+  src:[["«За рулём»: Гранта — замена ремня вспомогательных агрегатов","https://www.zr.ru/content/articles/833513-lada-granta-proverka-i-zamena-remnya-privoda-vspomogatelnyx-agregatov/"],["«За рулём»: Lada Vesta на ремонтопригодность","https://www.zr.ru/content/articles/848471-proveryaem-lada-vesta-na-remontoprigodnost/"]]},
+ season:{diff:1,secs:[["Перед зимой",0],["Перед летом",7]]},
+ valves:{diff:4,secs:[["Подготовка",0],["Разборка",2],["Регулировка",5],["Сборка",10]],keys:{4:"ключ на 10",8:"ключи 13 и 17",7:"щуп 0,15 мм"},
+  mistakes:["Регулировали на горячем моторе.","Зажали щуп — зазор меньше нормы, клапан прогорает.","Не перепроверили зазор после затяжки контргайки.","Перетянули гайки крышки — прокладку выдавило."],
+  src:[["«За рулём»: регулировка зазоров в приводе клапанов","https://www.zr.ru/content/articles/954942-regulirovka-zazorov-v-privode-klapanov/"]]},
+ stablink:{diff:2,secs:[["Проверка",0],["Снятие",1],["Установка",7]],keys:{5:"ключ + шестигранник"},
+  mistakes:["Били молотком по пальцу — повредили резьбу.","Затягивали гайку, не удерживая палец, — сорвали шарнир.","Поменяли одну стойку из двух."],
+  src:[["Моменты затяжки Lada Granta и Kalina","https://xn--80aal0a.xn--80asehdb/do-my-self/repair/repair-lada-granta/11474-momenty-zatjazhki-osnovnyh-rezbovyh-soedinenij-uzlov-i-agregatov-lada-granta-kalina.html"],["Моменты затяжки Lada Vesta","https://xn--80aal0a.xn--80asehdb/do-my-self/repair/repair-lada-vesta/4538-momenty-zatjazhki-otvetstvennyh-rezbovyh-soedinenij-lada-vesta.html"]]},
+ hub:{diff:5,secs:[["Проверка",0],["Разборка",1],["Замена подшипника",5],["Сборка",9]],atts:{3:"Не вешай суппорт на тормозном шланге."},
+  mistakes:["Запрессовали подшипник через внутреннее кольцо.","Затянули гайку ступицы на вывешенном колесе — не дотянули.","Поставили старую гайку ступицы."],
+  src:[["Моменты затяжки Lada Kalina (carservic)","https://carservic.ru/mz/avto/mz-ld/momenty-zatyazhki-lada-kalina-1"],["Моменты затяжки Lada Vesta","https://xn--80aal0a.xn--80asehdb/do-my-self/repair/repair-lada-vesta/4538-momenty-zatjazhki-otvetstvennyh-rezbovyh-soedinenij-lada-vesta.html"]]}
+};
+JOBS.forEach(j => { const m = JOB_META[j.id]; if(m) Object.assign(j, m); });
+
 const JOB_GROUPS = [["Масло и фильтры",["oil","air","cabin","fuel"]],["Двигатель",["plugs","altbelt","timing","coolant","valves"]],["Тормоза",["brakes","padsreplace","bleed"]],["Подвеска",["stablink","hub"]],["Электрика",["battery","bulbs"]],["Колёса и сезон",["wheel","levels","season"]]];
 const JOB_PARTS = {stablink:["stablink"],hub:["hubbearing"],oil:["oil","oilfilter"],air:["air"],cabin:["cabin"],plugs:["plugs","wires"],coolant:["coolant"],brakes:["pads","discs","brakefluid"],levels:["oil","coolant","brakefluid"],
   padsreplace:["pads","discs"],timing:["grm"],fuel:["fuelfilter"],bleed:["brakefluid"],battery:["battery"],bulbs:["bulbs"],season:["wipers","coolant","battery"]};
@@ -1501,7 +1743,7 @@ const icon = id => `<span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24
 /* ---------- схемы ---------- */
 const SYM_IDS = ["oillamp","overheat","softpedal","nostart","nocatch","misfire","whistle","chargelamp","brakenoise","pull","chainnoise","heater","lights"];
 SYMPTOMS.forEach((s,i) => s.id = SYM_IDS[i] || ("s" + i));
-const FIG_JOBS = {oil:["oilmap","dipstick"],levels:["dipstick","tank"],air:["air"],cabin:["cabin","air"],plugs:["gap","plugread"],coolant:["tank"],brakes:["pads"],padsreplace:["caliper","pads","star"],timing:["marks"],fuel:["fuelf"],bleed:["bleedorder","hose"],battery:["volt","jump"],bulbs:["bulbs"],altbelt:["belt","tens"],wheel:["star"],valves:["valvefig"],stablink:["linkfig"],hub:["hubfig"]};
+const FIG_JOBS = {oil:["oiltech","dipT"],levels:["dipT","tankT"],air:["airT"],cabin:["cabinT","airT"],plugs:["gapT","plugread"],coolant:["tankT"],brakes:["padsT"],padsreplace:["caliperT","padsT","starT"],timing:["marksT"],fuel:["fuelT"],bleed:["bleedT","hoseT"],battery:["volt","jumpT"],bulbs:["bulbs"],altbelt:["beltT","tens"],wheel:["starT"],valves:["valvefig"],stablink:["linkfig"],hub:["hubfig"]};
 
 const PLUG_LOOK = [
   {c:"#B98A57",l:"Светло-коричневый, сухой",m:"Норма: смесь и двигатель в порядке",ok:true},
@@ -1830,39 +2072,290 @@ function figLink(){
     "Стойка стабилизатора: что откручивать");
 }
 function figHub(){
-  const balls = (x, y) => [0,1].map(i => `<circle cx="${x + i*34}" cy="${y}" r="9" class="fx-blackn"/>`).join("");
-  return fig("0 0 600 300", `
-    <rect x="150" y="40" width="200" height="56" class="fx-body"/><rect x="150" y="204" width="200" height="56" class="fx-body"/>
-    <text x="250" y="74" class="fx-s" text-anchor="middle">поворотный кулак</text>
-    <rect x="186" y="96" width="128" height="14" class="fx-metalf"/><rect x="186" y="190" width="128" height="14" class="fx-metalf"/>
-    ${balls(233, 120)}${balls(233, 180)}
-    <rect x="186" y="130" width="128" height="40" class="fx-disc"/>
-    <rect x="60" y="138" width="430" height="24" rx="4" class="fx-hub"/>
-    <text x="520" y="155" class="fx-s">ступица</text>
-    <rect x="178" y="92" width="6" height="20" class="fx-amberf"/><rect x="316" y="92" width="6" height="20" class="fx-amberf"/>
-    <rect x="178" y="188" width="6" height="20" class="fx-amberf"/><rect x="316" y="188" width="6" height="20" class="fx-amberf"/>
-    <path d="M322 100 L392 70" class="fx-lead"/><text x="396" y="66" class="fx-s fx-a">стопорные кольца</text>
-    <path d="M314 104 L392 100" class="fx-lead"/><text x="396" y="104" class="fx-s">наружное кольцо</text>
-    <path d="M314 150 L392 128" class="fx-lead"/><text x="396" y="128" class="fx-s">внутреннее кольцо</text>
-    <rect x="96" y="92" width="22" height="20" class="fx-amberf"/><rect x="96" y="188" width="22" height="20" class="fx-amberf"/>
-    <path d="M70 102 H92" class="fx-arA"/><path d="M70 198 H92" class="fx-arA"/>
-    <text x="20" y="34" class="fx-s fx-a">оправка жмёт</text><text x="20" y="50" class="fx-s fx-a">на наружное кольцо</text>
-    <path d="M40 270 L60 290 M60 270 L40 290" class="fx-dimw"/><text x="70" y="286" class="fx-s">через внутреннее кольцо и молотком — нельзя</text>`,
-    "Подшипник запрессовывают в кулак только через наружное кольцо, ступицу в подшипник — подпирая внутреннее кольцо.",
+  const ball = (x, y) => `<circle cx="${x}" cy="${y}" r="8" class="tl-fill2"/><circle cx="${x}" cy="${y}" r="8" class="tl-body"/>`;
+  return fig("0 0 600 330", `
+    <path d="M150 30 h210 v70 h-210z M150 230 h210 v70 h-210z" class="tl-fill"/><path d="M150 30 h210 v70 h-210z M150 230 h210 v70 h-210z" class="tl-body"/>
+    ${RIBS(150,30,210,70,8)}${RIBS(150,230,210,70,8)}
+    <rect x="186" y="100" width="138" height="16" class="tl-part"/><rect x="186" y="214" width="138" height="16" class="tl-part"/>
+    ${ball(226,128)}${ball(284,128)}${ball(226,202)}${ball(284,202)}
+    <rect x="186" y="140" width="138" height="50" class="tl-fill2"/><rect x="186" y="140" width="138" height="50" class="tl-body"/><path d="M255 140 v50" class="tl-hid"/>
+    <rect x="60" y="150" width="440" height="30" rx="4" class="tl-part"/><path d="M60 165 h440" class="tl-hid"/>
+    <rect x="500" y="146" width="18" height="38" rx="2" class="tl-part"/>${HX(530,165,10,"tl-accf")}
+    <rect x="178" y="96" width="7" height="22" class="tl-accf"/><rect x="325" y="96" width="7" height="22" class="tl-accf"/><rect x="178" y="212" width="7" height="22" class="tl-accf"/><rect x="325" y="212" width="7" height="22" class="tl-accf"/>
+    <rect x="96" y="96" width="24" height="22" class="tl-accf"/><rect x="96" y="212" width="24" height="22" class="tl-accf"/><path d="M60 107 H92 M60 223 H92" class="tl-acc"/>
+    ${TC(250,60,1,40,40)}${TC(255,108,2,420,70)}${TC(226,128,3,420,110)}${TC(255,160,4,420,150)}${TC(329,104,5,560,90)}${TC(90,165,6,40,200)}${TC(530,165,7,560,240)}${TC(108,107,8,40,110)}
+    <path d="M380 300 L394 314 M394 300 L380 314" class="tl-warnl"/><text x="400" y="312" class="tl-s">молотком — нельзя</text>`,
+    TLEG(["Поворотный кулак","Наружное кольцо подшипника","Шарики (два ряда)","Внутреннее кольцо (две половины)","Стопорные кольца","Ступица","Гайка ступицы — новая, затяжка на колёсах","Оправка — давит только на наружное кольцо"],
+      "Подшипник запрессовывают в кулак только через наружное кольцо, ступицу в подшипник — подпирая внутреннее кольцо."),
     "Ступичный подшипник: разрез и как запрессовывать");
 }
 function figTens(){
   if(fam !== "vesta") return "";
-  return fig("0 0 360 240", `
-    <circle cx="180" cy="120" r="70" class="fx-pulley"/>
-    <circle cx="198" cy="112" r="22" class="fx-hub"/>
-    <path d="M198 98 l12 7 v14 l-12 7 l-12 -7 v-14z" class="fx-bolt"/><text x="198" y="116" class="fx-numd" text-anchor="middle" style="font-size:11px">13</text>
-    <path d="M150 152 l5 -8 5 8 -5 8z M150 152" class="fx-amberf"/><circle cx="155" cy="152" r="10" class="fx-dim"/>
-    <path d="M140 152 L60 200" class="fx-lead"/><text x="12" y="218" class="fx-s fx-a">Torx T55 — поворот ролика</text>
-    <path d="M212 104 L290 50" class="fx-lead"/><text x="230" y="40" class="fx-s">гайка — ключ 13</text>
-    <path d="M110 70 A80 80 0 0 1 250 70" class="fx-arA"/>`,
-    "Ослабь гайку на 13, поверни ролик ключом T55 — ремень ослабнет или натянется. Затем затяни гайку: 30–36 Н·м.",
-    "Натяжной ролик ремня генератора Весты", true);
+  return fig("0 0 560 300", `
+    <path d="M110 70 L420 40 M110 250 L330 190" class="tl-belt"/><path d="M110 70 A90 90 0 0 0 110 250" class="tl-belt"/>
+    <circle cx="110" cy="160" r="84" class="tl-part"/><circle cx="110" cy="160" r="70" class="tl-hid"/><circle cx="110" cy="160" r="16" class="tl-fill2"/>
+    <circle cx="430" cy="90" r="52" class="tl-part"/><circle cx="430" cy="90" r="40" class="tl-hid"/><circle cx="430" cy="90" r="12" class="tl-fill2"/>
+    <path d="M420 40 A52 52 0 0 1 470 120 L330 190" class="tl-belt"/>
+    <circle cx="330" cy="220" r="36" class="tl-part"/><circle cx="342" cy="214" r="13" class="tl-fill2"/>${HX(342,214,7,"tl-accf")}
+    <path d="M314 232 l4 -7 4 7 -4 7z" class="tl-accf"/><circle cx="318" cy="232" r="8" class="tl-body"/>
+    <path d="M290 186 A50 50 0 0 1 372 186" class="tl-acc"/>
+    ${TC(80,110,1,30,40)}${TC(450,70,2,530,30)}${TC(330,250,3,400,280)}${TC(342,214,4,500,200)}${TC(318,232,5,240,280)}`,
+    TLEG(["Шкив коленвала","Шкив генератора","Эксцентриковый натяжной ролик","Гайка ролика — ключ 13","Отверстие под Torx T55 — поворот ролика"],
+      "Ослабь гайку 4, поверни ролик ключом T55 — ремень ослабнет или натянется. Затем затяни гайку: 30–36 Н·м."),
+    "Натяжной ролик ремня генератора Весты");
+}
+/* ---------- технические схемы: линии, номера деталей, расшифровка ---------- */
+const TC = (x, y, n, tx, ty) => `<path d="M${x} ${y} L${tx} ${ty}" class="tl-lead"/><circle cx="${x}" cy="${y}" r="2.4" class="tl-dot"/><circle cx="${tx}" cy="${ty}" r="10.5" class="tl-num"/><text x="${tx}" y="${ty+4.2}" class="tl-numt" text-anchor="middle">${n}</text>`;
+const TLEG = (items, note) => `<ol class="legend">${items.map(x => `<li>${x}</li>`).join("")}</ol>${note ? `<p class="figcap2">${note}</p>` : ""}`;
+const TDIM = (x1, y1, x2, y2, label, lx, ly) => `<path d="M${x1} ${y1} L${x2} ${y2}" class="tl-dim"/><path d="M${x1-5} ${y1} h10 M${x2-5} ${y2} h10" class="tl-dim"/><text x="${lx}" y="${ly}" class="tl-v">${label}</text>`;
+
+function figCaliperT(){
+  const holes = [0,90,180,270].map(a => { const r = a*Math.PI/180; return `<circle cx="${(200+42*Math.cos(r)).toFixed(1)}" cy="${(160+42*Math.sin(r)).toFixed(1)}" r="7" class="tl-part"/>`; }).join("");
+  return fig("0 0 600 330", `
+    <circle cx="200" cy="160" r="122" class="tl-fill"/><circle cx="200" cy="160" r="122" class="tl-body"/>
+    <circle cx="200" cy="160" r="104" class="tl-hid"/>
+    <circle cx="200" cy="160" r="62" class="tl-part"/><circle cx="200" cy="160" r="20" class="tl-part"/>${holes}
+    <path d="M300 64 h70 a14 14 0 0 1 14 14 v164 a14 14 0 0 1 -14 14 h-70 z" class="tl-fill2"/><path d="M300 64 h70 a14 14 0 0 1 14 14 v164 a14 14 0 0 1 -14 14 h-70 z" class="tl-body"/>
+    <rect x="312" y="86" width="12" height="148" rx="2" class="tl-accf"/>
+    <rect x="290" y="92" width="10" height="136" rx="2" class="tl-part"/>
+    <circle cx="392" cy="88" r="11" class="tl-part"/><path d="M386 82 l12 12 M398 82 l-12 12" class="tl-thin"/>
+    <circle cx="392" cy="232" r="11" class="tl-accf"/><path d="M385.5 228 h13 l-6.5 11z" class="tl-thin"/>
+    <path d="M384 120 C430 110 450 80 470 60" class="tl-hose"/>
+    <rect x="370" y="140" width="16" height="12" rx="2" class="tl-part"/><path d="M386 146 h14" class="tl-body"/>
+    <path d="M430 210 A70 70 0 0 0 430 120" class="tl-acc" marker-end="url(#tlArr)"/>
+    <defs><marker id="tlArr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" class="tl-arrf"/></marker></defs>
+    <text x="446" y="170" class="tl-s">откинь вверх</text>
+    ${TC(110,110,1,40,40)}${TC(350,110,2,520,100)}${TC(318,200,3,520,200)}${TC(392,232,4,520,250)}${TC(392,88,5,520,40)}${TC(460,70,6,560,70)}${TC(386,146,7,520,150)}${TC(295,250,8,250,305)}`,
+    TLEG(["Тормозной диск","Корпус суппорта (цилиндр)","Колодки","Нижний болт — ключ 13, палец держать ключом 17","Верхний болт — ось поворота, не трогать","Тормозной шланг — не перекручивать","Штуцер прокачки","Скоба (направляющая колодок)"],
+      "Открути нижний болт — корпус поворачивается вверх на верхнем, колодки вынимаются."),
+    "Передний тормоз: суппорт и колодки");
+}
+function figMarksT(){
+  if(CHAIN.has(fam)) return "";
+  const teeth = Array.from({length:40}, (_,i) => { const a = i*9*Math.PI/180; return `<path d="M${(150+86*Math.sin(a)).toFixed(1)} ${(150-86*Math.cos(a)).toFixed(1)} L${(150+96*Math.sin(a)).toFixed(1)} ${(150-96*Math.cos(a)).toFixed(1)}" class="tl-thin"/>`; }).join("");
+  const ticks = [-4,-3,-2,-1,0,1,2,3,4].map(i => `<path d="M${450+i*20} 120 V${i===0?146:134}" class="${i===0?"tl-body":"tl-thin"}"/>`).join("");
+  return fig("0 0 600 320", `
+    <text x="150" y="22" class="tl-h" text-anchor="middle">Распредвал</text>
+    <path d="M118 46 q32 -14 64 0 v18 h-64z" class="tl-fill2"/><path d="M118 46 q32 -14 64 0" class="tl-body"/>
+    <path d="M150 40 l-7 14 h14z" class="tl-accf"/>
+    <circle cx="150" cy="150" r="96" class="tl-part"/>${teeth}<circle cx="150" cy="150" r="86" class="tl-body"/>
+    <circle cx="150" cy="150" r="48" class="tl-fill"/><circle cx="150" cy="150" r="14" class="tl-part"/>
+    <path d="M150 66 v-8" class="tl-mark"/>
+    <path d="M54 150 V262 M246 150 V262" class="tl-belt"/><text x="262" y="250" class="tl-s">ремень</text>
+    <text x="450" y="22" class="tl-h" text-anchor="middle">Окно картера сцепления</text>
+    <rect x="356" y="70" width="188" height="140" rx="10" class="tl-fill"/><rect x="356" y="70" width="188" height="140" rx="10" class="tl-body"/>
+    <path d="M366 170 Q450 196 534 170 V200 H366 Z" class="tl-fill2"/>
+    ${ticks}<path d="M450 160 v34" class="tl-mark"/>
+    <text x="450" y="112" class="tl-v" text-anchor="middle">0</text>
+    <text x="368" y="112" class="tl-s">шкала</text>
+    ${TC(150,52,1,60,40)}${TC(150,64,2,250,52)}${TC(240,150,3,286,150)}${TC(450,176,4,450,250)}${TC(500,128,5,560,250)}
+    <text x="150" y="282" class="tl-s" text-anchor="middle">1 и 2 должны стоять напротив друг друга</text>
+    <text x="450" y="282" class="tl-s" text-anchor="middle">4 — напротив среднего деления «0»</text>`,
+    TLEG(["Метка на задней крышке ремня («усик»)","Метка на шкиве распредвала","Зубчатый шкив распредвала","Риска на маховике","Шкала в смотровом окне картера сцепления"],
+      "Обе пары меток совпали одновременно — поршень 1-го цилиндра в верхней мёртвой точке. Коленвал проворачивай только по часовой. На 16-клапанных моторах метки есть на обоих шкивах распредвалов."),
+    "Метки ГРМ: распредвал и маховик");
+}
+function figBeltT(){
+  return fig("0 0 600 300", `
+    <path d="M118 74 L452 96 M118 246 L452 214" class="tl-belt"/>
+    <path d="M118 74 A86 86 0 0 0 118 246" class="tl-belt"/><path d="M452 96 A59 59 0 0 1 452 214" class="tl-belt"/>
+    <circle cx="118" cy="160" r="80" class="tl-part"/><circle cx="118" cy="160" r="66" class="tl-hid"/><circle cx="118" cy="160" r="16" class="tl-fill2"/>
+    <circle cx="452" cy="155" r="53" class="tl-part"/><circle cx="452" cy="155" r="40" class="tl-hid"/><circle cx="452" cy="155" r="12" class="tl-fill2"/>
+    <circle cx="300" cy="240" r="22" class="tl-part"/><circle cx="300" cy="240" r="6" class="tl-fill2"/>
+    <path d="M300 34 V74" class="tl-acc" marker-end="url(#tlArr2)"/>
+    <defs><marker id="tlArr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" class="tl-arrf"/></marker></defs>
+    
+    <path d="M118 74 Q300 112 452 96" class="tl-accline"/>
+    <path d="M330 87 L330 106" class="tl-dim"/><path d="M322 87 h16 M322 106 h16" class="tl-dim"/>
+    <text x="170" y="128" class="tl-v">прогиб 10–15 мм</text><text x="310" y="30" class="tl-s">нажми пальцем ≈ 10 кг</text>
+    ${TC(70,110,1,30,40)}${TC(480,120,2,560,60)}${TC(300,240,3,300,290)}${TC(220,82,4,200,40)}`,
+    TLEG(["Шкив коленвала","Шкив генератора","Натяжной ролик или планка натяжения (зависит от модели)","Поликлиновой ремень"],
+      "Прогиб больше — ремень свистит и проскальзывает. Меньше — перетянут, быстрее изнашиваются подшипники генератора и ролика."),
+    "Ремень генератора: как проверить натяжение");
+}
+function figGapT(){
+  const f = F();
+  const ribs = [0,1,2,3,4].map(i => `<path d="M230 ${40+i*14} h80" class="tl-thin"/>`).join("");
+  const thr = Array.from({length:9}, (_,i) => `<path d="M236 ${206+i*7} l68 4" class="tl-thin"/>`).join("");
+  return fig("0 0 600 360", `
+    <rect x="258" y="6" width="24" height="26" rx="3" class="tl-part"/>
+    <rect x="230" y="32" width="80" height="78" rx="12" class="tl-part"/>${ribs}
+    <path d="M222 110 h96 l-6 40 h-84z" class="tl-fill2"/><path d="M222 110 h96 l-6 40 h-84z" class="tl-body"/>
+    <path d="M228 150 h84 v14 h-84z" class="tl-accf"/>
+    <rect x="236" y="164" width="68" height="40" class="tl-part"/>
+    <rect x="236" y="204" width="68" height="66" class="tl-fill"/>${thr}<rect x="236" y="204" width="68" height="66" class="tl-body"/>
+    <path d="M254 270 l12 30 h8 l12 -30" class="tl-part"/>
+    <rect x="265" y="296" width="10" height="16" class="tl-part"/>
+    <path d="M300 270 v58 h-36 v-8 h28 v-50" class="tl-part"/>
+    <rect x="200" y="312" width="140" height="6" class="tl-accf"/>
+    <path d="M350 312 v8" class="tl-dim"/><path d="M342 312 h16 M342 320 h16" class="tl-dim"/>
+    <text x="362" y="322" class="tl-v">${esc(f.plugGap || "по руководству")}</text>
+    ${TC(270,18,1,140,18)}${TC(240,70,2,140,70)}${TC(230,130,3,140,130)}${TC(262,157,4,140,160)}${TC(240,240,5,140,240)}${TC(270,304,6,140,300)}${TC(298,300,7,440,280)}${TC(210,315,8,140,340)}`,
+    TLEG(["Контактная гайка","Изолятор с рёбрами","Шестигранник под свечной ключ","Уплотнительное кольцо","Резьба","Центральный электрод","Боковой электрод — подгибается для регулировки","Щуп в зазоре"],
+      "Щуп должен проходить между электродами с лёгким трением. Зазор регулируют только подгибая боковой электрод — центральный трогать нельзя."),
+    "Свеча зажигания: устройство и зазор");
+}
+function figPadsT(){
+  const pad = (x, mat, worn) => `<rect x="${x}" y="70" width="18" height="150" class="tl-part"/>
+    <rect x="${x+18}" y="76" width="${mat}" height="138" class="${worn ? "tl-warnf" : "tl-padf"}"/><rect x="${x+18}" y="76" width="${mat}" height="138" class="tl-body"/>
+    <rect x="${x+18+mat+4}" y="56" width="16" height="178" class="tl-fill2"/><rect x="${x+18+mat+4}" y="56" width="16" height="178" class="tl-body"/>`;
+  return fig("0 0 600 300", `
+    <text x="150" y="30" class="tl-h" text-anchor="middle">Новая колодка</text>
+    ${pad(90, 48)}
+    <path d="M108 248 h48" class="tl-dim"/><path d="M108 242 v12 M156 242 v12" class="tl-dim"/><text x="112" y="268" class="tl-v">≈ 10–12 мм</text>
+    <text x="450" y="30" class="tl-h" text-anchor="middle">Пора менять</text>
+    ${pad(400, 6, 1)}
+    <path d="M418 248 h6" class="tl-dim"/><path d="M418 242 v12 M424 242 v12" class="tl-dim"/><text x="432" y="268" class="tl-v tl-warnt">меньше 1,5 мм</text>
+    ${TC(99,150,1,40,110)}${TC(130,150,2,40,170)}${TC(170,150,3,236,110)}${TC(421,150,4,520,150)}`,
+    TLEG(["Металлическое основание колодки","Фрикционная накладка","Тормозной диск","Накладка стёрта — скоро металл пойдёт по диску"],
+      "Смотри на накладку с торца суппорта. Меньше 1,5 мм — меняй колодки на обеих сторонах оси. Скрежет металла — износ уже до основания, проверь и диски."),
+    "Тормозная колодка: новая и изношенная");
+}
+function figTankT(){
+  return fig("0 0 600 330", `
+    <rect x="236" y="22" width="68" height="24" rx="4" class="tl-fill2"/><rect x="236" y="22" width="68" height="24" rx="4" class="tl-body"/>
+    <path d="M244 22 v-6 h52 v6" class="tl-thin"/>
+    <rect x="190" y="46" width="160" height="230" rx="18" class="tl-part"/>
+    <path d="M192 176 h156 v82 a16 16 0 0 1 -16 16 h-124 a16 16 0 0 1 -16 -16z" class="tl-coolf"/>
+    <path d="M190 120 h-26 M190 200 h-26" class="tl-body"/>
+    <text x="156" y="124" class="tl-v" text-anchor="end">MAX</text><text x="156" y="204" class="tl-v" text-anchor="end">MIN</text>
+    <path d="M192 176 h156" class="tl-acc"/>
+    <path d="M350 250 h50 q16 0 16 16 v40" class="tl-hose"/><path d="M350 90 h60" class="tl-hose"/>
+    ${TC(270,30,1,420,30)}${TC(340,176,2,450,150)}${TC(260,230,3,450,230)}${TC(400,250,4,520,300)}${TC(400,90,5,520,90)}`,
+    TLEG(["Пробка — на горячем моторе не открывать","Уровень на холодном моторе: чуть выше MIN","Антифриз","Шланг к системе охлаждения","Пароотводящий шланг"],
+      "Проверяй на холодном моторе на ровной площадке. Уровень ушёл ниже MIN — долей того же типа антифриза и ищи утечку."),
+    "Расширительный бачок: уровень антифриза");
+}
+function figDipT(){
+  return fig("0 0 600 220", `
+    <circle cx="40" cy="70" r="16" class="tl-accf"/><circle cx="40" cy="70" r="7" class="tl-part"/>
+    <rect x="56" y="64" width="40" height="12" rx="3" class="tl-fill2"/>
+    <path d="M96 70 H540" class="tl-stick"/>
+    <rect x="436" y="62" width="104" height="16" rx="3" class="tl-oilf"/>
+    <path d="M400 54 v32 M470 54 v32" class="tl-body"/>
+    <text x="400" y="104" class="tl-v" text-anchor="middle">MAX</text><text x="470" y="104" class="tl-v" text-anchor="middle">MIN</text>
+    <path d="M400 130 h70" class="tl-dim"/><path d="M400 124 v12 M470 124 v12" class="tl-dim"/><text x="330" y="152" class="tl-s">≈ 1 л масла между метками</text>
+    ${TC(40,70,1,40,150)}${TC(300,70,2,300,150)}${TC(500,62,3,520,26)}${TC(540,70,4,575,150)}`,
+    TLEG(["Ручка щупа","Стержень щупа","Масло на щупе — верхний край плёнки должен быть между MIN и MAX","Конец щупа (MIN — ближе к нему)"],
+      "Проверяй на ровном месте через 5–10 минут после остановки мотора: вынь, протри, вставь до упора и снова вынь. Между метками — около литра."),
+    "Щуп: как читать уровень масла");
+}
+function figAirT(){
+  const pleats = Array.from({length:22}, (_,i) => `<path d="M${120+i*14} 120 v100" class="tl-thin"/>`).join("");
+  const dirty = Array.from({length:22}, (_,i) => `<path d="M${120+i*14} 120 v100" class="tl-thin"/>`).join("");
+  return fig("0 0 600 300", `
+    <rect x="96" y="40" width="360" height="40" rx="8" class="tl-fill2"/><rect x="96" y="40" width="360" height="40" rx="8" class="tl-body"/>
+    <path d="M90 60 h-20 M462 60 h20" class="tl-body"/><rect x="62" y="52" width="12" height="18" class="tl-accf"/><rect x="478" y="52" width="12" height="18" class="tl-accf"/>
+    <rect x="104" y="110" width="344" height="120" rx="4" class="tl-padf2"/>${pleats}<rect x="104" y="110" width="344" height="120" rx="4" class="tl-body"/>
+    <rect x="100" y="106" width="352" height="128" rx="6" class="tl-seal"/>
+    <path d="M96 240 h360 v40 h-360z" class="tl-fill"/><path d="M96 240 h360 v40 h-360z" class="tl-body"/>
+    <path d="M276 30 v-14" class="tl-acc" marker-end="url(#tlArr3)"/>
+    <defs><marker id="tlArr3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" class="tl-arrf"/></marker></defs>
+    ${TC(300,60,1,540,40)}${TC(68,60,2,30,110)}${TC(300,170,3,540,140)}${TC(450,232,4,540,210)}${TC(300,260,5,540,270)}`,
+    TLEG(["Крышка корпуса","Защёлки или винты крышки","Фильтрующий элемент (гофрированная бумага)","Уплотнитель по периметру — должен лечь ровно","Нижняя часть корпуса"],
+      "Посмотри фильтр на просвет: если свет почти не проходит или бумага серая, забита пылью и листьями — меняй, даже если пробег не подошёл."),
+    "Воздушный фильтр: корпус и элемент");
+}
+function figCabinT(){
+  return fig("0 0 600 300", `
+    <path d="M60 30 L540 30 L500 150 L100 150 Z" class="tl-glass"/><path d="M60 30 L540 30 L500 150 L100 150 Z" class="tl-body"/>
+    <path d="M190 140 L300 60 M330 140 L440 60" class="tl-wiper"/>
+    <path d="M90 150 h420 l14 34 h-448z" class="tl-fill2"/><path d="M90 150 h420 l14 34 h-448z" class="tl-body"/>
+    <path d="M110 162 h380" class="tl-thin"/><path d="M110 172 h380" class="tl-thin"/>
+    <rect x="300" y="186" width="150" height="40" rx="3" class="tl-padf2"/><rect x="300" y="186" width="150" height="40" rx="3" class="tl-hid"/>
+    <path d="M60 230 h480 l-30 50 h-420z" class="tl-fill"/><path d="M60 230 h480 l-30 50 h-420z" class="tl-body"/>
+    <path d="M375 260 v-24" class="tl-acc" marker-end="url(#tlArr4)"/>
+    <defs><marker id="tlArr4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" class="tl-arrf"/></marker></defs>
+    ${TC(250,90,1,40,60)}${TC(300,60,2,560,60)}${TC(200,168,3,40,170)}${TC(375,206,4,560,200)}${TC(200,260,5,40,265)}`,
+    TLEG(["Лобовое стекло","Поводки и щётки дворников — снять первыми","Жабо — пластиковая решётка под стеклом","Салонный фильтр под жабо (стрелка — по ходу воздуха)","Капот"],
+      "На большинстве переднеприводных Лад фильтр стоит под жабо, на части моделей — за перчаточным ящиком. На твоей машине: " + esc(F().cabin || "смотри руководство")),
+    "Где стоит салонный фильтр");
+}
+function figFuelT(){
+  return fig("0 0 600 220", `
+    <rect x="20" y="70" width="100" height="70" rx="8" class="tl-fill"/><rect x="20" y="70" width="100" height="70" rx="8" class="tl-body"/><text x="70" y="110" class="tl-s" text-anchor="middle">бак</text>
+    <rect x="480" y="70" width="100" height="70" rx="8" class="tl-fill"/><rect x="480" y="70" width="100" height="70" rx="8" class="tl-body"/><text x="530" y="110" class="tl-s" text-anchor="middle">двигатель</text>
+    <path d="M120 105 H220 M380 105 H480" class="tl-pipe"/>
+    <rect x="216" y="94" width="18" height="22" rx="3" class="tl-accf"/><rect x="366" y="94" width="18" height="22" rx="3" class="tl-accf"/>
+    <rect x="234" y="78" width="132" height="54" rx="10" class="tl-part"/>
+    <path d="M262 105 H332" class="tl-acc" marker-end="url(#tlArr5)"/>
+    <defs><marker id="tlArr5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" class="tl-arrf"/></marker></defs>
+    <rect x="280" y="132" width="40" height="14" rx="2" class="tl-fill2"/><path d="M270 146 h60" class="tl-body"/>
+    ${TC(300,90,1,300,30)}${TC(225,105,2,190,175)}${TC(300,146,3,300,190)}${TC(375,105,4,410,175)}`,
+    TLEG(["Корпус фильтра со стрелкой — стрелка по ходу топлива, к двигателю","Входная трубка (от бака), быстросъёмный разъём","Хомут или кронштейн крепления","Выходная трубка (к двигателю)"],
+      "На инжекторе перед снятием сбрось давление в системе. Бензин и его пары легко вспыхивают — никакого огня рядом."),
+    "Топливный фильтр: как ставить");
+}
+function figHoseT(){
+  return fig("0 0 600 300", `
+    <circle cx="140" cy="170" r="110" class="tl-fill"/><circle cx="140" cy="170" r="110" class="tl-body"/><circle cx="140" cy="170" r="34" class="tl-part"/>
+    <rect x="200" y="96" width="90" height="140" rx="12" class="tl-part"/>
+    <rect x="252" y="76" width="16" height="22" rx="2" class="tl-accf"/><path d="M256 76 v-8 h8 v8" class="tl-body"/>
+    <path d="M260 68 C 270 20, 420 20, 450 140" class="tl-hosec"/>
+    <path d="M400 130 l12 140 h96 l12 -140" class="tl-body"/>
+    <path d="M408 214 l4 56 h96 l4 -56 z" class="tl-brakef"/>
+    <circle cx="452" cy="196" r="4" class="tl-thin"/><circle cx="460" cy="182" r="3" class="tl-thin"/><circle cx="447" cy="170" r="2.5" class="tl-thin"/>
+    ${TC(260,86,1,320,40)}${TC(360,30,2,420,20)}${TC(452,196,3,560,180)}${TC(460,240,4,560,250)}${TC(245,180,5,320,280)}`,
+    TLEG(["Штуцер прокачки — ключ на 8","Прозрачный шланг","Пузырьки воздуха — качай, пока не исчезнут","Банка с небольшим количеством жидкости — конец шланга в жидкости","Суппорт"],
+      "Конец шланга всегда в жидкости — иначе при отпускании педали воздух засосёт обратно."),
+    "Прокачка тормозов: штуцер и шланг");
+}
+
+function figStarT(){
+  const B = [[0,-62,1],[0,62,2],[-62,0,4],[62,0,3]];
+  return fig("0 0 360 320", `
+    <circle cx="180" cy="160" r="140" class="tl-fill"/><circle cx="180" cy="160" r="140" class="tl-body"/>
+    <circle cx="180" cy="160" r="112" class="tl-hid"/><circle cx="180" cy="160" r="88" class="tl-part"/><circle cx="180" cy="160" r="26" class="tl-fill2"/><circle cx="180" cy="160" r="26" class="tl-body"/>
+    ${B.map(([dx,dy]) => `<path d="M${180+dx-9} ${160+dy} l4.5 -8 h9 l4.5 8 l-4.5 8 h-9z" class="tl-part"/>`).join("")}
+    <path d="M180 108 V200" class="tl-accline"/><path d="M128 160 H232" class="tl-accline"/>
+    ${B.map(([dx,dy,n]) => { const tx = 180 + dx*1.75, ty = 160 + dy*1.75; return `<path d="M${180+dx} ${160+dy} L${tx} ${ty}" class="tl-lead"/><circle cx="${tx}" cy="${ty}" r="14" class="tl-accf"/><text x="${tx}" y="${ty+5}" class="tl-numt2" text-anchor="middle">${n}</text>`; }).join("")}`,
+    "Затягивай крест-накрест: 1 → 2 → 3 → 4. Сначала все болты слегка, потом в том же порядке динамометрическим ключом до нужного момента.",
+    "Порядок затяжки колёсных болтов", true);
+}
+function figBleedT(){
+  const rear = CHAIN.has(fam);
+  const order = rear ? {RR:1,RL:2,FR:3,FL:4} : {RR:1,FL:2,RL:3,FR:4};
+  const W = {FL:[106,62],FR:[254,62],RL:[106,214],RR:[254,214]};
+  return fig("0 0 360 300", `
+    <text x="180" y="16" class="tl-s" text-anchor="middle">перёд машины ↑</text>
+    <path d="M140 28 h80 q34 0 34 40 v176 q0 32 -34 32 h-80 q-34 0 -34 -32 v-176 q0 -40 34 -40z" class="tl-fill"/><path d="M140 28 h80 q34 0 34 40 v176 q0 32 -34 32 h-80 q-34 0 -34 -32 v-176 q0 -40 34 -40z" class="tl-body"/>
+    <path d="M132 96 h96 l-8 44 h-80z" class="tl-glass"/><path d="M132 96 h96 l-8 44 h-80z" class="tl-body"/>
+    <path d="M140 220 h80 l6 28 h-92z" class="tl-glass"/><path d="M140 220 h80 l6 28 h-92z" class="tl-body"/>
+    ${Object.entries(W).map(([k,[x,y]]) => `<rect x="${x-12}" y="${y}" width="24" height="48" rx="5" class="tl-fill2"/><rect x="${x-12}" y="${y}" width="24" height="48" rx="5" class="tl-body"/>
+      <circle cx="${x < 180 ? x-46 : x+46}" cy="${y+24}" r="15" class="tl-accf"/><text x="${x < 180 ? x-46 : x+46}" y="${y+29}" class="tl-numt2" text-anchor="middle">${order[k]}</text>`).join("")}
+    <text x="20" y="160" class="tl-s">левые</text><text x="340" y="160" class="tl-s" text-anchor="end">правые</text>`,
+    "Вид сверху. " + (rear ? "Классика и Нива: сначала задние, потом передние, начиная с правого заднего." : "Переднеприводные Лады: по диагонали, начиная с правого заднего."),
+    "Порядок прокачки тормозов", true);
+}
+function figOilTech(){
+  return fig("0 0 600 340", `
+    <path d="M150 58 h250 v14 h-250z" class="tl-fill2"/><path d="M150 58 h250 v14 h-250z" class="tl-body"/>${BOLTS(160,390,65,7)}
+    <rect x="140" y="72" width="270" height="40" class="tl-fill"/><rect x="140" y="72" width="270" height="40" class="tl-body"/>
+    <rect x="130" y="112" width="290" height="104" class="tl-fill"/><rect x="130" y="112" width="290" height="104" class="tl-body"/>
+    ${[0,1,2,3].map(i => `<rect x="${160+i*62}" y="124" width="44" height="70" rx="4" class="tl-hid"/>`).join("")}
+    <path d="M130 216 h290 l-30 66 h-230 z" class="tl-fill"/><path d="M138 248 h274 l-22 34 h-230z" class="tl-oilf"/><path d="M130 216 h290 l-30 66 h-230 z" class="tl-body"/>
+    <path d="M300 270 v-50 h30" class="tl-hid"/><rect x="292" y="262" width="22" height="10" rx="2" class="tl-part"/>
+    <rect x="320" y="34" width="40" height="24" rx="3" class="tl-part"/><path d="M326 34 v-6 h28 v6" class="tl-body"/>
+    <path d="M190 58 V18" class="tl-stickT"/><circle cx="190" cy="14" r="6" class="tl-accf"/><path d="M190 216 V250" class="tl-hid"/>
+    <rect x="420" y="140" width="16" height="22" class="tl-fill2"/><rect x="436" y="128" width="46" height="62" rx="7" class="tl-part"/>${RIBS(440,128,38,62,4)}
+    <rect x="262" y="282" width="20" height="8" class="tl-accf"/>${HX(272,296,6)}
+    <path d="M412 250 h50" class="tl-hid"/><text x="466" y="254" class="tl-s">уровень масла</text>
+    ${TC(340,40,1,520,36)}${TC(190,14,2,70,26)}${TC(470,160,3,560,150)}${TC(272,296,4,160,320)}${TC(380,250,5,560,280)}${TC(300,266,6,420,320)}${TC(200,140,7,70,140)}${TC(270,65,8,70,80)}`,
+    TLEG(["Маслозаливная горловина с крышкой","Щуп уровня масла","Масляный фильтр на блоке цилиндров","Сливная пробка с шайбой","Поддон картера","Маслоприёмник насоса","Цилиндры (блок двигателя)","Крышка головки блока"]),
+    "Схема системы смазки: где заливать, где сливать");
+}
+function figJumpT(){
+  const bat = (x, label, sub) => `<rect x="${x}" y="110" width="170" height="96" rx="8" class="tl-part"/>${RIBS(x,124,170,82,8)}
+    <rect x="${x+24}" y="94" width="24" height="16" class="tl-redf"/><rect x="${x+122}" y="94" width="24" height="16" class="tl-fill2"/><rect x="${x+122}" y="94" width="24" height="16" class="tl-body"/>
+    <text x="${x+36}" y="106" class="tl-term">+</text><text x="${x+134}" y="106" class="tl-term2">−</text>
+    <text x="${x+85}" y="226" class="tl-h" text-anchor="middle">${label}</text><text x="${x+85}" y="244" class="tl-s" text-anchor="middle">${sub}</text>`;
+  const n = (x, y, k) => `<circle cx="${x}" cy="${y}" r="12" class="tl-accf"/><text x="${x}" y="${y+5}" class="tl-numt2" text-anchor="middle">${k}</text>`;
+  return fig("0 0 620 280", `${bat(20,"Донор","заведённая машина")}${bat(290,"Твой аккумулятор","разряженный")}
+    <rect x="500" y="110" width="100" height="96" rx="6" class="tl-fill"/><rect x="500" y="110" width="100" height="96" rx="6" class="tl-hid"/><text x="550" y="150" class="tl-s" text-anchor="middle">голый металл</text><text x="550" y="166" class="tl-s" text-anchor="middle">мотора</text>
+    <path d="M326 94 C326 30 56 30 56 94" class="tl-cableR"/><path d="M154 94 C154 46 560 46 560 120" class="tl-cableB"/>
+    ${n(326,74,1)}${n(56,74,2)}${n(154,74,3)}${n(560,120,4)}`,
+    TLEG(["Красный — на плюс разряженного аккумулятора","Красный — на плюс донора","Чёрный — на минус донора","Чёрный — на голый металл мотора, подальше от аккумулятора"], "Снимай в обратном порядке: 4 → 3 → 2 → 1."),
+    "Как подключать провода для прикуривания");
 }
 const ZOOM_HINT = `<span class="zoomhint" aria-hidden="true">⤢ Нажми, чтобы увеличить</span>`;
 document.addEventListener("click", e => {
@@ -1877,7 +2370,7 @@ document.addEventListener("click", e => {
   ov.hidden = false; document.body.style.overflow = "hidden"; sc.scrollLeft = 0; ov.querySelector("#zoomClose").focus();
 });
 document.addEventListener("keydown", e => { const ov = document.getElementById("zoomov"); if(e.key === "Escape" && ov && !ov.hidden){ ov.hidden = true; document.body.style.overflow = ""; } });
-const FIGS = {valvefig:figValves, linkfig:figLink, hubfig:figHub, tens:figTens, plugread:figPlugs, pads:figPads, marks:figMarks, jump:figJump, star:figStar, bleedorder:figBleed,
+const FIGS = {oiltech:figOilTech, jumpT:figJumpT, starT:figStarT, bleedT:figBleedT, caliperT:figCaliperT, marksT:figMarksT, beltT:figBeltT, gapT:figGapT, padsT:figPadsT, tankT:figTankT, dipT:figDipT, airT:figAirT, cabinT:figCabinT, fuelT:figFuelT, hoseT:figHoseT, valvefig:figValves, linkfig:figLink, hubfig:figHub, tens:figTens, plugread:figPlugs, pads:figPads, marks:figMarks, jump:figJump, star:figStar, bleedorder:figBleed,
   oilmap:figOilMap, dipstick:figDipstick, tank:figTank, air:figAir, cabin:figCabin, gap:figPlugGap, fuelf:figFuelFilter, hose:figBleedHose, volt:figVolt, bulbs:figBulbs, belt:figBelt, caliper:figCaliper};
 const FIG_TITLE = {valvefig:"Схема: регулировка клапанов", linkfig:"Схема: стойка стабилизатора", hubfig:"Схема: ступичный подшипник", tens:"Схема: натяжной ролик Весты", plugread:"Как читать старые свечи", pads:"Схема: износ колодки", marks:"Схема: метки ГРМ", jump:"Схема: как прикурить", star:"Схема: порядок затяжки колёс", bleedorder:"Схема: порядок прокачки",
   oilmap:"Схема: где что", dipstick:"Схема: уровень масла", tank:"Схема: уровень антифриза", air:"Схема: когда менять фильтр", cabin:"Схема: где фильтр", gap:"Схема: зазор свечи", fuelf:"Схема: как ставить фильтр", hose:"Схема: прокачка", volt:"Схема: напряжение аккумулятора", bulbs:"Схема: какие бывают лампы", belt:"Схема: проверка натяжения", caliper:"Схема: суппорт"};
@@ -1947,7 +2440,7 @@ const STEP_SVG = {
   temp: [() => sv(`<rect x="70" y="10" width="16" height="92" rx="8" class="fx-glassbox"/><circle cx="78" cy="106" r="14" class="fx-redf"/><rect x="74" y="60" width="8" height="46" class="fx-redf"/>${t(96,64,"+5 °C","fx-v","start")}<circle cx="200" cy="66" r="46" class="fx-wheelc"/><circle cx="200" cy="66" r="20" class="fx-hub"/>`, "Переобувка"), "Около +5 °C днём и ночью — пора менять резину"]
 };
 const STEP_MAP = {
-  oil:{3:"drain",4:"filterOff",5:"filterOn",7:"pour"},
+  oil:{3:"drain",6:"filterOff",9:"filterOn",11:"pour"},
   air:{1:"clips",4:"seal"},
   cabin:{2:"wiper",4:"cabinArrow"},
   plugs:{2:"wirePull",3:"coilPull",4:"blow",5:"socket",8:"byHand",9:"torque"},
@@ -1961,9 +2454,156 @@ const STEP_MAP = {
   bleed:{1:"syringe",4:"bleedHold"},
   battery:{0:"meter",4:"terminals"},
   bulbs:{1:"boot",2:"spring",3:"noTouch"},
-  altbelt:{3:"altNut"},
+  altbelt:{4:"altNut"},
   season:{0:"hydro",5:"temp"}
 };
+/* ---------- картинки к шагам в чертёжном стиле ---------- */
+const L = (x1, y1, x2, y2, s, anc = "start") => {
+  const w = s.length * 5.2, W = 260;
+  if(anc === "start" && x2 + 3 + w > W - 3) x2 = Math.max(4, W - 6 - w);
+  if(anc === "end" && x2 - 3 - w < 3) x2 = Math.min(W - 4, 6 + w);
+  if(anc === "middle") x2 = Math.min(Math.max(x2, w/2 + 3), W - w/2 - 3);
+  y2 = Math.min(Math.max(y2, 8), 126);
+  return `<path d="M${x1} ${y1} L${x2} ${y2}" class="tl-lead"/><circle cx="${x1}" cy="${y1}" r="1.8" class="tl-dot"/><text x="${x2 + (anc === "start" ? 3 : anc === "end" ? -3 : 0)}" y="${y2 + 3.5}" class="tl-xs" text-anchor="${anc}">${s}</text>`; };
+const HX = (x, y, r = 7, cls = "tl-part") => hexBolt(x, y, r, cls);
+const BOLTS = (x0, x1, y, n) => Array.from({length:n}, (_,i) => `<circle cx="${(x0 + (x1-x0)*i/(n-1)).toFixed(1)}" cy="${y}" r="2.6" class="tl-part"/>`).join("");
+const RIBS = (x, y, w, h, n, vert = true) => Array.from({length:n}, (_,i) => vert ? `<path d="M${(x + w*(i+1)/(n+1)).toFixed(1)} ${y} v${h}" class="tl-thin"/>` : `<path d="M${x} ${(y + h*(i+1)/(n+1)).toFixed(1)} h${w}" class="tl-thin"/>`).join("");
+const BKT = (x, y, w, h, lvl) => `<path d="M${x} ${y} L${x+5} ${y+h} H${x+w-5} L${x+w} ${y}" class="tl-body"/>${lvl ? `<path d="M${x+3+5*(h-lvl)/h} ${y+h-lvl} L${x+5} ${y+h} H${x+w-5} L${x+w-3-5*(h-lvl)/h} ${y+h-lvl}Z" class="tl-oilf"/>` : ""}`;
+const WHEEL = (cx, cy, r) => `<circle cx="${cx}" cy="${cy}" r="${r}" class="tl-tyre"/><circle cx="${cx}" cy="${cy}" r="${r*0.66}" class="tl-part"/><circle cx="${cx}" cy="${cy}" r="${r*0.2}" class="tl-fill2"/><circle cx="${cx}" cy="${cy}" r="${r*0.2}" class="tl-body"/>`;
+const GROUND = (y) => `<path d="M10 ${y} H250" class="tl-body"/>${Array.from({length:12}, (_,i) => `<path d="M${18+i*20} ${y} l-8 7" class="tl-thin"/>`).join("")}`;
+
+const STEP_T = {
+ drain: () => sv(`<path d="M30 12 H230 V20 H30Z" class="tl-fill2"/><path d="M30 12 H230 V20 H30Z" class="tl-body"/>${BOLTS(40,220,16,8)}
+   <path d="M40 20 H220 L198 66 H62 Z" class="tl-fill"/><path d="M47 38 H213 L198 66 H62 Z" class="tl-oilf"/><path d="M40 20 H220 L198 66 H62 Z" class="tl-body"/>
+   <rect x="121" y="66" width="18" height="3" class="tl-accf"/>${HX(130,74,7)}${arc(130,74,19,200,330)}
+   <path d="M130 82 q2 9 0 22" class="tl-oilline"/>${BKT(100,104,60,22,10)}
+   ${L(214,44,236,44,"поддон")}${L(139,68,176,90,"шайба")}${L(124,78,70,98,"пробка","end")}`, "Слив масла"),
+ filterOff: () => sv(`<path d="M10 10 H70 V120 H10" class="tl-fill"/><path d="M70 10 V120" class="tl-body"/>
+   <rect x="70" y="22" width="14" height="86" class="tl-fill2"/><rect x="70" y="22" width="14" height="86" class="tl-body"/>
+   <rect x="84" y="18" width="78" height="94" rx="10" class="tl-part"/>${RIBS(90,18,66,94,6)}
+   <rect x="78" y="56" width="92" height="12" rx="3" class="tl-accf"/><path d="M170 62 H244" class="tl-handle"/>${arc(123,62,64,-28,22)}
+   ${L(40,30,40,30,"блок")}${L(160,30,190,20,"фильтр")}${L(166,60,200,90,"съёмник")}`, "Съёмник фильтра"),
+ filterOn: () => sv(`<rect x="86" y="38" width="88" height="82" rx="12" class="tl-part"/>${RIBS(92,46,76,70,6)}
+   <ellipse cx="130" cy="38" rx="36" ry="7" class="tl-oring"/><circle cx="130" cy="38" r="9" class="tl-fill2"/><circle cx="130" cy="38" r="9" class="tl-body"/>
+   <path d="M196 20 q-10 6 -24 14" class="tl-oilline"/><circle cx="200" cy="18" r="4" class="tl-oilf"/>
+   ${arc(130,64,64,-152,-28)}${L(98,38,60,20,"смазать кольцо","end")}${L(130,38,130,6,"резьба","middle")}`, "Новый фильтр"),
+ pour: () => sv(`<path d="M20 84 H240 V122 H20Z" class="tl-fill"/><path d="M20 84 H240 V122 H20Z" class="tl-body"/>${RIBS(20,92,220,24,3,false)}
+   <rect x="112" y="72" width="36" height="14" rx="3" class="tl-fill2"/><rect x="112" y="72" width="36" height="14" rx="3" class="tl-body"/>
+   <path d="M98 18 H162 L138 60 H122 Z" class="tl-part"/><rect x="123" y="60" width="14" height="16" class="tl-part"/>
+   <path d="M196 6 q-30 6 -60 34" class="tl-oilline"/><path d="M188 2 l28 -2 l8 26 l-24 10z" class="tl-part"/>
+   ${L(148,78,184,70,"горловина")}${L(100,22,56,22,"воронка","end")}${L(36,100,36,100,"крышка ГБЦ")}`, "Залить масло"),
+ clips: () => sv(`<rect x="34" y="56" width="192" height="62" rx="8" class="tl-fill"/><rect x="34" y="56" width="192" height="62" rx="8" class="tl-body"/>
+   <rect x="34" y="34" width="192" height="22" rx="6" class="tl-fill2"/><rect x="34" y="34" width="192" height="22" rx="6" class="tl-body"/>
+   ${[64,130,196].map(x => `<path d="M${x-7} 30 h14 v6 l-3 22 h-8 l-3 -22z" class="tl-accf"/>`).join("")}
+   ${arr(130,26,130,4)}${L(203,44,236,22,"защёлка")}${L(60,90,60,90,"корпус фильтра")}`, "Защёлки корпуса"),
+ seal: () => sv(`<rect x="36" y="18" width="188" height="96" rx="8" class="tl-fill"/><rect x="36" y="18" width="188" height="96" rx="8" class="tl-seal"/>
+   <rect x="48" y="30" width="164" height="72" rx="3" class="tl-padf2"/>${RIBS(48,30,164,72,18)}<rect x="48" y="30" width="164" height="72" rx="3" class="tl-body"/>
+   ${L(224,26,240,10,"уплотнитель","end")}`, "Уплотнитель"),
+ wiper: () => sv(`<path d="M0 118 H260" class="tl-thin"/><path d="M30 112 L250 36" class="tl-wiperarm"/><path d="M60 102 L250 36" class="tl-thin"/>
+   <circle cx="44" cy="106" r="16" class="tl-fill2"/><circle cx="44" cy="106" r="16" class="tl-body"/>${HX(44,106,7,"tl-accf")}${arc(44,106,26,205,330)}
+   <path d="M64 88 l14 -10 l10 6 l-14 10z" class="tl-part"/>${L(80,84,150,102,"колпачок — снять")}${L(50,110,96,122,"гайка поводка")}`, "Поводок дворника"),
+ cabinArrow: () => sv(`<rect x="52" y="14" width="156" height="66" rx="4" class="tl-padf2"/>${RIBS(52,14,156,66,16)}<rect x="52" y="14" width="156" height="66" rx="4" class="tl-body"/>
+   <rect x="82" y="38" width="96" height="18" rx="2" class="tl-part"/><text x="130" y="51" class="tl-xs" text-anchor="middle">AIR FLOW ↓</text>
+   ${arr(130,86,130,122)}${L(178,47,226,100,"стрелка по ходу воздуха — в салон","end")}`, "Стрелка фильтра"),
+ wirePull: () => sv(`<rect x="60" y="78" width="140" height="48" class="tl-fill"/><path d="M60 78 H200" class="tl-body"/><rect x="112" y="78" width="36" height="48" class="tl-fill2"/><path d="M112 78 V126 M148 78 V126" class="tl-body"/>
+   <rect x="118" y="44" width="24" height="44" rx="8" class="tl-accf"/><path d="M130 44 Q130 10 220 14" class="tl-wire"/>
+   ${arr(160,62,160,30)}${NO(214,34,9)}${L(140,80,160,104,"тянуть за наконечник")}${L(206,30,246,52,"за провод нельзя","end")}${L(64,100,64,100,"головка")}`, "Снять провод"),
+ coilPull: () => sv(`<rect x="60" y="86" width="140" height="40" class="tl-fill"/><path d="M60 86 H200" class="tl-body"/>
+   <rect x="112" y="22" width="36" height="80" rx="6" class="tl-part"/>${RIBS(112,30,36,30,3,false)}<rect x="148" y="30" width="26" height="16" rx="3" class="tl-accf"/>
+   ${HX(100,30,5)}<path d="M100 30 H112" class="tl-body"/>${arr(182,38,220,38)}${arr(130,16,130,2)}
+   ${L(174,40,232,62,"фишка — отключить","end")}${L(98,30,40,22,"болт крепления","end")}${L(114,70,60,64,"катушка","end")}`, "Снять катушку"),
+ blow: () => sv(`<rect x="60" y="50" width="140" height="76" class="tl-fill"/><path d="M60 50 H200" class="tl-body"/><rect x="114" y="50" width="32" height="76" class="tl-fill2"/><path d="M114 50 V126 M146 50 V126" class="tl-body"/>
+   <rect x="122" y="96" width="16" height="22" class="tl-part"/><path d="M226 6 L156 40" class="tl-handle"/>${arr(150,44,134,60,"fx-arM")}
+   ${[0,1,2,3].map(i => `<circle cx="${172+i*12}" cy="${56-i*9}" r="1.8" class="tl-dot"/>`).join("")}${L(226,8,240,26,"пистолет","end")}${L(130,100,70,110,"свеча","end")}${L(140,62,196,80,"колодец")}`, "Продуть колодец"),
+ socket: () => sv(`<rect x="60" y="76" width="140" height="50" class="tl-fill"/><path d="M60 76 H200" class="tl-body"/><rect x="114" y="76" width="32" height="50" class="tl-fill2"/><path d="M114 76 V126 M146 76 V126" class="tl-body"/>
+   <rect x="120" y="58" width="20" height="40" rx="3" class="tl-part"/>${RIBS(120,64,20,28,3,false)}<rect x="125" y="20" width="10" height="40" rx="2" class="tl-part"/>
+   <circle cx="130" cy="18" r="9" class="tl-part"/><path d="M130 18 H236" class="tl-handle"/>${arc(130,18,66,-22,22)}
+   ${L(140,78,186,64,"свечная головка")}${L(134,40,186,40,"удлинитель")}${L(230,18,240,4,"трещотка","end")}`, "Выкрутить свечу"),
+ byHand: () => sv(`<rect x="60" y="86" width="140" height="40" class="tl-fill"/><path d="M60 86 H200" class="tl-body"/>${RIBS(116,90,28,30,4,false)}
+   <rect x="118" y="38" width="24" height="54" rx="4" class="tl-part"/><rect x="122" y="22" width="16" height="18" rx="3" class="tl-fill2"/><rect x="122" y="22" width="16" height="18" rx="3" class="tl-body"/>
+   ${arc(130,52,44,-205,22)}${L(142,60,190,52,"2–3 оборота рукой")}${L(130,100,70,112,"резьба головки","end")}`, "Наживить рукой"),
+ torque: () => sv(`<path d="M28 70 H232" class="tl-handle"/><rect x="150" y="58" width="82" height="24" rx="6" class="tl-part"/>${RIBS(156,58,40,24,6)}
+   <rect x="200" y="62" width="26" height="16" rx="2" class="tl-fill2"/><rect x="200" y="62" width="26" height="16" rx="2" class="tl-body"/>
+   <circle cx="36" cy="70" r="13" class="tl-part"/>${HX(36,70,6,"tl-accf")}${arc(36,70,26,-60,30)}
+   <text x="190" y="104" class="tl-v">щёлк</text>${L(213,64,236,40,"шкала момента","end")}${L(40,60,80,30,"головка")}`, "Динамометрический ключ"),
+ radDrain: () => sv(`<rect x="30" y="8" width="190" height="90" rx="4" class="tl-fill"/>${RIBS(30,12,190,82,16)}<rect x="30" y="8" width="190" height="90" rx="4" class="tl-body"/>
+   <rect x="22" y="8" width="8" height="90" class="tl-fill2"/><rect x="220" y="8" width="8" height="90" class="tl-fill2"/>
+   <rect x="196" y="98" width="16" height="8" class="tl-part"/><path d="M198 106 h12 l-2 6 h-8z" class="tl-accf"/>${arc(204,108,15,200,330)}
+   <path d="M204 114 q1 6 0 10" class="tl-coolline"/>${BKT(178,118,52,10)}${L(212,102,244,80,"сливная пробка (барашек)","end")}${L(40,50,40,50,"радиатор")}`, "Слив антифриза"),
+ squeeze: () => sv(`<rect x="10" y="40" width="40" height="70" class="tl-fill"/><rect x="10" y="40" width="40" height="70" class="tl-body"/><rect x="214" y="30" width="40" height="90" class="tl-fill"/>${RIBS(214,30,40,90,4)}<rect x="214" y="30" width="40" height="90" class="tl-body"/>
+   <path d="M50 70 C100 52 160 96 214 62" class="tl-hosethick"/>${arr(132,16,132,56)}${arr(132,124,132,86)}
+   ${L(24,60,24,60,"мотор")}${L(234,50,234,50,"радиатор")}${L(160,82,190,110,"верхний патрубок")}`, "Сжать патрубок"),
+ peek: () => sv(`${WHEEL(110,66,58)}${[0,72,144,216,288].map(a => { const r = a*Math.PI/180; return `<path d="M${(110+14*Math.cos(r)).toFixed(1)} ${(66+14*Math.sin(r)).toFixed(1)} L${(110+36*Math.cos(r)).toFixed(1)} ${(66+36*Math.sin(r)).toFixed(1)}" class="tl-spoke"/>`; }).join("")}
+   <rect x="134" y="40" width="18" height="32" rx="3" class="tl-fill2"/><rect x="134" y="40" width="18" height="32" rx="3" class="tl-body"/><rect x="138" y="44" width="5" height="24" class="tl-padf"/>
+   <path d="M250 18 L156 50 M250 34 L156 60" class="tl-beam"/><rect x="236" y="8" width="20" height="30" rx="4" class="tl-part"/>${L(141,56,170,108,"торец колодки")}`, "Колодки через диск"),
+ discLip: () => sv(`<rect x="70" y="14" width="34" height="104" class="tl-fill2"/><rect x="104" y="14" width="40" height="104" class="tl-fill"/><path d="M104 22 h32 v88 h-32" class="tl-warnl"/>
+   ${[34,48,62,76,90].map(y => `<path d="M104 ${y} h32" class="tl-thin"/>`).join("")}<rect x="136" y="14" width="8" height="104" class="tl-body"/>
+   <path d="M70 14 h74 v104 h-74z" class="tl-body"/>${L(120,40,190,30,"борозды")}${L(140,16,190,10,"бортик по краю")}${L(86,70,30,90,"ступица","end")}`, "Износ диска"),
+ brakeRes: () => sv(`<rect x="88" y="10" width="40" height="12" rx="3" class="tl-fill2"/><rect x="88" y="10" width="40" height="12" rx="3" class="tl-body"/>
+   <rect x="70" y="22" width="76" height="96" rx="8" class="tl-part"/><path d="M71 62 H145 V110 a7 7 0 0 1 -7 7 h-60 a7 7 0 0 1 -7 -7z" class="tl-brakef"/>
+   <path d="M146 44 h14 M146 86 h14" class="tl-body"/><text x="164" y="48" class="tl-v">MAX</text><text x="164" y="90" class="tl-v">MIN</text>${L(108,14,40,14,"крышка","end")}${L(80,90,40,100,"DOT-4","end")}`, "Тормозной бачок"),
+ chock: () => sv(`${GROUND(112)}${WHEEL(100,66,46)}<path d="M150 112 L190 112 L150 80 Z" class="tl-accf"/>${L(170,100,206,80,"упор")}`, "Упор"),
+ loosen: () => sv(`${GROUND(118)}${WHEEL(96,70,48)}${HX(96,40,6,"tl-accf")}<path d="M96 40 L214 10" class="tl-handle"/>${arc(96,40,46,-64,-12)}${L(206,12,240,30,"баллонный ключ","end")}`, "Сорвать болты"),
+ jack: () => sv(`<path d="M6 36 H254 V48 H6Z" class="tl-fill2"/><path d="M6 36 H254 V48 H6Z" class="tl-body"/><path d="M118 48 v-6 h24 v6" class="tl-accf"/>
+   <path d="M104 124 L130 86 L156 124 M104 52 L130 86 L156 52" class="tl-jack"/><path d="M96 124 H164 M112 52 H148" class="tl-body"/><path d="M156 86 H230" class="tl-handle"/>${GROUND(124)}
+   ${L(130,42,190,18,"место под домкрат на пороге")}`, "Домкрат"),
+ syringe: () => sv(`<rect x="30" y="22" width="70" height="92" rx="8" class="tl-part"/><path d="M31 54 H99 V106 a7 7 0 0 1 -7 7 h-54 a7 7 0 0 1 -7 -7z" class="tl-brakef"/>
+   <rect x="150" y="38" width="78" height="22" rx="6" class="tl-part"/>${RIBS(150,38,60,22,6)}<path d="M150 49 L70 70" class="tl-needle"/><path d="M228 49 H252" class="tl-handle"/>${arr(244,72,214,72)}
+   ${L(64,40,64,40,"бачок")}${L(190,40,220,22,"шприц или груша")}`, "Шприц"),
+ piston: () => sv(`<rect x="30" y="26" width="92" height="88" rx="10" class="tl-fill"/><rect x="30" y="26" width="92" height="88" rx="10" class="tl-body"/>
+   <rect x="58" y="44" width="54" height="52" class="tl-part"/><rect x="112" y="40" width="10" height="60" class="tl-part"/><rect x="122" y="44" width="10" height="52" class="tl-padf"/>
+   <path d="M224 16 V124 M224 16 H190 M224 124 H190 M136 70 H214" class="tl-clamp"/><rect x="132" y="62" width="6" height="16" class="tl-accf"/>${arr(190,56,144,56)}
+   ${L(84,70,40,122,"поршень","middle")}${L(127,50,160,22,"старая колодка")}${L(224,40,250,40,"струбцина","end")}`, "Вдавить поршень"),
+ pedal: () => sv(`<path d="M150 6 L120 80" class="tl-pedalarm"/><circle cx="150" cy="6" r="5" class="tl-part"/><rect x="92" y="78" width="60" height="16" rx="4" class="tl-fill2"/><rect x="92" y="78" width="60" height="16" rx="4" class="tl-body"/>
+   ${RIBS(92,78,60,16,6)}${arr(204,40,160,78)}<text x="206" y="34" class="tl-v">× 4–5</text>${L(110,94,60,116,"педаль тормоза","end")}`, "Педаль"),
+ tensioner: () => sv(`<rect x="20" y="16" width="170" height="100" rx="8" class="tl-fill"/><rect x="20" y="16" width="170" height="100" rx="8" class="tl-body"/>${RIBS(20,16,170,100,4,false)}
+   <rect x="190" y="52" width="16" height="28" class="tl-part"/>${HX(214,66,12,"tl-accf")}${arc(214,66,26,-70,40)}
+   ${L(222,58,246,26,"колпачковая гайка","end")}${L(60,40,60,40,"головка блока")}`, "Натяжитель цепи"),
+ rollerKey: () => sv(`<circle cx="104" cy="66" r="46" class="tl-part"/><circle cx="104" cy="66" r="34" class="tl-hid"/><circle cx="104" cy="66" r="9" class="tl-fill2"/>${HX(104,66,6)}
+   <circle cx="86" cy="50" r="5" class="tl-accf"/><circle cx="122" cy="82" r="5" class="tl-accf"/><path d="M86 50 L122 82" class="tl-handle"/><path d="M104 66 L236 66" class="tl-handle"/>${arc(104,66,58,-28,28)}
+   ${L(86,50,40,16,"отверстия под ключ","end")}${L(110,66,150,104,"гайка ролика")}`, "Натяжной ролик"),
+ rollerMark: () => sv(`<circle cx="130" cy="66" r="52" class="tl-part"/><circle cx="130" cy="66" r="40" class="tl-fill"/><circle cx="130" cy="66" r="11" class="tl-fill2"/>${HX(130,66,6)}
+   <path d="M130 66 L130 22" class="tl-mark"/><path d="M122 8 h16 l-8 10z" class="tl-accf"/>${L(138,12,200,14,"вырез на основании")}${L(130,32,200,44,"указатель")}`, "Метка ролика"),
+ fuse: () => sv(`<rect x="24" y="16" width="212" height="100" rx="8" class="tl-fill"/><rect x="24" y="16" width="212" height="100" rx="8" class="tl-body"/>
+   ${Array.from({length:12}, (_,i) => `<rect x="${38+(i%6)*30}" y="${30+Math.floor(i/6)*30}" width="16" height="22" rx="2" class="${i===3?"tl-accf":"tl-part"}"/>`).join("")}
+   <rect x="38" y="90" width="40" height="20" rx="2" class="tl-part"/><rect x="88" y="90" width="40" height="20" rx="2" class="tl-part"/>${arr(136,10,136,28)}
+   ${L(58,100,58,100,"реле")}${L(144,40,222,8,"схема — на крышке блока","end")}`, "Предохранитель"),
+ quick: () => sv(`<path d="M6 70 H108" class="tl-pipeT"/><rect x="108" y="52" width="56" height="36" rx="6" class="tl-part"/><path d="M164 70 H254" class="tl-pipeT"/>
+   <rect x="120" y="42" width="32" height="10" rx="3" class="tl-accf"/>${arr(136,12,136,40)}${arr(170,96,214,96)}
+   ${L(152,46,200,24,"защёлка — нажать")}${L(214,96,240,116,"тянуть","end")}`, "Разъём"),
+ primer: () => sv(`<rect x="50" y="40" width="110" height="70" rx="12" class="tl-fill"/><rect x="50" y="40" width="110" height="70" rx="12" class="tl-body"/>
+   <circle cx="105" cy="75" r="22" class="tl-part"/><path d="M50 60 H20 M50 90 H20" class="tl-pipeT"/><path d="M160 60 L222 34" class="tl-handle"/>${arc(160,60,54,-40,-6)}
+   ${L(216,36,246,58,"рычаг подкачки","end")}${L(60,50,60,50,"бензонасос")}`, "Подкачка"),
+ bleedHold: () => sv(`<rect x="18" y="80" width="56" height="14" rx="4" class="tl-fill2"/><rect x="18" y="80" width="56" height="14" rx="4" class="tl-body"/>${arr(46,30,46,74)}<text x="46" y="114" class="tl-xs" text-anchor="middle">держит</text>
+   <rect x="142" y="56" width="92" height="60" rx="10" class="tl-part"/>${HX(188,46,8,"tl-accf")}${arc(188,46,20,190,320)}<path d="M188 38 C 200 4, 248 10, 250 40" class="tl-hosec"/>
+   ${L(194,44,236,70,"штуцер ½ оборота","end")}<text x="110" y="70" class="tl-v" text-anchor="middle">→</text>`, "Прокачка вдвоём"),
+ meter: () => sv(`<rect x="22" y="58" width="128" height="62" rx="8" class="tl-part"/>${RIBS(22,72,128,48,4)}<rect x="40" y="46" width="20" height="12" class="tl-redf"/><rect x="110" y="46" width="20" height="12" class="tl-fill2"/>
+   <rect x="166" y="8" width="84" height="112" rx="10" class="tl-part"/><rect x="176" y="18" width="64" height="30" rx="3" class="tl-lcdT"/><text x="208" y="40" class="tl-lcdt" text-anchor="middle">12,6</text>
+   <circle cx="208" cy="78" r="16" class="tl-fill2"/><path d="M208 78 l8 -10" class="tl-body"/><text x="208" y="108" class="tl-xs" text-anchor="middle">V⎓</text>
+   <path d="M50 46 Q86 4 190 96" class="tl-probeR"/><path d="M120 46 Q150 26 226 96" class="tl-probeB"/>`, "Мультиметр"),
+ terminals: () => sv(`<rect x="40" y="56" width="180" height="64" rx="8" class="tl-part"/>${RIBS(40,70,180,50,6)}<rect x="60" y="40" width="30" height="18" class="tl-redf"/><rect x="170" y="40" width="30" height="18" class="tl-fill2"/><rect x="170" y="40" width="30" height="18" class="tl-body"/>
+   <text x="75" y="53" class="tl-term">+</text><text x="185" y="53" class="tl-term2">−</text>
+   <circle cx="185" cy="18" r="12" class="tl-accf"/><text x="185" y="23" class="tl-numt2" text-anchor="middle">1</text><circle cx="75" cy="18" r="12" class="tl-accf"/><text x="75" y="23" class="tl-numt2" text-anchor="middle">2</text>
+   ${L(200,50,240,40,"ключ на 10","end")}`, "Порядок клемм"),
+ boot: () => sv(`<path d="M20 20 H240 V112 H20Z" class="tl-fill"/><path d="M20 20 H240 V112 H20Z" class="tl-body"/><circle cx="120" cy="66" r="42" class="tl-fill2"/><circle cx="120" cy="66" r="42" class="tl-body"/>
+   ${RIBS(84,40,72,52,5,false)}<circle cx="120" cy="66" r="12" class="tl-part"/>${arc(120,66,56,200,250)}${L(156,46,200,30,"резиновый пыльник")}${L(120,72,200,96,"разъём лампы")}`, "Пыльник"),
+ spring: () => sv(`<circle cx="120" cy="66" r="46" class="tl-fill"/><circle cx="120" cy="66" r="46" class="tl-body"/><rect x="104" y="50" width="32" height="32" rx="3" class="tl-part"/>
+   <path d="M80 30 Q120 112 160 30" class="tl-spring"/>${arr(160,30,200,14)}${L(96,58,40,30,"цоколь лампы","end")}${L(150,52,206,60,"проволочный фиксатор")}`, "Фиксатор"),
+ noTouch: () => sv(`<ellipse cx="100" cy="46" rx="30" ry="36" class="tl-glass"/><ellipse cx="100" cy="46" rx="30" ry="36" class="tl-body"/><path d="M90 46 q10 -16 20 0" class="tl-acc"/>
+   <rect x="82" y="80" width="36" height="16" class="tl-part"/><rect x="86" y="96" width="28" height="22" rx="2" class="tl-fill2"/><rect x="86" y="96" width="28" height="22" rx="2" class="tl-body"/>
+   ${NO(100,40,18)}${arr(176,104,122,104)}${L(128,30,190,20,"колба — не трогать")}${L(176,104,236,104,"брать здесь","end")}`, "Лампа"),
+ altNut: () => sv(`<circle cx="96" cy="70" r="44" class="tl-part"/>${RIBS(60,40,72,60,5)}<circle cx="96" cy="70" r="14" class="tl-fill2"/><circle cx="96" cy="70" r="14" class="tl-body"/>
+   <path d="M130 30 Q190 14 220 40" class="tl-bar"/><path d="M146 26 Q186 16 206 32" class="tl-slot"/>${HX(176,22,8,"tl-accf")}${arc(176,22,20,200,330)}${arr(52,70,16,70)}
+   ${L(184,24,236,52,"гайка на планке","end")}${L(60,86,40,118,"генератор","middle")}`, "Генератор"),
+ hydro: () => sv(`<rect x="106" y="6" width="48" height="118" rx="20" class="tl-glass"/><rect x="106" y="6" width="48" height="118" rx="20" class="tl-body"/>
+   <path d="M108 62 H152 V104 a20 20 0 0 1 -20 18 h-4 a20 20 0 0 1 -20 -18z" class="tl-coolf"/>
+   <rect x="124" y="30" width="12" height="62" rx="5" class="tl-part"/>${[0,1,2,3,4].map(i => `<path d="M124 ${40+i*9} h6" class="tl-thin"/>`).join("")}<path d="M116 62 h28" class="tl-acc"/>
+   ${L(136,58,196,40,"−40 °C — отсчёт по уровню")}${L(108,96,56,110,"антифриз","end")}`, "Ареометр"),
+ temp: () => sv(`<rect x="64" y="8" width="18" height="92" rx="9" class="tl-glass"/><rect x="64" y="8" width="18" height="92" rx="9" class="tl-body"/><circle cx="73" cy="106" r="14" class="tl-redf"/><rect x="69" y="58" width="8" height="48" class="tl-redf"/>
+   ${[0,1,2,3,4,5].map(i => `<path d="M82 ${20+i*14} h6" class="tl-thin"/>`).join("")}<text x="94" y="62" class="tl-v">+5 °C</text>${WHEEL(196,66,46)}${RIBS(158,30,76,72,6)}`, "Переобувка")
+};
+for(const k in STEP_T) if(STEP_SVG[k]) STEP_SVG[k][0] = STEP_T[k];
+
 const stepFig = (jobId, i) => { const k = STEP_MAP[jobId]?.[i], d = k && STEP_SVG[k]; if(!d) return "";
   const cap = typeof d[1] === "function" ? d[1]() : d[1];
   return `<figure class="stepfig">${d[0]()}<figcaption>${esc(cap)}</figcaption></figure>`; };
@@ -1978,7 +2618,7 @@ try{ const s = localStorage.getItem("garazh-fam"); if(s && FAM[s]) fam = s; }cat
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const fill = s => { const f = F(); return esc(s).replace(/\{(\w+)\}/g, (m,k) => f[k] ? `<span class="n">${esc(f[k])}</span>` : m); };
+const fill = s => { const f = F(); return esc(s).replace(/\{(\w+)\}/g, (m,k) => f[k] ? `<span class="n">${esc(f[k])}</span>` : "по руководству к своей машине"); };
 const stepOk = st => { if(typeof st === "string") return true; const e = engOf(fam), f = F();
   return (!st.only || st.only.includes(fam)) && (!st.not || !st.not.includes(fam)) && (!st.kind || st.kind === (e?.kind || "inj")) && (!st.tank || (st.tank === "yes") === !!f.tankFilter); };
 const vidsFor = id => videos.filter(v => v.instr === id && (!v.family || v.family === "all" || v.family === fam));
@@ -2037,6 +2677,16 @@ function searchBox(ph){
 const match = (...parts) => !query || parts.join(" ").toLowerCase().includes(query.toLowerCase());
 const backBtn = (to, label) => `<button type="button" class="back" data-goto="${to}">← ${label}</button>`;
 
+function globalHits(){
+  const q = query.trim(); if(q.length < 2) return "";
+  const out = [];
+  SYMPTOMS.filter(x => match(x.t, x.c.join(" "))).slice(0,4).forEach(x => out.push(["Поломки · симптом", x.t, "symptoms"]));
+  LAMPS.filter(x => match(x.name, x.means)).slice(0,3).forEach(x => out.push(["Поломки · лампа", x.name, "lamps"]));
+  CODE_GROUPS.flatMap(g => g[1]).filter(c => match(c[0], c[1])).slice(0,4).forEach(c => out.push(["Код ошибки", c[0] + " — " + c[1], "codes"]));
+  PARTS.filter(x => match(x.name, x.prem.flat().join(" "), x.eco.flat().join(" "))).slice(0,3).forEach(x => out.push(["Запчасти", x.name, "parts"]));
+  TOOLS.filter(x => match(x.name, x.what)).slice(0,3).forEach(x => out.push(["Инструмент", x.name, "tools"]));
+  return out.length ? `<section class="group ghits"><h2 class="gh">В других разделах<span>${out.length}</span></h2><div class="hits">${out.map(([k,t,to]) => `<button type="button" class="hit" data-gs="${to}"><small>${esc(k)}</small><b>${esc(t)}</b></button>`).join("")}</div></section>` : "";
+}
 function renderList(){
   const jobs = JOBS.filter(j => (!j.fams || j.fams.includes(fam)) && match(j.title, j.desc, j.steps.map(s => s.t || s).join(" ")));
   const features = query ? "" : `<div class="features">
@@ -2044,14 +2694,15 @@ function renderList(){
     <button type="button" class="feature" data-goto="symptoms">${icon("symptoms")}<span><b>Что случилось?</b><small>Найти причину по симптому</small></span></button>
     <button type="button" class="feature" data-goto="numbers">${icon("numbers")}<span><b>Цифры моей машины</b><small>Объёмы, моменты, ключи — на одной странице</small></span></button>
   </div><a class="artstrip" href="stati/"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5M8 7h8M8 11h6"/></svg></span><span><b>Статьи о ТО Лады</b><small>Регламент, объёмы масла и антифриза, моменты затяжки, ГРМ, подготовка к зиме</small></span><span class="go" aria-hidden="true">→</span></a>`;
-  return searchBox("Найти работу: масло, свечи, ГРМ…") + features +
+  const other = query ? globalHits() : "";
+  return searchBox("Поиск по сайту: работа, поломка, код ошибки, запчасть…") + features + other +
     (jobs.length ? JOB_GROUPS.map(([gname, ids]) => { const gj = jobs.filter(j => ids.includes(j.id)); return gj.length ? `<section class="group"><h2 class="gh">${esc(gname)}<span>${gj.length}</span></h2><div class="list">${gj.map(j => {
       const n = vidsFor(j.id).length;
       return `<button type="button" class="card" data-job="${j.id}">
         ${icon(j.id)}<h3>${esc(j.title)}</h3><p>${esc(j.desc)}</p>
-        <div class="meta"><span class="pill ${j.lvl===1?"lvl1":"lvl2"}">${j.lvl===1?"Для новичка":"Нужен опыт"}</span>
+        <div class="meta"><span class="pill cdiff">${diffBar(j.diff || (j.lvl === 1 ? 2 : 4))}</span>
         <span class="pill">${esc(j.time)}</span>${n?`<span class="pill vid">Видео: ${n}</span>`:""}</div></button>`;
-    }).join("")}</div></section>` : ""; }).join("") : `<p class="empty">Ничего не нашлось. Попробуй другое слово.</p>`) + (query ? "" : tgCard() + aboutLinks());
+    }).join("")}</div></section>` : ""; }).join("") : other ? "" : `<p class="empty">Ничего не нашлось. Попробуй другое слово.</p>`) + (query ? "" : aboutLinks());
 }
 function tgCard(){
   return `<a class="tgcard" href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer">
@@ -2079,29 +2730,58 @@ function fillQr(){
   try{ const q = qrcode(0, "M"); q.addData("https://t.me/garage4to"); q.make(); el.innerHTML = q.createSvgTag({cellSize:3, margin:2, scalable:true}); }catch(e){}
 }
 
+function jobGroup(id){ const g = JOB_GROUPS.find(([,ids]) => ids.includes(id)); return g ? g[0] : "Работы"; }
+const diffBar = d => `<span class="diff" aria-label="Сложность ${d} из 5">${[1,2,3,4,5].map(i => `<i class="${i <= d ? "on" : ""}"></i>`).join("")}</span><b>${d} из 5</b>`;
+function stepHtml(j, s, i){
+  const kk = s.key || (j.keys && j.keys[i]), aa = s.att || (j.atts && j.atts[i]);
+  const key = kk ? `<span class="keytag">${esc(kk)}</span>` : "";
+  const att = aa ? `<p class="callout att"><b>Внимание.</b> ${esc(aa)}</p>` : "";
+  const wx = s.warnx ? `<p class="callout dang"><b>Предупреждение.</b> ${esc(s.warnx)}</p>` : "";
+  return `<li><div>${fill(s.t || s)}${key}${att}${wx}${stepFig(j.id, i)}${photoStrip(j.id, String(i), "", true)}</div></li>`;
+}
 function renderJob(j){
   const f = F();
-  const plate = j.plate.length ? `<div class="plate"><div class="cap">${esc(f.name)} · ${esc(String(f.engName || f.models).replace(/\s*\(.*\)\s*$/, ""))}</div><dl>${
-    j.plate.filter(k => f[k]).map(k => `<div><dt>${PLATE_LABEL[k]}</dt><dd class="${TEXT_FIELDS.has(k)?"txt":""}">${esc(f[k])}</dd></div>`).join("")}</dl>
-    <p class="approx">По руководству по эксплуатации АвтоВАЗа. Нашёл ошибку — напиши в Telegram-канал @garage4to.</p></div>` : "";
-  const tools = j.tools.map(t => { const T = TOOLS.find(x => x.id === t);
+  const eng = String(f.engName || f.models).replace(/\s*\(.*\)\s*$/, "");
+  const diff = j.diff || (j.lvl === 1 ? 2 : 4);
+  const toolNames = j.tools.map(t => { const T = TOOLS.find(x => x.id === t);
     return T ? `<button type="button" data-tool="${T.id}">${esc(T.name)}</button>` : `<span>${esc(t)}</span>`; }).join("");
-  const steps = j.steps.map((s,i) => [s,i]).filter(([s]) => stepOk(s)).map(([s,i]) => `<li><div>${fill(s.t || s)}${stepFig(j.id, i)}${photoStrip(j.id, String(i), "", true)}</div></li>`).join("");
-  const extra = renderFigs(j);
-  const logBtn = JOB_LOG[j.id] ? `<section class="blk"><button type="button" class="logbtn" data-logjob="${JOB_LOG[j.id]}">${icon("garage")}<span><b>Сделал? Запиши в «Мой гараж»</b><small>Дата, пробег и что использовал. Гаражник подскажет, когда следующая замена</small></span></button></section>` : "";
-  return `<div class="detail">
-    ${backBtn("to","Все работы")}
+  const parts = (JOB_PARTS[j.id] || []).map(p => `<button type="button" class="part" data-part="${p}">${esc(PARTS.find(x => x.id === p).name)}</button>`).join("");
+  const cat = j.cat && j.cat[fam] ? `<table class="cattbl"><tbody>${j.cat[fam].map(([a,b]) => `<tr><td>${esc(a)}</td><td class="mono">${esc(b)}</td></tr>`).join("")}</tbody></table>` : "";
+  const nums = j.plate.filter(k => f[k]).map(k => `<div><dt>${PLATE_LABEL[k]}</dt><dd class="${TEXT_FIELDS.has(k)?"txt":""}">${esc(f[k])}</dd></div>`).join("");
+  let n = 0; const ok = s => stepOk(s);
+  const idx = new Map(); j.steps.forEach((s,i) => idx.set(s, i));
+  const sec = j.sections ? j.sections.map(x => { const st = x.steps.filter(ok); return st.length ? `<section class="blk jsec"><h3 class="jh"><span>${++n}</span>${esc(x.h)}</h3><ol class="steps">${st.map(s => stepHtml(j, s, idx.get(s))).join("")}</ol></section>` : ""; }).join("")
+    : j.secs ? j.secs.map(([h, from], si) => { const to = si + 1 < j.secs.length ? j.secs[si+1][1] : j.steps.length;
+        const st = []; for(let i = from; i < to; i++) if(ok(j.steps[i])) st.push(stepHtml(j, j.steps[i], i));
+        return st.length ? `<section class="blk jsec"><h3 class="jh"><span>${++n}</span>${esc(h)}</h3><ol class="steps">${st.join("")}</ol></section>` : ""; }).join("")
+    : `<section class="blk jsec"><h3 class="jh"><span>${++n}</span>Порядок работы</h3><ol class="steps">${j.steps.map((s,i) => [s,i]).filter(([s]) => ok(s)).map(([s,i]) => stepHtml(j, s, i)).join("")}</ol></section>`;
+  const figs = (FIG_JOBS[j.id] || []).filter(id => !(j.id === "cabin" && fam === "classic") && !((id === "fuelf" || id === "fuelT") && F().tankFilter)).map(id => FIGS[id]()).filter(Boolean);
+  const figHtml = figs.length ? `<section class="blk jsec"><h3 class="jh"><span>${++n}</span>Схемы</h3>${figs.map((h,i) => `<div class="figwrap"><div class="fignum">Рис. ${i+1}</div>${h}</div>`).join("")}</section>` : "";
+  const mist = j.mistakes ? `<section class="blk jsec"><h3 class="jh"><span>${++n}</span>Типичные ошибки</h3><ul class="mist">${j.mistakes.map(x => `<li>${esc(x)}</li>`).join("")}</ul></section>` : "";
+  const src = j.src ? `<section class="blk jsec"><h3 class="jh"><span>${++n}</span>Источники</h3><ul class="srcs">${j.src.map(([t,u]) => `<li>${u ? `<a href="${u}" target="_blank" rel="noopener noreferrer">${esc(t)}</a>` : esc(t)}</li>`).join("")}</ul><p class="approx-note">Нашёл ошибку — напиши в Telegram-канал @garage4to.</p></section>` : "";
+  const logBtn = JOB_LOG[j.id] ? `<section class="blk"><button type="button" class="logbtn" data-logjob="${JOB_LOG[j.id]}">${icon("garage")}<span><b>Сделал? Запиши в «Мой гараж»</b><small>Дата, пробег и что использовал — Гаражник посчитает следующую замену</small></span></button></section>` : "";
+  return `<div class="detail job">
+    <nav class="jcrumbs" aria-label="Навигация"><button type="button" data-goto="to">Работы</button><span>›</span><span>${esc(jobGroup(j.id))}</span></nav>
     ${j.fams && !j.fams.includes(fam) ? `<div class="warn notfor"><p>Эта работа для: ${esc(j.fams.map(k => FAM[k].name).join(", "))}. У выбранной машины (${esc(F().name)}) устроено иначе — выбери другую в «Моя машина».</p></div>` : ""}
-    <div class="dhead">${icon(j.id)}<div><h2>${esc(j.title)}</h2><p class="lead">${esc(j.desc)}</p><div class="meta dmeta"><span class="pill ${j.lvl===1?"lvl1":"lvl2"}">${j.lvl===1?"Для новичка":"Нужен опыт"}</span><span class="pill">${esc(j.time)}</span></div></div></div>
+    <h2 class="jtitle">${esc(j.title)}</h2>
+    <p class="lead">${esc(j.desc)}</p>
+    <div class="passport">
+      <div class="pp-row pp-top">
+        <div><span class="pp-k">Сложность</span><span class="pp-v">${diffBar(diff)}</span></div>
+        <div><span class="pp-k">Время</span><span class="pp-v"><b>${esc(j.time)}</b></span></div>
+        <div><span class="pp-k">Для машины</span><span class="pp-v"><b>${esc(f.name)}</b> · ${esc(eng)}</span></div>
+      </div>
+      ${nums ? `<div class="pp-row"><span class="pp-k">Цифры для твоей машины</span><dl class="pp-nums">${nums}</dl></div>` : ""}
+      <div class="pp-row"><span class="pp-k">Инструмент</span><div class="tools">${toolNames}</div></div>
+      ${parts || cat ? `<div class="pp-row"><span class="pp-k">Запчасти</span>${parts ? `<div class="tools">${parts}</div>` : ""}${cat}</div>` : ""}
+    </div>
     <button type="button" class="startbtn" data-start="${j.id}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span><b>Начать работу</b><small>По одному шагу, крупно, экран не гаснет</small></span></button>
-    ${plate}
-    <section class="blk"><h4>Понадобится</h4><div class="tools">${tools}</div></section>
-    ${JOB_PARTS[j.id] ? `<section class="blk"><h4>Запчасти и расходники</h4><div class="tools">${
-      JOB_PARTS[j.id].map(p => `<button type="button" class="part" data-part="${p}">${esc(PARTS.find(x => x.id === p).name)}</button>`).join("")}</div></section>` : ""}
     ${renderChecks(j.id)}
-    <section class="blk"><h4>Порядок работы</h4><ol class="steps">${steps}</ol></section>
-    ${extra}
-    ${j.warn ? `<section class="blk"><div class="warn"><p>${esc(j.warn)}</p></div></section>` : ""}
+    ${sec}
+    ${figHtml}
+    ${j.warn ? `<p class="callout dang"><b>Предупреждение.</b> ${esc(j.warn)}</p>` : ""}
+    ${mist}
+    ${src}
     <section class="blk vidblk" id="vidblk">${renderVideos(j.id)}</section>
     ${logBtn}
   </div>`;
@@ -2567,8 +3247,10 @@ document.addEventListener("click", e => {
   else if(d.eng){ setEng(fam, d.eng); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $(`#famMenu [data-eng="${d.eng}"]`)?.focus(); }
   else if(b.hasAttribute("data-famclose")){ famMenu(false); }
   else if(b.hasAttribute("data-print")){ window.print(); }
+  else if(b.id === "themeBtn"){ const t = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); try{ localStorage.setItem("garazh-theme", t); }catch(e){} document.querySelector('meta[name="theme-color"]')?.setAttribute("content", t === "light" ? "#F4F3EF" : "#101316"); }
   else if(d.tab){ query = ""; go(d.tab); }
   else if(d.goto){ query = ""; go(d.goto); }
+  else if(d.gs){ go(d.gs); }
   else if(d.job){ query = ""; go(d.job); }
   else if(d.tool){ query = ""; go("tools"); requestAnimationFrame(() => document.getElementById("tool-" + d.tool)?.scrollIntoView({block:"start"})); }
   else if(d.part){ query = ""; go("parts"); requestAnimationFrame(() => document.getElementById("part-" + d.part)?.scrollIntoView({block:"start"})); }
