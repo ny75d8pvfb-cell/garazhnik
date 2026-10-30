@@ -134,6 +134,11 @@ ol.steps li div{min-width:0;padding-top:4px}
 .wfams button:hover,.wfams button:focus-visible{border-color:var(--amber)}
 .wfams b{font-size:15px}.wfams small{color:var(--muted);font-size:12.5px;line-height:1.3}
 .wskip{margin-top:10px;font-size:13.5px}
+.vinform label{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
+.vinrow{display:flex;gap:8px}.vinrow input{flex:1;min-width:0;font:500 15px var(--f-mono);letter-spacing:.04em;padding:9px 10px;border:1px solid var(--line-2);border-radius:var(--r);background:var(--surface);color:var(--ink);text-transform:uppercase}
+.vinform small{display:block;color:var(--muted);font-size:12px;margin-top:5px}
+.vinres{margin-top:10px}.vinres p{margin:0 0 8px;font-size:14.5px}.vinerr{color:var(--warn);font-size:14px;margin:8px 0 0}
+.wvin{margin:10px 0 0;font-size:14px;color:var(--muted)}
 dd.udd{font:italic 400 14px/1.45 var(--f-body)!important;color:var(--muted)!important}
 .n.nu{background:transparent;color:var(--muted);border:1px dashed var(--line-2);font-family:inherit;font-size:.92em}
 .schedmob{display:none}
@@ -2798,7 +2803,7 @@ function renderFam(){
   $("#famCur").innerHTML = `<b>${esc(g ? g.name : f.name)}</b><small>${esc(e ? e.name : f.models)}</small>`;
   const m = g ? g.model : null;
   const short = x => x.name.replace(/^(Карбюратор|Инжектор)\s*/i, "") || "Стандартный";
-  $("#famMenu").innerHTML =
+  $("#famMenu").innerHTML = `<div class="mstep">${vinBlock()}</div>` +
     `<div class="mstep"><div class="mcap"><span>1</span>Модель</div><div class="mfams">` + MODELS.map(x =>
       `<button type="button" data-model="${x.id}" aria-pressed="${!!m && m.id === x.id}"><b>${esc(x.name)}</b><small>${esc(x.gens.length > 1 ? x.gens.map(y => y.name).join(", ") : x.gens[0].years)}</small></button>`).join("") + `</div></div>` +
     (m ? `<div class="mstep"><div class="mcap"><span>2</span>Поколение</div><div class="engs">` + m.gens.map(y =>
@@ -2811,6 +2816,66 @@ function renderFam(){
       <li><b>Карбюратор:</b> в салоне есть ручка подсоса (обычно слева под рулём), сверху мотора большой круглый корпус воздушного фильтра.</li>
       <li><b>Инжектор:</b> ручки подсоса нет, при включении зажигания на панели загорается лампа «Check Engine», корпус фильтра сбоку, от него гофра к дроссельному узлу.</li>
       <li>Точно — по номеру двигателя в ПТС.</li></ul></details>` : "");
+}
+/* ---------- VIN: модель, кузов и модельный год. Всё считается в браузере, VIN никуда не отправляется ---------- */
+const VIN_YEAR = "ABCDEFGHJKLMNPRSTVWXY123456789";   /* A=1980 (и 2010), … Y=2000, 1=2001 … 9=2009 — цикл 30 лет */
+const vinYears = c => { const i = VIN_YEAR.indexOf(c); return i < 0 ? [] : [1980 + i, 2010 + i]; };
+/* [шаблон кода модели (символы 4–9), подпись, функция: модельный год → поколения] */
+const VIN_MODELS = [
+  [/^210[1-7]/, "ВАЗ 2101–2107", y => ["classic1"]],
+  [/^(2108|2109)/, "Самара 2108 / 2109 / 21099", y => ["samara1"]],
+  [/^(2113|2114|2115)/, "Самара 2113 / 2114 / 2115", y => ["samara2"]],
+  [/^(2110|2111|2112)/, "ВАЗ 2110 / 2111 / 2112", y => ["ten1"]],
+  [/^21213/, "Нива 21213", y => ["niva2121"]],
+  [/^(21214|2131)/, "Нива 4x4 / Легенд", y => y >= 2027 ? ["niva18"] : y >= 2026 ? ["niva17","niva18"] : ["niva17"]],
+  [/^2121/, "Нива 2121", y => ["niva2121"]],
+  [/^2123/, "Шевроле Нива / Нива Тревел", y => y <= 2019 ? ["chevyniva"] : y === 2020 ? ["chevyniva","travel17"] : y <= 2024 ? ["travel17"] : y === 2025 ? ["travel17","travel18"] : ["travel18"]],
+  [/^(1117|1118|1119)/, "Калина", y => ["kalina1"]],
+  [/^(2170|2171|2172)/, "Приора", y => y <= 2012 ? ["priora1"] : y === 2013 ? ["priora1","priora2"] : ["priora2"]],
+  [/^(2190|2191)/, "Гранта", y => y <= 2017 ? ["granta1"] : y === 2018 ? ["granta1","grantafl"] : ["grantafl"]],
+  [/^(2192|2194)/, "Калина 2 или Гранта FL (хэтчбек, универсал)", y => y <= 2017 ? ["kalina2"] : y === 2018 ? ["kalina2","grantafl"] : ["grantafl"]],
+  [/^GF/, "Веста", y => y <= 2021 ? ["vesta1"] : y === 2022 ? ["vesta1","vestang"] : ["vestang"]],
+  [/^GA/, "Иксрей", y => ["xray1"]],
+  [/^[RFK]S0/, "Ларгус", y => y <= 2020 ? ["largus1"] : y === 2021 ? ["largus1","largusfl"] : ["largusfl"]]
+];
+/* у первой Весты 7-й символ — мотор (два источника сходятся) */
+const VESTA_ENG = {"1":"e21129","3":"e21179","A":"e21129"};
+const VESTA_NOTE = {"2":"Мотор ВАЗ-11189 (8 кл., 87 л.с.) — его цифр у нас пока нет","4":"Мотор Renault H4M (вариатор) — его цифр у нас пока нет"};
+function decodeVin(raw){
+  const v = String(raw || "").toUpperCase().replace(/[\s-]/g, "");
+  if(v.length !== 17) return {err:`В VIN 17 символов, а здесь ${v.length}. Он есть в СТС, ПТС и на табличке в проёме двери.`};
+  if(/[^A-HJ-NPR-Z0-9]/.test(v)) return {err:/[IOQ]/.test(v) ? "В VIN не бывает букв I, O и Q — проверь, может, это цифры 1 и 0." : "В VIN только латинские буквы и цифры."};
+  const wmi = v.slice(0,3), vds = v.slice(3,9);
+  if(!/^(XTA|XTC|X9L|X7L)$/.test(wmi)) return {err:`Код производителя «${wmi}» — это не АвтоВАЗ. У Лад VIN начинается с XTA (у Шевроле Нивы — X9L).`};
+  const rule = VIN_MODELS.find(([re]) => re.test(vds));
+  if(!rule) return {err:"Модель по этому VIN мы пока не узнаём. Выбери машину вручную — ниже."};
+  const [, label, gensBy] = rule;
+  /* год: из двух кандидатов цикла берём тот, при котором у модели есть поколение */
+  const years = vinYears(v[9]).filter(y => y <= new Date().getFullYear() + 1);
+  let year = null, gens = [];
+  for(const y of years.slice().reverse()){ const g = gensBy(y).filter(id => { const G = GENS.find(x => x.id === id); return G && yearFits(G, y); }); if(g.length){ year = y; gens = g; break; } }
+  if(!gens.length){ year = years[years.length - 1] || null; gens = gensBy(year || 2000); }
+  let eng = null, note = "";
+  if(/^GF/.test(vds) && gens.length === 1 && gens[0] === "vesta1"){ eng = VESTA_ENG[v[6]] || null; note = VESTA_NOTE[v[6]] || ""; }
+  return {vin:v, label, year, gens, eng, note};
+}
+/* попадает ли модельный год в годы выпуска поколения («2013–2018», «с 2022», «до июля 2026», «1977–1990-е») */
+function yearFits(g, y){
+  const t = g.years, n = (t.match(/\d{4}/g) || []).map(Number);
+  if(/^с /.test(t)) return y >= n[0] - 1;
+  if(/^до /.test(t)) return y <= n[0] + 1;
+  if(/1990-е/.test(t)) return y >= n[0] && y <= 1999;
+  return n.length >= 2 ? y >= n[0] - 1 && y <= n[1] + 1 : true;
+}
+let vinRes = null;
+function vinBlock(){
+  const r = vinRes;
+  const res = !r ? "" : r.err ? `<p class="vinerr">${esc(r.err)}</p>` :
+    `<div class="vinres"><p>Похоже, это <b>${esc(r.label)}</b>${r.year ? `, ${r.year} модельного года` : ""}.${r.gens.length > 1 ? " Уточни поколение:" : ""}</p>
+     <div class="engs">${r.gens.map(id => { const G = GENS.find(x => x.id === id); return G ? `<button type="button" data-vingen="${id}" aria-pressed="${!!genOf() && genOf().id === id}"><b>${esc(G.name)}</b><small>${esc(G.years)}</small></button>` : ""; }).join("")}</div>
+     ${r.note ? `<p class="mnote">${esc(r.note)}.</p>` : ""}
+     <p class="mnote">${r.eng ? "Мотор определили по VIN." : r.note ? "" : "Мотор по VIN у этой модели не определить: смотри строку «Модель двигателя» (или «Модель, № двигателя») в СТС или ПТС и выбери его ниже."}</p></div>`;
+  return `<form class="vinform" data-vinform><label for="vinIn">Определить по VIN</label><div class="vinrow"><input id="vinIn" name="vin" maxlength="20" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="17 символов из СТС или ПТС" value="${r && r.vin ? esc(r.vin) : ""}"><button type="submit" class="btn">Найти</button></div><small>VIN не уходит с твоего телефона — всё считается на месте.</small></form>${res}`;
 }
 /* выбор поколения: семейство + первый подходящий мотор */
 function chooseGen(id){
@@ -2934,6 +2999,7 @@ function renderList(){
   const welcome = query || famChosen ? "" : `<section class="welcome" aria-labelledby="wh"><h2 id="wh">ТО Лады своими руками — по шагам</h2>
     <p>Пошаговые инструкции, поломки по симптомам и точные цифры: объёмы, моменты, ключи. Выбери свою машину — цифры подстроятся под неё.</p>
     <div class="wfams">${MODELS.map(x => `<button type="button" data-model="${x.id}"><b>${esc(x.name)}</b><small>${esc(x.gens.length > 1 ? x.gens.map(y => y.name).join(", ") : x.gens[0].years)}</small></button>`).join("")}</div>
+    <p class="wvin">Не знаешь поколение или мотор? <button type="button" class="linkbtn" data-openvin>Определи по VIN</button></p>
     <button type="button" class="linkbtn wskip" data-wskip>Выберу позже</button></section>`;
   const features = query ? "" : `<div class="features">
     <button type="button" class="feature" data-goto="schedule">${icon("schedule")}<span><b>Регламент ТО</b><small>Что и когда менять по пробегу</small></span></button>
@@ -3582,6 +3648,13 @@ function arm(b, label, fn){
   fn();
 }
 
+document.addEventListener("submit", e => {
+  const f = e.target.closest("[data-vinform]"); if(!f) return;
+  e.preventDefault();
+  vinRes = decodeVin(f.vin.value);
+  if(vinRes.gens && vinRes.gens.length === 1){ chooseGen(vinRes.gens[0]); if(vinRes.eng){ const G = GENS.find(x => x.id === vinRes.gens[0]); if(G.engs.includes(vinRes.eng)) setEng(G.fam, vinRes.eng); } }
+  render(); famMenu(true); $("#famMenu .vinres, #famMenu .vinerr")?.scrollIntoView({block:"nearest"});
+});
 document.addEventListener("click", e => {
   const b = e.target.closest("button");
   if(!b){ if(!e.target.closest(".famsel")) famMenu(false); return; }
@@ -3589,6 +3662,8 @@ document.addEventListener("click", e => {
   if(b.id === "famBtn"){ famMenu($("#famMenu").hidden); return; }
   if(!b.closest(".famsel")) famMenu(false);
   if(d.model){ const mm = MODELS.find(x => x.id === d.model); if(mm){ const cur = genOf(); chooseGen(cur && cur.model.id === mm.id ? cur.id : mm.gens[mm.gens.length - 1].id); } const y = scrollY; render(); scrollTo(0,y); famMenu(true); $("#famMenu [data-gen][aria-pressed=true]")?.focus(); }
+  else if(d.vingen){ chooseGen(d.vingen); if(vinRes && vinRes.eng){ const G = GENS.find(x => x.id === d.vingen); if(G && G.engs.includes(vinRes.eng)) setEng(G.fam, vinRes.eng); } const y = scrollY; render(); scrollTo(0,y); famMenu(true); $("#famMenu [data-eng][aria-pressed=true]")?.scrollIntoView({block:"center"}); }
+  else if("openvin" in d){ famMenu(true); $("#vinIn")?.focus(); }
   else if(d.gen){ chooseGen(d.gen); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $(`#famMenu [data-gen="${d.gen}"]`)?.focus(); }
   else if(d.fam){ setFam(d.fam); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $("#famMenu .engs button")?.focus(); }
   else if(d.kind){ const x = (ENG[fam] || []).find(x => x.kind === d.kind); if(x){ setEng(fam, x.id); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $(`#famMenu [data-kind="${d.kind}"]`)?.focus(); } }
