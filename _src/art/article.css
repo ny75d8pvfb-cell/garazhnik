@@ -90,6 +90,6 @@ ol.asteps>li>div{min-width:0;padding-top:4px}
   .anav{gap:12px}
   .abrand small{display:none}
   .btn-app{padding:7px 11px;font-size:13.5px!important}
-  .cookiebar{flex-direction:column;align-items:stretch}
+  .cookiebar{padding:9px 10px 9px 12px;gap:10px}.cookiebar p,.cookiebar a{font-size:12.5px;line-height:1.35}.cookiebar .btn{padding:8px 14px;font-size:14px}
   .art td{font-size:13.5px}
 }

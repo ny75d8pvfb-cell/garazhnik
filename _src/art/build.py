@@ -16,7 +16,7 @@ METRIKA = '''<script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i]
 LOGO = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.6 17.2a1.6 1.6 0 0 0 2.3 2.3l5.7-5.7a4 4 0 0 0 5.2-5.4l-2.4 2.4-2.2-.4-.4-2.2z"/></svg>'
 TG = '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4 2.8 11.1c-.9.4-.9 1.2.1 1.5l4.6 1.4 1.8 5.5c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8L22.9 5.5c.3-1.3-.5-1.9-1.9-1.5z"/><path d="m7.5 14 9.5-6"/></svg>'
 COOKIE = '''<div class="cookiebar" id="cookiebar" hidden><p>Сайт использует cookies и Яндекс Метрику, чтобы понимать, какие материалы полезны. <a href="../#about">Подробнее</a></p><button type="button" class="btn" id="cookieOk">Понятно</button></div>
-<script>(function(){var s=false;try{s=localStorage.getItem("garazh-cookie")==="1"}catch(e){}var b=document.getElementById("cookiebar");if(!s)b.hidden=false;document.getElementById("cookieOk").onclick=function(){b.hidden=true;try{localStorage.setItem("garazh-cookie","1")}catch(e){}};var tb=document.getElementById("themeBtn");if(tb)tb.onclick=function(){var t=document.documentElement.getAttribute("data-theme")==="light"?"dark":"light";document.documentElement.setAttribute("data-theme",t);try{localStorage.setItem("garazh-theme",t)}catch(e){}};})();</script>'''
+<script>(function(){var s=false;try{s=localStorage.getItem("garazh-cookie")==="1"}catch(e){}var b=document.getElementById("cookiebar");if(!s)b.hidden=false;document.getElementById("cookieOk").onclick=function(){b.hidden=true;try{localStorage.setItem("garazh-cookie","1")}catch(e){}};var tb=document.getElementById("themeBtn");if(tb)tb.onclick=function(){var t=document.documentElement.getAttribute("data-theme")==="light"?"dark":"light";document.documentElement.setAttribute("data-theme",t);try{localStorage.setItem("garazh-theme",t)}catch(e){}};document.querySelectorAll("figure svg[viewBox]").forEach(function(v){var bb;try{bb=v.getBBox()}catch(e){return}if(!bb||!bb.width)return;var b=v.viewBox.baseVal,m=3;if(bb.x<b.x-.5||bb.y<b.y-.5||bb.x+bb.width>b.x+b.width+.5||bb.y+bb.height>b.y+b.height+.5){var x0=Math.min(b.x,bb.x-m),y0=Math.min(b.y,bb.y-m),x1=Math.max(b.x+b.width,bb.x+bb.width+m),y1=Math.max(b.y+b.height,bb.y+bb.height+m);v.setAttribute("viewBox",[x0,y0,x1-x0,y1-y0].map(function(n){return n.toFixed(1)}).join(" "))}});})();</script>'''
 
 def head(title, desc, canon, extra=""):
     return f'''<!doctype html>
@@ -62,6 +62,7 @@ FOOT = f'''<footer class="afoot"><div class="wrap">
 def card(a):
     return f'<a class="acard" href="{a["slug"]}.html"><span class="acat">{E(a["cat"])}</span><b>{E(a["title"])}</b><small>{E(a["desc"])}</small><span class="ameta">{a["mins"]} мин чтения</span></a>'
 
+MODEL_PAGES = [a for a in A if a.get("fam")]
 by = {a["slug"]: a for a in A}
 for a in A:
     canon = f'{SITE}/stati/{a["slug"]}.html'
@@ -85,7 +86,7 @@ for a in A:
     <p class="lead">{E(a["lead"])}</p>
     <nav class="toc" aria-label="Содержание"><b>Содержание</b><ol>{toc}</ol></nav>
     {body}
-    <a class="cta" href="../#{a["app"]}"><span class="cta-ico" aria-hidden="true">{LOGO}</span><span><b>{E(a["app_label"])}</b><small>Открыть в Гаражнике: цифры под твою модель и мотор, схемы и пошаговый режим</small></span><span class="cta-go" aria-hidden="true">→</span></a>
+    <a class="cta" href="../{"?fam=" + a["fam"] if a.get("fam") else ""}#{a["app"]}"><span class="cta-ico" aria-hidden="true">{LOGO}</span><span><b>{E(a["app_label"])}</b><small>Открыть в Гаражнике: цифры под твою модель и мотор, схемы и пошаговый режим</small></span><span class="cta-go" aria-hidden="true">→</span></a>
   </article>
   <section class="related"><h2>Похожие статьи</h2><div class="cards">{rel}</div></section>
 </main>
@@ -93,10 +94,10 @@ for a in A:
     open(os.path.join(OUT, "stati", a["slug"] + ".html"), "w").write(page)
 
 # список статей
-GROUP = {"ТО и регламент": "С чего начать", "Цифры и таблицы": "С чего начать", "Инструмент": "С чего начать", "Сезон": "С чего начать",
+GROUP = {"Модель": "Твоя модель", "ТО и регламент": "С чего начать", "Цифры и таблицы": "С чего начать", "Инструмент": "С чего начать", "Сезон": "С чего начать",
          "Масло и жидкости": "Масло и жидкости", "Двигатель": "Двигатель",
          "Тормоза": "Тормоза и подвеска", "Подвеска": "Тормоза и подвеска", "Электрика": "Электрика и неисправности", "Неисправности": "Электрика и неисправности"}
-cats = []
+cats = ["Твоя модель"]
 for a in A:
     if GROUP[a["cat"]] not in cats: cats.append(GROUP[a["cat"]])
 groups = "".join(f'<section class="cgroup"><h2>{E(c)}</h2><div class="cards">{"".join(card(a) for a in A if GROUP[a["cat"]] == c)}</div></section>' for c in cats)
@@ -120,4 +121,12 @@ open(os.path.join(OUT, "stati", "style.css"), "w").write(css)
 urls = [(SITE + "/", NOW), (SITE + "/stati/", NOW)] + [(f'{SITE}/stati/{a["slug"]}.html', DT(a)) for a in A]
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f'  <url><loc>{u}</loc><lastmod>{d.isoformat()}</lastmod></url>\n' for u, d in urls) + '</urlset>\n'
 open(os.path.join(OUT, "sitemap.xml"), "w").write(sm)
-print("ok", len(A))
+# список статей для поиска и ссылок внутри приложения (index.html, между маркерами)
+import re as _re
+_app = os.path.join(OUT, "index.html")
+if os.path.exists(_app):
+    _arts = [dict({"s": a["slug"], "t": a["title"], "d": a["desc"], "c": a["cat"], "j": "" if a.get("fam") else a.get("app", "")}, **({"m": a["fam"]} if a.get("fam") else {})) for a in A]
+    _src = open(_app).read()
+    _new = _re.sub(r"const ARTS = .*?;/\*ARTS\*/", lambda _m: "const ARTS = " + json.dumps(_arts, ensure_ascii=False) + ";/*ARTS*/", _src, count=1, flags=_re.S)
+    if _new != _src: open(_app, "w").write(_new)
+print("ok", len(A), "из них моделей", len(MODEL_PAGES))

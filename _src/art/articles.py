@@ -334,7 +334,8 @@ add("nabor-instrumentov", "Инструмент", "Стартовый набор
 exec(open(os.path.join(os.path.dirname(__file__), "articles2.py")).read())
 exec(open(os.path.join(os.path.dirname(__file__), "articles3.py")).read())
 exec(open(os.path.join(os.path.dirname(__file__), "articles4.py")).read())
-assert len(A) == 35, len(A)
+exec(open(os.path.join(os.path.dirname(__file__), "articles5.py")).read())   # страницы моделей
+assert len(A) == 41, len(A)
 for a in A:
     for r in a["related"]:
         assert any(x["slug"] == r for x in A), r

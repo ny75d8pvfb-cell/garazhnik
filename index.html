@@ -124,6 +124,18 @@ ol.steps li div{min-width:0;padding-top:4px}
 .warn::before{content:"!";flex:none;width:22px;height:22px;border-radius:50%;background:var(--warn);color:var(--bg);font:14px/22px var(--f-display);text-align:center}
 .warn p{margin:0}
 .table{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+
+.welcome{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:var(--r);padding:16px 16px 12px;margin-bottom:14px}
+.welcome h2{margin:0 0 6px;font-size:20px;line-height:1.25}
+.welcome p{margin:0 0 12px;color:var(--muted);font-size:14.5px;line-height:1.45}
+.wfams{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+@media (min-width:700px){.wfams{grid-template-columns:repeat(3,1fr)}}
+.wfams button{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:10px 12px;border:1px solid var(--line-2);border-radius:var(--r);background:var(--bg,transparent);color:inherit;font:inherit;cursor:pointer}
+.wfams button:hover,.wfams button:focus-visible{border-color:var(--amber)}
+.wfams b{font-size:15px}.wfams small{color:var(--muted);font-size:12.5px;line-height:1.3}
+.wskip{margin-top:10px;font-size:13.5px}
+.schedmob{display:none}
+@media (max-width:560px){.sched .schedcol{display:none}.schedmob{display:block;margin-top:4px}.schedmob .linkbtn{font-size:13.5px}}
 table{border-collapse:collapse;width:100%;font-size:14px}
 th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
 tr:last-child td{border-bottom:0}
@@ -280,6 +292,7 @@ form.add input,form.add select{padding:10px 12px;border:1px solid var(--line-2);
 td:last-child{text-align:right}
 .entry.starter{border-color:color-mix(in srgb,var(--amber) 45%,transparent)}
 .sym h3{font-family:var(--f-body);font-weight:600;font-size:16.5px}
+.symgh{margin-top:22px}
 .sym.danger{border-color:color-mix(in srgb,var(--warn) 45%,transparent)}
 .dangerpill{display:inline-block;margin:2px 0 6px;background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn);border-color:transparent}
 .causes{margin:6px 0 12px;padding-left:20px;color:var(--ink);display:flex;flex-direction:column;gap:4px;max-width:68ch}
@@ -513,7 +526,7 @@ td:last-child{text-align:right}
 .cookiebar p{margin:0;font-size:13.5px;color:var(--muted);flex:1}
 .cookiebar .linkbtn{font-size:13.5px}
 .cookiebar .btn{flex:none}
-@media (max-width:640px){.cookiebar{bottom:calc(78px + env(safe-area-inset-bottom,0px));flex-direction:column;align-items:stretch}}
+@media (max-width:640px){.cookiebar{bottom:calc(74px + env(safe-area-inset-bottom,0px));padding:9px 10px 9px 12px;gap:10px}.cookiebar p{font-size:12.5px;line-height:1.35}.cookiebar .btn{padding:8px 14px;font-size:14px}}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--raised);border:1px solid var(--line-2);color:var(--ink);padding:10px 16px;border-radius:12px;font-size:14px;z-index:15;max-width:calc(100% - 32px);transition:opacity .2s,transform .2s}
 .toast.show{opacity:1;transform:translate(-50%,0)} .toast.err{border-color:var(--warn);color:var(--warn)}
 
@@ -875,6 +888,10 @@ nav.bottom button{font:500 11px var(--f-body)}
 .hit:hover{border-color:var(--amber)}
 .hit small{font:500 11px var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--dim)}
 .hit b{font-weight:500;font-size:14.5px}
+a.hit{text-decoration:none}a.hit:hover,.hit:hover{border-color:var(--amber)}
+.empty p{margin:0 0 6px}
+.jsec .hits{display:grid;gap:8px}
+.famnote a{color:var(--amber)}
 @media (max-width:640px){.jtitle{font-size:24px!important}.legend{columns:1}.tabs button{font-size:14.5px}}
 
 /* ===== Светлая тема «как руководство» ===== */
@@ -1738,7 +1755,21 @@ const SYMPTOMS = [
   {t:"Машину тянет вбок",c:["При торможении: колодки или суппорт с одной стороны","При езде: разное давление в шинах, развал-схождение"],jobs:["brakes","wheel"]},
   {t:"Металлический стук или шелест спереди мотора",c:["На классике и Ниве: растянута цепь ГРМ или изношен успокоитель","На ремённых моторах: шумит ролик ГРМ или помпа"],jobs:["timing"]},
   {t:"Плохо дует печка, потеют стёкла",c:["Забит салонный фильтр","Мало антифриза или воздух в системе охлаждения"],jobs:["cabin","coolant"]},
-  {t:"Не горит фара, габарит или стоп",c:["Перегорела лампа","Сгорел предохранитель","Окислилась фишка"],jobs:["bulbs"]}
+  {t:"Не горит фара, габарит или стоп",c:["Перегорела лампа","Сгорел предохранитель","Окислилась фишка"],jobs:["bulbs"]},
+  {t:"Пахнет бензином в салоне или возле машины",danger:true,c:["Не езди и не кури рядом: пары бензина могут вспыхнуть","Подтекает топливный фильтр или его соединения — посмотри снизу на мокрые следы","Треснул шланг или трубка подачи топлива под капотом","На карбюраторе: переливает поплавковая камера"],jobs:["fuel"],k:"запах бензина воняет бензином"},
+  {t:"Лужа или пятна под машиной",c:["Прозрачная вода под передней частью летом — конденсат кондиционера, это норма","Зелёная, красная или жёлтая, сладко пахнет — антифриз: проверь уровень в бачке и патрубки","Тёмная маслянистая под мотором — моторное масло: пробка поддона, фильтр, прокладки","Желтоватая маслянистая у колеса — тормозная жидкость. Ехать нельзя, пока не найдёшь утечку"],jobs:["levels","oil","coolant"],k:"течет капает лужа под машиной пятно масло антифриз"},
+  {t:"Стук в подвеске на кочках",c:["Глухой стук на мелких неровностях — стойки стабилизатора, самая частая причина","Стук на ямах — изношены амортизаторы или их опоры","Стук и люфт колеса — шаровая опора, сайлентблоки рычага, рулевой наконечник","Сначала проверь, что колёсные болты затянуты"],jobs:["stablink","wheel"],k:"стучит подвеска спереди сзади ямы кочки"},
+  {t:"Гул или вой на ходу, растёт со скоростью",c:["Ступичный подшипник: гул меняется в поворотах — громче, когда нагружаешь сторону с больным подшипником","Неравномерно изношенные или шумные шины","Вой при разгоне и сбросе газа — шумит коробка или главная пара"],jobs:["hub","wheel"],k:"гудит гул воет вой шум на скорости"},
+  {t:"Руль бьёт или вибрирует на скорости",c:["На 80–110 км/ч — колёса не отбалансированы: самая частая причина после переобувки","Погнутый диск или грыжа на шине","Бьёт только при торможении — неровные тормозные диски","Люфт рулевых наконечников или тяги"],jobs:["wheel","brakes"],k:"вибрация руль трясет бьет биение"},
+  {t:"Хруст при повороте руля в движении",c:["Хрустит на полном вывороте при разгоне — изношен наружный ШРУС («граната»)","Почти всегда сначала рвётся пыльник ШРУСа: смазку выбивает, внутрь попадает грязь","Порванный пыльник замечен рано — меняют только его, хруст уже есть — меняют ШРУС"],jobs:[],k:"хрустит щелкает при повороте шрус граната"},
+  {t:"Дым из выхлопной трубы",c:["Лёгкий белый пар на холодном моторе в мороз — норма","Густой белый дым со сладким запахом, уходит антифриз — антифриз попадает в цилиндры (прокладка ГБЦ). К мастеру","Сизый или синий дым — горит масло: износ маслосъёмных колпачков или колец","Чёрный дым — слишком богатая смесь: свечи, воздушный фильтр, датчики"],jobs:["levels","plugs","air"],k:"дымит дым выхлоп белый синий черный"},
+  {t:"Сладкий запах в салоне, запотевают стёкла",c:["Течёт радиатор печки или его патрубки: под ковриком у ног пассажира может быть мокро","Уровень антифриза в бачке медленно падает — это подтверждает утечку","Без запаха, просто потеют стёкла — забит салонный фильтр или включена рециркуляция"],jobs:["levels","coolant","cabin"],k:"запах антифриза пахнет сладко потеют стекла мокрый коврик"},
+  {t:"Плавают обороты на холостом ходу",c:["Загрязнён дроссель или регулятор холостого хода — частая причина на инжекторных Ладах","Подсос воздуха: треснул шланг или гофра после датчика расхода воздуха","Неисправен датчик расхода воздуха (ДМРВ) или температуры. Подскажет код ошибки"],jobs:["air","plugs"],k:"обороты скачут плавают холостые"},
+  {t:"Глохнет на ходу или на холостых",c:["Нет топлива: забит топливный фильтр, слабый бензонасос","Грязный дроссель или регулятор холостого хода — глохнет при сбросе газа","Отказывает датчик положения коленвала — мотор глохнет и не заводится, пока не остынет","Сгорел предохранитель или реле бензонасоса"],jobs:["fuel","plugs"],k:"глохнет заглох глохнет на ходу"},
+  {t:"Дёргается при разгоне, провалы при нажатии газа",c:["Пропуски зажигания: свечи, провода, катушка","Мало топлива: топливный фильтр, давление бензонасоса","Грязный воздушный фильтр или неисправен ДМРВ"],jobs:["plugs","fuel","air"],k:"дергается провал рывки не тянет нет тяги"},
+  {t:"Аккумулятор быстро садится",c:["Аккумулятор старый (больше 4–5 лет) — проверь напряжение и под нагрузкой","Генератор плохо заряжает: на заведённом моторе меньше 13,5 В","Что-то потребляет ток на стоянке: подсветка, магнитола, сигнализация"],jobs:["battery","altbelt"],k:"садится аккумулятор акб разряжается утечка тока"},
+  {t:"Хрустят передачи при включении",c:["Сцепление выключается не до конца: проверь, что педаль уходит в пол, нет ли воздуха в гидроприводе (на Весте, Ларгусе) или растянут трос","Изношены синхронизаторы — хрустит одна и та же передача","Мало масла в коробке: проверь уровень и следы подтёков"],jobs:["levels"],k:"коробка кпп хрустит передача не включается сцепление"},
+  {t:"Уходит масло, приходится доливать",c:["Сначала ищи подтёки: пробка поддона, масляный фильтр, прокладка клапанной крышки","Нет подтёков, но дымит сизым — масло горит: колпачки или кольца","Немного доливать между заменами — нормально для мотора с пробегом. Если доливать приходится каждые несколько сотен километров — к мастеру"],jobs:["levels","oil"],k:"жрет масло расход масла уходит масло доливать"}
 ];
 
 const PLUG_READ = [
@@ -1783,8 +1814,15 @@ const icon = id => `<span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24
 
 
 /* ---------- схемы ---------- */
-const SYM_IDS = ["oillamp","overheat","softpedal","nostart","nocatch","misfire","whistle","chargelamp","brakenoise","pull","chainnoise","heater","lights"];
+const SYM_IDS = ["oillamp","overheat","softpedal","nostart","nocatch","misfire","whistle","chargelamp","brakenoise","pull","chainnoise","heater","lights","fuelsmell","puddle","suspknock","hum","shimmy","cvjoint","smoke","sweetsmell","idle","stalls","jerks","batdrain","gears","oilburn"];
 SYMPTOMS.forEach((s,i) => s.id = SYM_IDS[i] || ("s" + i));
+const SYM_GROUPS = [
+  ["Опасно — сначала остановись", ["oillamp","overheat","softpedal","fuelsmell"]],
+  ["Не заводится, глохнет, троит", ["nostart","nocatch","stalls","misfire","jerks","idle"]],
+  ["Шумы, стуки, руль и тормоза", ["suspknock","chainnoise","hum","whistle","brakenoise","shimmy","pull","cvjoint","gears"]],
+  ["Дым, запахи, лужи, расход", ["smoke","puddle","sweetsmell","oilburn"]],
+  ["Электрика и салон", ["chargelamp","batdrain","lights","heater"]]
+];
 const FIG_JOBS = {oil:["oiltech","dipT"],levels:["dipT","tankT"],air:["airT"],cabin:["cabinT","airT"],plugs:["gapT","plugread"],coolant:["tankT"],brakes:["padsT"],padsreplace:["caliperT","padsT","starT"],timing:["marksT"],fuel:["fuelT"],bleed:["bleedT","hoseT"],battery:["volt","jumpT"],bulbs:["bulbs"],altbelt:["beltT","tens"],wheel:["starT"],valves:["valvefig"],stablink:["linkfig"],hub:["hubfig"]};
 
 const PLUG_LOOK = [
@@ -2657,10 +2695,15 @@ let db = null, isOwner = false, dbReady = false, assets = null;
 let photos = [], photoTarget = null;
 let garage = {cars:[], log:[]}, activeCar = null, gStore = "local", gUid = null, gEditing = null, prefillType = null, gMsg = "";
 try{ const s = localStorage.getItem("garazh-fam"); if(s && FAM[s]) fam = s; }catch(e){}
+try{ const u = new URLSearchParams(location.search).get("fam"); if(u && FAM[u]){ fam = u; localStorage.setItem("garazh-fam", u); history.replaceState(null, "", location.pathname + location.hash); } }catch(e){}
+let famChosen = false; try{ famChosen = !!localStorage.getItem("garazh-fam") || !!localStorage.getItem("garazh-welcome"); }catch(e){}
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const fill = s => { const f = F(); return esc(s).replace(/\{(\w+)\}/g, (m,k) => f[k] ? `<span class="n">${esc(f[k])}</span>` : "по руководству к своей машине"); };
+const fill = s => { const f = F(), chip = k => `<span class="n">${esc(f[k])}</span>`;
+  /* «объёма ({oil})»: значение уже выделено плашкой, скобки вокруг неё лишние (и двоятся, если в значении свои скобки) */
+  return esc(s).replace(/\(\{(\w+)\}\)/g, (m,k) => f[k] ? "— " + chip(k) + " —" : "(по руководству к своей машине)")
+    .replace(/\{(\w+)\}/g, (m,k) => f[k] ? chip(k) : "по руководству к своей машине").replace(/ —([,.;])/g, "$1"); };
 const stepOk = st => { if(typeof st === "string") return true; const e = engOf(fam), f = F();
   return (!st.only || st.only.includes(fam)) && (!st.not || !st.not.includes(fam)) && (!st.kind || st.kind === (e?.kind || "inj")) && (!st.tank || (st.tank === "yes") === !!f.tankFilter); };
 const vidsFor = id => videos.filter(v => v.instr === id && (!v.family || v.family === "all" || v.family === fam));
@@ -2669,7 +2712,7 @@ const rub = n => Number(n).toLocaleString("ru-RU") + " ₽";
 const isoToday = () => { const d = new Date(); return new Date(d - d.getTimezoneOffset()*60000).toISOString().slice(0,10); };
 const ruDate = iso => iso ? iso.split("-").reverse().join(".") : "";
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
-const setFam = k => { if(!FAM[k]) return; fam = k; try{ localStorage.setItem("garazh-fam", fam); }catch(_){} };
+const setFam = k => { if(!FAM[k]) return; fam = k; famChosen = true; try{ localStorage.setItem("garazh-fam", fam); }catch(_){} };
 
 function platform(url){
   try{
@@ -2711,41 +2754,126 @@ function renderTabs(){
 }
 function famNote(){
   const f = F();
-  return `<p class="famnote">Цифры показаны для: <b>${esc(f.name)}</b>, ${esc(f.engName || f.models)}. Поменять — кнопка «Моя машина» вверху.</p>`;
+  const mp = ARTS.find(a => a.m === fam);
+  return `<p class="famnote">Цифры показаны для: <b>${esc(f.name)}</b>, ${esc(f.engName || f.models)}. Поменять — кнопка «Моя машина» вверху.${mp ? ` <a href="stati/${mp.s}.html">Всё про ${esc(f.name)} на одной странице →</a>` : ""}</p>`;
 }
 function searchBox(ph){
   return `<div class="search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="${ph}" value="${esc(query)}" autocomplete="off" aria-label="Поиск"></div>`;
 }
-const match = (...parts) => !query || parts.join(" ").toLowerCase().includes(query.toLowerCase());
+/* ---------- поиск: окончания, синонимы, модели ---------- */
+const ARTS = [{"s": "to-po-reglamentu", "t": "ТО Лады по регламенту: что и когда менять", "d": "Таблица регламента ТО для Лады: интервалы замены масла, фильтров, свечей, ремня ГРМ, антифриза и тормозной жидкости по пробегу и времени.", "c": "ТО и регламент", "j": "schedule"}, {"s": "skolko-masla", "t": "Сколько масла заливать в Ладу: объёмы по моделям и моторам", "d": "Сколько литров масла нужно в двигатель Лады: классика, Нива, Самара, десятка, Калина, Приора, Гранта, Веста, Ларгус. Какое масло выбрать.", "c": "Масло и жидкости", "j": "numbers"}, {"s": "zamena-masla", "t": "Замена масла на Гранте, Калине и Приоре своими руками", "d": "Пошаговая замена масла и масляного фильтра на Гранте, Калине, Приоре и других Ладах в гараже: инструмент, сколько масла, порядок работы, частые ошибки.", "c": "Масло и жидкости", "j": "oil"}, {"s": "antifriz", "t": "Сколько антифриза в Ладе и какой выбрать", "d": "Объём антифриза для всех моделей Лады, какой тип выбрать (тосол, G11, G12), можно ли смешивать, как проверить уровень и защиту от мороза.", "c": "Масло и жидкости", "j": "coolant"}, {"s": "momenty-zatyazhki", "t": "Моменты затяжки колёс и свечей на Ладе", "d": "Таблица моментов затяжки колёсных болтов и свечей зажигания для всех моделей Лады, размеры ключей, как правильно затягивать колёса.", "c": "Цифры и таблицы", "j": "numbers"}, {"s": "zamena-svechey", "t": "Как поменять свечи на Гранте, Калине и Приоре", "d": "Замена свечей зажигания на Гранте, Калине и Приоре с 8- и 16-клапанным мотором: какой ключ, момент затяжки, зазор, пошагово со схемами.", "c": "Двигатель", "j": "plugs"}, {"s": "gnet-klapana", "t": "Гнёт ли клапаны мотор Лады: список двигателей", "d": "Какие двигатели Лады гнут клапаны при обрыве ремня ГРМ, а какие нет: 8 и 16 клапанов, Гранта, Калина, Приора, Веста, Ларгус.", "c": "Двигатель", "j": "timing"}, {"s": "remen-grm", "t": "Когда менять ремень ГРМ на Ладе", "d": "Интервал замены ремня ГРМ для всех моторов Лады, признаки износа, что менять вместе с ремнём, как выставить метки.", "c": "Двигатель", "j": "timing"}, {"s": "iznos-kolodok", "t": "Как проверить износ тормозных колодок", "d": "Как понять, что тормозные колодки пора менять: признаки, проверка без снятия колеса, минимальная толщина накладки, какие колодки выбрать для Лады.", "c": "Тормоза", "j": "brakes"}, {"s": "svistit-remen", "t": "Свистит ремень генератора: причины и что делать", "d": "Почему свистит ремень генератора на Ладе при запуске и включении фар, как проверить натяжение, когда менять ремень.", "c": "Двигатель", "j": "altbelt"}, {"s": "lampa-davleniya-masla", "t": "Горит лампа давления масла: что делать сразу", "d": "Загорелась красная лампа давления масла на Ладе: что делать немедленно, как проверить уровень, когда можно ехать, а когда нужен эвакуатор.", "c": "Неисправности", "j": "symptoms"}, {"s": "kak-prikurit", "t": "Как правильно прикурить машину", "d": "Как прикурить машину с севшим аккумулятором: порядок подключения проводов, как заводить, частые ошибки, как проверить аккумулятор после.", "c": "Электрика", "j": "battery"}, {"s": "nagar-svechey", "t": "Нагар на свечах: как читать", "d": "Что значит цвет нагара на свечах зажигания: нормальный, сажа, белый, масляный, красный налёт, оплавленный электрод. Причины и что делать.", "c": "Двигатель", "j": "plugs"}, {"s": "podgotovka-k-zime", "t": "Подготовка Лады к зиме: чек-лист", "d": "Что проверить в Ладе перед зимой: антифриз, аккумулятор, масло, омыватель, щётки, резина, свет. Короткий чек-лист со схемами.", "c": "Сезон", "j": "season"}, {"s": "nabor-instrumentov", "t": "Стартовый набор инструментов для своей Лады", "d": "Какие инструменты купить, чтобы самому обслуживать Ладу: ключи, головки, трещотка, динамометрический ключ, домкрат. Размеры ключей для Лады.", "c": "Инструмент", "j": "tools"}, {"s": "lampy-na-paneli", "t": "Лампы на приборной панели Лады: что значат и что делать", "d": "12 самых важных ламп и значков на приборной панели Лады: давление масла, перегрев, зарядка, тормоза, Check Engine, ABS, подушки, ЭУР. Можно ли ехать и что делать.", "c": "Неисправности", "j": "symptoms"}, {"s": "stoyki-stabilizatora", "t": "Стучит спереди на кочках: как проверить и заменить стойки стабилизатора", "d": "Признаки износа стоек стабилизатора на Калине, Приоре, Гранте и Весте, как проверить люфт, порядок замены и моменты затяжки. Каких Лад это не касается.", "c": "Подвеска", "j": "stablink"}, {"s": "stupichnyy-podshipnik", "t": "Гудит ступичный подшипник на Гранте, Калине, Весте: как определить и заменить", "d": "Как понять, что гудит ступичный подшипник на Ладе, какой именно — левый или правый, можно ли ездить, как заменить и с каким моментом затянуть гайку ступицы.", "c": "Подвеска", "j": "hub"}, {"s": "regulirovka-klapanov-2107", "t": "Регулировка клапанов на ВАЗ 2107 своими руками", "d": "Как отрегулировать клапаны на классике ВАЗ 2101–2107: зазор 0,15 мм, порядок регулировки 8 и 6, 4 и 7, 1 и 3, 5 и 2, ключи, частые ошибки. Как понять, нужна ли регулировка на Ниве.", "c": "Двигатель", "j": "valves"}, {"s": "remen-generatora-vesta", "t": "Как заменить ремень генератора на Весте", "d": "Замена ремня генератора (вспомогательных агрегатов) на Lada Vesta своими руками: признаки износа, натяжной ролик, ключи Torx T55 и на 13, момент затяжки, частые ошибки.", "c": "Двигатель", "j": "altbelt"}, {"s": "vesta-ne-zavoditsya", "t": "Веста не заводится: причины и что проверить", "d": "Почему не заводится Лада Веста: стартер не крутит, крутит но не заводится, не заводится с кнопки старт-стоп. Что проверить самому по порядку.", "c": "Неисправности", "j": "symptoms"}, {"s": "remen-grm-granta-8", "t": "Замена ремня ГРМ на Гранте 8 клапанов своими руками", "d": "Замена ремня ГРМ на Lada Granta с 8-клапанными моторами 11183 и 11186 (21116): интервал, метки, натяжной ролик, ключи и моменты затяжки. Гнёт ли клапаны.", "c": "Двигатель", "j": "timing"}, {"s": "remen-generatora-granta", "t": "Замена ремня генератора на Гранте", "d": "Как заменить ремень генератора на Lada Granta и Калине-2: с кондиционером через опору двигателя и натяжитель, без кондиционера — эластичный ремень. Натяжение, интервал, ошибки.", "c": "Двигатель", "j": "altbelt"}, {"s": "zamena-kolodok-granta", "t": "Замена передних тормозных колодок на Гранте", "d": "Как поменять передние тормозные колодки на Lada Granta и Калине своими руками: когда менять, ключи на 13 и 17, стопорная пластина, как утопить поршень, первые километры.", "c": "Тормоза", "j": "padsreplace"}, {"s": "stuk-gidrokompensatorov-priora", "t": "Стук гидрокомпенсаторов на Приоре 16 клапанов: причины и что делать", "d": "Почему стучат гидрокомпенсаторы на Приоре и других 16-клапанных Ладах: на холодную и на горячую, роль масла и фильтра, когда это опасно и что делать по порядку.", "c": "Двигатель", "j": "oil"}, {"s": "predohraniteli-vaz-2107", "t": "Предохранители ВАЗ 2107: где находятся и за что отвечают", "d": "Где находится блок предохранителей на ВАЗ 2104, 2105, 2107, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-niva", "t": "Предохранители Нивы 21213, 21214 и 4x4: схема и расшифровка", "d": "Где находится блок предохранителей на Нива 2121, 21213, 21214, 4x4, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-niva-legend", "t": "Предохранители Нивы Легенд и 4x4 после 2019 года: расшифровка", "d": "Где находится блок предохранителей на Нива Legend и 4x4, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-vaz-2114", "t": "Предохранители ВАЗ 2114, 2109, 2115: схема блока и расшифровка", "d": "Где находится блок предохранителей на Самара: 2108, 2109, 21099, 2113, 2114, 2115, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-vaz-2110", "t": "Предохранители ВАЗ 2110, 2111, 2112: где стоят и за что отвечают", "d": "Где находится блок предохранителей на Десятка: 2110, 2111, 2112, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-kalina", "t": "Предохранители Лада Калина (2004–2013): схема и расшифровка", "d": "Где находится блок предохранителей на Калина, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-priora", "t": "Предохранители Лада Приора: схема блоков и расшифровка", "d": "Где находится блок предохранителей на Приора, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-granta", "t": "Предохранители Лада Гранта и Калина 2: схема блока и расшифровка", "d": "Где находится блок предохранителей на Гранта и Калина 2, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-vesta", "t": "Предохранители Лада Веста: где находятся и расшифровка", "d": "Где находится блок предохранителей на Веста, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-largus", "t": "Предохранители Лада Ларгус: схема и расшифровка", "d": "Где находится блок предохранителей на Ларгус, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "obsluzhivanie-vaz-2107", "t": "Обслуживание ВАЗ 2107 и классики (2101–2107) своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО ВАЗ 2107 и классики (2101–2107): объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "classic"}, {"s": "obsluzhivanie-niva", "t": "Обслуживание Нивы 2121, 21214 и Legend своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО Нивы 2121, 21214 и Legend: объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "niva"}, {"s": "obsluzhivanie-vaz-2114", "t": "Обслуживание ВАЗ 2114, 2109, 2115 (Самара) своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО ВАЗ 2114, 2109, 2115 (Самара): объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "samara"}, {"s": "obsluzhivanie-vaz-2110", "t": "Обслуживание ВАЗ 2110, 2111, 2112 своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО ВАЗ 2110, 2111, 2112: объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "ten"}, {"s": "obsluzhivanie-granta-kalina-priora", "t": "Обслуживание Гранты, Калины и Приоры своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО Гранты, Калины и Приоры: объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "kpg"}, {"s": "obsluzhivanie-vesta-largus", "t": "Обслуживание Весты, Ларгуса и Иксрея своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО Весты, Ларгуса и Иксрея: объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "vesta"}];/*ARTS*/
+const nrm = x => String(x).toLowerCase().replace(/ё/g, "е");
+const ENDS = ["ается","яется","ются","ется","ится","атся","ятся","ться","ение","ание","ого","его","ому","ему","ыми","ими","ами","ями","ией","иях","ешь","ишь","тся","ах","ях","ой","ей","ий","ый","ая","яя","ое","ее","ые","ие","ую","юю","ом","ем","ам","ям","ов","ев","ит","ат","ят","ут","ют","ет","ть","ти","а","я","о","е","и","ы","у","ю","ь","й"];
+function stem(w){ if(/\d/.test(w) || w.length < 4) return w;
+  for(const e of ENDS) if(w.endsWith(e) && w.length - e.length >= 3) return w.slice(0, -e.length);
+  return w; }
+/* группы основ, которые люди используют как синонимы */
+const SYN = [
+  ["стук","стуч","постук","бряк","грем","дребезж","колот"],
+  ["скрип","скреж","визг","визж","пищ","писк"],
+  ["свист","свищ"],
+  ["гул","гуд","гудит","вой","воет","шум","шелест","жужж"],
+  ["дым","дыми","копт","выхлоп"],
+  ["теч","утеч","течет","луж","капа","капл","подтек","мокр"],
+  ["троит","трои","троен","пропуск","дерга","дерг"],
+  ["вибрац","вибр","бьет","биен","трясе","тряс"],
+  ["завод","запуск"],
+  ["глохн","заглох","глохнет"],
+  ["печк","отопит","обогрев","дует","мерзн","греет","грее"],
+  ["перегр","кипит","кипи","закип","температур","охлажд"],
+  ["рул","руле"],
+  ["тянет","увод"],
+  ["акб","аккумулят","батаре"],
+  ["запах","пахн","воня","вонь"],
+  ["оборот","плава","холост"],
+  ["коробк","кпп","передач","хруст"],
+  ["тормоз","педал"],
+  ["подвеск","амортиз","стойк","кочк"]
+].map(g => g.map(nrm));
+const STOP = new Set(["не","на","в","во","и","а","с","со","у","по","при","что","как","где","от","до","за","из","или","то","же","ли","мой","моя","моей","меня","у меня","машина","машины","машине","авто","ваз","лада","lada"]);
+/* модели: слово запроса → семейство и предохранители */
+const MODEL_WORDS = [
+  [/^(210[1-7]|классик|жигул|семерк|шестерк|пятерк|копейк|четверк)/, "classic", "2107"],
+  [/^(нив|2121|2131|2121[34]|4х4|4x4|legend|легенд)/, "niva", "niva"],
+  [/^(2108|2109|21099|211[345]|самар|девятк|восьмерк|четырнашк|зубил)/, "samara", "samara"],
+  [/^(211[012]|десятк)/, "ten", "ten"],
+  [/^(калин|111[789])/, "kpg", "kalina1"], [/^(приор|217[0-2])/, "kpg", "priora"], [/^(грант|219[0-2])/, "kpg", "granta"],
+  [/^(вест|xray|иксре)/, "vesta", "vesta"], [/^ларгус/, "vesta", "largus"]
+];
+let qT = [], qModels = [], qRelax = false;
+function parseQuery(){
+  qT = []; qModels = []; const q = nrm(query).trim(); if(!q) return;
+  for(const w of q.split(/[^a-zа-я0-9]+/)){
+    if(!w || STOP.has(w)) continue;
+    const mw = MODEL_WORDS.find(([re]) => re.test(w)); if(mw){ if(!qModels.includes(mw)) qModels.push(mw); continue; }
+    if(w.length < 2) continue;
+    let st = stem(w); const alts = new Set();
+    SYN.forEach(g => { if(g.some(x => st.startsWith(x) || w.startsWith(x) || (x.startsWith(st) && st.length >= 4))) g.forEach(x => alts.add(x)); });
+    if(st.length < 4 && w.length >= 5) st = w.slice(0, 4);   /* «троит» → не «тро» (ловит «электро») */
+    if(!alts.size || st.length >= 4) alts.add(st);
+    qT.push([...alts]);
+  }
+}
+let _pq = null;
+const match = (...parts) => { if(!query) return true; if(_pq !== query){ _pq = query; parseQuery(); }
+  if(!qT.length) return !qModels.length ? false : true;
+  const t = nrm(parts.join(" "));
+  return qRelax ? qT.some(a => a.some(x => x.length >= 4 && t.includes(x))) : qT.every(a => a.some(x => t.includes(x))); };
 const backBtn = (to, label) => `<button type="button" class="back" data-goto="${to}">← ${label}</button>`;
 
+const artModels = a => { const ws = nrm(a.t).split(/[^a-zа-я0-9]+/); return MODEL_WORDS.filter(([re]) => ws.some(w => re.test(w))); };
 function globalHits(){
   const q = query.trim(); if(q.length < 2) return "";
-  const out = [];
-  SYMPTOMS.filter(x => match(x.t, x.c.join(" "))).slice(0,4).forEach(x => out.push(["Поломки · симптом", x.t, "symptoms"]));
-  LAMPS.filter(x => match(x.name, x.means)).slice(0,3).forEach(x => out.push(["Поломки · лампа", x.name, "lamps"]));
-  if(/предохран|реле|прикуривател|не работает/i.test(query)) out.push(["Поломки · предохранители", "Предохранители и реле: где стоят и за что отвечают", "fuses"]);
-  CODE_GROUPS.flatMap(g => g[1]).filter(c => match(c[0], c[1])).slice(0,4).forEach(c => out.push(["Код ошибки", c[0] + " — " + c[1], "codes"]));
-  PARTS.filter(x => match(x.name, x.prem.flat().join(" "), x.eco.flat().join(" "))).slice(0,3).forEach(x => out.push(["Запчасти", x.name, "parts"]));
-  TOOLS.filter(x => match(x.name, x.what)).slice(0,3).forEach(x => out.push(["Инструмент", x.name, "tools"]));
-  return out.length ? `<section class="group ghits"><h2 class="gh">В других разделах<span>${out.length}</span></h2><div class="hits">${out.map(([k,t,to]) => `<button type="button" class="hit" data-gs="${to}"><small>${esc(k)}</small><b>${esc(t)}</b></button>`).join("")}</div></section>` : "";
+  match(); /* разобрать запрос */
+  const out = [], txt = qT.length > 0;
+  qModels.forEach(([, fk, fid]) => {
+    if(fk !== fam) out.push(["Моя машина", "Показать цифры для: " + FAM[fk].name, "", "", fk]);
+    const fm = FUSE_M.find(m => m.id === fid);
+    if(fm && (!txt || /предохран|реле|прикур|не работ|печк|фар|свет|поворот|дворн/.test(nrm(query)))) out.push(["Поломки · предохранители", fm.title, "fuses", "", "", fid]);
+  });
+  if(!qModels.length && /предохран|реле|прикуривател|не работает/i.test(query)) out.push(["Поломки · предохранители", "Предохранители и реле: где стоят и за что отвечают", "fuses"]);
+  if(txt){
+    SYMPTOMS.filter(x => match(x.t, x.c.join(" "), x.k || "")).sort((a, b) => (match(b.t, b.k || "") ? 1 : 0) - (match(a.t, a.k || "") ? 1 : 0)).slice(0,4).forEach(x => out.push(["Поломки · симптом", x.t, "symptoms"]));
+    LAMPS.filter(x => match(x.name, x.means)).slice(0,3).forEach(x => out.push(["Поломки · лампа", x.name, "lamps"]));
+    CODE_GROUPS.flatMap(g => g[1]).filter(c => match(c[0], c[1])).slice(0,4).forEach(c => out.push(["Код ошибки", c[0] + " — " + c[1], "codes"]));
+    PARTS.filter(x => match(x.name, x.prem.flat().join(" "), x.eco.flat().join(" "))).slice(0,3).forEach(x => out.push(["Запчасти", x.name, "parts"]));
+    TOOLS.filter(x => match(x.name, x.what)).slice(0,3).forEach(x => out.push(["Инструмент", x.name, "tools"]));
+  }
+  const fuseSlugs = out.filter(o => o[5]).map(o => (FUSE_M.find(m => m.id === o[5]) || {}).slug);
+  ARTS.filter(a => {
+    if(fuseSlugs.includes(a.s)) return false;
+    const textOk = !txt || match(a.t, a.d);
+    const am = artModels(a);
+    const modelOk = !qModels.length || (a.m ? qModels.some(m => m[1] === a.m) : am.some(m => qModels.includes(m)) || (txt && !am.length));
+    return textOk && modelOk;
+  }).sort((a, b) => (b.m ? 1 : 0) - (a.m ? 1 : 0)).slice(0, 5).forEach(a => out.push([a.m ? "Страница модели" : "Статья", a.t, "", "stati/" + a.s + ".html"]));
+  return out.length ? `<section class="group ghits"><h2 class="gh">${qRelax ? "Похожее" : "В других разделах"}<span>${out.length}</span></h2><div class="hits">${out.map(([k,t,to,href,fk,fid]) => href
+    ? `<a class="hit" href="${href}"><small>${esc(k)}</small><b>${esc(t)}</b></a>`
+    : `<button type="button" class="hit" ${fk ? `data-fam="${fk}"` : `data-gs="${to}"`} ${fid ? `data-fmod2="${fid}"` : ""}><small>${esc(k)}</small><b>${esc(t)}</b></button>`).join("")}</div></section>` : "";
 }
 function renderList(){
-  const jobs = JOBS.filter(j => (!j.fams || j.fams.includes(fam)) && match(j.title, j.desc, j.steps.map(s => s.t || s).join(" ")));
+  qRelax = false;
+  const findJobs = () => JOBS.filter(j => (!j.fams || j.fams.includes(fam)) && match(j.title, j.desc, j.steps.map(s => s.t || s).join(" ")));
+  match(); let jobs = query && !qT.length ? [] : findJobs();
+  if(query && !jobs.length && !globalHits()){ qRelax = true; jobs = findJobs(); }
+  const welcome = query || famChosen ? "" : `<section class="welcome" aria-labelledby="wh"><h2 id="wh">ТО Лады своими руками — по шагам</h2>
+    <p>Пошаговые инструкции, поломки по симптомам и точные цифры: объёмы, моменты, ключи. Выбери свою машину — цифры подстроятся под неё.</p>
+    <div class="wfams">${Object.entries(FAM).map(([k,x]) => `<button type="button" data-fam="${k}"><b>${esc(x.name)}</b><small>${esc(x.models)}</small></button>`).join("")}</div>
+    <button type="button" class="linkbtn wskip" data-wskip>Выберу позже</button></section>`;
   const features = query ? "" : `<div class="features">
     <button type="button" class="feature" data-goto="schedule">${icon("schedule")}<span><b>Регламент ТО</b><small>Что и когда менять по пробегу</small></span></button>
     <button type="button" class="feature" data-goto="symptoms">${icon("symptoms")}<span><b>Что случилось?</b><small>Найти причину по симптому</small></span></button>
     <button type="button" class="feature" data-goto="numbers">${icon("numbers")}<span><b>Цифры моей машины</b><small>Объёмы, моменты, ключи — на одной странице</small></span></button>
   </div><a class="artstrip" href="stati/"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5M8 7h8M8 11h6"/></svg></span><span><b>Статьи о ТО Лады</b><small>Регламент, объёмы масла и антифриза, моменты затяжки, ГРМ, подготовка к зиме</small></span><span class="go" aria-hidden="true">→</span></a>`;
   const other = query ? globalHits() : "";
-  return searchBox("Поиск по сайту: работа, поломка, код ошибки, запчасть…") + features + other +
+  return welcome + searchBox("Поиск по сайту: работа, поломка, код ошибки, запчасть…") + features + other +
     (jobs.length ? JOB_GROUPS.map(([gname, ids]) => { const gj = jobs.filter(j => ids.includes(j.id)); return gj.length ? `<section class="group"><h2 class="gh">${esc(gname)}<span>${gj.length}</span></h2><div class="list">${gj.map(j => {
       const n = vidsFor(j.id).length;
       return `<button type="button" class="card" data-job="${j.id}">
         ${icon(j.id)}<h3>${esc(j.title)}</h3><p>${esc(j.desc)}</p>
         <div class="meta"><span class="pill cdiff">${diffBar(j.diff || (j.lvl === 1 ? 2 : 4))}</span>
         <span class="pill">${esc(j.time)}</span>${n?`<span class="pill vid">Видео: ${n}</span>`:""}</div></button>`;
-    }).join("")}</div></section>` : ""; }).join("") : other ? "" : `<p class="empty">Ничего не нашлось. Попробуй другое слово.</p>`) + (query ? "" : aboutLinks());
+    }).join("")}</div></section>` : ""; }).join("") : other ? "" : `<div class="empty"><p>Ничего не нашлось по «${esc(query)}».</p><p>Попробуй описать проще: <b>стучит</b>, <b>не заводится</b>, <b>горит лампа</b> — или загляни в <button type="button" class="linkbtn" data-goto="symptoms">поломки по симптомам</button>.</p></div>`) + (query ? "" : aboutLinks());
 }
 function tgCard(){
   return `<a class="tgcard" href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer">
@@ -2824,12 +2952,20 @@ function renderJob(j){
     ${figHtml}
     ${j.warn ? `<p class="callout dang"><b>Предупреждение.</b> ${esc(j.warn)}</p>` : ""}
     ${mist}
+    ${jobArts(j.id)}
     ${src}
     <section class="blk vidblk" id="vidblk">${renderVideos(j.id)}</section>
     ${logBtn}
   </div>`;
 }
 
+/* статьи к работе: сначала про выбранную модель, чужие модели не показываем */
+function jobArts(id){
+  const fw = MODEL_WORDS.filter(m => m[1] === fam);
+  const list = ARTS.filter(a => a.j === id).filter(a => { const am = artModels(a); return !am.length || am.some(m => fw.includes(m)); })
+    .sort((a, b) => (artModels(b).length ? 1 : 0) - (artModels(a).length ? 1 : 0)).slice(0, 3);
+  return list.length ? `<section class="blk jsec"><h3 class="jh"><span>+</span>Почитать подробнее</h3><div class="hits">${list.map(a => `<a class="hit" href="stati/${a.s}.html"><small>Статья</small><b>${esc(a.t)}</b></a>`).join("")}</div></section>` : "";
+}
 function renderVideos(target, compact){
   const list = vidsFor(target);
   if(!list.length && !isOwner) return "";
@@ -2855,12 +2991,13 @@ function renderSchedule(){
   const rows = SCHED.filter(s => !(s.skip && s.skip(fam))).map(s => {
     const k = val(s.km, fam), y = val(s.years, fam);
     const when = [k ? "каждые " + km(k) : "", y ? (y === 1 ? "раз в год" : `раз в ${y} ${y < 5 ? "года" : "лет"}`) : ""].filter(Boolean).join(" или ");
-    return `<tr><td>${esc(val(s.name, fam))}</td><td>${esc(when)}</td><td>${s.job ? `<button type="button" class="linkbtn" data-job="${s.job}">Инструкция</button>` : ""}</td></tr>`;
+    const ib = s.job ? `<button type="button" class="linkbtn" data-job="${s.job}">Инструкция</button>` : "";
+    return `<tr><td>${esc(val(s.name, fam))}${ib ? `<span class="schedmob">${ib.replace("Инструкция","Инструкция →")}</span>` : ""}</td><td>${esc(when)}</td><td class="schedcol">${ib}</td></tr>`;
   }).join("");
   return `<div class="detail">${backBtn("to","Все работы")}
     <div class="dhead">${icon("schedule")}<div><h2>Регламент ТО</h2><p class="lead">Что менять и проверять, по пробегу или по времени — что наступит раньше.</p></div></div>
     ${famNote()}
-    <div class="table"><table><thead><tr><th>Что</th><th>Когда</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>
+    <div class="table sched"><table><thead><tr><th>Что</th><th>Когда</th><th class="schedcol"></th></tr></thead><tbody>${rows}</tbody></table></div>
     <p class="approx-note">Это ориентир по типовому регламенту АвтоВАЗа. При тяжёлых условиях (пробки, короткие поездки зимой, пыль, такси) интервалы сокращают примерно в полтора раза. Точный регламент для своей машины смотри в сервисной книжке.</p>
     <button type="button" class="logbtn" data-tab="garage">${icon("garage")}<span><b>Вести учёт в «Моём гараже»</b><small>Гаражник сам посчитает, что пора делать на твоём пробеге</small></span></button>
   </div>`;
@@ -2888,18 +3025,18 @@ function renderNumbers(){
   </div>`;
 }
 function renderSymptoms(){
-  const items = SYMPTOMS.filter(s => match(s.t, s.c.join(" ")));
+  const items = SYMPTOMS.filter(s => match(s.t, s.c.join(" "), s.k || ""));
   return `<div class="detail">${faultsNav("symptoms")}
     ${searchBox("Например: свистит, не заводится, стучит…")}
     <a class="artstrip" href="#fuses" data-goto-link="fuses"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="11" rx="1.5"/><path d="M9 14v7M15 14v7M9 8.5h2l1-2 1 4 1-2h1"/></svg></span><span><b>Не работает прикуриватель, печка, фара?</b><small>Предохранители и реле по моделям: где стоят и за что отвечают</small></span><span class="go" aria-hidden="true">→</span></a>
     <a class="artstrip" href="#lamps" data-goto-link="lamps"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15h11l5-4 2 1-6 6H5a2 2 0 0 1-2-2z"/><path d="M8 15v-3h4v3M10 12V9.5M8.5 9.5h3"/></svg></span><span><b>Загорелась лампа на панели?</b><small>12 главных ламп: что значат, можно ли ехать и что делать</small></span><span class="go" aria-hidden="true">→</span></a>
-    ${items.length ? `<div class="stack">${items.map(s => `<article class="entry sym ${s.danger ? "danger" : ""}">
+    ${items.length ? SYM_GROUPS.map(([gname, ids]) => { const gi = items.filter(s => ids.includes(s.id)); return gi.length ? `<h2 class="gh symgh">${esc(gname)}<span>${gi.length}</span></h2><div class="stack">${gi.map(s => `<article class="entry sym ${s.danger ? "danger" : ""}">
       <h3>${esc(s.t)}</h3>${s.danger ? `<span class="pill dangerpill">Опасно ехать</span>` : ""}
       <ul class="causes">${s.c.map(c => `<li>${esc(c)}</li>`).join("")}</ul>
       <div class="tools">${s.jobs.map(id => { const j = JOBS.find(x => x.id === id); return j ? `<button type="button" data-job="${id}">${esc(j.title)}</button>` : ""; }).join("")}</div>
       ${pairBlock("sym-" + s.id)}
       ${renderVideos("sym-" + s.id, true)}
-    </article>`).join("")}</div>` : `<p class="empty">Ничего не нашлось. Попробуй другое слово.</p>`}
+    </article>`).join("")}</div>` : ""; }).join("") : `<p class="empty">Ничего не нашлось. Попробуй другое слово.</p>`}
     <p class="approx-note">Это подсказка, а не диагноз. Если причина не нашлась или не уверен в себе — лучше к мастеру.</p>
   </div>`;
 }
@@ -3313,8 +3450,20 @@ function render(keepFocus){
   $("#main").innerHTML = job ? renderJob(job)
     : view === "about" ? renderAbout() : view === "schedule" ? renderSchedule() : view === "symptoms" ? renderSymptoms() : view === "lamps" ? renderLamps() : view === "codes" ? renderCodes() : view === "fuses" ? renderFuses() : view === "numbers" ? renderNumbers()
     : tab === "garage" ? renderGarage() : tab === "tools" ? renderTools() : tab === "parts" ? renderParts() : tab === "fluids" ? renderFluids() : renderList();
-  fillQr();
+  qRelax = false; fillQr(); fitSvgs($("#main"));
   if(keepFocus){ const q = $("#q"); if(q){ q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
+}
+/* подписи на схемах не должны обрезаться: расширяем viewBox под фактическое содержимое */
+function fitSvgs(root){
+  if(!root) return;
+  root.querySelectorAll("svg[viewBox]").forEach(sv => {
+    if(sv.dataset.fit) return; let bb; try{ bb = sv.getBBox(); }catch(e){ return; }
+    if(!bb || !bb.width) return; const v = sv.viewBox.baseVal, m = 3;
+    const out = bb.x < v.x - .5 || bb.y < v.y - .5 || bb.x + bb.width > v.x + v.width + .5 || bb.y + bb.height > v.y + v.height + .5;
+    if(out){ const x0 = Math.min(v.x, bb.x - m), y0 = Math.min(v.y, bb.y - m), x1 = Math.max(v.x + v.width, bb.x + bb.width + m), y1 = Math.max(v.y + v.height, bb.y + bb.height + m);
+      sv.setAttribute("viewBox", `${x0.toFixed(1)} ${y0.toFixed(1)} ${(x1-x0).toFixed(1)} ${(y1-y0).toFixed(1)}`); }
+    sv.dataset.fit = "1";
+  });
 }
 function rerenderVideos(){
   const blk = $("#vidblk"); const job = openJob && JOBS.find(j => j.id === openJob);
@@ -3359,12 +3508,13 @@ document.addEventListener("click", e => {
   else if(d.kind){ const x = (ENG[fam] || []).find(x => x.kind === d.kind); if(x){ setEng(fam, x.id); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $(`#famMenu [data-kind="${d.kind}"]`)?.focus(); } }
   else if(d.eng){ setEng(fam, d.eng); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $(`#famMenu [data-eng="${d.eng}"]`)?.focus(); }
   else if(b.hasAttribute("data-famclose")){ famMenu(false); }
+  else if(b.hasAttribute("data-wskip")){ famChosen = true; try{ localStorage.setItem("garazh-welcome","1"); }catch(_){} render(); }
   else if(d.fmod){ fuseModel = d.fmod; try{ localStorage.setItem("garazh-fuse", d.fmod); }catch(_){} const y = scrollY; render(); scrollTo(0,y); }
   else if(b.hasAttribute("data-print")){ window.print(); }
   else if(b.id === "themeBtn"){ const t = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); try{ localStorage.setItem("garazh-theme", t); }catch(e){} document.querySelector('meta[name="theme-color"]')?.setAttribute("content", t === "light" ? "#F4F3EF" : "#101316"); }
   else if(d.tab){ query = ""; go(d.tab); }
   else if(d.goto){ query = ""; go(d.goto); }
-  else if(d.gs){ go(d.gs); }
+  else if(d.gs){ if(d.fmod2){ fuseModel = d.fmod2; try{ localStorage.setItem("garazh-fuse", d.fmod2); }catch(_){} query = ""; } go(d.gs); }
   else if(d.job){ query = ""; go(d.job); }
   else if(d.tool){ query = ""; go("tools"); requestAnimationFrame(() => document.getElementById("tool-" + d.tool)?.scrollIntoView({block:"start"})); }
   else if(d.part){ query = ""; go("parts"); requestAnimationFrame(() => document.getElementById("part-" + d.part)?.scrollIntoView({block:"start"})); }
@@ -3447,7 +3597,7 @@ function renderDoer(){
     <div class="dbar"><span style="width:${Math.round(Math.min(cur, n) / n * 100)}%"></span></div>
     <div class="dbody">${nums}${body}</div>
     ${done ? "" : `<div class="dnav"><button type="button" class="ghost big" data-dprev ${cur === 0 ? "disabled" : ""}>Назад</button><button type="button" class="btn big amber" data-dnext>${cur === n - 1 ? "Готово" : "Сделал, дальше"}</button></div>`}`;
-  el.hidden = false;
+  el.hidden = false; fitSvgs(el);
   el.querySelector(".dbody").scrollTop = 0;
 }
 document.addEventListener("keydown", e => {
