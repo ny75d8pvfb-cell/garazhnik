@@ -2136,6 +2136,7 @@ function renderSymptoms(){
   return `<div class="detail">${backBtn("to","Все работы")}
     <div class="dhead">${icon("symptoms")}<div><h2>Что случилось?</h2><p class="lead">Найди свой симптом: возможные причины и что проверить в первую очередь.</p></div></div>
     ${searchBox("Например: свистит, не заводится, лампа…")}
+    <a class="artstrip" href="stati/lampy-na-paneli.html"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15h11l5-4 2 1-6 6H5a2 2 0 0 1-2-2z"/><path d="M8 15v-3h4v3M10 12V9.5M8.5 9.5h3"/></svg></span><span><b>Загорелась лампа на панели?</b><small>12 главных ламп: что значат, можно ли ехать и что делать</small></span><span class="go" aria-hidden="true">→</span></a>
     ${items.length ? `<div class="stack">${items.map(s => `<article class="entry sym ${s.danger ? "danger" : ""}">
       <h3>${esc(s.t)}</h3>${s.danger ? `<span class="pill dangerpill">Опасно ехать</span>` : ""}
       <ul class="causes">${s.c.map(c => `<li>${esc(c)}</li>`).join("")}</ul>
