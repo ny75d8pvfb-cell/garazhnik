@@ -227,6 +227,37 @@ form.add input,form.add select{padding:10px 12px;border:1px solid var(--line-2);
   .printfoot{display:block!important;margin-top:8px;font-size:10px;color:#333}
   *{box-shadow:none!important;text-shadow:none!important}
 }
+.detail h2.gh{font:600 19px/1.2 var(--f-head,var(--f-display));text-transform:uppercase;letter-spacing:.06em;margin:0 0 10px}
+.fseg{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line-2);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
+.fseg button{border:0;background:var(--surface);color:var(--muted);padding:11px 6px;font:500 14px var(--f-head,var(--f-body));text-transform:uppercase;letter-spacing:.05em;cursor:pointer}
+.fseg button+button{border-left:1px solid var(--line-2)}
+.fseg button[aria-selected="true"]{background:var(--raised);color:var(--amber);box-shadow:inset 0 -3px 0 var(--amber)}
+.lampc{display:grid;grid-template-columns:56px 1fr;gap:14px;background:var(--surface);border:1px solid var(--line-2);border-left:4px solid var(--amber);border-radius:var(--r);padding:14px}
+.lampc.red{border-left-color:var(--warn)}
+.lampc-ico{width:56px;height:56px;border-radius:3px;background:#05070a;border:1px solid var(--line-2);display:grid;place-items:center;color:var(--amber);box-shadow:inset 0 0 16px rgba(232,163,23,.18)}
+.lampc.red .lampc-ico{color:var(--warn);box-shadow:inset 0 0 16px rgba(255,90,60,.2)}
+.lampc-ico svg{width:34px;height:34px;filter:drop-shadow(0 0 4px currentColor)}
+.lampc-b{min-width:0}
+.lampc-b h3{margin:0 0 3px;font:600 18px/1.2 var(--f-head,var(--f-body))}
+.lampc-tag{display:inline-block;font:500 11px var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--amber);margin-bottom:8px}
+.lampc.red .lampc-tag{color:var(--warn)}
+.lampc-b p{margin:0 0 6px;font-size:14.5px}
+.lampc-go{padding:6px 10px;background:var(--raised);border-radius:2px;margin-top:8px!important}
+.lampc .tools{margin-top:8px}
+.codehow{font-size:13.5px;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:var(--r);padding:10px 12px;margin-bottom:16px}
+.codehow b{color:var(--ink)}
+.codes{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.codec{background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r);padding:12px 14px;min-width:0}
+.codec-h{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.code{font:500 15px var(--f-mono);color:var(--amber);letter-spacing:.02em}
+.sev{font:500 10.5px var(--f-mono);text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:2px;border:1px solid}
+.sev0{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,transparent)}
+.sev1{color:var(--amber);border-color:color-mix(in srgb,var(--amber) 45%,transparent)}
+.sev2{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,transparent)}
+.codec h3{margin:0 0 6px;font-size:15px;font-weight:600;line-height:1.35}
+.codec p{margin:0;font-size:13.5px;color:var(--muted)}
+.codec p b{color:var(--ink);font-weight:600}
+@media (max-width:640px){.fseg button{font-size:12.5px;padding:10px 4px}.lampc{grid-template-columns:44px 1fr;gap:11px;padding:12px}.lampc-ico{width:44px;height:44px}.lampc-ico svg{width:27px;height:27px}}
 .tiernote{font-size:13.5px;color:var(--muted);margin:0 0 16px;max-width:75ch}
 .tiernote b{color:var(--ink)}
 .bad{margin-top:12px;font-size:13.5px;background:color-mix(in srgb,var(--warn) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--warn) 35%,transparent);border-radius:10px;padding:10px 12px}
@@ -722,6 +753,7 @@ body{background-size:48px 48px}
     <div class="famsel"><div class="famrow"><button type="button" id="famBtn" class="fambtn" aria-haspopup="true" aria-expanded="false">Моя машина<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><span class="famcur" id="famCur"></span></div><div id="famMenu" class="fammenu" hidden></div></div>
     <div class="tabs" role="tablist">
       <button role="tab" data-tab="to" id="tab-to">Работы</button>
+      <button role="tab" data-tab="faults" id="tab-faults">Поломки</button>
       <button role="tab" data-tab="garage" id="tab-garage">Мой гараж</button>
       <button role="tab" data-tab="tools" id="tab-tools">Инструмент</button>
       <button role="tab" data-tab="parts" id="tab-parts">Запчасти</button>
@@ -736,6 +768,7 @@ body{background-size:48px 48px}
 <div class="cookiebar" id="cookiebar" hidden><p>Сайт использует cookies и Яндекс Метрику, чтобы понимать, какие инструкции полезны. <button type="button" class="linkbtn" data-goto="about">Подробнее</button></p><button type="button" class="btn" id="cookieOk">Понятно</button></div>
 <nav class="bottom" role="tablist" aria-label="Разделы">
   <button role="tab" data-tab="to"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6M9 4a1 1 0 0 0-1 1v1h8V5a1 1 0 0 0-1-1M8 5H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2M9 12l2 2 4-4M9 17h6"/></svg>Работы</button>
+  <button role="tab" data-tab="faults"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4.5M12 17v.3"/></svg>Поломки</button>
   <button role="tab" data-tab="garage"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M7 21v-8h10v8M7 17h10"/></svg>Гараж</button>
   <button role="tab" data-tab="tools"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.6 17.2a1.6 1.6 0 0 0 2.3 2.3l5.7-5.7a4 4 0 0 0 5.2-5.4l-2.4 2.4-2.2-.4-.4-2.2z"/></svg>Инструмент</button>
   <button role="tab" data-tab="parts"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg>Запчасти</button>
@@ -2133,10 +2166,9 @@ function renderNumbers(){
 }
 function renderSymptoms(){
   const items = SYMPTOMS.filter(s => match(s.t, s.c.join(" ")));
-  return `<div class="detail">${backBtn("to","Все работы")}
-    <div class="dhead">${icon("symptoms")}<div><h2>Что случилось?</h2><p class="lead">Найди свой симптом: возможные причины и что проверить в первую очередь.</p></div></div>
-    ${searchBox("Например: свистит, не заводится, лампа…")}
-    <a class="artstrip" href="stati/lampy-na-paneli.html"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15h11l5-4 2 1-6 6H5a2 2 0 0 1-2-2z"/><path d="M8 15v-3h4v3M10 12V9.5M8.5 9.5h3"/></svg></span><span><b>Загорелась лампа на панели?</b><small>12 главных ламп: что значат, можно ли ехать и что делать</small></span><span class="go" aria-hidden="true">→</span></a>
+  return `<div class="detail">${faultsNav("symptoms")}
+    ${searchBox("Например: свистит, не заводится, стучит…")}
+    <a class="artstrip" href="#lamps" data-goto-link="lamps"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15h11l5-4 2 1-6 6H5a2 2 0 0 1-2-2z"/><path d="M8 15v-3h4v3M10 12V9.5M8.5 9.5h3"/></svg></span><span><b>Загорелась лампа на панели?</b><small>12 главных ламп: что значат, можно ли ехать и что делать</small></span><span class="go" aria-hidden="true">→</span></a>
     ${items.length ? `<div class="stack">${items.map(s => `<article class="entry sym ${s.danger ? "danger" : ""}">
       <h3>${esc(s.t)}</h3>${s.danger ? `<span class="pill dangerpill">Опасно ехать</span>` : ""}
       <ul class="causes">${s.c.map(c => `<li>${esc(c)}</li>`).join("")}</ul>
@@ -2146,6 +2178,145 @@ function renderSymptoms(){
     </article>`).join("")}</div>` : `<p class="empty">Ничего не нашлось. Попробуй другое слово.</p>`}
     <p class="approx-note">Это подсказка, а не диагноз. Если причина не нашлась или не уверен в себе — лучше к мастеру.</p>
   </div>`;
+}
+
+/* ---------- раздел «Поломки»: симптомы, лампы на панели, коды ошибок ---------- */
+const LAMP_ICO = {
+ oil:'<path d="M3 15h11l5-4 2 1-6 6H5a2 2 0 0 1-2-2z"/><path d="M8 15v-3h4v3M10 12V9.5M8.5 9.5h3"/><path d="M20.5 15.5c0 .9.6 1.4.6 2.1a.6.6 0 0 1-1.2 0c0-.7.6-1.2.6-2.1z"/>',
+ temp:'<path d="M12 3v10"/><circle cx="12" cy="16" r="2.5"/><path d="M12 6h3M12 9h3"/><path d="M3 21c1.5-1 3-1 4.5 0s3 1 4.5 0 3-1 4.5 0 3 1 4.5 0"/>',
+ brake:'<circle cx="12" cy="12" r="6"/><path d="M12 9v3.6M12 15.1v.3"/><path d="M4.8 6.5a9 9 0 0 0 0 11M19.2 6.5a9 9 0 0 1 0 11"/>',
+ batt:'<rect x="3" y="7" width="18" height="12" rx="1.5"/><path d="M7 7V5M17 7V5M6.5 13h3.5M14.5 13h3.5M16.25 11.25v3.5"/>',
+ bag:'<circle cx="8" cy="5" r="2"/><path d="M7.5 9 9 14h5l2.5 5M7 9l-1 7h4"/><circle cx="17" cy="9.5" r="3.6"/>',
+ check:'<path d="M3.5 10h2.5V8h7l2 2h2v2h2v-2h1.5v6H19v-2h-2v3h-3l-2 2H6.5v-3H3.5z"/>',
+ abs:'<circle cx="12" cy="12" r="7"/><path d="M4.3 6.5a9.5 9.5 0 0 0 0 11M19.7 6.5a9.5 9.5 0 0 1 0 11"/><text x="12" y="14.4" text-anchor="middle" font-size="6.2" font-weight="700" font-family="Arial,sans-serif" fill="currentColor" stroke="none">ABS</text>',
+ eps:'<circle cx="11" cy="13" r="7"/><circle cx="11" cy="13" r="2"/><path d="M4.3 11.5h4.8M12.9 11.5h4.8M11 15v4.8"/><path d="M20.5 3v4.5M20.5 10v.3"/>',
+ esp:'<path d="M5.5 13 7 9h10l1.5 4v3h-13z"/><circle cx="8.5" cy="16" r="1"/><circle cx="15.5" cy="16" r="1"/><path d="M5 20.5c1.6-1.5 3.2-1.5 4.8 0M14.2 20.5c1.6-1.5 3.2-1.5 4.8 0"/>',
+ fuel:'<path d="M5 20V5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v15M4 20h11M7.5 8h4"/><path d="M14 10h2a1.5 1.5 0 0 1 1.5 1.5V17a1.5 1.5 0 0 0 3 0V9L18 6.5"/>',
+ tpms:'<path d="M7 19.5a7.5 7.5 0 1 1 10 0"/><path d="M5.5 21.5h13"/><path d="M12 8v5M12 15.7v.3"/>',
+ immo:'<path d="M3.5 16 5 12h9l1.5 4v3h-12z"/><circle cx="6.5" cy="19" r=".9"/><circle cx="12.5" cy="19" r=".9"/><rect x="15.5" y="4.5" width="6" height="5" rx=".8"/><path d="M16.8 4.5V3.4a1.7 1.7 0 0 1 3.4 0v1.1"/>'
+};
+const LAMPS = [
+ {ic:"oil",red:1,name:"Давление масла",tag:"Красная · заглуши мотор",
+  means:"В двигателе упало давление масла: масла мало, не работает насос или датчик. Без смазки мотор может погибнуть за несколько минут.",
+  todo:"Сразу остановись и заглуши двигатель. Через 5–10 минут проверь уровень щупом и при необходимости долей.",
+  go:"Нет, пока лампа горит. Уровень в норме, а лампа не гаснет — только на эвакуаторе.",jobs:["levels","oil"]},
+ {ic:"temp",red:1,name:"Перегрев двигателя",tag:"Красная · сбрось нагрузку и остановись",
+  means:"Антифриз перегрелся: мало жидкости, не включается вентилятор, заклинил термостат или порвался ремень, который крутит помпу. На многих Ладах вместо лампы — стрелка в красной зоне.",
+  todo:"Включи печку на максимум — она заберёт часть тепла. Остановись, заглуши мотор и дай ему остыть. Пробку бачка на горячем не открывай. На холодном проверь уровень антифриза.",
+  go:"Нет. Езда с перегревом заканчивается ремонтом головки блока.",jobs:["levels","coolant"]},
+ {ic:"brake",red:1,name:"Тормозная система",tag:"Красная · проверь тормоза",
+  means:"Поднят ручник, низкий уровень тормозной жидкости или неисправность тормозов. Уровень падает из-за износа колодок или утечки.",
+  todo:"Опусти ручник до конца. Не погасла — остановись и проверь уровень в бачке. Педаль мягкая или проваливается — никуда не едь.",
+  go:"Только если педаль твёрдая, а уровень после доливки в норме — и сразу проверить колодки и трубки.",jobs:["brakes","bleed"]},
+ {ic:"batt",red:1,name:"Зарядка аккумулятора",tag:"Красная · доезжай до гаража",
+  means:"Генератор не заряжает аккумулятор: порван или проскальзывает ремень, неисправен генератор или его регулятор.",
+  todo:"Выключи всё лишнее: печку, обогревы, музыку. Проверь ремень генератора. На классике тот же ремень крутит помпу — если порвался, будет перегрев.",
+  go:"Недолго — обычно хватает на 20–60 минут. Сразу в гараж или сервис.",jobs:["altbelt","battery"]},
+ {ic:"bag",red:1,name:"Подушки безопасности",tag:"Красная · опасно в аварии",
+  means:"Система подушек нашла неисправность: разъём под сиденьем, датчик, шлейф в руле. При аварии подушки могут не сработать.",
+  todo:"Сам не разбирай — в подушках пиропатроны. Покажи машину электрику или в сервисе.",
+  go:"Да, машина едет как обычно, но подушки сейчас не защищают.",jobs:[]},
+ {ic:"check",red:0,name:"Check Engine",tag:"Жёлтая · горит или мигает",
+  means:"Блок управления мотором записал ошибку: датчик, проводка, пропуски зажигания, катализатор. Бывает только на инжекторе.",
+  todo:"Горит — считай код ошибки сканером OBD-II и найди его во вкладке «Коды ошибок». Мигает — пропуски зажигания: сбрось скорость, не газуй и в сервис, иначе сгорит катализатор.",
+  go:"Горит — да, аккуратно. Мигает — только до ближайшего сервиса, без нагрузки.",jobs:["plugs"],codes:1},
+ {ic:"abs",red:0,name:"ABS",tag:"Жёлтая · тормоза без ABS",
+  means:"Антиблокировочная система отключилась — чаще всего грязный или повреждённый датчик скорости колеса.",
+  todo:"Проверь датчики и разъёмы у колёс. Тормози плавнее: колёса могут блокироваться, особенно на льду.",
+  go:"Да, обычные тормоза работают. Починить стоит до зимы.",jobs:[]},
+ {ic:"eps",red:0,name:"Электроусилитель руля",tag:"Жёлтая · руль тяжёлый",
+  means:"Отключился электроусилитель — на Калине, Приоре, Гранте и Весте. Часто из-за низкого напряжения в сети.",
+  todo:"Остановись, заглуши и снова заведи мотор. Проверь аккумулятор и зарядку. Не прошло — в сервис.",
+  go:"Да, но руль станет заметно тяжелее.",jobs:["battery"]},
+ {ic:"esp",red:0,name:"ESP — стабилизация",tag:"Жёлтая · Веста и Иксрей",
+  means:"Мигает на ходу — система ловит занос, это нормально. Горит постоянно — ESP отключена кнопкой или неисправна.",
+  todo:"Проверь, не нажата ли кнопка ESP OFF. Не она — в сервис.",
+  go:"Да, но на скользкой дороге без ESP машину легче сорвать в занос.",jobs:[]},
+ {ic:"fuel",red:0,name:"Мало топлива",tag:"Жёлтая · заправься",
+  means:"В баке остался резерв — обычно на несколько десятков километров, зависит от модели.",
+  todo:"Заправься в ближайшее время. На инжекторе не катайся «на лампе»: бензин охлаждает насос в баке, а со дна засасывается грязь.",
+  go:"Да, до заправки.",jobs:[]},
+ {ic:"tpms",red:0,name:"Давление в шинах",tag:"Жёлтая · на машинах с датчиками",
+  means:"Давление в одной из шин упало ниже нормы: прокол или просто сдулась.",
+  todo:"Остановись и осмотри колёса. Подкачай до нормы с наклейки в проёме двери. Колесо спущено — ставь запаску.",
+  go:"До шиномонтажа — да, если колесо не спущено полностью.",jobs:["wheel"]},
+ {ic:"immo",red:0,name:"Иммобилайзер",tag:"Мигает или горит · не заводится",
+  means:"Противоугонная система не узнала ключ: села батарейка в брелоке, сбилась привязка или неисправен иммобилайзер.",
+  todo:"Попробуй запасной ключ, поднеси ключ ближе к замку или кнопке запуска. Не помогло — к автоэлектрику.",
+  go:"Если машина завелась — да.",jobs:[]}
+];
+/* коды OBD-II: [код, что значит, что проверить, срочность 0 — ехать можно, 1 — аккуратно и скорее в ремонт, 2 — лучше не ехать] */
+const CODE_GROUPS = [
+ ["Пропуски зажигания и зажигание", [
+  ["P0300","Случайные или множественные пропуски зажигания","Свечи, катушки или модуль зажигания, провода, качество бензина. Если Check Engine мигает — сбрось нагрузку.",2],
+  ["P0301–P0304","Пропуски зажигания в цилиндре 1, 2, 3 или 4","Поменяй местами катушки или провода соседних цилиндров: ошибка «переехала» — виновата катушка или провод. Не переехала — свеча, форсунка, компрессия.",2],
+  ["P0351, P0352","Цепь управления катушкой (модулем) зажигания","Разъём и проводку катушки или модуля зажигания, саму катушку.",1],
+  ["P0325, P0327, P0328","Датчик детонации: обрыв или неправильный сигнал","Разъём и проводку датчика на блоке цилиндров, момент затяжки датчика, сам датчик.",0]]],
+ ["Датчики двигателя", [
+  ["P0335, P0336","Датчик положения коленвала (ДПКВ): нет сигнала или он искажён","Разъём, проводку и зазор датчика у задающего диска, сам диск. Без этого датчика мотор не заведётся или глохнет.",2],
+  ["P0340","Датчик фаз (положения распредвала)","Разъём и проводку датчика на головке, сам датчик. Мотор обычно работает, но расход растёт.",1],
+  ["P0101, P0102, P0103","Датчик массового расхода воздуха (ДМРВ): сигнал вне нормы, низкий или высокий","Подсос воздуха после датчика, грязный воздушный фильтр, разъём, сам ДМРВ.",1],
+  ["P0105–P0108","Датчик абсолютного давления (ДАД)","Разъём, проводку, вакуумный канал датчика; подсос воздуха во впуске.",1],
+  ["P0112, P0113","Датчик температуры воздуха на впуске: низкий или высокий сигнал","Разъём и проводку датчика.",0],
+  ["P0116, P0117, P0118","Датчик температуры охлаждающей жидкости (ДТОЖ)","Разъём и проводку. Сначала проверь уровень антифриза и работу термостата — по этому датчику включается вентилятор.",1],
+  ["P0122, P0123","Датчик положения дроссельной заслонки (ДПДЗ): низкий или высокий сигнал","Разъём и проводку, загрязнение дроссельного узла.",1],
+  ["P2135","Сигналы двух датчиков положения дросселя не совпадают","Электронный дроссель: разъём, проводку, сам дроссельный узел. Машина может уйти в аварийный режим с малой мощностью.",1],
+  ["P2122, P2123, P2127, P2128","Датчик положения педали газа","Разъём и проводку педали, саму педаль. Возможен аварийный режим.",1]]],
+ ["Смесь и датчики кислорода", [
+  ["P0171","Слишком бедная смесь","Подсос воздуха (шланги, прокладка впуска), давление топлива, топливный фильтр, грязные форсунки, ДМРВ.",1],
+  ["P0172","Слишком богатая смесь","Форсунки (подтекают), давление топлива, ДМРВ, датчик кислорода, забитый воздушный фильтр.",1],
+  ["P2187, P2188","Смесь бедная или богатая на холостых","Подсос воздуха на холостых, регулятор холостого хода, вентиляция картера.",1],
+  ["P0130–P0134","Первый (управляющий) датчик кислорода: обрыв, неверный или медленный сигнал","Разъём и проводку датчика перед катализатором, сам датчик, подсос воздуха в выпуск.",1],
+  ["P0136–P0140","Второй (диагностический) датчик кислорода","Разъём и проводку датчика после катализатора, сам датчик, состояние катализатора.",0],
+  ["P0030–P0032, P0036–P0038","Цепь подогрева датчика кислорода","Предохранитель и проводку подогрева, сам датчик.",0]]],
+ ["Топливо, катализатор, адсорбер", [
+  ["P0201–P0204","Цепь форсунки цилиндра 1–4","Разъём и проводку форсунки, саму форсунку. Цилиндр может не работать — мотор троит.",2],
+  ["P0627–P0629","Цепь реле или управления бензонасосом","Предохранитель и реле бензонасоса, проводку. Если насос не работает — мотор не заведётся.",2],
+  ["P0420","Эффективность катализатора ниже нормы","Состояние катализатора, второй датчик кислорода, нет ли пропусков зажигания, которые его убивают.",0],
+  ["P0443–P0445","Клапан продувки адсорбера","Разъём, проводку и сам клапан (на впуске рядом с дросселем).",0]]],
+ ["Холостой ход, скорость, напряжение, блок", [
+  ["P0505–P0507","Регулятор холостого хода или обороты холостого хода не в норме","Грязный дроссель и регулятор холостого хода, подсос воздуха, разъём регулятора.",0],
+  ["P0500–P0503","Датчик скорости автомобиля","Разъём и проводку датчика на коробке, сам датчик. Может врать спидометр.",0],
+  ["P0480","Цепь управления вентилятором радиатора","Предохранитель, реле и проводку вентилятора. Следи за температурой — возможен перегрев.",1],
+  ["P0560, P0562, P0563","Напряжение бортовой сети вне нормы, низкое или высокое","Аккумулятор, клеммы, ремень генератора, сам генератор и его регулятор.",1],
+  ["P1602","Пропадало питание блока управления","Часто появляется после снятия клеммы аккумулятора — тогда просто сбрось. Если повторяется — клеммы, «масса», предохранители питания блока.",0],
+  ["P0601–P0606","Внутренняя ошибка блока управления","Сначала проверь питание и «массу» блока. Если ошибка остаётся — диагностика в сервисе.",1]]]
+];
+const SEV = [["Ехать можно","sev0"],["Аккуратно, скорее в ремонт","sev1"],["Лучше не ехать","sev2"]];
+let faultQ = "";
+function faultsNav(cur){
+  const it = [["symptoms","Симптомы"],["lamps","Лампы на панели"],["codes","Коды ошибок"]];
+  return `<div class="fseg" role="tablist" aria-label="Поломки">${it.map(([id,t]) => `<button type="button" role="tab" data-goto="${id}" aria-selected="${cur === id}">${t}</button>`).join("")}</div>`;
+}
+function renderLamps(){
+  const items = LAMPS.filter(l => match(l.name, l.tag, l.means, l.todo));
+  const card = l => `<article class="lampc ${l.red ? "red" : "yel"}"><span class="lampc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${LAMP_ICO[l.ic]}</svg></span>
+    <div class="lampc-b"><h3>${esc(l.name)}</h3><span class="lampc-tag">${esc(l.tag)}</span>
+    <p><b>Что значит.</b> ${esc(l.means)}</p><p><b>Что делать.</b> ${esc(l.todo)}</p><p class="lampc-go"><b>Ехать можно?</b> ${esc(l.go)}</p>
+    ${l.jobs.length || l.codes ? `<div class="tools">${l.codes ? `<button type="button" data-goto="codes">Коды ошибок</button>` : ""}${l.jobs.map(id => { const j = JOBS.find(x => x.id === id); return j ? `<button type="button" data-job="${id}">${esc(j.title)}</button>` : ""; }).join("")}</div>` : ""}</div></article>`;
+  const red = items.filter(l => l.red), yel = items.filter(l => !l.red);
+  return `<div class="detail">${faultsNav("lamps")}
+    ${searchBox("Найти лампу: масло, ABS, руль…")}
+    <p class="famnote">При включении зажигания загораются почти все лампы — это проверка. После запуска они должны погаснуть за пару секунд.</p>
+    ${red.length ? `<section class="group"><h2 class="gh">Красные — остановись<span>${red.length}</span></h2><div class="stack">${red.map(card).join("")}</div></section>` : ""}
+    ${yel.length ? `<section class="group"><h2 class="gh">Жёлтые — ехать можно, но проверь<span>${yel.length}</span></h2><div class="stack">${yel.map(card).join("")}</div></section>` : ""}
+    ${items.length ? "" : `<p class="empty">Ничего не нашлось. Попробуй другое слово.</p>`}
+    <p class="approx-note">Подробнее с примерами — в статье <a href="stati/lampy-na-paneli.html">«Лампы на приборной панели Лады»</a>.</p></div>`;
+}
+function renderCodes(){
+  const q = query.trim().toUpperCase().replace(/\s+/g, "");
+  const hit = c => { if(!query.trim()) return true;
+    if(/^P?\d{2,4}$/.test(q)){ const n = q.replace(/^P/, ""); const nums = []; c[0].replace(/P(\d{4})(?:–P(\d{4}))?/g, (m,a,b) => { const A = +a, B = b ? +b : A; for(let i = A; i <= B; i++) nums.push(String(i).padStart(4, "0")); }); return nums.some(x => x.startsWith(n) || x === n.padStart(4, "0")); }
+    return match(c[0], c[1], c[2]); };
+  const groups = CODE_GROUPS.map(([g, list]) => [g, list.filter(hit)]).filter(([,l]) => l.length);
+  return `<div class="detail">${faultsNav("codes")}
+    ${searchBox("Введи код: P0300, 0335… или слово: датчик, смесь")}
+    <div class="codehow"><b>Как узнать код.</b> На большинстве инжекторных Лад начиная с Калины и Приоры под панелью есть разъём OBD-II. Вставь сканер ELM327, включи зажигание и посмотри код в приложении на телефоне. Код — это подсказка, где искать, а не готовый диагноз.</div>
+    ${groups.length ? groups.map(([g, list]) => `<section class="group"><h2 class="gh">${esc(g)}<span>${list.length}</span></h2><div class="codes">${list.map(([code, name, check, sev]) => `<article class="codec">
+      <div class="codec-h"><span class="code">${esc(code)}</span><span class="sev ${SEV[sev][1]}">${SEV[sev][0]}</span></div>
+      <h3>${esc(name)}</h3><p><b>Что проверить:</b> ${esc(check)}</p></article>`).join("")}</div></section>`).join("")
+      : `<p class="empty">Такого кода в списке нет. Здесь собраны самые частые ошибки на Ладах — остальные смотри по описанию в приложении сканера.</p>`}
+    <p class="approx-note">Коды стандартные для OBD-II; точное описание зависит от блока управления твоей машины. Устрани причину и только потом сбрасывай ошибку — просто стереть ошибку не значит починить.</p></div>`;
 }
 
 function renderTools(){
@@ -2347,7 +2518,7 @@ function render(keepFocus){
   renderFam(); renderTabs();
   const job = openJob && JOBS.find(j => j.id === openJob);
   $("#main").innerHTML = job ? renderJob(job)
-    : view === "about" ? renderAbout() : view === "schedule" ? renderSchedule() : view === "symptoms" ? renderSymptoms() : view === "numbers" ? renderNumbers()
+    : view === "about" ? renderAbout() : view === "schedule" ? renderSchedule() : view === "symptoms" ? renderSymptoms() : view === "lamps" ? renderLamps() : view === "codes" ? renderCodes() : view === "numbers" ? renderNumbers()
     : tab === "garage" ? renderGarage() : tab === "tools" ? renderTools() : tab === "parts" ? renderParts() : tab === "fluids" ? renderFluids() : renderList();
   fillQr();
   if(keepFocus){ const q = $("#q"); if(q){ q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
@@ -2363,13 +2534,14 @@ function rerenderVideos(){
 }
 
 /* ---------- навигация ---------- */
-const TABS = ["to","garage","tools","parts"];
+const TABS = ["to","faults","garage","tools","parts"];
 function go(hash){ if(location.hash.slice(1) !== hash) location.hash = hash; else route(); }
 function route(){
   const h = location.hash.slice(1);
   openJob = null; view = "list";
   if(JOBS.some(j => j.id === h)){ openJob = h; tab = "to"; }
-  else if(h === "schedule" || h === "symptoms" || h === "numbers" || h === "about"){ view = h; tab = "to"; }
+  else if(h === "schedule" || h === "numbers" || h === "about"){ view = h; tab = "to"; }
+  else if(h === "faults" || h === "symptoms" || h === "lamps" || h === "codes"){ view = h === "faults" ? "symptoms" : h; tab = "faults"; }
   else if(h === "fluids") tab = "parts";
   else if(TABS.includes(h)) tab = h;
   else tab = "to";
