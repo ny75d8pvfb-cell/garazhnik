@@ -105,5 +105,5 @@ ol.asteps>li>div{min-width:0;padding-top:4px}
 .ecards{display:grid;gap:10px;margin:10px 0}
 @media (min-width:760px){.ecards{grid-template-columns:repeat(2,1fr)}}
 .ecard{border:1px solid var(--line);background:var(--surface);border-radius:var(--r,6px);padding:12px 14px}
-.ecard>b{display:block;font-size:16px}.ecard>small{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
+.ecard>b{display:block;font-size:16px;font-weight:600}.ecard>b b{font-weight:700}.ecard>small{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
 .ecard dl{margin:0}.ecard dt{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:8px}.ecard dd{margin:2px 0 0;font-size:14.5px;line-height:1.45}
