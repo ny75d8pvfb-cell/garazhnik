@@ -86,7 +86,7 @@ for a in A:
     <p class="lead">{E(a["lead"])}</p>
     <nav class="toc" aria-label="Содержание"><b>Содержание</b><ol>{toc}</ol></nav>
     {body}
-    <a class="cta" href="../{"?fam=" + a["fam"] if a.get("fam") else ""}#{a["app"]}"><span class="cta-ico" aria-hidden="true">{LOGO}</span><span><b>{E(a["app_label"])}</b><small>Открыть в Гаражнике: цифры под твою модель и мотор, схемы и пошаговый режим</small></span><span class="cta-go" aria-hidden="true">→</span></a>
+    <a class="cta" href="../{"?gen=" + a["gen"] if a.get("gen") else ("?fam=" + a["fam"] if a.get("fam") else "")}#{a["app"]}"><span class="cta-ico" aria-hidden="true">{LOGO}</span><span><b>{E(a["app_label"])}</b><small>Открыть в Гаражнике: цифры под твою модель и мотор, схемы и пошаговый режим</small></span><span class="cta-go" aria-hidden="true">→</span></a>
   </article>
   <section class="related"><h2>Похожие статьи</h2><div class="cards">{rel}</div></section>
 </main>
@@ -125,7 +125,7 @@ open(os.path.join(OUT, "sitemap.xml"), "w").write(sm)
 import re as _re
 _app = os.path.join(OUT, "index.html")
 if os.path.exists(_app):
-    _arts = [dict({"s": a["slug"], "t": a["title"], "d": a["desc"], "c": a["cat"], "j": "" if a.get("fam") else a.get("app", "")}, **({"m": a["fam"]} if a.get("fam") else {})) for a in A]
+    _arts = [dict({"s": a["slug"], "t": a["title"], "d": a["desc"], "c": a["cat"], "j": "" if a.get("fam") else a.get("app", "")}, **({"m": a["fam"]} if a.get("fam") else {}), **({"mm": a["mm"]} if a.get("mm") else {})) for a in A]
     _src = open(_app).read()
     _new = _re.sub(r"const ARTS = .*?;/\*ARTS\*/", lambda _m: "const ARTS = " + json.dumps(_arts, ensure_ascii=False) + ";/*ARTS*/", _src, count=1, flags=_re.S)
     if _new != _src: open(_app, "w").write(_new)

@@ -129,11 +129,13 @@ ol.steps li div{min-width:0;padding-top:4px}
 .welcome h2{margin:0 0 6px;font-size:20px;line-height:1.25}
 .welcome p{margin:0 0 12px;color:var(--muted);font-size:14.5px;line-height:1.45}
 .wfams{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-@media (min-width:700px){.wfams{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:700px){.wfams{grid-template-columns:repeat(4,1fr)}}
 .wfams button{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:10px 12px;border:1px solid var(--line-2);border-radius:var(--r);background:var(--bg,transparent);color:inherit;font:inherit;cursor:pointer}
 .wfams button:hover,.wfams button:focus-visible{border-color:var(--amber)}
 .wfams b{font-size:15px}.wfams small{color:var(--muted);font-size:12.5px;line-height:1.3}
 .wskip{margin-top:10px;font-size:13.5px}
+dd.udd{font:italic 400 14px/1.45 var(--f-body)!important;color:var(--muted)!important}
+.n.nu{background:transparent;color:var(--muted);border:1px dashed var(--line-2);font-family:inherit;font-size:.92em}
 .schedmob{display:none}
 @media (max-width:560px){.sched .schedcol{display:none}.schedmob{display:block;margin-top:4px}.schedmob .linkbtn{font-size:13.5px}}
 table{border-collapse:collapse;width:100%;font-size:14px}
@@ -1016,6 +1018,8 @@ a.hit{text-decoration:none}a.hit:hover,.hit:hover{border-color:var(--amber)}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script>
 /* ---------- данные ---------- */
+/* цифра не подтверждена двумя надёжными источниками — честно пишем, что уточняется */
+const UTOCH = "уточняется — сверь с сервисной книжкой";
 const FAM = {
   classic:{name:"Классика",models:"2101–2107",engine:"8 клапанов, карбюратор или инжектор (поздние 2104–2107)",
     oil:"3,75 л",coolant:"9,9 л",plugKey:"21",plugTorque:"31–39 Н·м",plugGap:"0,7–0,8 мм карбюратор · 1,0–1,1 мм инжектор",
@@ -1039,13 +1043,19 @@ const FAM = {
     oil:"3,2–3,5 л",coolant:"7,8 л",plugKey:"21 (8 кл.) · 16 (16 кл.)",plugTorque:"31–39 Н·м (8 кл.) · 25–30 Н·м (16 кл.)",plugGap:"1,0–1,1 мм",
     wheelKey:"17",wheelTorque:"65–93 Н·м",cabin:"Есть, под жабо или за перчаточным ящиком (зависит от модели)",
     air:"Панельный фильтр в корпусе",ign:"8 кл.: модуль и провода · 16 кл.: катушки на каждой свече",brakes:"Перед: диски · зад: барабаны"},
-  vesta:{name:"Веста · Ларгус · Иксрей",models:"Веста, Ларгус, Иксрей",engine:"16 клапанов (Ларгус бывает 8 кл.)",
+  vesta:{name:"Веста · Искра · Ларгус · Иксрей",models:"Веста, Искра, Ларгус, Иксрей",engine:"16 клапанов (Ларгус бывает 8 кл.)",
     oil:"см. двигатель",coolant:"7 л",plugKey:"16",plugTorque:"25–30 Н·м",plugGap:"по руководству (свечи обычно уже с заводским зазором)",
     wheelKey:"17",wheelTorque:"90–110 Н·м, проверь по руководству",cabin:"Есть",
     air:"Панельный фильтр в корпусе",ign:"Катушки на каждой свече (8 кл. Ларгус: модуль и провода)",brakes:"Перед: диски · зад: барабаны (на части версий диски)"}
+,
+  travel:{name:"Нива Тревел",models:"Шевроле Нива, Нива Тревел",engine:"8 клапанов, 1,7 или 1,8 л",
+    oil:UTOCH,coolant:UTOCH,plugKey:UTOCH,plugTorque:UTOCH,plugGap:UTOCH,
+    wheelKey:UTOCH,wheelTorque:UTOCH,cabin:"Есть",
+    air:"Панельный фильтр в корпусе",ign:UTOCH,brakes:"Перед: диски · зад: барабаны"}
 };
-const APPROX = new Set(["vesta","kpg"]);
-const CHAIN = new Set(["classic","niva"]);
+const APPROX = new Set(["vesta","kpg","travel"]);
+const CHAIN = new Set(["classic","niva","travel"]);   /* семейство с цепью; мотор может переопределить (belt:true) */
+const RWD = new Set(["classic","niva"]);
 const FAM_EXTRA = {
   classic:{grm:"Цепь. Меняют не по пробегу, а по износу: обычно на 80–100 тыс. км, когда появляется шум",
     fuel:"Карбюратор: фильтр тонкой очистки в моторном отсеке перед бензонасосом. Инжектор: под днищем рядом с баком",
@@ -1072,6 +1082,7 @@ const FAM_EXTRA = {
     bleed:"правое заднее → левое переднее → левое заднее → правое переднее (сверь с руководством: на машинах с ABS бывают особенности)",battery:"60 А·ч (Ларгус — до 70 А·ч)",
     alt:"Эксцентриковый натяжной ролик: гайка на 13, ролик поворачивают ключом Torx T55"}
 };
+FAM_EXTRA.travel = {grm:"Цепь. Меняют не по пробегу, а когда появляется шум: шелест или стук спереди мотора",fuel:UTOCH,bleed:UTOCH,battery:"как у старого — смотри наклейку",alt:UTOCH};
 for(const k in FAM_EXTRA) Object.assign(FAM[k], FAM_EXTRA[k]);
 
 /* Двигатели: точные цифры по руководствам АвтоВАЗа; перекрывают значения семейства. */
@@ -1084,6 +1095,7 @@ const ENG = {
   niva:[
     {id:"inj",kind:"inj",name:"Инжектор 1,7",sub:"21214, 4x4, Legend — с 2000-х",v:{plugGap:"1,0–1,1 мм",ign:"Модуль зажигания и высоковольтные провода",air:"Панельный фильтр в корпусе",fuel:"Под днищем рядом с баком"}},
     {id:"carb17",kind:"carb",name:"Карбюратор 1,7",sub:"21213, 1990-е",v:{plugGap:"0,7–0,8 мм",ign:"Трамблёр, катушка и высоковольтные провода",air:"Круглый фильтр в корпусе над карбюратором",fuel:"Фильтр тонкой очистки в моторном отсеке, на шланге перед бензонасосом"}},
+    {id:"e11184",kind:"inj",belt:true,name:"1,8 8 кл. 11184",sub:"Нива Легенд с июля 2026 — 90 л.с.",v:{oil:UTOCH,coolant:UTOCH,plugKey:"14 (свечи с резьбой M12 — головка на 21 от мотора 1,7 не подойдёт)",plugTorque:UTOCH,plugGap:UTOCH,ign:UTOCH,air:"Панельный фильтр в корпусе",fuel:UTOCH,grm:"Ремень, а не цепь, как на 1,7. Клапаны при обрыве, по имеющимся данным, с поршнями не встречаются — уточняется. Интервал замены уточняется (называют 60 000 км). Гидрокомпенсаторов нет: зазоры клапанов регулируют",valveGap:UTOCH}},
     {id:"carb",kind:"carb",name:"Карбюратор 1,6",sub:"2121, 1977–1993",v:{plugGap:"0,7–0,8 мм",ign:"Трамблёр, катушка и высоковольтные провода",air:"Круглый фильтр в корпусе над карбюратором",fuel:"Фильтр тонкой очистки в моторном отсеке, на шланге перед бензонасосом"}}],
   samara:[
     {id:"inj8",kind:"inj",name:"Инжектор",sub:"2113, 2114, большинство 2115; инжекторные 2108–21099",v:{plugGap:"1,0–1,1 мм",ign:"Модуль зажигания и высоковольтные провода",air:"Панельный фильтр в корпусе",fuel:"Под днищем справа у бака"}},
@@ -1095,12 +1107,18 @@ const ENG = {
   kpg:[
     {id:"e11183",kind:"inj",name:"8 кл. 11183",sub:"Калина, Гранта, 1,6 л 81–82 л.с.",v:{grmKm:60000,oil:"3,2 л (при замене с фильтром — 2,9 л)",plugKey:"21",plugTorque:"30,7–39,0 Н·м",ign:"Модуль зажигания и высоковольтные провода",grm:"Ремень, замена каждые 60 000 км. При обрыве клапаны не гнёт"}},
     {id:"e11186",kind:"inj",name:"8 кл. 21116 / 11186",sub:"Гранта, Калина-2, 1,6 л 87 л.с.",v:{oil:"3,2 л (при замене с фильтром — 2,9 л)",plugKey:"21",plugTorque:"30,7–39,0 Н·м",ign:"Модуль зажигания и высоковольтные провода",grm:"Ремень. При обрыве гнёт клапаны. Интервал замены — по сервисной книжке, проверяй ремень на каждом ТО"}},
+    {id:"e11182",kind:"inj",name:"8 кл. 11182",sub:"Гранта с 2021, 1,6 л 90 л.с.",v:{oil:"около 4,1 л на замену с фильтром — заливай чуть меньше и доливай до метки MAX по щупу",plugKey:"14 (свечи с резьбой M12, головка с резинкой)",plugTorque:UTOCH,plugGap:UTOCH,ign:"Модуль зажигания и высоковольтные провода",grm:"Ремень. Гнёт ли клапаны при обрыве — уточняется: в поршнях есть выточки, но на высоких оборотах встреча возможна. Интервал замены уточняется — смотри сервисную книжку и осматривай ремень на каждом ТО. Гидрокомпенсаторов нет: зазоры клапанов регулируют, ориентировочно после 90 000 км"}},
     {id:"e16",kind:"inj",name:"16 кл. 21126 / 21127 / 11194",sub:"Приора, Калина, Гранта",v:{oil:"Приора — 3,5 л; Калина и Гранта — 3,2 л (при замене с фильтром 2,9 л); с АКПП — 4,4 л (4,1 л)",plugKey:"16",plugTorque:"25–30 Н·м",ign:"Катушки на каждой свече",grm:"Ремень. При обрыве гнёт клапаны. Интервал замены — по сервисной книжке, проверяй ремень на каждом ТО"}}],
   vesta:[
     {id:"e21129",kind:"inj",name:"1,6 16 кл. 21129",sub:"Веста, Иксрей, Ларгус с 2021",v:{oil:"4,4 л (при замене с фильтром — 4,1 л); ранние машины со штампованным поддоном — 3,2 л (2,9 л)",coolant:"7,0 л",plugKey:"16",plugTorque:"20–30 Н·м",plugGap:"1,0–1,1 мм",wheelKey:"17",wheelTorque:"90–120 Н·м",ign:"Катушки на каждой свече",grm:"Ремень. При обрыве гнёт клапаны. Интервал — по сервисной книжке, проверяй на каждом ТО",gear:"2,25 л (МКП 2180 и АМТ) · 2,34 л (МКП JH3)",tankFilter:true}},
     {id:"e21179",kind:"inj",name:"1,8 16 кл. 21179",sub:"Веста, Иксрей",v:{oil:"4,4 л (при замене с фильтром — 4,1 л)",coolant:"7,0 л",plugKey:"16",plugTorque:"20–30 Н·м",plugGap:"1,0–1,1 мм",wheelKey:"17",wheelTorque:"90–120 Н·м",ign:"Катушки на каждой свече",grm:"Ремень. При обрыве гнёт клапаны. Интервал — по сервисной книжке, проверяй на каждом ТО",gear:"2,25 л (МКП 2180 и АМТ) · 2,34 л (МКП JH3)",tankFilter:true}},
     {id:"k7m",kind:"inj",name:"Ларгус 8 кл. K7M",sub:"1,6 л, Renault",v:{grmKm:60000,oil:"3,3 л",coolant:"5,45 л с кондиционером · 4,5 л без",plugKey:"16",plugTorque:"25–30 Н·м",plugGap:"по маркировке на упаковке свечи",wheelKey:"по размеру своих болтов",wheelTorque:"105 Н·м",ign:"Модуль зажигания и высоковольтные провода",grm:"Ремень вместе с роликами и помпой каждые 60 000 км. При обрыве гнёт клапаны",gear:"по руководству Ларгуса",battery:"как у старого — смотри наклейку",fuel:"Под днищем рядом с баком",tankFilter:false}},
-    {id:"k4m",kind:"inj",name:"Ларгус 16 кл. K4M",sub:"1,6 л, Renault",v:{grmKm:120000,oil:"4,8 л",coolant:"5,45 л с кондиционером · 4,5 л без",plugKey:"16",plugTorque:"25–30 Н·м",plugGap:"по маркировке на упаковке свечи",wheelKey:"по размеру своих болтов",wheelTorque:"105 Н·м",ign:"Катушки на каждой свече",grm:"Ремень, по регламенту каждые 120 000 км. При обрыве гнёт клапаны",gear:"по руководству Ларгуса",battery:"как у старого — смотри наклейку",fuel:"Под днищем рядом с баком",tankFilter:false}}]
+    {id:"k4m",kind:"inj",name:"Ларгус 16 кл. K4M",sub:"1,6 л, Renault",v:{grmKm:120000,oil:"4,8 л",coolant:"5,45 л с кондиционером · 4,5 л без",plugKey:"16",plugTorque:"25–30 Н·м",plugGap:"по маркировке на упаковке свечи",wheelKey:"по размеру своих болтов",wheelTorque:"105 Н·м",ign:"Катушки на каждой свече",grm:"Ремень, по регламенту каждые 120 000 км. При обрыве гнёт клапаны",gear:"по руководству Ларгуса",battery:"как у старого — смотри наклейку",fuel:"Под днищем рядом с баком",tankFilter:false}},
+    {id:"e11182v",kind:"inj",name:"8 кл. 11182",sub:"Веста NG с 2023, Искра, Ларгус с 2021 — 1,6 л 90 л.с.",v:{oil:"3,85–4,1 л на замену с фильтром (данные расходятся) — заливай 3,8 л и доливай до метки MAX по щупу",coolant:UTOCH,plugKey:"14 (свечи с резьбой M12, головка с резинкой)",plugTorque:UTOCH,plugGap:UTOCH,ign:"Модуль зажигания и высоковольтные провода",grm:"Ремень. Гнёт ли клапаны при обрыве — уточняется: в поршнях есть выточки, но на высоких оборотах встреча возможна. Интервал замены уточняется — смотри сервисную книжку и осматривай ремень на каждом ТО. Гидрокомпенсаторов нет: зазоры клапанов регулируют, ориентировочно после 90 000 км",gear:UTOCH,tankFilter:true}},
+    {id:"e21179ng",kind:"inj",name:"1,8 EVO 21179",sub:"Веста NG — 1,8 л 122 л.с., вариатор",v:{oil:"4,4 л (при замене с фильтром — 4,1 л)",coolant:UTOCH,plugKey:"16",plugTorque:"20–30 Н·м",plugGap:"1,0–1,1 мм",ign:"Катушки на каждой свече",grm:"Ремень. При обрыве гнёт клапаны. Интервал — по сервисной книжке, проверяй на каждом ТО",gear:"Вариатор WLY CVT18: по данным АвтоВАЗа первая замена жидкости — на 30 000 км. Объём и жидкость — уточняется, сверь с сервисной книжкой",tankFilter:true}}],
+  travel:[
+    {id:"t21214",kind:"inj",name:"1,7 8 кл. 2123 / 21214",sub:"Шевроле Нива, Нива Тревел до 2025 — 80–83 л.с.",v:{oil:"3,75 л",plugKey:"21",ign:"Модуль зажигания и высоковольтные провода",fuel:"Под днищем рядом с баком"}},
+    {id:"t11184",kind:"inj",belt:true,name:"1,8 8 кл. 11184",sub:"Нива Тревел с 2025 — 90 л.с.",v:{oil:UTOCH,plugKey:"14 (свечи с резьбой M12)",grm:"Ремень, а не цепь, как на 1,7. Клапаны при обрыве, по имеющимся данным, с поршнями не встречаются — уточняется. Интервал замены уточняется (называют 60 000 км). Гидрокомпенсаторов нет: зазоры клапанов регулируют"}}]
 };
 const FAM_BASE = {
   classic:{oil:"3,75 л",coolant:"8,65 л (по руководству 2105/2107)",plugKey:"21",plugTorque:"30,7–39,0 Н·м",wheelKey:"19",wheelTorque:"58,8–72,0 Н·м",grm:CHAIN_TXT,gear:"1,35 л (4-ступ.) · 1,6 л (5-ступ.) · задний мост 1,3 л",battery:BAT55},
@@ -1108,7 +1126,8 @@ const FAM_BASE = {
   samara:{grmKm:60000,oil:"3,5 л",coolant:"7,8 л",plugKey:"21",plugTorque:"30,7–39,0 Н·м",wheelKey:"17",wheelTorque:"65,2–92,6 Н·м",grm:"Ремень, замена каждые 60 000 км. 8-клапанные моторы Самары при обрыве клапаны не гнут",gear:"3,3 л",battery:BAT55},
   ten:{grmKm:60000,oil:"3,5 л",coolant:"7,8 л",plugGap:"1,0–1,1 мм",wheelKey:"17",wheelTorque:"65,2–92,6 Н·м",gear:"3,3 л",battery:BAT55},
   kpg:{coolant:"7,84 л",plugGap:"1,0–1,1 мм",wheelKey:"17",wheelTorque:"65,2–92,6 Н·м",gear:"Тросовая КПП (Калина-2, Гранта) — 2,2 л · старая КПП (Приора, Калина-1) — 3,1 л",battery:BAT55},
-  vesta:{battery:"60 А·ч — как у старого, смотри наклейку"}
+  vesta:{battery:"60 А·ч — как у старого, смотри наклейку"},
+  travel:{gear:UTOCH}
 };
 for(const k in FAM_BASE) Object.assign(FAM[k], FAM_BASE[k]);
 const FAM_SUSP = {
@@ -1123,7 +1142,52 @@ for(const k in FAM_SUSP) Object.assign(FAM[k], FAM_SUSP[k]);
 let engSel = {};
 try{ engSel = JSON.parse(localStorage.getItem("garazh-eng") || "{}") || {}; }catch(e){}
 const engOf = k => (ENG[k] || []).find(e => e.id === engSel[k]) || (ENG[k] || [])[0];
-const F = (k = fam) => { const e = engOf(k); return Object.assign({}, FAM[k], e ? e.v : {}, e ? {engName: e.name + (e.sub ? " (" + e.sub + ")" : "")} : {}); };
+/* Каталог: модель → поколение → мотор. Поколение ссылается на семейство (общие цифры) и список его моторов;
+   поле v поколения перекрывает цифры семейства и мотора (то, что у этой модели своё). */
+const MODELS = [
+  {id:"granta",name:"Гранта",gens:[
+    {id:"granta1",name:"Гранта",years:"2011–2018",fam:"kpg",engs:["e11183","e11186","e16"]},
+    {id:"grantafl",name:"Гранта FL",years:"с 2018",fam:"kpg",engs:["e11186","e11182","e16"],note:"Мотор 11182 (90 л.с.) — с 2021 года"}]},
+  {id:"vesta",name:"Веста",gens:[
+    {id:"vesta1",name:"Веста",years:"2015–2022",fam:"vesta",engs:["e21129","e21179"],note:"Веста с вариатором 2020–2022 годов — мотор Renault H4M: его цифр у нас пока нет"},
+    {id:"vestang",name:"Веста NG",years:"с 2022",fam:"vesta",engs:["e21129","e11182v","e21179ng"]}]},
+  {id:"iskra",name:"Искра",gens:[
+    {id:"iskra1",name:"Искра",years:"с 2025",fam:"vesta",engs:["e11182v","e21129"],v:{coolant:UTOCH,wheelKey:UTOCH,wheelTorque:UTOCH,gear:"МКП — уточняется; вариатор WLY — уточняется, сверь с сервисной книжкой",hubNut:UTOCH,linkTorque:UTOCH,knuckle:UTOCH},note:"Новая модель: часть цифр ещё уточняется"}]},
+  {id:"niva",name:"Нива Легенд / 4x4",gens:[
+    {id:"niva2121",name:"ВАЗ 2121 / 21213",years:"1977–1990-е",fam:"niva",engs:["carb","carb17"]},
+    {id:"niva17",name:"Нива 4x4 / Легенд 1,7",years:"до июля 2026",fam:"niva",engs:["inj"]},
+    {id:"niva18",name:"Нива Легенд 1,8",years:"с июля 2026",fam:"niva",engs:["e11184"],v:{cabin:"Есть — появился в обновлении 2026 года",brakes:"Перед: вентилируемые диски · зад: барабаны",gear:"Коробка, мосты и раздатка доработаны — объёмы уточняются, сверь с сервисной книжкой"},note:"Новый мотор с ремнём ГРМ: часть цифр ещё уточняется"}]},
+  {id:"travel",name:"Нива Тревел / Шевроле Нива",gens:[
+    {id:"chevyniva",name:"Шевроле Нива",years:"2002–2020",fam:"travel",engs:["t21214"]},
+    {id:"travel17",name:"Нива Тревел 1,7",years:"2020–2025",fam:"travel",engs:["t21214"]},
+    {id:"travel18",name:"Нива Тревел 1,8",years:"с 2025",fam:"travel",engs:["t11184"]}]},
+  {id:"largus",name:"Ларгус",gens:[
+    {id:"largus1",name:"Ларгус",years:"2012–2021",fam:"vesta",engs:["k7m","k4m","e21129"],note:"С 2016 года вместо K7M ставили ВАЗ-11189 (87 л.с.) — его цифр у нас пока нет. 21129 — с осени 2017 года вместо K4M"},
+    {id:"largusfl",name:"Ларгус FL",years:"с 2021",fam:"vesta",engs:["e21129","e11182v"],v:{coolant:UTOCH,wheelTorque:"105 Н·м",hubNut:UTOCH,linkTorque:UTOCH,knuckle:UTOCH}}]},
+  {id:"xray",name:"Иксрей",gens:[
+    {id:"xray1",name:"Иксрей",years:"2015–2022",fam:"vesta",engs:["e21129","e21179"]}]},
+  {id:"priora",name:"Приора",gens:[
+    {id:"priora1",name:"Приора 1",years:"2007–2013",fam:"kpg",engs:["e16","e11186"]},
+    {id:"priora2",name:"Приора 2",years:"2013–2018",fam:"kpg",engs:["e16","e11186"]}]},
+  {id:"kalina",name:"Калина",gens:[
+    {id:"kalina1",name:"Калина 1",years:"2004–2013",fam:"kpg",engs:["e11183","e16"]},
+    {id:"kalina2",name:"Калина 2",years:"2013–2018",fam:"kpg",engs:["e11186","e16"]}]},
+  {id:"ten",name:"2110 / 2111 / 2112",gens:[
+    {id:"ten1",name:"Десятка",years:"1995–2014",fam:"ten",engs:(ENG.ten || []).map(e => e.id)}]},
+  {id:"samara",name:"Самара",gens:[
+    {id:"samara1",name:"2108 / 2109 / 21099",years:"1984–2004",fam:"samara",engs:["carb","inj8"]},
+    {id:"samara2",name:"2113 / 2114 / 2115",years:"1997–2013",fam:"samara",engs:["inj8","carb"]}]},
+  {id:"classic",name:"Классика 2101–2107",gens:[
+    {id:"classic1",name:"2101–2107",years:"1970–2012",fam:"classic",engs:["carb","inj"]}]}
+];
+const GENS = MODELS.flatMap(m => m.gens.map(g => Object.assign(g, {model:m})));
+let genSel = null; try{ genSel = localStorage.getItem("garazh-gen"); }catch(e){}
+/* поколение действует, только если совпадает семейство и выбранный мотор есть в его списке */
+const genOf = (k = fam) => { const g = GENS.find(x => x.id === genSel); const e = engOf(k); return g && g.fam === k && (!e || g.engs.includes(e.id)) ? g : null; };
+const setGen = id => { genSel = id; famChosen = true; try{ localStorage.setItem("garazh-gen", id); }catch(e){} };
+const isU = v => String(v || "").startsWith("уточняется");
+const isChain = (k = fam) => CHAIN.has(k) && !(engOf(k) || {}).belt;
+const F = (k = fam) => { const e = engOf(k), g = genOf(k); return Object.assign({}, FAM[k], e ? e.v : {}, g && g.v ? g.v : {}, e ? {engName: e.name + (e.sub ? " (" + e.sub + ")" : "")} : {}, g ? {name: g.name + " (" + g.years + ")"} : {}); };
 const setEng = (k, id) => { engSel[k] = id; try{ localStorage.setItem("garazh-eng", JSON.stringify(engSel)); }catch(e){} };
 
 
@@ -1335,17 +1399,18 @@ const JOBS = [
    desc:"Самая ответственная работа из списка: ошибка в метках может стоить ремонта мотора.",
    plate:["grm"],tools:["grmtools","sockets","ratchet","wrenches","torque","jack"],
    steps:[
-    {t:"У тебя цепь ГРМ. Её меняют не по пробегу, а по звуку: шелест или стук спереди мотора на холостых, особенно на холодную.",only:["classic","niva"]},
-    {t:"Подтяжка: ослабь колпачковую гайку натяжителя сбоку головки, проверни коленвал на 1–2 оборота по часовой и затяни гайку.",only:["classic","niva"]},
-    {t:"Шум не ушёл — цепь растянута. Меняют её с натяжителем, башмаком и успокоителем. Первый раз — с опытным человеком.",only:["classic","niva"]},
-    {t:"Сначала узнай, что будет при обрыве ремня на твоём моторе: {grm}.",not:["classic","niva"]},
-    {t:"Осмотр: сними верхнюю крышку ремня. Трещины, сколы зубьев, масло на ремне, гул роликов — меняй, даже если пробег не подошёл.",not:["classic","niva"]},
-    {t:"Замена: подними правую сторону машины, сними правое переднее колесо и подкрылок, ремень генератора и крышки ГРМ.",not:["classic","niva"]},
-    {t:"Проверни коленвал по часовой за болт шкива, пока не совпадут метки на распредвале и на маховике (схема ниже).",not:["classic","niva"]},
-    {t:"Ослабь натяжной ролик и сними ремень. Ролики и помпу меняй сразу вместе с ним.",not:["classic","niva"]},
-    {t:"Надень новый ремень, не сдвигая валы. Начинай с коленвала; ветвь от коленвала к распредвалу должна быть натянута.",not:["classic","niva"]},
-    {t:"Натяни ремень роликом — по указателю на ролике или по руководству — и затяни гайку.",not:["classic","niva"]},
-    {t:"Проверни коленвал рукой на два оборота и снова проверь метки. Ушла хоть одна — переставляй.",not:["classic","niva"]},
+    {t:"У тебя цепь ГРМ. Её меняют не по пробегу, а по звуку: шелест или стук спереди мотора на холостых, особенно на холодную.",chain:"yes"},
+    {t:"Подтяжка: ослабь колпачковую гайку натяжителя сбоку головки, проверни коленвал на 1–2 оборота по часовой и затяни гайку.",chain:"yes"},
+    {t:"Шум не ушёл — цепь растянута. Меняют её с натяжителем, башмаком и успокоителем. Первый раз — с опытным человеком.",chain:"yes"},
+    {t:"Сначала узнай, что будет при обрыве ремня на твоём моторе: {grm}.",chain:"no"},
+    {t:"На Ниве с мотором 1,8 ремень стоит спереди продольного мотора — порядок разборки другой, чем на переднеприводных Ладах. Пошаговую инструкцию для неё мы готовим: пока меняй ремень в сервисе или вместе с опытным человеком и обязательно меняй ролики.",chain:"no",only:["niva","travel"]},
+    {t:"Осмотр: сними верхнюю крышку ремня. Трещины, сколы зубьев, масло на ремне, гул роликов — меняй, даже если пробег не подошёл.",chain:"no",not:["niva","travel"]},
+    {t:"Замена: подними правую сторону машины, сними правое переднее колесо и подкрылок, ремень генератора и крышки ГРМ.",chain:"no",not:["niva","travel"]},
+    {t:"Проверни коленвал по часовой за болт шкива, пока не совпадут метки на распредвале и на маховике (схема ниже).",chain:"no",not:["niva","travel"]},
+    {t:"Ослабь натяжной ролик и сними ремень. Ролики и помпу меняй сразу вместе с ним.",chain:"no",not:["niva","travel"]},
+    {t:"Надень новый ремень, не сдвигая валы. Начинай с коленвала; ветвь от коленвала к распредвалу должна быть натянута.",chain:"no",not:["niva","travel"]},
+    {t:"Натяни ремень роликом — по указателю на ролике или по руководству — и затяни гайку.",chain:"no",not:["niva","travel"]},
+    {t:"Проверни коленвал рукой на два оборота и снова проверь метки. Ушла хоть одна — переставляй.",chain:"no",not:["niva","travel"]},
     {t:"Собери всё обратно, заведи и послушай. Гул или вой ремня — признак перетяга.",not:["classic","niva"]}],
    warn:"Если сомневаешься в метках, остановись и проверь ещё раз. На моторах, которые гнут клапаны, ошибка на один зуб может закончиться ремонтом головки блока."},
   {id:"fuel",title:"Замена топливного фильтра",lvl:1,time:"20–40 мин",
@@ -1483,7 +1548,7 @@ const JOBS = [
 const OLD = new Set(["classic","niva","samara"]);
 const PARTS = [
   {id:"oil",name:"Моторное масло",
-   params:(f,k) => [["Вязкость","5W-40 или 10W-40. Первая цифра — холодный пуск: чем она меньше, тем легче заводиться зимой. Для Урала и Сибири — 5W-40 или 0W-40"],["Класс","API SL, SM или SN и выше"],["Объём на замену",f.oil],["Замена",(CHAIN.has(k) ? "Каждые 10 000 км" : "Каждые 15 000 км") + " или раз в год; в городе с пробками и зимой — чаще"]],
+   params:(f,k) => [["Вязкость","5W-40 или 10W-40. Первая цифра — холодный пуск: чем она меньше, тем легче заводиться зимой. Для Урала и Сибири — 5W-40 или 0W-40"],["Класс","API SL, SM или SN и выше"],["Объём на замену",f.oil],["Замена",(RWD.has(k) ? "Каждые 10 000 км" : "Каждые 15 000 км") + " или раз в год; в городе с пробками и зимой — чаще"]],
    prem:[["Liqui Moly","Molygen, Top Tec. Германия; в продаже по параллельному импорту — проверяй подлинность"],["Motul","8100. Франция"],["Mobil","Mobil 1, Super 3000"],["Bardahl","XTC — без замечаний в лабораторном тесте «За рулём»"]],
    eco:[["Лукойл Genesis","Самый популярный бренд у читателей «За рулём» в 2025"],["Sintec Premium 9000","Лучший результат в лабораторном тесте 5W-40 «За рулём»"],["Роснефть Magnum","Заводская заливка АвтоВАЗа"],["G-Energy","Газпромнефть"]],
    tip:"Ищи на канистре одобрение АвтоВАЗа: такие масла завод проверил на своих моторах."},
@@ -1508,7 +1573,7 @@ const PARTS = [
    eco:[["Brisk","Часто стоят на Ладах с завода"],["NGK V-Line","Недорогая линейка NGK для наших машин"]],
    tip:"Свечи меняют комплектом, все сразу. Обычные служат 15–30 тыс. км, иридиевые и платиновые дольше."},
   {id:"coolant",name:"Антифриз",
-   params:(f,k) => [["Тип", OLD.has(k) ? "Тосол или G11 на старых машинах. G12 можно, но только после промывки системы" : "G12, G12+ (карбоксилатный, обычно красный)"],["Объём системы",f.coolant]],
+   params:(f,k) => [["Тип", (OLD.has(k) && !(engOf(k) || {}).belt) ? "Тосол или G11 на старых машинах. G12 можно, но только после промывки системы" : "G12, G12+ (карбоксилатный, обычно красный)"],["Объём системы",f.coolant]],
    prem:[["Liqui Moly","KFS 12+"],["Coolstream","Premium"]],
    eco:[["Felix Carbox","Лидер «Бренда года» «За рулём» 2025"],["Sintec Lux G12","Заводская заливка Весты"],["Лукойл G12 Red",""]],
    tip:"Разные типы антифриза не смешивают. Не знаешь, что залито, — сливай полностью и промывай."},
@@ -1724,7 +1789,7 @@ const JOB_PARTS = {stablink:["stablink"],hub:["hubbearing"],oil:["oil","oilfilte
 
 /* Регламент: интервалы-ориентиры. km и years — числа или функция от семейства. */
 const SCHED = [
-  {id:"oil",name:"Масло и масляный фильтр",km:k => CHAIN.has(k) ? 10000 : 15000,years:1,job:"oil"},
+  {id:"oil",name:"Масло и масляный фильтр",km:k => RWD.has(k) ? 10000 : 15000,years:1,job:"oil"},
   {id:"air",name:"Воздушный фильтр",km:30000,job:"air"},
   {id:"cabin",name:"Салонный фильтр",km:15000,years:1,job:"cabin",skip:k => k === "classic"},
   {id:"plugs",name:"Свечи зажигания",km:30000,job:"plugs"},
@@ -1732,7 +1797,7 @@ const SCHED = [
   {id:"brakes",name:"Проверка тормозных колодок",km:15000,job:"brakes"},
   {id:"brakefluid",name:"Тормозная жидкость",years:2,job:"bleed"},
   {id:"altbelt",name:"Ремень генератора",km:60000,job:"altbelt"},
-  {id:"timing",name:k => CHAIN.has(k) ? "Цепь ГРМ: проверка и подтяжка" : F(k).grmKm ? "Ремень ГРМ с роликами" : "Ремень ГРМ: осмотр",km:k => CHAIN.has(k) ? 30000 : (F(k).grmKm || 15000),job:"timing"},
+  {id:"timing",name:k => isChain(k) ? "Цепь ГРМ: проверка и подтяжка" : F(k).grmKm ? "Ремень ГРМ с роликами" : "Ремень ГРМ: осмотр",km:k => isChain(k) ? 30000 : (F(k).grmKm || 15000),job:"timing"},
   {id:"coolant",name:"Антифриз",km:k => k === "vesta" ? 90000 : 75000,years:5,job:"coolant"},
   {id:"gear",name:"Масло в коробке передач",km:75000,job:null}
 ];
@@ -1869,7 +1934,7 @@ function figPads(){
   </svg><figcaption>Смотри на накладку с торца суппорта. Меньше 1,5 мм — меняй колодки на обеих сторонах оси.</figcaption></figure>`;
 }
 function figMarks(){
-  if(CHAIN.has(fam)) return "";
+  if(isChain() || RWD.has(fam) || fam === "travel") return "";
   const teeth = Array.from({length:36}, (_,i) => { const a = i*10*Math.PI/180; const x1 = 150+84*Math.sin(a), y1 = 140-84*Math.cos(a), x2 = 150+92*Math.sin(a), y2 = 140-92*Math.cos(a); return `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)} L${x2.toFixed(1)} ${y2.toFixed(1)}" class="fx-tooth"/>`; }).join("");
   const ticks = [-40,-30,-20,-10,0,10,20,30,40].map(d => `<path d="M${450+d*1.9} 112 V${d===0?132:124}" class="fx-tick"/>`).join("");
   return `<figure class="fig">${ZOOM_HINT}<svg viewBox="0 0 600 290" role="img" aria-label="Метки ГРМ">
@@ -1915,7 +1980,8 @@ function figStar(){
   </svg><figcaption>Крест-накрест: 1 → 2 → 3 → 4. Сначала все слегка, потом в том же порядке динамометрическим ключом.</figcaption></figure>`;
 }
 function figBleed(){
-  const rear = CHAIN.has(fam);
+  if(fam === "travel") return "";
+  const rear = RWD.has(fam);
   const order = rear ? {RR:1,RL:2,FR:3,FL:4} : {RR:1,FL:2,RL:3,FR:4};
   const W = {FL:[96,58],FR:[264,58],RL:[96,212],RR:[264,212]};
   return `<figure class="fig fig-sm"><svg viewBox="0 0 360 300" role="img" aria-label="Порядок прокачки тормозов">
@@ -2211,7 +2277,7 @@ function figCaliperT(){
     "Передний тормоз: суппорт и колодки");
 }
 function figMarksT(){
-  if(CHAIN.has(fam)) return "";
+  if(isChain() || RWD.has(fam) || fam === "travel") return "";
   const teeth = Array.from({length:40}, (_,i) => { const a = i*9*Math.PI/180; return `<path d="M${(150+86*Math.sin(a)).toFixed(1)} ${(150-86*Math.cos(a)).toFixed(1)} L${(150+96*Math.sin(a)).toFixed(1)} ${(150-96*Math.cos(a)).toFixed(1)}" class="tl-thin"/>`; }).join("");
   const ticks = [-4,-3,-2,-1,0,1,2,3,4].map(i => `<path d="M${450+i*20} 120 V${i===0?146:134}" class="${i===0?"tl-body":"tl-thin"}"/>`).join("");
   return fig("0 0 600 320", `
@@ -2393,7 +2459,8 @@ function figStarT(){
     "Порядок затяжки колёсных болтов", true);
 }
 function figBleedT(){
-  const rear = CHAIN.has(fam);
+  if(fam === "travel") return "";
+  const rear = RWD.has(fam);
   const order = rear ? {RR:1,RL:2,FR:3,FL:4} : {RR:1,FL:2,RL:3,FR:4};
   const W = {FL:[106,62],FR:[254,62],RL:[106,214],RR:[254,214]};
   return fig("0 0 360 300", `
@@ -2695,17 +2762,18 @@ let db = null, isOwner = false, dbReady = false, assets = null;
 let photos = [], photoTarget = null;
 let garage = {cars:[], log:[]}, activeCar = null, gStore = "local", gUid = null, gEditing = null, prefillType = null, gMsg = "";
 try{ const s = localStorage.getItem("garazh-fam"); if(s && FAM[s]) fam = s; }catch(e){}
+try{ const ug = new URLSearchParams(location.search).get("gen"); if(ug){ localStorage.setItem("garazh-gen", ug); genSel = ug; const g = GENS.find(x => x.id === ug); if(g){ fam = g.fam; localStorage.setItem("garazh-fam", g.fam); const e = (ENG[g.fam] || []).find(x => x.id === engSel[g.fam]); if(!e || !g.engs.includes(e.id)) setEng(g.fam, g.engs[0]); } history.replaceState(null, "", location.pathname + location.hash); } }catch(e){}
 try{ const u = new URLSearchParams(location.search).get("fam"); if(u && FAM[u]){ fam = u; localStorage.setItem("garazh-fam", u); history.replaceState(null, "", location.pathname + location.hash); } }catch(e){}
 let famChosen = false; try{ famChosen = !!localStorage.getItem("garazh-fam") || !!localStorage.getItem("garazh-welcome"); }catch(e){}
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const fill = s => { const f = F(), chip = k => `<span class="n">${esc(f[k])}</span>`;
+const fill = s => { const f = F(), chip = k => `<span class="n${String(f[k]).startsWith("уточняется") ? " nu" : ""}">${esc(f[k])}</span>`;
   /* «объёма ({oil})»: значение уже выделено плашкой, скобки вокруг неё лишние (и двоятся, если в значении свои скобки) */
   return esc(s).replace(/\(\{(\w+)\}\)/g, (m,k) => f[k] ? "— " + chip(k) + " —" : "(по руководству к своей машине)")
     .replace(/\{(\w+)\}/g, (m,k) => f[k] ? chip(k) : "по руководству к своей машине").replace(/ —([,.;])/g, "$1"); };
 const stepOk = st => { if(typeof st === "string") return true; const e = engOf(fam), f = F();
-  return (!st.only || st.only.includes(fam)) && (!st.not || !st.not.includes(fam)) && (!st.kind || st.kind === (e?.kind || "inj")) && (!st.tank || (st.tank === "yes") === !!f.tankFilter); };
+  return (!st.only || st.only.includes(fam)) && (!st.not || !st.not.includes(fam)) && (!st.chain || (st.chain === "yes") === isChain()) && (!st.kind || st.kind === (e?.kind || "inj")) && (!st.tank || (st.tank === "yes") === !!f.tankFilter); };
 const vidsFor = id => videos.filter(v => v.instr === id && (!v.family || v.family === "all" || v.family === fam));
 const km = n => Number(n).toLocaleString("ru-RU") + " км";
 const rub = n => Number(n).toLocaleString("ru-RU") + " ₽";
@@ -2726,27 +2794,29 @@ function platform(url){
 
 /* ---------- отрисовка ---------- */
 function renderFam(){
-  const f = F();
-  const e = engOf(fam);
-  $("#famCur").innerHTML = `<b>${esc(f.name)}</b><small>${esc(e ? e.name : f.models)}</small>`;
-  const engs = ENG[fam] || [], kind = e ? e.kind : "inj";
-  const hasCarb = engs.some(x => x.kind === "carb"), hasInj = engs.some(x => x.kind === "inj");
-  const ofKind = engs.filter(x => x.kind === kind);
+  const f = F(), e = engOf(fam), g = genOf();
+  $("#famCur").innerHTML = `<b>${esc(g ? g.name : f.name)}</b><small>${esc(e ? e.name : f.models)}</small>`;
+  const m = g ? g.model : null;
   const short = x => x.name.replace(/^(Карбюратор|Инжектор)\s*/i, "") || "Стандартный";
   $("#famMenu").innerHTML =
-    `<div class="mstep"><div class="mcap"><span>1</span>Машина</div><div class="mfams">` + Object.entries(FAM).map(([k,x]) =>
-      `<button type="button" data-fam="${k}" aria-pressed="${k===fam}"><b>${esc(x.name)}</b><small>${esc(x.models)}</small></button>`).join("") + `</div></div>` +
-    `<div class="mstep"><div class="mcap"><span>2</span>Питание</div><div class="mseg">` +
-      `<button type="button" data-kind="carb" aria-pressed="${kind==="carb"}" ${hasCarb ? "" : "disabled"}>Карбюратор</button>` +
-      `<button type="button" data-kind="inj" aria-pressed="${kind==="inj"}" ${hasInj ? "" : "disabled"}>Инжектор</button></div>` +
-      (hasCarb ? "" : `<p class="mnote">У ${esc(f.name)} только инжектор.</p>`) + `</div>` +
-    `<div class="mstep"><div class="mcap"><span>3</span>Двигатель</div><div class="engs">` + ofKind.map(x =>
-      `<button type="button" data-eng="${x.id}" aria-pressed="${e && x.id===e.id}"><b>${esc(short(x))}</b><small>${esc(x.sub)}</small></button>`).join("") + `</div></div>` +
-    `<div class="mdone"><button type="button" class="btn" data-famclose>Готово</button></div>` +
-    (hasCarb ? `<details class="enghelp"><summary>Как понять: карбюратор или инжектор?</summary><ul>
+    `<div class="mstep"><div class="mcap"><span>1</span>Модель</div><div class="mfams">` + MODELS.map(x =>
+      `<button type="button" data-model="${x.id}" aria-pressed="${!!m && m.id === x.id}"><b>${esc(x.name)}</b><small>${esc(x.gens.length > 1 ? x.gens.map(y => y.name).join(", ") : x.gens[0].years)}</small></button>`).join("") + `</div></div>` +
+    (m ? `<div class="mstep"><div class="mcap"><span>2</span>Поколение</div><div class="engs">` + m.gens.map(y =>
+      `<button type="button" data-gen="${y.id}" aria-pressed="${y.id === g.id}"><b>${esc(y.name)}</b><small>${esc(y.years)}</small></button>`).join("") + `</div></div>` +
+    `<div class="mstep"><div class="mcap"><span>3</span>Двигатель</div><div class="engs">` + g.engs.map(id => (ENG[g.fam] || []).find(x => x.id === id)).filter(Boolean).map(x =>
+      `<button type="button" data-eng="${x.id}" aria-pressed="${e && x.id === e.id}"><b>${esc(short(x))}</b><small>${esc(x.sub)}</small></button>`).join("") + `</div>` +
+      (g.note ? `<p class="mnote">${esc(g.note)}</p>` : "") + `</div>` +
+    `<div class="mdone"><button type="button" class="btn" data-famclose>Готово</button></div>` : `<p class="mnote">Выбери модель — дальше поколение и мотор.</p>`) +
+    (g && g.engs.some(id => ((ENG[g.fam] || []).find(x => x.id === id) || {}).kind === "carb") ? `<details class="enghelp"><summary>Как понять: карбюратор или инжектор?</summary><ul>
       <li><b>Карбюратор:</b> в салоне есть ручка подсоса (обычно слева под рулём), сверху мотора большой круглый корпус воздушного фильтра.</li>
       <li><b>Инжектор:</b> ручки подсоса нет, при включении зажигания на панели загорается лампа «Check Engine», корпус фильтра сбоку, от него гофра к дроссельному узлу.</li>
       <li>Точно — по номеру двигателя в ПТС.</li></ul></details>` : "");
+}
+/* выбор поколения: семейство + первый подходящий мотор */
+function chooseGen(id){
+  const g = GENS.find(x => x.id === id); if(!g) return;
+  setGen(id); setFam(g.fam);
+  const e = engOf(g.fam); if(!e || !g.engs.includes(e.id)) setEng(g.fam, g.engs[0]);
 }
 function famMenu(open){ $("#famMenu").hidden = !open; $("#famBtn").setAttribute("aria-expanded", open); }
 function renderTabs(){
@@ -2754,14 +2824,14 @@ function renderTabs(){
 }
 function famNote(){
   const f = F();
-  const mp = ARTS.find(a => a.m === fam);
-  return `<p class="famnote">Цифры показаны для: <b>${esc(f.name)}</b>, ${esc(f.engName || f.models)}. Поменять — кнопка «Моя машина» вверху.${mp ? ` <a href="stati/${mp.s}.html">Всё про ${esc(f.name)} на одной странице →</a>` : ""}</p>`;
+  const g = genOf(), mp = (g && ARTS.find(a => a.mm === g.model.id)) || ARTS.find(a => a.m === fam);
+  return `<p class="famnote">Цифры показаны для: <b>${esc(f.name)}</b>, ${esc(f.engName || f.models)}. Поменять — кнопка «Моя машина» вверху.${mp ? ` <a href="stati/${mp.s}.html">Всё про ${esc(g ? g.model.name : f.name)} на одной странице →</a>` : ""}</p>`;
 }
 function searchBox(ph){
   return `<div class="search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="${ph}" value="${esc(query)}" autocomplete="off" aria-label="Поиск"></div>`;
 }
 /* ---------- поиск: окончания, синонимы, модели ---------- */
-const ARTS = [{"s": "to-po-reglamentu", "t": "ТО Лады по регламенту: что и когда менять", "d": "Таблица регламента ТО для Лады: интервалы замены масла, фильтров, свечей, ремня ГРМ, антифриза и тормозной жидкости по пробегу и времени.", "c": "ТО и регламент", "j": "schedule"}, {"s": "skolko-masla", "t": "Сколько масла заливать в Ладу: объёмы по моделям и моторам", "d": "Сколько литров масла нужно в двигатель Лады: классика, Нива, Самара, десятка, Калина, Приора, Гранта, Веста, Ларгус. Какое масло выбрать.", "c": "Масло и жидкости", "j": "numbers"}, {"s": "zamena-masla", "t": "Замена масла на Гранте, Калине и Приоре своими руками", "d": "Пошаговая замена масла и масляного фильтра на Гранте, Калине, Приоре и других Ладах в гараже: инструмент, сколько масла, порядок работы, частые ошибки.", "c": "Масло и жидкости", "j": "oil"}, {"s": "antifriz", "t": "Сколько антифриза в Ладе и какой выбрать", "d": "Объём антифриза для всех моделей Лады, какой тип выбрать (тосол, G11, G12), можно ли смешивать, как проверить уровень и защиту от мороза.", "c": "Масло и жидкости", "j": "coolant"}, {"s": "momenty-zatyazhki", "t": "Моменты затяжки колёс и свечей на Ладе", "d": "Таблица моментов затяжки колёсных болтов и свечей зажигания для всех моделей Лады, размеры ключей, как правильно затягивать колёса.", "c": "Цифры и таблицы", "j": "numbers"}, {"s": "zamena-svechey", "t": "Как поменять свечи на Гранте, Калине и Приоре", "d": "Замена свечей зажигания на Гранте, Калине и Приоре с 8- и 16-клапанным мотором: какой ключ, момент затяжки, зазор, пошагово со схемами.", "c": "Двигатель", "j": "plugs"}, {"s": "gnet-klapana", "t": "Гнёт ли клапаны мотор Лады: список двигателей", "d": "Какие двигатели Лады гнут клапаны при обрыве ремня ГРМ, а какие нет: 8 и 16 клапанов, Гранта, Калина, Приора, Веста, Ларгус.", "c": "Двигатель", "j": "timing"}, {"s": "remen-grm", "t": "Когда менять ремень ГРМ на Ладе", "d": "Интервал замены ремня ГРМ для всех моторов Лады, признаки износа, что менять вместе с ремнём, как выставить метки.", "c": "Двигатель", "j": "timing"}, {"s": "iznos-kolodok", "t": "Как проверить износ тормозных колодок", "d": "Как понять, что тормозные колодки пора менять: признаки, проверка без снятия колеса, минимальная толщина накладки, какие колодки выбрать для Лады.", "c": "Тормоза", "j": "brakes"}, {"s": "svistit-remen", "t": "Свистит ремень генератора: причины и что делать", "d": "Почему свистит ремень генератора на Ладе при запуске и включении фар, как проверить натяжение, когда менять ремень.", "c": "Двигатель", "j": "altbelt"}, {"s": "lampa-davleniya-masla", "t": "Горит лампа давления масла: что делать сразу", "d": "Загорелась красная лампа давления масла на Ладе: что делать немедленно, как проверить уровень, когда можно ехать, а когда нужен эвакуатор.", "c": "Неисправности", "j": "symptoms"}, {"s": "kak-prikurit", "t": "Как правильно прикурить машину", "d": "Как прикурить машину с севшим аккумулятором: порядок подключения проводов, как заводить, частые ошибки, как проверить аккумулятор после.", "c": "Электрика", "j": "battery"}, {"s": "nagar-svechey", "t": "Нагар на свечах: как читать", "d": "Что значит цвет нагара на свечах зажигания: нормальный, сажа, белый, масляный, красный налёт, оплавленный электрод. Причины и что делать.", "c": "Двигатель", "j": "plugs"}, {"s": "podgotovka-k-zime", "t": "Подготовка Лады к зиме: чек-лист", "d": "Что проверить в Ладе перед зимой: антифриз, аккумулятор, масло, омыватель, щётки, резина, свет. Короткий чек-лист со схемами.", "c": "Сезон", "j": "season"}, {"s": "nabor-instrumentov", "t": "Стартовый набор инструментов для своей Лады", "d": "Какие инструменты купить, чтобы самому обслуживать Ладу: ключи, головки, трещотка, динамометрический ключ, домкрат. Размеры ключей для Лады.", "c": "Инструмент", "j": "tools"}, {"s": "lampy-na-paneli", "t": "Лампы на приборной панели Лады: что значат и что делать", "d": "12 самых важных ламп и значков на приборной панели Лады: давление масла, перегрев, зарядка, тормоза, Check Engine, ABS, подушки, ЭУР. Можно ли ехать и что делать.", "c": "Неисправности", "j": "symptoms"}, {"s": "stoyki-stabilizatora", "t": "Стучит спереди на кочках: как проверить и заменить стойки стабилизатора", "d": "Признаки износа стоек стабилизатора на Калине, Приоре, Гранте и Весте, как проверить люфт, порядок замены и моменты затяжки. Каких Лад это не касается.", "c": "Подвеска", "j": "stablink"}, {"s": "stupichnyy-podshipnik", "t": "Гудит ступичный подшипник на Гранте, Калине, Весте: как определить и заменить", "d": "Как понять, что гудит ступичный подшипник на Ладе, какой именно — левый или правый, можно ли ездить, как заменить и с каким моментом затянуть гайку ступицы.", "c": "Подвеска", "j": "hub"}, {"s": "regulirovka-klapanov-2107", "t": "Регулировка клапанов на ВАЗ 2107 своими руками", "d": "Как отрегулировать клапаны на классике ВАЗ 2101–2107: зазор 0,15 мм, порядок регулировки 8 и 6, 4 и 7, 1 и 3, 5 и 2, ключи, частые ошибки. Как понять, нужна ли регулировка на Ниве.", "c": "Двигатель", "j": "valves"}, {"s": "remen-generatora-vesta", "t": "Как заменить ремень генератора на Весте", "d": "Замена ремня генератора (вспомогательных агрегатов) на Lada Vesta своими руками: признаки износа, натяжной ролик, ключи Torx T55 и на 13, момент затяжки, частые ошибки.", "c": "Двигатель", "j": "altbelt"}, {"s": "vesta-ne-zavoditsya", "t": "Веста не заводится: причины и что проверить", "d": "Почему не заводится Лада Веста: стартер не крутит, крутит но не заводится, не заводится с кнопки старт-стоп. Что проверить самому по порядку.", "c": "Неисправности", "j": "symptoms"}, {"s": "remen-grm-granta-8", "t": "Замена ремня ГРМ на Гранте 8 клапанов своими руками", "d": "Замена ремня ГРМ на Lada Granta с 8-клапанными моторами 11183 и 11186 (21116): интервал, метки, натяжной ролик, ключи и моменты затяжки. Гнёт ли клапаны.", "c": "Двигатель", "j": "timing"}, {"s": "remen-generatora-granta", "t": "Замена ремня генератора на Гранте", "d": "Как заменить ремень генератора на Lada Granta и Калине-2: с кондиционером через опору двигателя и натяжитель, без кондиционера — эластичный ремень. Натяжение, интервал, ошибки.", "c": "Двигатель", "j": "altbelt"}, {"s": "zamena-kolodok-granta", "t": "Замена передних тормозных колодок на Гранте", "d": "Как поменять передние тормозные колодки на Lada Granta и Калине своими руками: когда менять, ключи на 13 и 17, стопорная пластина, как утопить поршень, первые километры.", "c": "Тормоза", "j": "padsreplace"}, {"s": "stuk-gidrokompensatorov-priora", "t": "Стук гидрокомпенсаторов на Приоре 16 клапанов: причины и что делать", "d": "Почему стучат гидрокомпенсаторы на Приоре и других 16-клапанных Ладах: на холодную и на горячую, роль масла и фильтра, когда это опасно и что делать по порядку.", "c": "Двигатель", "j": "oil"}, {"s": "predohraniteli-vaz-2107", "t": "Предохранители ВАЗ 2107: где находятся и за что отвечают", "d": "Где находится блок предохранителей на ВАЗ 2104, 2105, 2107, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-niva", "t": "Предохранители Нивы 21213, 21214 и 4x4: схема и расшифровка", "d": "Где находится блок предохранителей на Нива 2121, 21213, 21214, 4x4, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-niva-legend", "t": "Предохранители Нивы Легенд и 4x4 после 2019 года: расшифровка", "d": "Где находится блок предохранителей на Нива Legend и 4x4, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-vaz-2114", "t": "Предохранители ВАЗ 2114, 2109, 2115: схема блока и расшифровка", "d": "Где находится блок предохранителей на Самара: 2108, 2109, 21099, 2113, 2114, 2115, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-vaz-2110", "t": "Предохранители ВАЗ 2110, 2111, 2112: где стоят и за что отвечают", "d": "Где находится блок предохранителей на Десятка: 2110, 2111, 2112, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-kalina", "t": "Предохранители Лада Калина (2004–2013): схема и расшифровка", "d": "Где находится блок предохранителей на Калина, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-priora", "t": "Предохранители Лада Приора: схема блоков и расшифровка", "d": "Где находится блок предохранителей на Приора, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-granta", "t": "Предохранители Лада Гранта и Калина 2: схема блока и расшифровка", "d": "Где находится блок предохранителей на Гранта и Калина 2, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-vesta", "t": "Предохранители Лада Веста: где находятся и расшифровка", "d": "Где находится блок предохранителей на Веста, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-largus", "t": "Предохранители Лада Ларгус: схема и расшифровка", "d": "Где находится блок предохранителей на Ларгус, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "obsluzhivanie-vaz-2107", "t": "Обслуживание ВАЗ 2107 и классики (2101–2107) своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО ВАЗ 2107 и классики (2101–2107): объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "classic"}, {"s": "obsluzhivanie-niva", "t": "Обслуживание Нивы 2121, 21214 и Legend своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО Нивы 2121, 21214 и Legend: объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "niva"}, {"s": "obsluzhivanie-vaz-2114", "t": "Обслуживание ВАЗ 2114, 2109, 2115 (Самара) своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО ВАЗ 2114, 2109, 2115 (Самара): объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "samara"}, {"s": "obsluzhivanie-vaz-2110", "t": "Обслуживание ВАЗ 2110, 2111, 2112 своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО ВАЗ 2110, 2111, 2112: объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "ten"}, {"s": "obsluzhivanie-granta-kalina-priora", "t": "Обслуживание Гранты, Калины и Приоры своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО Гранты, Калины и Приоры: объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "kpg"}, {"s": "obsluzhivanie-vesta-largus", "t": "Обслуживание Весты, Ларгуса и Иксрея своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО Весты, Ларгуса и Иксрея: объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "vesta"}];/*ARTS*/
+const ARTS = [{"s": "to-po-reglamentu", "t": "ТО Лады по регламенту: что и когда менять", "d": "Таблица регламента ТО для Лады: интервалы замены масла, фильтров, свечей, ремня ГРМ, антифриза и тормозной жидкости по пробегу и времени.", "c": "ТО и регламент", "j": "schedule"}, {"s": "skolko-masla", "t": "Сколько масла заливать в Ладу: объёмы по моделям и моторам", "d": "Сколько литров масла нужно в двигатель Лады: классика, Нива, Самара, десятка, Калина, Приора, Гранта, Веста, Ларгус. Какое масло выбрать.", "c": "Масло и жидкости", "j": "numbers"}, {"s": "zamena-masla", "t": "Замена масла на Гранте, Калине и Приоре своими руками", "d": "Пошаговая замена масла и масляного фильтра на Гранте, Калине, Приоре и других Ладах в гараже: инструмент, сколько масла, порядок работы, частые ошибки.", "c": "Масло и жидкости", "j": "oil"}, {"s": "antifriz", "t": "Сколько антифриза в Ладе и какой выбрать", "d": "Объём антифриза для всех моделей Лады, какой тип выбрать (тосол, G11, G12), можно ли смешивать, как проверить уровень и защиту от мороза.", "c": "Масло и жидкости", "j": "coolant"}, {"s": "momenty-zatyazhki", "t": "Моменты затяжки колёс и свечей на Ладе", "d": "Таблица моментов затяжки колёсных болтов и свечей зажигания для всех моделей Лады, размеры ключей, как правильно затягивать колёса.", "c": "Цифры и таблицы", "j": "numbers"}, {"s": "zamena-svechey", "t": "Как поменять свечи на Гранте, Калине и Приоре", "d": "Замена свечей зажигания на Гранте, Калине и Приоре с 8- и 16-клапанным мотором: какой ключ, момент затяжки, зазор, пошагово со схемами.", "c": "Двигатель", "j": "plugs"}, {"s": "gnet-klapana", "t": "Гнёт ли клапаны мотор Лады: список двигателей", "d": "Какие двигатели Лады гнут клапаны при обрыве ремня ГРМ, а какие нет: 8 и 16 клапанов, Гранта, Калина, Приора, Веста, Ларгус.", "c": "Двигатель", "j": "timing"}, {"s": "remen-grm", "t": "Когда менять ремень ГРМ на Ладе", "d": "Интервал замены ремня ГРМ для всех моторов Лады, признаки износа, что менять вместе с ремнём, как выставить метки.", "c": "Двигатель", "j": "timing"}, {"s": "iznos-kolodok", "t": "Как проверить износ тормозных колодок", "d": "Как понять, что тормозные колодки пора менять: признаки, проверка без снятия колеса, минимальная толщина накладки, какие колодки выбрать для Лады.", "c": "Тормоза", "j": "brakes"}, {"s": "svistit-remen", "t": "Свистит ремень генератора: причины и что делать", "d": "Почему свистит ремень генератора на Ладе при запуске и включении фар, как проверить натяжение, когда менять ремень.", "c": "Двигатель", "j": "altbelt"}, {"s": "lampa-davleniya-masla", "t": "Горит лампа давления масла: что делать сразу", "d": "Загорелась красная лампа давления масла на Ладе: что делать немедленно, как проверить уровень, когда можно ехать, а когда нужен эвакуатор.", "c": "Неисправности", "j": "symptoms"}, {"s": "kak-prikurit", "t": "Как правильно прикурить машину", "d": "Как прикурить машину с севшим аккумулятором: порядок подключения проводов, как заводить, частые ошибки, как проверить аккумулятор после.", "c": "Электрика", "j": "battery"}, {"s": "nagar-svechey", "t": "Нагар на свечах: как читать", "d": "Что значит цвет нагара на свечах зажигания: нормальный, сажа, белый, масляный, красный налёт, оплавленный электрод. Причины и что делать.", "c": "Двигатель", "j": "plugs"}, {"s": "podgotovka-k-zime", "t": "Подготовка Лады к зиме: чек-лист", "d": "Что проверить в Ладе перед зимой: антифриз, аккумулятор, масло, омыватель, щётки, резина, свет. Короткий чек-лист со схемами.", "c": "Сезон", "j": "season"}, {"s": "nabor-instrumentov", "t": "Стартовый набор инструментов для своей Лады", "d": "Какие инструменты купить, чтобы самому обслуживать Ладу: ключи, головки, трещотка, динамометрический ключ, домкрат. Размеры ключей для Лады.", "c": "Инструмент", "j": "tools"}, {"s": "lampy-na-paneli", "t": "Лампы на приборной панели Лады: что значат и что делать", "d": "12 самых важных ламп и значков на приборной панели Лады: давление масла, перегрев, зарядка, тормоза, Check Engine, ABS, подушки, ЭУР. Можно ли ехать и что делать.", "c": "Неисправности", "j": "symptoms"}, {"s": "stoyki-stabilizatora", "t": "Стучит спереди на кочках: как проверить и заменить стойки стабилизатора", "d": "Признаки износа стоек стабилизатора на Калине, Приоре, Гранте и Весте, как проверить люфт, порядок замены и моменты затяжки. Каких Лад это не касается.", "c": "Подвеска", "j": "stablink"}, {"s": "stupichnyy-podshipnik", "t": "Гудит ступичный подшипник на Гранте, Калине, Весте: как определить и заменить", "d": "Как понять, что гудит ступичный подшипник на Ладе, какой именно — левый или правый, можно ли ездить, как заменить и с каким моментом затянуть гайку ступицы.", "c": "Подвеска", "j": "hub"}, {"s": "regulirovka-klapanov-2107", "t": "Регулировка клапанов на ВАЗ 2107 своими руками", "d": "Как отрегулировать клапаны на классике ВАЗ 2101–2107: зазор 0,15 мм, порядок регулировки 8 и 6, 4 и 7, 1 и 3, 5 и 2, ключи, частые ошибки. Как понять, нужна ли регулировка на Ниве.", "c": "Двигатель", "j": "valves"}, {"s": "remen-generatora-vesta", "t": "Как заменить ремень генератора на Весте", "d": "Замена ремня генератора (вспомогательных агрегатов) на Lada Vesta своими руками: признаки износа, натяжной ролик, ключи Torx T55 и на 13, момент затяжки, частые ошибки.", "c": "Двигатель", "j": "altbelt"}, {"s": "vesta-ne-zavoditsya", "t": "Веста не заводится: причины и что проверить", "d": "Почему не заводится Лада Веста: стартер не крутит, крутит но не заводится, не заводится с кнопки старт-стоп. Что проверить самому по порядку.", "c": "Неисправности", "j": "symptoms"}, {"s": "remen-grm-granta-8", "t": "Замена ремня ГРМ на Гранте 8 клапанов своими руками", "d": "Замена ремня ГРМ на Lada Granta с 8-клапанными моторами 11183 и 11186 (21116): интервал, метки, натяжной ролик, ключи и моменты затяжки. Гнёт ли клапаны.", "c": "Двигатель", "j": "timing"}, {"s": "remen-generatora-granta", "t": "Замена ремня генератора на Гранте", "d": "Как заменить ремень генератора на Lada Granta и Калине-2: с кондиционером через опору двигателя и натяжитель, без кондиционера — эластичный ремень. Натяжение, интервал, ошибки.", "c": "Двигатель", "j": "altbelt"}, {"s": "zamena-kolodok-granta", "t": "Замена передних тормозных колодок на Гранте", "d": "Как поменять передние тормозные колодки на Lada Granta и Калине своими руками: когда менять, ключи на 13 и 17, стопорная пластина, как утопить поршень, первые километры.", "c": "Тормоза", "j": "padsreplace"}, {"s": "stuk-gidrokompensatorov-priora", "t": "Стук гидрокомпенсаторов на Приоре 16 клапанов: причины и что делать", "d": "Почему стучат гидрокомпенсаторы на Приоре и других 16-клапанных Ладах: на холодную и на горячую, роль масла и фильтра, когда это опасно и что делать по порядку.", "c": "Двигатель", "j": "oil"}, {"s": "predohraniteli-vaz-2107", "t": "Предохранители ВАЗ 2107: где находятся и за что отвечают", "d": "Где находится блок предохранителей на ВАЗ 2104, 2105, 2107, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-niva", "t": "Предохранители Нивы 21213, 21214 и 4x4: схема и расшифровка", "d": "Где находится блок предохранителей на Нива 2121, 21213, 21214, 4x4, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-niva-legend", "t": "Предохранители Нивы Легенд и 4x4 после 2019 года: расшифровка", "d": "Где находится блок предохранителей на Нива Legend и 4x4, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-vaz-2114", "t": "Предохранители ВАЗ 2114, 2109, 2115: схема блока и расшифровка", "d": "Где находится блок предохранителей на Самара: 2108, 2109, 21099, 2113, 2114, 2115, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-vaz-2110", "t": "Предохранители ВАЗ 2110, 2111, 2112: где стоят и за что отвечают", "d": "Где находится блок предохранителей на Десятка: 2110, 2111, 2112, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-kalina", "t": "Предохранители Лада Калина (2004–2013): схема и расшифровка", "d": "Где находится блок предохранителей на Калина, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-priora", "t": "Предохранители Лада Приора: схема блоков и расшифровка", "d": "Где находится блок предохранителей на Приора, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-granta", "t": "Предохранители Лада Гранта и Калина 2: схема блока и расшифровка", "d": "Где находится блок предохранителей на Гранта и Калина 2, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-vesta", "t": "Предохранители Лада Веста: где находятся и расшифровка", "d": "Где находится блок предохранителей на Веста, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "predohraniteli-largus", "t": "Предохранители Лада Ларгус: схема и расшифровка", "d": "Где находится блок предохранителей на Ларгус, за что отвечает каждый предохранитель и реле, номиналы. Какой предохранитель у прикуривателя, печки, бензонасоса, фар. Как проверить и заменить.", "c": "Электрика", "j": "fuses"}, {"s": "lada-granta", "t": "Лада Гранта: моторы, цифры для ТО, слабые места и новости", "d": "Всё о Ладе Гранте для самостоятельного обслуживания: поколения и моторы (11183, 11186, 11182, 21127), объёмы масла, свечи, ГРМ, частые проблемы, отзывы и новости.", "c": "Модель", "j": "", "m": "kpg", "mm": "granta"}, {"s": "lada-vesta", "t": "Лада Веста и Веста NG: моторы, цифры для ТО, слабые места и новости", "d": "Лада Веста и Веста NG для самостоятельного обслуживания: моторы 21129, 11182, 1,8 EVO с вариатором, объёмы масла, свечи, ГРМ, частые неисправности, вариатор и новости модели.", "c": "Модель", "j": "", "m": "vesta", "mm": "vesta"}, {"s": "lada-iskra", "t": "Лада Искра: моторы, цифры для ТО, первые проблемы и новости", "d": "Лада Искра для самостоятельного обслуживания: моторы 11182 и 21129, объёмы масла, свечи, вариатор, первые проблемы владельцев и новости модели.", "c": "Модель", "j": "", "m": "vesta", "mm": "iskra"}, {"s": "lada-niva-legend", "t": "Лада Нива Легенд (4x4): моторы 1,7 и 1,8, цифры для ТО и новости", "d": "Нива Легенд и Нива 4x4 для самостоятельного обслуживания: мотор 1,7 с цепью и новый 1,8 с ремнём ГРМ (с 2026), объёмы, свечи, что изменилось в 2026 году, отзывная кампания.", "c": "Модель", "j": "", "m": "niva", "mm": "niva"}, {"s": "lada-niva-travel", "t": "Лада Нива Тревел и Шевроле Нива: моторы, цифры для ТО и новости", "d": "Нива Тревел и Шевроле Нива для самостоятельного обслуживания: мотор 1,7 с цепью и новый 1,8 (11184) с ремнём ГРМ, что изменилось после обновления 2025 года, отзывная кампания.", "c": "Модель", "j": "", "m": "travel", "mm": "travel"}, {"s": "lada-largus", "t": "Лада Ларгус: пять моторов, цифры для ТО, слабые места и новости", "d": "Лада Ларгус для самостоятельного обслуживания: моторы K7M, K4M, 11189, 21129 и 11182, объёмы масла, свечи, ремень ГРМ, частые неисправности и новости модели.", "c": "Модель", "j": "", "m": "vesta", "mm": "largus"}, {"s": "obsluzhivanie-vaz-2107", "t": "Обслуживание ВАЗ 2107 и классики (2101–2107) своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО ВАЗ 2107 и классики (2101–2107): объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "classic"}, {"s": "obsluzhivanie-niva", "t": "Обслуживание Нивы 2121, 21214 и Legend своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО Нивы 2121, 21214 и Legend: объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "niva"}, {"s": "obsluzhivanie-vaz-2114", "t": "Обслуживание ВАЗ 2114, 2109, 2115 (Самара) своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО ВАЗ 2114, 2109, 2115 (Самара): объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "samara"}, {"s": "obsluzhivanie-vaz-2110", "t": "Обслуживание ВАЗ 2110, 2111, 2112 своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО ВАЗ 2110, 2111, 2112: объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "ten"}, {"s": "obsluzhivanie-granta-kalina-priora", "t": "Обслуживание Гранты, Калины и Приоры своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО Гранты, Калины и Приоры: объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "kpg"}, {"s": "obsluzhivanie-vesta-largus", "t": "Обслуживание Весты, Ларгуса и Иксрея своими руками: все цифры и регламент", "d": "Всё для самостоятельного ТО Весты, Ларгуса и Иксрея: объёмы масла и антифриза по моторам, моменты затяжки, зазор свечей, привод ГРМ, регламент, предохранители и пошаговые инструкции.", "c": "Модель", "j": "", "m": "vesta"}];/*ARTS*/
 const nrm = x => String(x).toLowerCase().replace(/ё/g, "е");
 const ENDS = ["ается","яется","ются","ется","ится","атся","ятся","ться","ение","ание","ого","его","ому","ему","ыми","ими","ами","ями","ией","иях","ешь","ишь","тся","ах","ях","ой","ей","ий","ый","ая","яя","ое","ее","ые","ие","ую","юю","ом","ем","ам","ям","ов","ев","ит","ат","ят","ут","ют","ет","ть","ти","а","я","о","е","и","ы","у","ю","ь","й"];
 function stem(w){ if(/\d/.test(w) || w.length < 4) return w;
@@ -2793,12 +2863,14 @@ const SYN = [
 const STOP = new Set(["не","на","в","во","и","а","с","со","у","по","при","что","как","где","от","до","за","из","или","то","же","ли","мой","моя","моей","меня","у меня","машина","машины","машине","авто","ваз","лада","lada"]);
 /* модели: слово запроса → семейство и предохранители */
 const MODEL_WORDS = [
-  [/^(210[1-7]|классик|жигул|семерк|шестерк|пятерк|копейк|четверк)/, "classic", "2107"],
-  [/^(нив|2121|2131|2121[34]|4х4|4x4|legend|легенд)/, "niva", "niva"],
-  [/^(2108|2109|21099|211[345]|самар|девятк|восьмерк|четырнашк|зубил)/, "samara", "samara"],
-  [/^(211[012]|десятк)/, "ten", "ten"],
-  [/^(калин|111[789])/, "kpg", "kalina1"], [/^(приор|217[0-2])/, "kpg", "priora"], [/^(грант|219[0-2])/, "kpg", "granta"],
-  [/^(вест|xray|иксре)/, "vesta", "vesta"], [/^ларгус/, "vesta", "largus"]
+  [/^(210[1-7]|классик|жигул|семерк|шестерк|пятерк|копейк|четверк)/, "classic", "2107", "classic"],
+  [/^(тревел|travel|шевроле|chevrolet|шнив)/, "travel", null, "travel"],
+  [/^(нив|2121|2131|2121[34]|4х4|4x4|legend|легенд)/, "niva", "niva", "niva"],
+  [/^(2108|2109|21099|211[345]|самар|девятк|восьмерк|четырнашк|зубил)/, "samara", "samara", "samara"],
+  [/^(211[012]|десятк)/, "ten", "ten", "ten"],
+  [/^(калин|111[789])/, "kpg", "kalina1", "kalina"], [/^(приор|217[0-2])/, "kpg", "priora", "priora"], [/^(грант|219[0-2])/, "kpg", "granta", "granta"],
+  [/^(вест|vesta)/, "vesta", "vesta", "vesta"], [/^(xray|иксре)/, "vesta", "vesta", "xray"], [/^ларгус/, "vesta", "largus", "largus"],
+  [/^(искр|iskra)/, "vesta", null, "iskra"]
 ];
 let qT = [], qModels = [], qRelax = false;
 function parseQuery(){
@@ -2813,6 +2885,7 @@ function parseQuery(){
     if(!alts.size || st.length >= 4) alts.add(st);
     qT.push([...alts]);
   }
+  if(qModels.some(m => m[3] === "travel")) qModels = qModels.filter(m => m[3] !== "niva");
 }
 let _pq = null;
 const match = (...parts) => { if(!query) return true; if(_pq !== query){ _pq = query; parseQuery(); }
@@ -2826,9 +2899,10 @@ function globalHits(){
   const q = query.trim(); if(q.length < 2) return "";
   match(); /* разобрать запрос */
   const out = [], txt = qT.length > 0;
-  qModels.forEach(([, fk, fid]) => {
-    if(fk !== fam) out.push(["Моя машина", "Показать цифры для: " + FAM[fk].name, "", "", fk]);
-    const fm = FUSE_M.find(m => m.id === fid);
+  qModels.forEach(([, fk, fid, mid]) => {
+    const mm = MODELS.find(x => x.id === mid), g = genOf();
+    if(mm && !(g && g.model.id === mid)) out.push(["Моя машина", "Выбрать: " + mm.name, "", "", "", "", mid]);
+    const fm = fid && FUSE_M.find(m => m.id === fid);
     if(fm && (!txt || /предохран|реле|прикур|не работ|печк|фар|свет|поворот|дворн/.test(nrm(query)))) out.push(["Поломки · предохранители", fm.title, "fuses", "", "", fid]);
   });
   if(!qModels.length && /предохран|реле|прикуривател|не работает/i.test(query)) out.push(["Поломки · предохранители", "Предохранители и реле: где стоят и за что отвечают", "fuses"]);
@@ -2844,21 +2918,21 @@ function globalHits(){
     if(fuseSlugs.includes(a.s)) return false;
     const textOk = !txt || match(a.t, a.d);
     const am = artModels(a);
-    const modelOk = !qModels.length || (a.m ? qModels.some(m => m[1] === a.m) : am.some(m => qModels.includes(m)) || (txt && !am.length));
+    const modelOk = !qModels.length || (a.mm ? qModels.some(m => m[3] === a.mm) : a.m ? qModels.some(m => m[1] === a.m) : am.some(m => qModels.includes(m)) || (txt && !am.length));
     return textOk && modelOk;
-  }).sort((a, b) => (b.m ? 1 : 0) - (a.m ? 1 : 0)).slice(0, 5).forEach(a => out.push([a.m ? "Страница модели" : "Статья", a.t, "", "stati/" + a.s + ".html"]));
-  return out.length ? `<section class="group ghits"><h2 class="gh">${qRelax ? "Похожее" : "В других разделах"}<span>${out.length}</span></h2><div class="hits">${out.map(([k,t,to,href,fk,fid]) => href
+  }).sort((a, b) => (b.mm ? 2 : b.m ? 1 : 0) - (a.mm ? 2 : a.m ? 1 : 0)).slice(0, 5).forEach(a => out.push([a.m ? "Страница модели" : "Статья", a.t, "", "stati/" + a.s + ".html"]));
+  return out.length ? `<section class="group ghits"><h2 class="gh">${qRelax ? "Похожее" : "В других разделах"}<span>${out.length}</span></h2><div class="hits">${out.map(([k,t,to,href,fk,fid,mid]) => href
     ? `<a class="hit" href="${href}"><small>${esc(k)}</small><b>${esc(t)}</b></a>`
-    : `<button type="button" class="hit" ${fk ? `data-fam="${fk}"` : `data-gs="${to}"`} ${fid ? `data-fmod2="${fid}"` : ""}><small>${esc(k)}</small><b>${esc(t)}</b></button>`).join("")}</div></section>` : "";
+    : `<button type="button" class="hit" ${mid ? `data-model="${mid}"` : fk ? `data-fam="${fk}"` : `data-gs="${to}"`} ${fid ? `data-fmod2="${fid}"` : ""}><small>${esc(k)}</small><b>${esc(t)}</b></button>`).join("")}</div></section>` : "";
 }
 function renderList(){
   qRelax = false;
-  const findJobs = () => JOBS.filter(j => (!j.fams || j.fams.includes(fam)) && match(j.title, j.desc, j.steps.map(s => s.t || s).join(" ")));
+  const findJobs = () => JOBS.filter(j => (!j.fams || j.fams.includes(fam)) && !(j.id === "valves" && !isChain()) && match(j.title, j.desc, j.steps.map(s => s.t || s).join(" ")));
   match(); let jobs = query && !qT.length ? [] : findJobs();
   if(query && !jobs.length && !globalHits()){ qRelax = true; jobs = findJobs(); }
   const welcome = query || famChosen ? "" : `<section class="welcome" aria-labelledby="wh"><h2 id="wh">ТО Лады своими руками — по шагам</h2>
     <p>Пошаговые инструкции, поломки по симптомам и точные цифры: объёмы, моменты, ключи. Выбери свою машину — цифры подстроятся под неё.</p>
-    <div class="wfams">${Object.entries(FAM).map(([k,x]) => `<button type="button" data-fam="${k}"><b>${esc(x.name)}</b><small>${esc(x.models)}</small></button>`).join("")}</div>
+    <div class="wfams">${MODELS.map(x => `<button type="button" data-model="${x.id}"><b>${esc(x.name)}</b><small>${esc(x.gens.length > 1 ? x.gens.map(y => y.name).join(", ") : x.gens[0].years)}</small></button>`).join("")}</div>
     <button type="button" class="linkbtn wskip" data-wskip>Выберу позже</button></section>`;
   const features = query ? "" : `<div class="features">
     <button type="button" class="feature" data-goto="schedule">${icon("schedule")}<span><b>Регламент ТО</b><small>Что и когда менять по пробегу</small></span></button>
@@ -2922,7 +2996,7 @@ function renderJob(j){
     return T ? `<button type="button" data-tool="${T.id}">${esc(T.name)}</button>` : `<span>${esc(t)}</span>`; }).join("");
   const parts = (JOB_PARTS[j.id] || []).map(p => `<button type="button" class="part" data-part="${p}">${esc(PARTS.find(x => x.id === p).name)}</button>`).join("");
   const cat = j.cat && j.cat[fam] ? `<table class="cattbl"><tbody>${j.cat[fam].map(([a,b]) => `<tr><td>${esc(a)}</td><td class="mono">${esc(b)}</td></tr>`).join("")}</tbody></table>` : "";
-  const nums = j.plate.filter(k => f[k]).map(k => `<div><dt>${PLATE_LABEL[k]}</dt><dd class="${TEXT_FIELDS.has(k)?"txt":""}">${esc(f[k])}</dd></div>`).join("");
+  const nums = j.plate.filter(k => f[k]).map(k => `<div><dt>${PLATE_LABEL[k]}</dt><dd class="${TEXT_FIELDS.has(k)?"txt":""}${isU(f[k])?" udd":""}">${esc(f[k])}</dd></div>`).join("");
   let n = 0; const ok = s => stepOk(s);
   const idx = new Map(); j.steps.forEach((s,i) => idx.set(s, i));
   const sec = j.sections ? j.sections.map(x => { const st = x.steps.filter(ok); return st.length ? `<section class="blk jsec"><h3 class="jh"><span>${++n}</span>${esc(x.h)}</h3><ol class="steps">${st.map(s => stepHtml(j, s, idx.get(s))).join("")}</ol></section>` : ""; }).join("")
@@ -3011,7 +3085,7 @@ function renderNumbers(){
   const f = F();
   const gear = (fam === "niva" ? "КПП и раздатка: 75W-90 GL-4 · мосты: 75W-90 GL-5" : "75W-90 или 75W-85, GL-4") + (f.gear ? " · объём: " + f.gear : "");
   const G = [
-    ["Двигатель",[["Масло, объём",f.oil,1],["Масло, вязкость","5W-40 или 10W-40",1],["Антифриз, объём",f.coolant,1],["Антифриз, тип",OLD.has(fam) ? "Тосол / G11 (G12 — после промывки)" : "G12 / G12+",0],["Привод ГРМ",f.grm,0]]],
+    ["Двигатель",[["Масло, объём",f.oil,1],["Масло, вязкость","5W-40 или 10W-40",1],["Антифриз, объём",f.coolant,1],["Антифриз, тип",(OLD.has(fam) && !(engOf(fam) || {}).belt) ? "Тосол / G11 (G12 — после промывки)" : "G12 / G12+",0],["Привод ГРМ",f.grm,0]]],
     ["Зажигание",[["Система",f.ign,0]]],
     ["Свечи",[["Ключ",f.plugKey,1],["Зазор",f.plugGap,1],["Момент затяжки",f.plugTorque,1]]],
     ["Колёса",[["Ключ",f.wheelKey,1],["Момент затяжки",f.wheelTorque,1],["Порядок","Крест-накрест",0]]],
@@ -3023,7 +3097,7 @@ function renderNumbers(){
     <div class="printhead">Гаражник · цифры моей машины<span>${esc(f.name)} · ${esc(String(f.engName || f.models).replace(/\s*\(.*\)\s*$/, ""))}</span></div>
     <div class="dhead">${icon("numbers")}<div><h2>Цифры моей машины</h2><p class="lead">Всё, что ищут в гараже, на одной странице.</p></div></div>
     <button type="button" class="printbtn" data-print><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3h10v6"/><rect x="3" y="9" width="18" height="8" rx="1"/><path d="M7 14h10v7H7z"/></svg><span><b>Распечатать или сохранить PDF</b><small>Шпаргалка в бардачок или на стену гаража — на одном листе</small></span></button>
-    <div class="numgrid">${G.map(([t, rows]) => `<div class="plate"><div class="cap">${esc(t)}</div><dl class="numdl">${rows.map(([k,v,mono]) => `<div><dt>${esc(k)}</dt><dd class="${mono?"":"txt"}">${esc(v)}</dd></div>`).join("")}</dl></div>`).join("")}</div>
+    <div class="numgrid">${G.map(([t, rows]) => `<div class="plate"><div class="cap">${esc(t)}</div><dl class="numdl">${rows.map(([k,v,mono]) => `<div><dt>${esc(k)}</dt><dd class="${mono?"":"txt"}${isU(v)?" udd":""}">${esc(v)}</dd></div>`).join("")}</dl></div>`).join("")}</div>
     <p class="approx-note">Для: ${esc(f.name)}, ${esc(f.engName || f.models)}. Цифры — по руководствам по эксплуатации и ремонту АвтоВАЗа. Нашёл ошибку — напиши в Telegram-канал @garage4to.</p>
     <p class="printfoot">garazhnik-lada.ru — инструкции по ТО Лады своими руками. Цифры по руководствам АвтоВАЗа; перед работой сверяйся с руководством к своей машине.</p>
   </div>`;
@@ -3163,9 +3237,12 @@ const FUSE_MAXI = [["20","Жёлтый"],["30","Зелёный"],["40","Оран
 const FUSE_TYPES = [["Плоский стандартный","Самый частый на Ладах с 2000-х: Самара 2113–2115, Десятка, Калина, Приора, Гранта, поздние 2105–2107. Две ножки, цвет по номиналу."],["Плоский мини","Такой же, но меньше. Стоит в части блоков Весты, Ларгуса, Иксрея и поздних Гранты."],["Макси","Крупный плоский на 30–70 А. Стоит под капотом и защищает силовые цепи: генератор, вентилятор, ЭУР, ABS."],["Цилиндрический (бочонок)","Керамический или пластиковый с лентой на 8 и 16 А. Стоит на классике и старых Нивах в блоках старого образца."],["Картриджный и силовой","Коробочка с защёлками или пластина под болт на 40–80 А. Стоит под капотом рядом с аккумулятором на современных моделях."]];
 const FUSE_FIG = "<svg viewBox=\"0 0 640 240\" role=\"img\" aria-label=\"Виды предохранителей: целый и сгоревший плоский, мини, макси, цилиндрический\"><rect x=\"48.9\" y=\"128.0\" width=\"14.8\" height=\"42.0\" class=\"tl-fill2\" stroke=\"var(--ink)\" stroke-width=\"1.3\"/><rect x=\"90.3\" y=\"128.0\" width=\"14.8\" height=\"42.0\" class=\"tl-fill2\" stroke=\"var(--ink)\" stroke-width=\"1.3\"/><rect x=\"40\" y=\"70\" width=\"74\" height=\"60\" rx=\"4\" fill=\"#d43b30\" stroke=\"var(--ink)\" stroke-width=\"1.6\"/><rect x=\"51.8\" y=\"77.2\" width=\"50.3\" height=\"25.2\" rx=\"2\" fill=\"#fff\" fill-opacity=\".55\" stroke=\"var(--ink)\" stroke-width=\"1\"/><path d=\"M54.8 89.8 h12.6 q6.0 -8.8 12.6 0 h19.2\" stroke=\"#2b2f33\" stroke-width=\"2.4\" fill=\"none\"/><rect x=\"50.4\" y=\"67.0\" width=\"10.4\" height=\"5\" fill=\"#c9ccd0\" stroke=\"var(--ink)\" stroke-width=\"1\"/><rect x=\"93.3\" y=\"67.0\" width=\"10.4\" height=\"5\" fill=\"#c9ccd0\" stroke=\"var(--ink)\" stroke-width=\"1\"/><text x=\"77.0\" y=\"121.6\" text-anchor=\"middle\" fill=\"#14171a\" style=\"font:700 15px var(--f-mono)\">10</text><text x=\"77\" y=\"205\" text-anchor=\"middle\" class=\"tl-h\">Целый</text><text x=\"77\" y=\"222\" text-anchor=\"middle\" class=\"tl-numt\">перемычка видна</text><rect x=\"168.9\" y=\"128.0\" width=\"14.8\" height=\"42.0\" class=\"tl-fill2\" stroke=\"var(--ink)\" stroke-width=\"1.3\"/><rect x=\"210.3\" y=\"128.0\" width=\"14.8\" height=\"42.0\" class=\"tl-fill2\" stroke=\"var(--ink)\" stroke-width=\"1.3\"/><rect x=\"160\" y=\"70\" width=\"74\" height=\"60\" rx=\"4\" fill=\"#d43b30\" stroke=\"var(--ink)\" stroke-width=\"1.6\"/><rect x=\"171.8\" y=\"77.2\" width=\"50.3\" height=\"25.2\" rx=\"2\" fill=\"#fff\" fill-opacity=\".55\" stroke=\"var(--ink)\" stroke-width=\"1\"/><path d=\"M174.8 89.8 h16.6\" stroke=\"#2b2f33\" stroke-width=\"2.4\" fill=\"none\"/><path d=\"M203.0 89.8 H219.2\" stroke=\"#2b2f33\" stroke-width=\"2.4\" fill=\"none\"/><ellipse cx=\"196.0\" cy=\"89.8\" rx=\"8.1\" ry=\"8.1\" fill=\"#3a2a1e\" fill-opacity=\".55\"/><rect x=\"170.4\" y=\"67.0\" width=\"10.4\" height=\"5\" fill=\"#c9ccd0\" stroke=\"var(--ink)\" stroke-width=\"1\"/><rect x=\"213.3\" y=\"67.0\" width=\"10.4\" height=\"5\" fill=\"#c9ccd0\" stroke=\"var(--ink)\" stroke-width=\"1\"/><text x=\"197.0\" y=\"121.6\" text-anchor=\"middle\" fill=\"#14171a\" style=\"font:700 15px var(--f-mono)\">10</text><text x=\"197\" y=\"205\" text-anchor=\"middle\" class=\"tl-h\">Сгоревший</text><text x=\"197\" y=\"222\" text-anchor=\"middle\" class=\"tl-numt\">разрыв, нагар</text><rect x=\"296.0\" y=\"126.0\" width=\"10.0\" height=\"30.0\" class=\"tl-fill2\" stroke=\"var(--ink)\" stroke-width=\"1.3\"/><rect x=\"324.0\" y=\"126.0\" width=\"10.0\" height=\"30.0\" class=\"tl-fill2\" stroke=\"var(--ink)\" stroke-width=\"1.3\"/><rect x=\"290\" y=\"88\" width=\"50\" height=\"40\" rx=\"4\" fill=\"#2f6fd0\" stroke=\"var(--ink)\" stroke-width=\"1.6\"/><rect x=\"298.0\" y=\"92.8\" width=\"34.0\" height=\"16.8\" rx=\"2\" fill=\"#fff\" fill-opacity=\".55\" stroke=\"var(--ink)\" stroke-width=\"1\"/><path d=\"M301.0 101.2 h8.5 q4.1 -5.9 8.5 0 h11.0\" stroke=\"#2b2f33\" stroke-width=\"2.4\" fill=\"none\"/><rect x=\"297.0\" y=\"85.0\" width=\"7.0\" height=\"5\" fill=\"#c9ccd0\" stroke=\"var(--ink)\" stroke-width=\"1\"/><rect x=\"326.0\" y=\"85.0\" width=\"7.0\" height=\"5\" fill=\"#c9ccd0\" stroke=\"var(--ink)\" stroke-width=\"1\"/><text x=\"315.0\" y=\"122.4\" text-anchor=\"middle\" fill=\"#14171a\" style=\"font:700 10px var(--f-mono)\">15</text><text x=\"315\" y=\"205\" text-anchor=\"middle\" class=\"tl-h\">Мини</text><text x=\"315\" y=\"222\" text-anchor=\"middle\" class=\"tl-numt\">Веста, Ларгус</text><rect x=\"397.0\" y=\"134.0\" width=\"20.0\" height=\"42.0\" class=\"tl-fill2\" stroke=\"var(--ink)\" stroke-width=\"1.3\"/><rect x=\"453.0\" y=\"134.0\" width=\"20.0\" height=\"42.0\" class=\"tl-fill2\" stroke=\"var(--ink)\" stroke-width=\"1.3\"/><rect x=\"385\" y=\"60\" width=\"100\" height=\"76\" rx=\"4\" fill=\"#3aa357\" stroke=\"var(--ink)\" stroke-width=\"1.6\"/><rect x=\"401.0\" y=\"69.1\" width=\"68.0\" height=\"31.9\" rx=\"2\" fill=\"#fff\" fill-opacity=\".55\" stroke=\"var(--ink)\" stroke-width=\"1\"/><path d=\"M404.0 85.1 h17.0 q8.2 -11.2 17.0 0 h28.0\" stroke=\"#2b2f33\" stroke-width=\"2.4\" fill=\"none\"/><rect x=\"399.0\" y=\"57.0\" width=\"14.0\" height=\"5\" fill=\"#c9ccd0\" stroke=\"var(--ink)\" stroke-width=\"1\"/><rect x=\"457.0\" y=\"57.0\" width=\"14.0\" height=\"5\" fill=\"#c9ccd0\" stroke=\"var(--ink)\" stroke-width=\"1\"/><text x=\"435.0\" y=\"125.4\" text-anchor=\"middle\" fill=\"#14171a\" style=\"font:700 19px var(--f-mono)\">30</text><text x=\"435\" y=\"205\" text-anchor=\"middle\" class=\"tl-h\">Макси</text><text x=\"435\" y=\"222\" text-anchor=\"middle\" class=\"tl-numt\">под капотом</text><path d=\"M512 104 l10 -14 h76 l10 14 l-10 14 h-76 z\" class=\"tl-part\"/><rect x=\"514\" y=\"98\" width=\"10\" height=\"12\" fill=\"#c9ccd0\" stroke=\"var(--ink)\" stroke-width=\"1\"/><rect x=\"596\" y=\"98\" width=\"10\" height=\"12\" fill=\"#c9ccd0\" stroke=\"var(--ink)\" stroke-width=\"1\"/><path d=\"M524 116 H596\" stroke=\"#2b2f33\" stroke-width=\"2.4\"/><text x=\"560\" y=\"108\" text-anchor=\"middle\" class=\"tl-numt\">16 А</text><text x=\"560\" y=\"205\" text-anchor=\"middle\" class=\"tl-h\">Бочонок</text><text x=\"560\" y=\"222\" text-anchor=\"middle\" class=\"tl-numt\">классика, старая Нива</text><path d=\"M60 64 L84 30\" class=\"tl-lead\"/><circle cx=\"60\" cy=\"66\" r=\"2.5\" class=\"tl-dot\"/><text x=\"88\" y=\"28\" class=\"tl-numt\">контрольные точки — сюда щупы тестера</text><path d=\"M206 92 L236 44\" class=\"tl-lead\"/><text x=\"240\" y=\"40\" class=\"tl-numt\" style=\"fill:var(--warn)\">перемычка разорвана</text></svg>";
 const FUSE_DEF = {classic:"2107", niva:"niva", samara:"samara", ten:"ten", kpg:"granta", vesta:"vesta"};
+/* поколение → своя схема предохранителей, если она есть */
+const FUSE_GEN = {priora1:"priora", priora2:"priora", kalina1:"kalina1", kalina2:"granta", granta1:"granta", grantafl:"granta", vesta1:"vesta", largus1:"largus", niva2121:"niva", samara1:"samara", samara2:"samara", ten1:"ten", classic1:"2107"};
 let fuseModel = null; try{ fuseModel = localStorage.getItem("garazh-fuse"); }catch(e){}
 function renderFuses(){
-  const id = FUSE_M.some(m => m.id === fuseModel) ? fuseModel : (FUSE_DEF[fam] || "granta");
+  const g = genOf();
+  const id = FUSE_M.some(m => m.id === fuseModel) ? fuseModel : ((g && FUSE_GEN[g.id]) || FUSE_DEF[fam] || "granta");
   const m = FUSE_M.find(x => x.id === id);
   const q = query.trim().toLowerCase();
   const hit = (...p) => !q || p.join(" ").toLowerCase().includes(q);
@@ -3187,6 +3264,7 @@ function renderFuses(){
   const sw = FUSE_COLORS.map(([a, n, c]) => `<div class="fsw"><i style="background:${c}"></i><b>${a} А</b><small>${esc(n)}</small></div>`).join("");
   return `<div class="detail">${faultsNav("fuses")}
     <p class="famnote">Перестало работать что-то одно — прикуриватель, печка, фара, поворотники? Сначала проверь его предохранитель. Это пять минут и пара десятков рублей.</p>
+    ${g && !FUSE_GEN[g.id] && !fuseModel ? `<p class="callout">Для модели «${esc(g.name)}» своей схемы у нас пока нет. Ниже — ближайшая похожая; номера обязательно сверяй со схемой на крышке блока.</p>` : ""}
     ${chips}
     ${searchBox("Что не работает: прикуриватель, печка, фара…")}
     <section class="group fmodel">
@@ -3508,7 +3586,9 @@ document.addEventListener("click", e => {
   const d = b.dataset;
   if(b.id === "famBtn"){ famMenu($("#famMenu").hidden); return; }
   if(!b.closest(".famsel")) famMenu(false);
-  if(d.fam){ setFam(d.fam); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $("#famMenu .engs button")?.focus(); }
+  if(d.model){ const mm = MODELS.find(x => x.id === d.model); if(mm){ const cur = genOf(); chooseGen(cur && cur.model.id === mm.id ? cur.id : mm.gens[mm.gens.length - 1].id); } const y = scrollY; render(); scrollTo(0,y); famMenu(true); $("#famMenu [data-gen][aria-pressed=true]")?.focus(); }
+  else if(d.gen){ chooseGen(d.gen); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $(`#famMenu [data-gen="${d.gen}"]`)?.focus(); }
+  else if(d.fam){ setFam(d.fam); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $("#famMenu .engs button")?.focus(); }
   else if(d.kind){ const x = (ENG[fam] || []).find(x => x.kind === d.kind); if(x){ setEng(fam, x.id); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $(`#famMenu [data-kind="${d.kind}"]`)?.focus(); } }
   else if(d.eng){ setEng(fam, d.eng); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $(`#famMenu [data-eng="${d.eng}"]`)?.focus(); }
   else if(b.hasAttribute("data-famclose")){ famMenu(false); }
@@ -3590,7 +3670,7 @@ function renderDoer(){
   const el = $("#doer"); if(!doer){ el.hidden = true; return; }
   const {j, steps, cur} = doer, n = steps.length, f = F();
   const done = cur >= n;
-  const nums = j.plate.length ? `<details class="dnums"><summary>Цифры для ${esc(f.name)}</summary><dl>${j.plate.filter(k => f[k]).map(k => `<div><dt>${PLATE_LABEL[k]}</dt><dd>${esc(f[k])}</dd></div>`).join("")}</dl></details>` : "";
+  const nums = j.plate.length ? `<details class="dnums"><summary>Цифры для ${esc(f.name)}</summary><dl>${j.plate.filter(k => f[k]).map(k => `<div><dt>${PLATE_LABEL[k]}</dt><dd class="${isU(f[k])?"udd":""}">${esc(f[k])}</dd></div>`).join("")}</dl></details>` : "";
   const body = done
     ? `<div class="dfinish"><div class="dcheck" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div><h3>Работа сделана</h3><p>${esc(j.title)}</p>
         ${JOB_LOG[j.id] ? `<button type="button" class="btn big" data-dlog="${JOB_LOG[j.id]}">Записать в «Мой гараж»</button>` : ""}
