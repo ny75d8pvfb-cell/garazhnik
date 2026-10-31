@@ -1,11 +1,11 @@
-# Раз в день публикует в Telegram-канал одну новую статью из очереди (самую свежую из ещё не опубликованных).
+# Раз в день (вечером) публикует в Telegram-канал одну новую статью из очереди (самую свежую из ещё не опубликованных).
 # Учёт опубликованного — _src/tg_posted.txt (удали строку, чтобы статья снова попала в очередь).
 # Нужны секреты репозитория: TELEGRAM_BOT_TOKEN и TELEGRAM_CHAT_ID.
 # Вручную: Actions → «Статьи в Telegram» → Run workflow. Пустое поле — следующая из очереди; или укажи файлы через пробел.
 name: Статьи в Telegram
 on:
   schedule:
-    - cron: "17 7 * * *"   # 12:17 по Екатеринбургу
+    - cron: "55 14 * * *"   # 19:55 по Екатеринбургу (GitHub часто запускает с опозданием на 5–15 минут)
   workflow_dispatch:
     inputs:
       files:
@@ -30,10 +30,10 @@ jobs:
           if [ -n "$FILES" ]; then python3 _src/tg_post.py $FILES; else python3 _src/tg_post.py --next; fi
       - name: Запомнить опубликованное
         run: |
-          if ! git diff --quiet -- _src/tg_posted.txt; then
+          if ! git diff --quiet -- _src/tg_posted.txt _src/tg_last.txt; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add _src/tg_posted.txt
+            git add _src/tg_posted.txt _src/tg_last.txt
             git commit -m "Telegram: опубликована статья"
             git pull --rebase -q && git push
           fi

@@ -22,9 +22,18 @@ def posted():
     return set(l.strip() for l in open(POSTED, encoding="utf-8") if l.strip() and not l.startswith("#")) if os.path.exists(POSTED) else set()
 
 
+LAST = "_src/tg_last.txt"   # дата последнего поста (по Екатеринбургу) — не больше одного поста в день
+
+
+def today_ekb():
+    import datetime
+    return (datetime.datetime.utcnow() + datetime.timedelta(hours=5)).date().isoformat()
+
+
 def mark(path):
     with open(POSTED, "a", encoding="utf-8") as f:
         f.write(path + "\n")
+    open(LAST, "w").write(today_ekb() + "\n")
 
 
 def light_patterns():
@@ -83,6 +92,8 @@ def send(token, chat, text):
 def main(paths):
     token, chat = os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID")
     if paths == ["--next"]:
+        if os.path.exists(LAST) and open(LAST).read().strip() == today_ekb():
+            print("Сегодня пост уже был — пропускаю."); return
         q = queue()
         wk = weekend_ekb()
         pick = [p for p in q if is_light(p) == wk] or q
