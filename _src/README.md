@@ -37,6 +37,7 @@ cd _src/art && python3 build.py ../..     # пересобирает stati/*.htm
 
 ## Telegram-канал
 - `.github/workflows/telegram.yml` + `_src/tg_post.py`: **раз в день в 12:17 по Екатеринбургу** публикуется одна статья — самая свежая из тех, которых нет в `_src/tg_posted.txt`. Workflow сам дописывает её в этот файл и коммитит в main («github-actions[bot]»). Секреты: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` (@garage4to). Ручной запуск: Actions → «Статьи в Telegram» → Run workflow (пусто — следующая из очереди, или список файлов).
+- По будням — основные статьи, по выходным — «лёгкие» (справочные) из `_src/tg_light.txt`; если подходящих нет, берётся любая. Подборка новостей (scheduled task Claude) — пн, ср, пт в 18:33.
 - Новая статья попадает в очередь сама. Чтобы статья не уходила в канал — допиши её путь в tg_posted.txt.
 - Из-за коммитов бота main уходит вперёд: перед выкладкой всегда `git pull` в main и сливай draft обычным merge (не только fast-forward).
 

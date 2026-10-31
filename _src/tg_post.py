@@ -5,6 +5,8 @@
   python3 _src/tg_post.py --next                 — опубликовать одну следующую статью из очереди
   python3 _src/tg_post.py stati/statya.html ...  — опубликовать указанные сразу (ручной запуск)
 Очередь: все stati/*.html, которых нет в _src/tg_posted.txt; сначала самые свежие (по lastmod в sitemap.xml).
+По будням идут основные статьи, по выходным (сб, вс по Екатеринбургу) — «лёгкие» из _src/tg_light.txt.
+Если подходящих нет — берётся любая следующая из очереди, чтобы пост выходил каждый день.
 Нужны переменные окружения TELEGRAM_BOT_TOKEN и TELEGRAM_CHAT_ID (например, @garage4to).
 Бот должен быть администратором канала с правом публиковать сообщения.
 Перед отправкой ждёт, пока страница откроется на сайте (GitHub Pages обновляется 1–3 минуты).
@@ -23,6 +25,21 @@ def posted():
 def mark(path):
     with open(POSTED, "a", encoding="utf-8") as f:
         f.write(path + "\n")
+
+
+def light_patterns():
+    f = "_src/tg_light.txt"
+    return [l.strip() for l in open(f, encoding="utf-8") if l.strip() and not l.startswith("#")] if os.path.exists(f) else []
+
+
+def is_light(path):
+    import fnmatch
+    return any(fnmatch.fnmatch(path, pat) for pat in light_patterns())
+
+
+def weekend_ekb():
+    import datetime
+    return (datetime.datetime.utcnow() + datetime.timedelta(hours=5)).weekday() >= 5
 
 
 def queue():
@@ -67,8 +84,10 @@ def main(paths):
     token, chat = os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID")
     if paths == ["--next"]:
         q = queue()
-        print(f"В очереди {len(q)} статей.")
-        paths = q[:1]
+        wk = weekend_ekb()
+        pick = [p for p in q if is_light(p) == wk] or q
+        print(f"В очереди {len(q)} статей; сегодня {'выходной — лёгкая' if wk else 'будний — основная'} статья.")
+        paths = pick[:1]
     paths = [p for p in paths if p.startswith("stati/") and p.endswith(".html") and not p.endswith("/index.html") and os.path.exists(p)]
     if not paths:
         print("Новых статей нет — публиковать нечего."); return
