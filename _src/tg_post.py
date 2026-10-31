@@ -1,16 +1,36 @@
 # -*- coding: utf-8 -*-
 """Публикует новые статьи Гаражника в Telegram-канал.
 
-Запускается GitHub Actions (.github/workflows/telegram.yml) после пуша в main:
-  python3 _src/tg_post.py stati/novaya-statya.html [stati/eshe.html ...]
+Запускается GitHub Actions (.github/workflows/telegram.yml) раз в день:
+  python3 _src/tg_post.py --next                 — опубликовать одну следующую статью из очереди
+  python3 _src/tg_post.py stati/statya.html ...  — опубликовать указанные сразу (ручной запуск)
+Очередь: все stati/*.html, которых нет в _src/tg_posted.txt; сначала самые свежие (по lastmod в sitemap.xml).
 Нужны переменные окружения TELEGRAM_BOT_TOKEN и TELEGRAM_CHAT_ID (например, @garage4to).
 Бот должен быть администратором канала с правом публиковать сообщения.
 Перед отправкой ждёт, пока страница откроется на сайте (GitHub Pages обновляется 1–3 минуты).
 """
-import html, json, os, re, sys, time, urllib.parse, urllib.request
+import glob, html, json, os, re, sys, time, urllib.parse, urllib.request
 
 SITE = "https://garazhnik-lada.ru"
 MAX_POSTS = 5
+POSTED = "_src/tg_posted.txt"
+
+
+def posted():
+    return set(l.strip() for l in open(POSTED, encoding="utf-8") if l.strip() and not l.startswith("#")) if os.path.exists(POSTED) else set()
+
+
+def mark(path):
+    with open(POSTED, "a", encoding="utf-8") as f:
+        f.write(path + "\n")
+
+
+def queue():
+    sm = open("sitemap.xml", encoding="utf-8").read()
+    lm = {u.replace(SITE + "/", ""): d for u, d in re.findall(r"<loc>([^<]+)</loc><lastmod>([^<]+)</lastmod>", sm)}
+    done = posted()
+    cand = [p for p in sorted(glob.glob("stati/*.html")) if not p.endswith("/index.html") and p not in done]
+    return sorted(cand, key=lambda p: lm.get(p, ""), reverse=True)
 
 
 def meta(path):
@@ -45,6 +65,10 @@ def send(token, chat, text):
 
 def main(paths):
     token, chat = os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID")
+    if paths == ["--next"]:
+        q = queue()
+        print(f"В очереди {len(q)} статей.")
+        paths = q[:1]
     paths = [p for p in paths if p.startswith("stati/") and p.endswith(".html") and not p.endswith("/index.html") and os.path.exists(p)]
     if not paths:
         print("Новых статей нет — публиковать нечего."); return
@@ -57,6 +81,7 @@ def main(paths):
             print(f"::warning::{url} так и не открылась — пропускаю"); continue
         text = f"🔧 <b>Новое в Гаражнике</b>\n\n<b>{html.escape(title)}</b>\n{html.escape(desc)}\n\n{url}"
         send(token, chat, text)
+        mark(p)
         print("Опубликовано:", title)
         time.sleep(3)
     if len(paths) > MAX_POSTS:

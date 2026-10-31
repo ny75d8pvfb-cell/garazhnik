@@ -1,40 +1,39 @@
-# Новые статьи (stati/*.html) после пуша в main автоматически публикуются в Telegram-канал.
-# Нужны секреты репозитория: TELEGRAM_BOT_TOKEN и TELEGRAM_CHAT_ID (см. _src/README.md).
-# Вручную: Actions → «Статьи в Telegram» → Run workflow, указать файлы через пробел.
+# Раз в день публикует в Telegram-канал одну новую статью из очереди (самую свежую из ещё не опубликованных).
+# Учёт опубликованного — _src/tg_posted.txt (удали строку, чтобы статья снова попала в очередь).
+# Нужны секреты репозитория: TELEGRAM_BOT_TOKEN и TELEGRAM_CHAT_ID.
+# Вручную: Actions → «Статьи в Telegram» → Run workflow. Пустое поле — следующая из очереди; или укажи файлы через пробел.
 name: Статьи в Telegram
 on:
-  push:
-    branches: [main]
-    paths: ["stati/*.html"]
+  schedule:
+    - cron: "17 7 * * *"   # 12:17 по Екатеринбургу
   workflow_dispatch:
     inputs:
       files:
-        description: "Файлы через пробел, например: stati/lada-iskra.html"
-        required: true
+        description: "Пусто — следующая из очереди. Или файлы через пробел, например: stati/lada-iskra.html"
+        required: false
+permissions:
+  contents: write
+concurrency:
+  group: telegram-post
 jobs:
   post:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Найти новые статьи
-        id: new
-        env:
-          INPUT_FILES: ${{ github.event.inputs.files }}
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "files=$(echo "$INPUT_FILES" | tr -cd 'a-z0-9./ _-')" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
-            echo "files=" >> "$GITHUB_OUTPUT"
-          else
-            f=$(git diff --diff-filter=A --name-only "${{ github.event.before }}" "${{ github.sha }}" -- 'stati/*.html' | grep -v '^stati/index.html$' | tr '\n' ' ')
-            echo "files=$f" >> "$GITHUB_OUTPUT"
-          fi
       - name: Опубликовать
-        if: steps.new.outputs.files != ''
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          FILES: ${{ steps.new.outputs.files }}
-        run: python3 _src/tg_post.py $FILES
+          INPUT_FILES: ${{ github.event.inputs.files }}
+        run: |
+          FILES=$(echo "$INPUT_FILES" | tr -cd 'a-z0-9./ _-')
+          if [ -n "$FILES" ]; then python3 _src/tg_post.py $FILES; else python3 _src/tg_post.py --next; fi
+      - name: Запомнить опубликованное
+        run: |
+          if ! git diff --quiet -- _src/tg_posted.txt; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add _src/tg_posted.txt
+            git commit -m "Telegram: опубликована статья"
+            git pull --rebase -q && git push
+          fi
