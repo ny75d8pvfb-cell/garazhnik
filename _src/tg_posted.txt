@@ -39,3 +39,4 @@ stati/zamena-kolodok-granta.html
 stati/zamena-masla.html
 stati/zamena-svechey.html
 stati/otzyvnye-kampanii-lada.html
+stati/obsluzhivanie-granta-kalina-priora.html
