@@ -42,3 +42,4 @@ stati/otzyvnye-kampanii-lada.html
 stati/obsluzhivanie-granta-kalina-priora.html
 stati/pokupka-lady-s-probegom.html
 stati/variator-lada.html
+stati/lada-granta.html
