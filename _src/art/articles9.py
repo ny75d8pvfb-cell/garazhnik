@@ -208,7 +208,7 @@ def _bymodel(texts, intro=""):
     for k, h, links in _FAM9:
         if k not in texts: continue
         lk = " · ".join(art(s, t) for s, t in links)
-        out += f"<h3>{E(h)}</h3>" + ul(texts[k]) + f'<p class="tip">Ещё по теме: {lk}</p>'
+        out += f"<h3>{E(h)}</h3>" + ul(texts[k]) + f'<p class="tip"><span>Ещё по теме: {lk}</span></p>'
     return out
 
 def _patch9(slug, title, desc, texts, intro=""):
