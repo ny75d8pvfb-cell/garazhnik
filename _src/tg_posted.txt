@@ -47,3 +47,4 @@ stati/lada-largus.html
 stati/akkumulyator-na-ladu.html
 stati/obsluzhivanie-niva.html
 stati/obsluzhivanie-vaz-2107.html
+stati/lada-kalina.html
