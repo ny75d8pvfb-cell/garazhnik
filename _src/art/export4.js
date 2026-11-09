@@ -6,6 +6,7 @@ await p.goto('http://localhost:8765/');await p.waitForTimeout(400);
 const out=await p.evaluate(()=>{const o={fams:{},sched:{},models:[]};const keep=engSel[fam],keepFam=fam,keepGen=genSel;
  genSel=null;
  for(const k of Object.keys(FAM)){const engs=[];for(const e of (ENG[k]||[])){engSel[k]=e.id;const f=F(k);const v={};for(const [a,x] of Object.entries(f)) if(typeof x!=='object'&&typeof x!=='function') v[a]=x;engs.push({id:e.id,name:e.name,sub:e.sub||'',belt:!!e.belt,v});}
+  { const L=(ENG[k]||[]).filter(e=>!e.chain); if(L.length) engSel[k]=L[L.length-1].id; }   /* регламент семейства — как раньше, по последнему мотору; мотор с «чужим» приводом ГРМ (H4M) не берём */
   o.fams[k]={name:FAM[k].name,models:FAM[k].models,engines:engs};
   o.sched[k]=SCHED.filter(s=>!(s.skip&&s.skip(k))).map(s=>({id:s.id,name:val(s.name,k),km:val(s.km,k)||null,years:val(s.years,k)||null,job:s.job}));}
  for(const m of MODELS) o.models.push({id:m.id,name:m.name,gens:m.gens.map(g=>({id:g.id,name:g.name,years:g.years,fam:g.fam,engs:g.engs,v:g.v||{},note:g.note||''}))});

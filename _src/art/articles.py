@@ -340,8 +340,9 @@ exec(open(os.path.join(os.path.dirname(__file__), "articles9.py")).read())   # �
 exec(open(os.path.join(os.path.dirname(__file__), "articles10.py")).read())   # модели в заголовках старых статей
 exec(open(os.path.join(os.path.dirname(__file__), "articles11.py")).read())   # что должно быть в машине
 exec(open(os.path.join(os.path.dirname(__file__), "articles6.py")).read())   # страницы современных моделей
+exec(open(os.path.join(os.path.dirname(__file__), "articles12.py")).read())   # страницы старых моделей
 exec(open(os.path.join(os.path.dirname(__file__), "articles5.py")).read())   # страницы семейств (все цифры)
-assert len(A) == 59, len(A)
+assert len(A) == 64, len(A)
 for a in A:
     for r in a["related"]:
         assert any(x["slug"] == r for x in A), r
