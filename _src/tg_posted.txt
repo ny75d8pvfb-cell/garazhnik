@@ -50,3 +50,4 @@ stati/obsluzhivanie-vaz-2107.html
 stati/lada-kalina.html
 stati/lada-priora.html
 stati/motor-troit.html
+stati/lampa-akkumulyatora.html
