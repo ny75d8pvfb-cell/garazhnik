@@ -5,3 +5,4 @@ stati/momenty-zatyazhki.html
 stati/skolko-masla.html
 stati/lampy-na-paneli.html
 stati/nabor-instrumentov.html
+stati/davlenie-v-shinah-zimoy.html
