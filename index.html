@@ -1104,6 +1104,71 @@ ol.steps li::before{font-family:var(--f-round);font-weight:800}
   .cookiebar:not([hidden]){animation:barIn .5s var(--ease) .4s both}
   @keyframes barIn{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
 }
+
+/* ===== «Моя машина» по шагам + путь на странице работы ===== */
+.fammenu{padding:0 6px 6px;width:min(560px,calc(100vw - 32px))}
+.fammenu .wz-steps{position:sticky;top:0;z-index:2;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin:0 -6px 2px;padding:8px 8px 12px;background:var(--raised);border-bottom:1px solid var(--line)}
+.fammenu .wz-step{flex-direction:row;align-items:center;gap:8px;padding:7px 8px;border-radius:10px;min-width:0;background:none;box-shadow:none}
+.fammenu .wz-step:disabled{opacity:.38;cursor:default}
+.fammenu .wz-step:disabled:hover{background:none}
+.fammenu .wz-step[aria-selected="true"]{background:color-mix(in srgb,var(--amber) 13%,transparent);box-shadow:none}
+.wz-n{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line-2);color:var(--muted);font:800 12px/1 var(--f-round);transition:background-color .3s,border-color .3s,color .3s,box-shadow .3s}
+.wz-n svg{width:13px;height:13px;stroke:currentColor}
+.wz-step.done .wz-n{background:var(--amber);border-color:var(--amber);color:var(--amber-ink,#111)}
+.wz-step[aria-selected="true"] .wz-n{border-color:var(--amber);color:var(--amber);box-shadow:0 0 0 4px color-mix(in srgb,var(--amber) 22%,transparent)}
+.wz-t{display:flex;flex-direction:column;min-width:0;flex:1;line-height:1.15}
+.fammenu .wz-t b{display:block}
+.wz-t small{font:700 10.5px var(--f-round);text-transform:uppercase;letter-spacing:.06em;color:var(--dim)}
+.fammenu .wz-t b{font:700 13px/1.25 var(--f-round);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.wz-step:not(.done):not([aria-selected="true"]) .wz-t b{color:var(--muted);font-weight:600}
+.wz-track{position:absolute;left:10px;right:10px;bottom:4px;height:3px;border-radius:3px;background:var(--line)}
+.wz-track i{display:block;height:100%;border-radius:3px;background:var(--amber);transition:width .45s var(--ease)}
+.wz-hint{margin:10px 8px 6px;font:600 13.5px/1.35 var(--f-round);color:var(--muted)}
+.wzbody{min-height:120px}
+.wz-g{margin:4px 0 8px}
+.wz-gh{padding:6px 8px 4px;font:700 11px var(--f-round);text-transform:uppercase;letter-spacing:.07em;color:var(--dim)}
+.wz-jobs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+.fammenu .wz-job{flex-direction:row;align-items:center;gap:10px;padding:8px;border:1px solid var(--line);border-radius:10px;font:700 13.5px/1.25 var(--f-round);color:var(--ink)}
+@media (hover:hover){.fammenu .wz-job:hover{border-color:var(--amber);background:var(--surface)}}
+.fammenu .wz-job[aria-pressed="true"]{border-color:var(--amber);box-shadow:none}
+.wz-job .ico{flex:none;width:32px;height:32px;border-radius:8px}
+.wz-job .ico svg{width:18px;height:18px}
+.wz-foot{position:sticky;bottom:-6px;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:8px;margin:6px -6px -6px;padding:10px 8px;background:var(--raised);border-top:1px solid var(--line)}
+.fammenu .wz-back{flex-direction:row;padding:9px 12px;border-radius:10px;font:700 14px var(--f-round);color:var(--muted)}
+.fammenu .wz-back:hover{color:var(--ink)}
+.fammenu .wz-next{width:auto;padding:10px 20px;border-radius:10px;align-items:center;background:var(--amber);color:var(--amber-ink,#111)}
+.fammenu .wz-next:hover{background:var(--amber);filter:brightness(1.08)}
+:root[data-theme="light"] .fammenu .wz-next{background:var(--ink);color:#fff}
+.fammenu .mfams button,.fammenu .engs button{border-radius:10px}
+@media (max-width:640px){
+  .fammenu .wz-steps{gap:2px;padding:6px 4px 12px}
+  .fammenu .wz-step{flex-direction:column;align-items:center;text-align:center;gap:4px;padding:6px 2px}
+  .wz-t{align-items:center;width:100%}
+  .wz-t small{font-size:9.5px;letter-spacing:.04em}
+  .fammenu .wz-t b{font-size:11.5px}
+  .wz-jobs{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:no-preference){
+  .wzbody.fwd{animation:wzFwd .34s var(--ease) both}
+  .wzbody.back{animation:wzBack .34s var(--ease) both}
+  @keyframes wzFwd{from{opacity:0;transform:translateX(28px)}}
+  @keyframes wzBack{from{opacity:0;transform:translateX(-28px)}}
+  .fammenu .wz-step{transition:background-color .3s var(--ease)}
+}
+/* путь: Работы ‹ Машина › Двигатель › Работа */
+.trail{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+.trail button{display:flex;flex-direction:column;align-items:flex-start;gap:1px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);border-radius:12px;padding:6px 12px;cursor:pointer;text-align:left;max-width:100%;min-width:0;font:inherit;transition:border-color .2s,background-color .2s,transform .25s var(--ease-spring)}
+.trail button:hover{border-color:var(--amber)}
+.trail button:active{transform:scale(.96)}
+.trail small{font:700 10px var(--f-round);text-transform:uppercase;letter-spacing:.07em;color:var(--dim)}
+.trail b{font:700 13.5px/1.2 var(--f-round);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px}
+.trail .tr-chip.cur{border-color:var(--amber);background:color-mix(in srgb,var(--amber) 12%,var(--surface))}
+.trail .tr-chip.cur b{color:var(--amber)}
+.trail .tr-home{flex-direction:row;align-items:center;gap:4px;align-self:stretch;font:700 13.5px var(--f-round);color:var(--muted);padding:6px 12px 6px 8px}
+.trail .tr-home svg{width:16px;height:16px;stroke:currentColor}
+.tr-sep svg{width:14px;height:14px;stroke:var(--dim);display:block}
+:root[data-theme="light"] .trail .tr-chip.cur b{color:var(--ink)}
+@media (max-width:640px){.trail{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -16px 14px;padding:2px 16px;gap:4px}.trail::-webkit-scrollbar{display:none}.trail button{flex:none;padding:5px 10px}.trail b{font-size:12.5px;max-width:170px}.trail .tr-home{padding:5px 10px 5px 6px}.tr-sep{flex:none}}
 </style>
 </head>
 <body>
@@ -3265,24 +3330,52 @@ function platform(url){
 }
 
 /* ---------- отрисовка ---------- */
+/* «Моя машина» — пошагово: модель → поколение → двигатель → работа. По шагам вверху можно вернуться назад. */
+let wiz = 0, wizShown = -1;
+const WIZ = ["Модель","Поколение","Двигатель","Работа"];
+const engShort = x => x.name.replace(/^(Карбюратор|Инжектор)\s*/i, "") || "Стандартный";
+const famJobs = () => JOBS.filter(j => (!j.fams || j.fams.includes(fam)) && !(j.id === "valves" && !isChain()));
+function wizAfterModel(){ const g = genOf(); if(!g) return 1; if(g.model.gens.length > 1) return 1; return g.engs.length > 1 ? 2 : 3; }
+function wizAfterGen(){ const g = genOf(); return g && g.engs.length > 1 ? 2 : 3; }
 function renderFam(){
   const f = F(), e = engOf(fam), g = genOf();
   $("#famCur").innerHTML = `<b>${esc(g ? g.name : f.name)}</b><small>${esc(e ? e.name : f.models)}</small>`;
   const m = g ? g.model : null;
-  const short = x => x.name.replace(/^(Карбюратор|Инжектор)\s*/i, "") || "Стандартный";
-  $("#famMenu").innerHTML = `<div class="mstep">${vinBlock()}</div>` +
-    `<div class="mstep"><div class="mcap"><span>1</span>Модель</div><div class="mfams">` + MODELS.map(x =>
-      `<button type="button" data-model="${x.id}" aria-pressed="${!!m && m.id === x.id}"><b>${esc(x.name)}</b><small>${esc(x.gens.length > 1 ? x.gens.map(y => y.name).join(", ") : x.gens[0].years)}</small></button>`).join("") + `</div></div>` +
-    (m ? `<div class="mstep"><div class="mcap"><span>2</span>Поколение</div><div class="engs">` + m.gens.map(y =>
-      `<button type="button" data-gen="${y.id}" aria-pressed="${y.id === g.id}"><b>${esc(y.name)}</b><small>${esc(y.years)}</small></button>`).join("") + `</div></div>` +
-    `<div class="mstep"><div class="mcap"><span>3</span>Двигатель</div><div class="engs">` + g.engs.map(id => (ENG[g.fam] || []).find(x => x.id === id)).filter(Boolean).map(x =>
-      `<button type="button" data-eng="${x.id}" aria-pressed="${e && x.id === e.id}"><b>${esc(short(x))}</b><small>${esc(x.sub)}</small></button>`).join("") + `</div>` +
-      (g.note ? `<p class="mnote">${esc(g.note)}</p>` : "") + `</div>` +
-    `<div class="mdone"><button type="button" class="btn" data-famclose>Готово</button></div>` : `<p class="mnote">Выбери модель — дальше поколение и мотор.</p>`) +
-    (g && g.engs.some(id => ((ENG[g.fam] || []).find(x => x.id === id) || {}).kind === "carb") ? `<details class="enghelp"><summary>Как понять: карбюратор или инжектор?</summary><ul>
+  if(!m && wiz > 0) wiz = 0;
+  const job = openJob && JOBS.find(j => j.id === openJob);
+  const val = [m && m.name, g && g.name, e && engShort(e), job && job.title];
+  const can = [true, !!m, !!g, !!g];
+  const steps = `<div class="wz-steps" role="tablist" aria-label="Шаги выбора">` + WIZ.map((t, i) =>
+    `<button type="button" role="tab" class="wz-step${i < wiz ? " done" : ""}" data-wiz="${i}" aria-selected="${i === wiz}"${can[i] ? "" : " disabled"}>
+      <span class="wz-n" aria-hidden="true">${i < wiz ? `<svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>` : i + 1}</span>
+      <span class="wz-t"><small>${t}</small><b>${esc(val[i] || (can[i] ? "выбери" : "—"))}</b></span></button>`).join("") +
+    `<span class="wz-track" aria-hidden="true"><i style="width:${(wiz + 1) * 25}%"></i></span></div>`;
+  let body = "";
+  if(wiz === 0){
+    body = vinBlock() + `<div class="mfams">` + MODELS.map(x =>
+      `<button type="button" data-model="${x.id}" aria-pressed="${!!m && m.id === x.id}"><b>${esc(x.name)}</b><small>${esc(x.gens.length > 1 ? x.gens.map(y => y.name).join(", ") : x.gens[0].years)}</small></button>`).join("") + `</div>`;
+  } else if(wiz === 1){
+    body = `<div class="engs">` + m.gens.map(y =>
+      `<button type="button" data-gen="${y.id}" aria-pressed="${y.id === g.id}"><b>${esc(y.name)}</b><small>${esc(y.years)}</small></button>`).join("") + `</div>`;
+  } else if(wiz === 2){
+    body = `<div class="engs">` + g.engs.map(id => (ENG[g.fam] || []).find(x => x.id === id)).filter(Boolean).map(x =>
+      `<button type="button" data-eng="${x.id}" aria-pressed="${!!e && x.id === e.id}"><b>${esc(engShort(x))}</b><small>${esc(x.sub)}</small></button>`).join("") + `</div>` +
+      (g.note ? `<p class="mnote">${esc(g.note)}</p>` : "") +
+      (g.engs.some(id => ((ENG[g.fam] || []).find(x => x.id === id) || {}).kind === "carb") ? `<details class="enghelp"><summary>Как понять: карбюратор или инжектор?</summary><ul>
       <li><b>Карбюратор:</b> в салоне есть ручка подсоса (обычно слева под рулём), сверху мотора большой круглый корпус воздушного фильтра.</li>
       <li><b>Инжектор:</b> ручки подсоса нет, при включении зажигания на панели загорается лампа «Check Engine», корпус фильтра сбоку, от него гофра к дроссельному узлу.</li>
       <li>Точно — по номеру двигателя в ПТС.</li></ul></details>` : "");
+  } else {
+    const jobs = famJobs();
+    body = JOB_GROUPS.map(([gname, ids]) => { const gj = jobs.filter(j => ids.includes(j.id)); return gj.length ? `<div class="wz-g"><div class="wz-gh">${esc(gname)}</div><div class="wz-jobs">` +
+      gj.map(j => `<button type="button" class="wz-job" data-wjob="${j.id}" aria-pressed="${openJob === j.id}">${icon(j.id)}<span>${esc(j.title)}</span></button>`).join("") + `</div></div>` : ""; }).join("");
+  }
+  const anim = wizShown < 0 || wizShown === wiz ? "" : wiz > wizShown ? " fwd" : " back";
+  wizShown = wiz;
+  const hint = ["Выбери модель — или определи её по VIN.", "Какое поколение? Год выпуска есть в СТС и ПТС.", "Какой двигатель? Точно — по номеру мотора в ПТС.", "Цифры уже под твою машину. Какую работу делаем?"][wiz];
+  const foot = `<div class="wz-foot">${wiz > 0 ? `<button type="button" class="wz-back" data-wback>‹ Назад</button>` : `<span></span>`}` +
+    (wiz < 3 ? (can[wiz + 1] ? `<button type="button" class="btn wz-next" data-wnext>Дальше ›</button>` : "") : `<button type="button" class="btn wz-next" data-famclose>Готово</button>`) + `</div>`;
+  $("#famMenu").innerHTML = steps + `<p class="wz-hint">${hint}</p><div class="wzbody${anim}">${body}</div>` + foot;
 }
 /* ---------- VIN: модель, кузов и модельный год. Всё считается в браузере, VIN никуда не отправляется ---------- */
 const VIN_YEAR = "ABCDEFGHJKLMNPRSTVWXY123456789";   /* A=1980 (и 2010), … Y=2000, 1=2001 … 9=2009 — цикл 30 лет */
@@ -3353,6 +3446,7 @@ function chooseGen(id){
 }
 const REDUCE = () => window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 let famT = 0;
+function wizFocus(){ const m = $("#famMenu"); if(!m || m.hidden) return; m.scrollTop = 0; m.querySelector(".wzbody [aria-pressed=true]")?.focus({preventScroll:true}); }
 function famMenu(open){
   const m = $("#famMenu"); clearTimeout(famT); m.classList.remove("closing");
   $("#famBtn").setAttribute("aria-expanded", open);
@@ -3531,6 +3625,13 @@ function fillQr(){
   try{ const q = qrcode(0, "M"); q.addData("https://t.me/garage4to"); q.make(); el.innerHTML = q.createSvgTag({cellSize:3, margin:2, scalable:true}); }catch(e){}
 }
 
+function jobTrail(j){
+  const g = genOf(), e = engOf(fam), f = F();
+  const chip = (n, cap, v, cur) => `<button type="button" class="tr-chip${cur ? " cur" : ""}" data-wizopen="${n}"${cur ? ' aria-current="page"' : ""}><small>${cap}</small><b>${esc(v)}</b></button>`;
+  const sep = `<span class="tr-sep" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>`;
+  return `<nav class="trail" aria-label="Где ты сейчас"><button type="button" class="tr-home" data-goto="to" aria-label="Все работы"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>Работы</button>` +
+    chip(g && g.model.gens.length > 1 ? 1 : 0, "Машина", g ? g.name : f.name) + sep + chip(2, "Двигатель", e ? engShort(e) : f.models) + sep + chip(3, jobGroup(j.id), j.title, true) + `</nav>`;
+}
 function jobGroup(id){ const g = JOB_GROUPS.find(([,ids]) => ids.includes(id)); return g ? g[0] : "Работы"; }
 const diffBar = d => `<span class="diff" aria-label="Сложность ${d} из 5">${[1,2,3,4,5].map(i => `<i class="${i <= d ? "on" : ""}"></i>`).join("")}</span><b>${d} из 5</b>`;
 function stepHtml(j, s, i){
@@ -3562,7 +3663,7 @@ function renderJob(j){
   const src = j.src ? `<section class="blk jsec"><h3 class="jh"><span>${++n}</span>Источники</h3><ul class="srcs">${j.src.map(([t,u]) => `<li>${u ? `<a href="${u}" target="_blank" rel="noopener noreferrer">${esc(t)}</a>` : esc(t)}</li>`).join("")}</ul><p class="approx-note">Нашёл ошибку — напиши в Telegram-канал @garage4to.</p></section>` : "";
   const logBtn = JOB_LOG[j.id] ? `<section class="blk"><button type="button" class="logbtn" data-logjob="${JOB_LOG[j.id]}">${icon("garage")}<span><b>Сделал? Запиши в «Мой гараж»</b><small>Дата, пробег и что использовал — Гаражник посчитает следующую замену</small></span></button></section>` : "";
   return `<div class="detail job">
-    <nav class="jcrumbs" aria-label="Навигация"><button type="button" data-goto="to">Работы</button><span>›</span><span>${esc(jobGroup(j.id))}</span></nav>
+    ${jobTrail(j)}
     ${j.fams && !j.fams.includes(fam) ? `<div class="warn notfor"><p>Эта работа для: ${esc(j.fams.map(k => FAM[k].name).join(", "))}. У выбранной машины (${esc(F().name)}) устроено иначе — выбери другую в «Моя машина».</p></div>` : ""}
     <h2 class="jtitle">${esc(j.title)}</h2>
     <p class="lead">${esc(j.desc)}</p>
@@ -4168,15 +4269,20 @@ document.addEventListener("click", e => {
   const b = e.target.closest("button");
   if(!b){ if(!e.target.closest(".famsel")) famMenu(false); return; }
   const d = b.dataset;
-  if(b.id === "famBtn"){ famMenu($("#famMenu").hidden); return; }
+  if(b.id === "famBtn"){ if($("#famMenu").hidden){ wiz = 0; wizShown = -1; renderFam(); } famMenu($("#famMenu").hidden); return; }
   if(!b.closest(".famsel")) famMenu(false);
-  if(d.model){ const mm = MODELS.find(x => x.id === d.model); if(mm){ const cur = genOf(); chooseGen(cur && cur.model.id === mm.id ? cur.id : mm.gens[mm.gens.length - 1].id); } const y = scrollY; render(); scrollTo(0,y); famMenu(true); $("#famMenu [data-gen][aria-pressed=true]")?.focus(); }
-  else if(d.vingen){ chooseGen(d.vingen); if(vinRes && vinRes.eng){ const G = GENS.find(x => x.id === d.vingen); if(G && G.engs.includes(vinRes.eng)) setEng(G.fam, vinRes.eng); } const y = scrollY; render(); scrollTo(0,y); famMenu(true); $("#famMenu [data-eng][aria-pressed=true]")?.scrollIntoView({block:"center"}); }
-  else if("openvin" in d){ famMenu(true); $("#vinIn")?.focus(); }
-  else if(d.gen){ chooseGen(d.gen); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $(`#famMenu [data-gen="${d.gen}"]`)?.focus(); }
+  if(d.model){ const mm = MODELS.find(x => x.id === d.model); if(mm){ const cur = genOf(); chooseGen(cur && cur.model.id === mm.id ? cur.id : mm.gens[mm.gens.length - 1].id); wiz = wizAfterModel(); } const y = scrollY; render(); scrollTo(0,y); famMenu(true); wizFocus(); }
+  else if(d.vingen){ chooseGen(d.vingen); if(vinRes && vinRes.eng){ const G = GENS.find(x => x.id === d.vingen); if(G && G.engs.includes(vinRes.eng)) setEng(G.fam, vinRes.eng); } wiz = vinRes && vinRes.eng ? 3 : wizAfterGen(); const y = scrollY; render(); scrollTo(0,y); famMenu(true); wizFocus(); }
+  else if("openvin" in d){ wiz = 0; wizShown = -1; renderFam(); famMenu(true); $("#vinIn")?.focus(); }
+  else if(d.gen){ chooseGen(d.gen); wiz = wizAfterGen(); const y = scrollY; render(); scrollTo(0,y); famMenu(true); wizFocus(); }
   else if(d.fam){ setFam(d.fam); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $("#famMenu .engs button")?.focus(); }
-  else if(d.kind){ const x = (ENG[fam] || []).find(x => x.kind === d.kind); if(x){ setEng(fam, x.id); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $(`#famMenu [data-kind="${d.kind}"]`)?.focus(); } }
-  else if(d.eng){ setEng(fam, d.eng); const y = scrollY; render(); scrollTo(0,y); famMenu(true); $(`#famMenu [data-eng="${d.eng}"]`)?.focus(); }
+  else if(d.kind){ const x = (ENG[fam] || []).find(x => x.kind === d.kind); if(x){ setEng(fam, x.id); wiz = 3; const y = scrollY; render(); scrollTo(0,y); famMenu(true); wizFocus(); } }
+  else if(d.eng){ setEng(fam, d.eng); wiz = 3; const y = scrollY; render(); scrollTo(0,y); famMenu(true); wizFocus(); }
+  else if(d.wiz !== undefined){ wiz = +d.wiz; renderFam(); famMenu(true); wizFocus(); }
+  else if("wnext" in d){ wiz = Math.min(3, wiz + 1); renderFam(); wizFocus(); }
+  else if("wback" in d){ wiz = Math.max(0, wiz - 1); renderFam(); wizFocus(); }
+  else if(d.wizopen !== undefined){ wiz = +d.wizopen; renderFam(); famMenu(true); wizFocus(); }
+  else if(d.wjob){ famMenu(false); query = ""; go(d.wjob); }
   else if(b.hasAttribute("data-famclose")){ famMenu(false); }
   else if(b.hasAttribute("data-wskip")){ famChosen = true; try{ localStorage.setItem("garazh-welcome","1"); }catch(_){} render(); }
   else if(d.fmod){ fuseModel = d.fmod; try{ localStorage.setItem("garazh-fuse", d.fmod); }catch(_){} const y = scrollY; render(); scrollTo(0,y); }
