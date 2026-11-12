@@ -25,3 +25,32 @@
 :root[data-theme="light"] .lamp-ico{background:#16181b}
 @media (max-width:640px){.art h1,.ihero h1{font-size:27px}.art h2{font-size:19px}.anav .themebtn{padding:5px}}
 @media (max-width:640px){.anav > a[href="index.html"]{display:none}.abrand b{font-size:19px}.btn-app{padding:7px 10px;font-size:13px!important}}
+
+/* ===== 12.11: скруглённый шрифт для заголовков, плавность ===== */
+:root{--f-round:"Nunito","IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--f-head:var(--f-round);--ease:cubic-bezier(.22,.8,.24,1);--ease-spring:cubic-bezier(.3,1.35,.5,1)}
+.abrand b{font:800 21px/1 var(--f-round);letter-spacing:-.005em}
+.abrand small{font:600 11.5px var(--f-round)}
+.art h1,.ihero h1{font-family:var(--f-round);font-weight:800;letter-spacing:-.005em}
+.art h2,.related h2,.cgroup h2,.lamp-b h3,.cta b{font-family:var(--f-round);font-weight:800;letter-spacing:0}
+.acard b{font-family:var(--f-round);font-weight:700}
+ol.asteps>li::before{font-family:var(--f-round);font-weight:800}
+.anav a,.btn-app{font-family:var(--f-round)!important;font-weight:700}
+.abrand{-webkit-tap-highlight-color:transparent}
+@media (prefers-reduced-motion:no-preference){
+  .abrand{transition:transform .35s var(--ease-spring)}
+  .abrand .logo{transition:transform .45s var(--ease-spring)}
+  .abrand:active{transform:scale(.96);transition-duration:.12s}
+  @media (hover:hover){.abrand:hover .logo{transform:rotate(-14deg)}
+    .acard{transition:transform .28s var(--ease),box-shadow .28s var(--ease)}
+    .acard:hover{transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(0,0,0,.45)}}
+  @supports (interpolate-size:allow-keywords){
+    :root{interpolate-size:allow-keywords}
+    details::details-content{height:0;overflow:clip;transition:height .36s var(--ease),content-visibility .36s allow-discrete}
+    details[open]::details-content{height:auto}
+  }
+  @view-transition{navigation:auto}
+  ::view-transition-old(root){animation:vtOut .16s var(--ease) both}
+  ::view-transition-new(root){animation:vtIn .34s var(--ease) both}
+  @keyframes vtOut{to{opacity:0}}
+  @keyframes vtIn{from{opacity:0;transform:translateY(10px)}}
+}

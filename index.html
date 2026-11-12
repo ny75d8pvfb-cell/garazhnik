@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://garazhnik-lada.ru/og.png">
 <meta property="og:url" content="https://garazhnik-lada.ru/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Russo+One&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Russo+One&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 :root{color-scheme:dark;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{-webkit-text-size-adjust:100%}
@@ -1019,6 +1019,91 @@ a.hit{text-decoration:none}a.hit:hover,.hit:hover{border-color:var(--amber)}
 .tl-accf2{fill:color-mix(in srgb,var(--amber) 30%,var(--surface));stroke:var(--ink);stroke-width:1.2}
 .tl-xs{fill:var(--muted);font:500 10px var(--f-body)}
 .cylhelp{margin:0 0 12px}
+
+/* ===== 12.11: скруглённый шрифт, логотип-ссылка, плавность ===== */
+:root{--f-round:"Nunito","IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--f-head:var(--f-round);--ease:cubic-bezier(.22,.8,.24,1);--ease-spring:cubic-bezier(.3,1.35,.5,1)}
+/* Скруглённый — заголовки, кнопки, меню. Обычный (Plex) — текст инструкций. Моно — цифры и таблицы. */
+.brand h1{font:800 27px/1 var(--f-round);letter-spacing:-.005em;text-transform:none}
+.brand .sub{font:600 12.5px var(--f-round);letter-spacing:.01em}
+.tabs button{font:700 15.5px var(--f-round);letter-spacing:0}
+nav.bottom button{font:700 11px var(--f-round);letter-spacing:.01em}
+.fambtn{font:700 15px var(--f-round);letter-spacing:0;text-transform:none}
+.famcur,.famcur b{font-family:var(--f-round);letter-spacing:0}
+.famcur b{font-weight:800}
+.btn,.back,.tg,.fseg button{font-family:var(--f-round);font-weight:700;letter-spacing:0;text-transform:none}
+.card h3,.feature b,.logbtn b,.artstrip b,.tgcard b,.sym h3,.entry h3{font-family:var(--f-round);font-weight:700;letter-spacing:0;text-transform:none}
+.gh,.detail h2.gh,h2{font-family:var(--f-round);font-weight:800;letter-spacing:0}
+.detail h2,.dhead h2,.jtitle,.startbtn b{font-family:var(--f-round)!important;font-weight:800!important;text-transform:none;letter-spacing:-.005em!important}
+ol.steps li::before{font-family:var(--f-round);font-weight:800}
+
+/* Логотип — просто нажимается, без рамок */
+.brandlink{display:flex;align-items:center;gap:12px;margin-right:auto;min-width:0;color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent;outline:none;border-radius:12px;cursor:pointer;user-select:none;-webkit-user-select:none}
+.brandlink .t{margin-right:0}
+.brandlink:focus-visible{outline:2px solid var(--amber);outline-offset:4px}
+@media (prefers-reduced-motion:no-preference){
+  .brandlink{transition:transform .35s var(--ease-spring)}
+  .brandlink .logo{transition:transform .45s var(--ease-spring)}
+  .brandlink:active{transform:scale(.96);transition-duration:.12s}
+  @media (hover:hover){.brandlink:hover .logo{transform:rotate(-14deg)}}
+  .brandlink.spin .logo{animation:logoSpin .6s var(--ease)}
+  @keyframes logoSpin{0%{transform:rotate(0)}40%{transform:rotate(-28deg) scale(.92)}100%{transform:rotate(0) scale(1)}}
+}
+
+@media (prefers-reduced-motion:no-preference){
+  /* переходы между экранами (View Transitions) */
+  header{view-transition-name:hdr}
+  nav.bottom{view-transition-name:bnav}
+  ::view-transition-old(hdr),::view-transition-old(bnav){display:none}
+  ::view-transition-new(hdr),::view-transition-new(bnav){animation:none}
+  ::view-transition-old(root){animation:vtOut .16s var(--ease) both}
+  ::view-transition-new(root){animation:vtIn .34s var(--ease) both}
+  @keyframes vtOut{to{opacity:0;transform:scale(.992)}}
+  @keyframes vtIn{from{opacity:0;transform:translateY(10px) scale(.996)}}
+  /* без поддержки View Transitions — просто мягкое появление */
+  #main.enter{animation:vtIn .34s var(--ease) both}
+  /* смена темы — круг от кнопки */
+  html.vt-theme header,html.vt-theme nav.bottom{view-transition-name:none}
+  html.vt-theme::view-transition-old(root),html.vt-theme::view-transition-new(root){animation:none;mix-blend-mode:normal}
+
+  /* меню «Моя машина» раскрывается из кнопки */
+  .fammenu{transform-origin:20px -8px}
+  .fammenu:not([hidden]){animation:menuIn .3s var(--ease-spring) both}
+  .fammenu.closing{animation:menuOut .16s var(--ease) both;pointer-events:none}
+  @keyframes menuIn{from{opacity:0;transform:translateY(-6px) scale(.94)}}
+  @keyframes menuOut{to{opacity:0;transform:translateY(-4px) scale(.97)}}
+  .fambtn svg{transition:transform .3s var(--ease-spring)}
+  .fambtn[aria-expanded="true"] svg{transform:rotate(180deg)}
+
+  /* ползунок под вкладками */
+  .tabs{position:relative}
+  .tabs.has-ind button[aria-selected="true"]{border-bottom-color:transparent}
+  .tabind{position:absolute;left:0;bottom:0;height:3px;width:0;border-radius:3px 3px 0 0;background:var(--amber);pointer-events:none;transition:transform .42s var(--ease),width .42s var(--ease)}
+  :root[data-theme="light"] .tabind{background:var(--ink)}
+  .tabs button{transition:color .2s}
+  nav.bottom button svg{transition:transform .35s var(--ease-spring)}
+  nav.bottom button:active svg{transform:scale(.84);transition-duration:.1s}
+  nav.bottom button[aria-selected="true"] svg{transform:translateY(-1px) scale(1.08)}
+
+  /* карточки: мягкий отклик */
+  .card,.feature,.logbtn,.artstrip,.tgcard,.sym,.entry{transition:transform .28s var(--ease),box-shadow .28s var(--ease),border-color .2s,background-color .2s}
+  .card:active,.feature:active,.logbtn:active,.artstrip:active,.tgcard:active{transform:scale(.985);transition-duration:.1s}
+  @media (hover:hover){
+    .card:hover,.feature:hover,.logbtn:hover,.artstrip:hover,.tgcard:hover{transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(0,0,0,.45)}
+  }
+  .btn,.tg,.fambtn,.back{transition:transform .25s var(--ease-spring),background-color .2s,color .2s,border-color .2s}
+  .btn:active,.tg:active,.fambtn:active,.back:active{transform:scale(.95);transition-duration:.08s}
+
+  /* раскрывающиеся блоки — плавно, где браузер умеет */
+  @supports (interpolate-size:allow-keywords){
+    :root{interpolate-size:allow-keywords}
+    details::details-content{height:0;overflow:clip;transition:height .36s var(--ease),content-visibility .36s allow-discrete}
+    details[open]::details-content{height:auto}
+  }
+
+  /* плашка cookies и подсказки выезжают */
+  .cookiebar:not([hidden]){animation:barIn .5s var(--ease) .4s both}
+  @keyframes barIn{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
+}
 </style>
 </head>
 <body>
@@ -1026,8 +1111,8 @@ a.hit{text-decoration:none}a.hit:hover,.hit:hover{border-color:var(--amber)}
 <header>
   <div class="wrap head">
     <div class="brand">
-      <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.6 17.2a1.6 1.6 0 0 0 2.3 2.3l5.7-5.7a4 4 0 0 0 5.2-5.4l-2.4 2.4-2.2-.4-.4-2.2z"/></svg></div>
-      <div class="t"><h1>Гаражник</h1><span class="sub">твой помощник в ТО</span></div>
+      <a class="brandlink" href="./" aria-label="Гаражник — на главный экран"><div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.6 17.2a1.6 1.6 0 0 0 2.3 2.3l5.7-5.7a4 4 0 0 0 5.2-5.4l-2.4 2.4-2.2-.4-.4-2.2z"/></svg></div>
+      <div class="t"><h1>Гаражник</h1><span class="sub">твой помощник в ТО</span></div></a>
       <span id="ownerBadge" class="owner-badge" hidden>редактор</span>
       <a class="tg tg-art" href="stati/" aria-label="Статьи"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5M8 7h8M8 11h6"/></svg><span>Статьи</span></a>
       <button type="button" class="tg themebtn" id="themeBtn" aria-label="Сменить тему"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span>Тема</span></button>
@@ -3266,10 +3351,28 @@ function chooseGen(id){
   fuseModel = null; try{ localStorage.removeItem("garazh-fuse"); }catch(e){}   /* новая машина — своя схема предохранителей */
   const e = engOf(g.fam); if(!e || !g.engs.includes(e.id)) setEng(g.fam, g.engs[0]);
 }
-function famMenu(open){ $("#famMenu").hidden = !open; $("#famBtn").setAttribute("aria-expanded", open); }
+const REDUCE = () => window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+let famT = 0;
+function famMenu(open){
+  const m = $("#famMenu"); clearTimeout(famT); m.classList.remove("closing");
+  $("#famBtn").setAttribute("aria-expanded", open);
+  if(open || m.hidden || REDUCE()){ m.hidden = !open; return; }
+  m.classList.add("closing"); famT = setTimeout(() => { m.hidden = true; m.classList.remove("closing"); }, 160);
+}
 function renderTabs(){
   document.querySelectorAll("[role=tab][data-tab]").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === tab));
+  moveTabInd();
 }
+function moveTabInd(){
+  const box = $(".tabs"); if(!box || REDUCE()) return;
+  let ind = box.querySelector(".tabind");
+  if(!ind){ ind = document.createElement("span"); ind.className = "tabind"; ind.setAttribute("aria-hidden", "true"); box.appendChild(ind); box.classList.add("has-ind"); }
+  const b = box.querySelector('[aria-selected="true"]');
+  if(!b || !b.offsetWidth){ ind.style.opacity = "0"; return; }
+  ind.style.opacity = "1"; ind.style.width = b.offsetWidth + "px"; ind.style.transform = `translateX(${b.offsetLeft}px)`;
+}
+window.addEventListener("resize", () => moveTabInd());
+document.fonts?.ready?.then(() => moveTabInd());
 function famNote(){
   const f = F();
   const g = genOf(), mp = (g && ARTS.find(a => a.mm === g.model.id)) || ARTS.find(a => a.m === fam);
@@ -4022,8 +4125,30 @@ function route(){
   else if(TABS.includes(h)) tab = h;
   else tab = "to";
   if(tab !== "garage"){ gEditing = null; }
-  render(); window.scrollTo(0,0);
+  swap(() => { render(); window.scrollTo({top:0, behavior:"instant"}); });
 }
+/* плавная смена экрана: View Transitions, а где их нет — мягкое появление */
+let firstRoute = true;
+function swap(fn){
+  if(firstRoute || REDUCE()){ firstRoute = false; fn(); return; }
+  if(document.startViewTransition){ document.startViewTransition(fn); return; }
+  fn(); const m = $("#main"); m.classList.remove("enter"); void m.offsetWidth; m.classList.add("enter");
+}
+/* логотип: на главный экран */
+document.addEventListener("click", e => {
+  const a = e.target.closest(".brandlink"); if(!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+  e.preventDefault(); famMenu(false);
+  a.classList.remove("spin"); void a.offsetWidth; a.classList.add("spin");
+  const home = !location.hash.slice(1) || location.hash === "#to";
+  const hadQuery = typeof query !== "undefined" && query;
+  if(typeof query !== "undefined") query = "";
+  if(home && !openJob && view === "list" && tab === "to"){
+    if(hadQuery) swap(() => render());
+    window.scrollTo({top:0, behavior: REDUCE() ? "auto" : "smooth"});
+  } else {
+    history.pushState(null, "", location.pathname + location.search); route();
+  }
+});
 window.addEventListener("hashchange", route);
 
 function arm(b, label, fn){
@@ -4056,7 +4181,14 @@ document.addEventListener("click", e => {
   else if(b.hasAttribute("data-wskip")){ famChosen = true; try{ localStorage.setItem("garazh-welcome","1"); }catch(_){} render(); }
   else if(d.fmod){ fuseModel = d.fmod; try{ localStorage.setItem("garazh-fuse", d.fmod); }catch(_){} const y = scrollY; render(); scrollTo(0,y); }
   else if(b.hasAttribute("data-print")){ window.print(); }
-  else if(b.id === "themeBtn"){ const t = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); try{ localStorage.setItem("garazh-theme", t); }catch(e){} document.querySelector('meta[name="theme-color"]')?.setAttribute("content", t === "light" ? "#F4F3EF" : "#101316"); }
+  else if(b.id === "themeBtn"){ const t = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+    const apply = () => { document.documentElement.setAttribute("data-theme", t); try{ localStorage.setItem("garazh-theme", t); }catch(e){} document.querySelector('meta[name="theme-color"]')?.setAttribute("content", t === "light" ? "#F4F3EF" : "#101316"); moveTabInd(); };
+    if(!document.startViewTransition || REDUCE()){ apply(); }
+    else { const r = b.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2, R = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+      const H = document.documentElement; H.classList.add("vt-theme");
+      const vt = document.startViewTransition(apply);
+      vt.ready.then(() => H.animate({clipPath:[`circle(0px at ${x}px ${y}px)`, `circle(${R}px at ${x}px ${y}px)`]}, {duration:520, easing:"cubic-bezier(.22,.8,.24,1)", pseudoElement:"::view-transition-new(root)"})).catch(() => {});
+      vt.finished.finally(() => H.classList.remove("vt-theme")); } }
   else if(d.tab){ query = ""; go(d.tab); }
   else if(d.goto){ query = ""; go(d.goto); }
   else if(d.gs){ if(d.fmod2){ fuseModel = d.fmod2; try{ localStorage.setItem("garazh-fuse", d.fmod2); }catch(_){} query = ""; } go(d.gs); }
