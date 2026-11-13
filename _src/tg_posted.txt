@@ -51,3 +51,4 @@ stati/lada-kalina.html
 stati/lada-priora.html
 stati/motor-troit.html
 stati/lampa-akkumulyatora.html
+stati/starter-shchelkaet.html
