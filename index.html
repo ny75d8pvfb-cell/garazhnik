@@ -1180,7 +1180,7 @@ ol.steps li::before{font-family:var(--f-round);font-weight:800}
 .wfams button{justify-content:flex-start;min-width:0}
 .wfams b{line-height:1.25}
 .wfams small{display:block;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.famcur.none b{color:var(--muted);font-weight:700}
+.famcur[hidden]{display:none}
 @media (max-width:640px){
   .cookiebar,.cookiebar:not([hidden]){bottom:calc(var(--navh,64px) + env(safe-area-inset-bottom,0px));padding:7px 12px}
   .head{gap:8px;padding-block:8px}
@@ -3370,8 +3370,9 @@ function wizAfterModel(){ const g = genOf(); if(!g) return 1; if(g.model.gens.le
 function wizAfterGen(){ const g = genOf(); return g && g.engs.length > 1 ? 2 : 3; }
 function renderFam(){
   const f = F(), e = engOf(fam), g = genOf();
-  const cur = $("#famCur"); cur.classList.toggle("none", !famPicked);
-  cur.innerHTML = famPicked ? `<b>${esc(g ? g.name : f.name)}</b><small>${esc(e ? e.name : f.models)}</small>` : `<b>Машина не выбрана</b><small>Выбери — цифры подстроятся</small>`;
+  const cur = $("#famCur"); cur.hidden = !famPicked;
+  $("#famBtn").firstChild.nodeValue = famPicked ? "Моя машина" : "Выбрать машину";
+  cur.innerHTML = famPicked ? `<b>${esc(g ? g.name : f.name)}</b><small>${esc(e ? e.name : f.models)}</small>` : "";
   const m = g ? g.model : null;
   if(!m && wiz > 0) wiz = 0;
   const job = openJob && JOBS.find(j => j.id === openJob);
