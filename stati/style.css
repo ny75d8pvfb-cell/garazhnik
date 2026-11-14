@@ -1110,3 +1110,53 @@ ol.asteps>li::before{font-family:var(--f-round);font-weight:800}
 .cookiebar p{font-size:12.5px;line-height:1.35}
 .cookiebar .btn{padding:6px 16px;font-size:13.5px}
 @media (max-width:640px){.cookiebar,.cookiebar:not([hidden]){bottom:0;padding:7px 12px;flex-direction:row;align-items:center}}
+
+/* ===== 14.11: стиль «Техническая карта» для статей (как в приложении, см. _src/feat/techcard.css) ===== */
+
+:root{--tc-bar:#1D2024;--tc-bar-ink:#FFFFFF;--tc-bar-muted:#AAB0B7;--tc-bar-line:#3A3F45;--tc-acc:#E8590C;--tc-acc-2:#FF9A62}
+:root:not([data-theme="light"]){
+  --bg:#131518; --peg:#1A1D21; --surface:#1A1D21; --raised:#202428; --sunk:#16181B; --line:#2C3036; --line-2:#3E444C;
+  --ink:#ECEEF0; --muted:#9AA1A9; --dim:#6E757D;
+  --blue:#2A2E33; --blue-ink:#ECEEF0; --blue-soft:#202428;
+  --amber:#FF7A33; --amber-ink:#131518; --amber-soft:#2A1A10;
+  --warn:#FF6B57; --ok:#6CC48C; --r:2px;
+  --tc-bar:#0C0D0F; --tc-frame:#4A5058;
+}
+:root[data-theme="light"]{
+  --bg:#F3F1EC; --peg:#E5E1D8; --surface:#FBFAF7; --raised:#F6F4EF; --sunk:#ECE9E2; --line:#DDD8CE; --line-2:#CFCAC0;
+  --ink:#1D2024; --muted:#5F666E; --dim:#868C93;
+  --blue:#E9E5DC; --blue-ink:#1D2024; --blue-soft:#EFECE5;
+  --amber:#C2410C; --amber-ink:#FFFFFF; --amber-soft:#FCEBDD;
+  --warn:#B42318; --ok:#2E7A3A; --r:2px;
+  --tc-frame:#1D2024;
+}
+:root{
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --f-head:var(--f-body); --f-round:var(--f-body); --f-display:var(--f-body);
+}
+
+html body{font-family:var(--f-body);background-color:var(--bg);background-image:linear-gradient(var(--peg) 1px,transparent 1px),linear-gradient(90deg,var(--peg) 1px,transparent 1px);background-size:32px 32px;background-position:-1px -1px;-webkit-font-smoothing:antialiased}
+html body::before{display:none}
+:root[data-theme] .ahead{background:var(--tc-bar);border-bottom:0;color:#fff}
+:root[data-theme] .abrand{color:#fff}
+:root[data-theme] .abrand b{font:800 18px/1 var(--f-body);text-transform:uppercase;letter-spacing:.07em;color:#fff}
+:root[data-theme] .abrand small{display:none}
+:root[data-theme] .abrand .logo{width:28px;height:28px;border-radius:0;background:transparent;border:2px solid var(--tc-acc)}
+:root[data-theme] .abrand .logo svg{width:16px;height:16px;stroke:var(--tc-acc)}
+:root[data-theme] .anav a{font:500 12px var(--f-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--tc-bar-muted)}
+:root[data-theme] .anav a:hover{color:#fff}
+:root[data-theme] .anav .tg,:root[data-theme] .anav .themebtn{background:transparent;border:1px solid var(--tc-bar-line);border-radius:0;color:var(--tc-bar-muted)}
+:root[data-theme] .anav .btn-app{background:var(--tc-acc);color:#fff!important;border:0;border-radius:0;font:600 12px var(--f-mono)!important;text-transform:uppercase;letter-spacing:.05em;padding:9px 13px}
+:root[data-theme] .crumbs{font:500 11.5px var(--f-mono);text-transform:uppercase;letter-spacing:.06em}
+:root[data-theme] .art h1,:root[data-theme] .ihero h1{font:800 36px/1.1 var(--f-body);letter-spacing:-.02em}
+:root[data-theme] .art h2{font:700 22px/1.25 var(--f-body);letter-spacing:-.01em;border-bottom:1.5px solid var(--tc-frame)}
+:root[data-theme] .related h2,:root[data-theme] .cgroup h2{font:700 19px var(--f-body)}
+:root[data-theme] .byline{font:500 12px var(--f-mono);letter-spacing:.02em}
+:root[data-theme] .toc,:root[data-theme] .acard,:root[data-theme] .afig,:root[data-theme] .tip,:root[data-theme] .warn,:root[data-theme] .table,:root[data-theme] .art table{border-radius:0;box-shadow:none}
+:root[data-theme] .toc,:root[data-theme] .acard{background:var(--surface);border:1.5px solid var(--tc-frame)}
+:root[data-theme] .acard:hover{border-color:var(--amber)}
+:root[data-theme] .afoot{background:var(--tc-bar);color:var(--tc-bar-muted);border-top:0}
+:root[data-theme] .afoot a,:root[data-theme] .afoot b{color:#fff}
+:root[data-theme] .cookiebar .btn{background:var(--amber);color:var(--amber-ink);border-radius:0}
+@media (max-width:640px){:root[data-theme] .art h1,:root[data-theme] .ihero h1{font-size:28px}:root[data-theme] .anav .btn-app{padding:8px 10px;font-size:11px!important}}

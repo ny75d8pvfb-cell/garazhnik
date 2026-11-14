@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://garazhnik-lada.ru/og.png">
 <meta property="og:url" content="https://garazhnik-lada.ru/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Russo+One&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap">
 <style>
 :root{color-scheme:dark;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{-webkit-text-size-adjust:100%}
@@ -1199,6 +1199,186 @@ ol.steps li::before{font-family:var(--f-round);font-weight:800}
   header.hid{transform:translateY(calc(-100% - env(safe-area-inset-top,0px)))}
 }
 @media (prefers-reduced-motion:reduce){header{transition:none}}
+/*TC-BEGIN*/
+/* ===== 14.11: стиль «Техническая карта» (вариант Б). Исходник: _src/feat/techcard.css, вставляется
+   в index.html скриптом _src/feat/techcard_patch.py с префиксом :root[data-theme] (перебивает старые слои). ===== */
+:root{--tc-bar:#1D2024;--tc-bar-ink:#FFFFFF;--tc-bar-muted:#AAB0B7;--tc-bar-line:#3A3F45;--tc-acc:#E8590C;--tc-acc-2:#FF9A62}
+:root:not([data-theme="light"]){
+  --bg:#131518; --peg:#1A1D21; --surface:#1A1D21; --raised:#202428; --sunk:#16181B; --line:#2C3036; --line-2:#3E444C;
+  --ink:#ECEEF0; --muted:#9AA1A9; --dim:#6E757D;
+  --blue:#2A2E33; --blue-ink:#ECEEF0; --blue-soft:#202428;
+  --amber:#FF7A33; --amber-ink:#131518; --amber-soft:#2A1A10;
+  --warn:#FF6B57; --ok:#6CC48C; --r:2px;
+  --tc-bar:#0C0D0F; --tc-frame:#4A5058;
+}
+:root[data-theme="light"]{
+  --bg:#F3F1EC; --peg:#E5E1D8; --surface:#FBFAF7; --raised:#F6F4EF; --sunk:#ECE9E2; --line:#DDD8CE; --line-2:#CFCAC0;
+  --ink:#1D2024; --muted:#5F666E; --dim:#868C93;
+  --blue:#E9E5DC; --blue-ink:#1D2024; --blue-soft:#EFECE5;
+  --amber:#C2410C; --amber-ink:#FFFFFF; --amber-soft:#FCEBDD;
+  --warn:#B42318; --ok:#2E7A3A; --r:2px;
+  --tc-frame:#1D2024;
+}
+:root{
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --f-head:var(--f-body); --f-round:var(--f-body); --f-display:var(--f-body);
+}
+
+:root[data-theme] body{font-family:var(--f-body);background-color:var(--bg);background-image:linear-gradient(var(--peg) 1px,transparent 1px),linear-gradient(90deg,var(--peg) 1px,transparent 1px);background-size:32px 32px;background-position:-1px -1px;-webkit-font-smoothing:antialiased}
+:root[data-theme] body::before{display:none}
+:root[data-theme] h1,:root[data-theme] h2,:root[data-theme] h3,:root[data-theme] .gh,:root[data-theme] .card h3,:root[data-theme] .feature b,:root[data-theme] .entry h3,:root[data-theme] .sym h3,:root[data-theme] .logbtn b,:root[data-theme] .artstrip b,:root[data-theme] .tgcard b,:root[data-theme] .detail h2,:root[data-theme] .dhead h2,:root[data-theme] .jtitle{font-family:var(--f-body);text-transform:none;letter-spacing:-.01em}
+
+/* шапка — тёмная полоса в обеих темах */
+:root[data-theme] header{background:var(--tc-bar);color:var(--tc-bar-ink);border-bottom:0;backdrop-filter:none;-webkit-backdrop-filter:none}
+:root[data-theme] header::after{display:none}
+:root[data-theme] .brand h1{font:800 18px/1 var(--f-body);text-transform:uppercase;letter-spacing:.07em;color:var(--tc-bar-ink)}
+:root[data-theme] .brand .sub{display:none}
+:root[data-theme] .logo{width:28px;height:28px;border-radius:0;background:transparent;border:2px solid var(--tc-acc)}
+:root[data-theme] .logo svg{width:16px;height:16px;stroke:var(--tc-acc)}
+:root[data-theme] .tg{background:transparent;color:var(--tc-bar-muted);border:1px solid var(--tc-bar-line);border-radius:0;font:500 11.5px var(--f-mono);text-transform:uppercase;letter-spacing:.06em}
+:root[data-theme] .tg:hover{color:var(--tc-bar-ink);border-color:var(--tc-bar-muted)}
+:root[data-theme] .themebtn[aria-pressed="true"],:root[data-theme] .tg.themebtn{background:transparent}
+:root[data-theme] .fambtn{background:var(--tc-acc);color:#fff;border:0;border-radius:0;font:600 12.5px var(--f-mono);text-transform:uppercase;letter-spacing:.05em;padding:9px 12px 9px 14px}
+:root[data-theme] .fambtn svg{stroke:#fff}
+:root[data-theme] .famcur b{color:var(--tc-bar-ink);font:700 15px var(--f-body);letter-spacing:0}
+:root[data-theme] .famcur small{color:var(--tc-acc-2);font:500 12px var(--f-mono)}
+:root[data-theme] .tabs button{font:500 12.5px var(--f-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--tc-bar-muted);border-bottom-color:transparent}
+:root[data-theme] .tabs button[aria-selected="true"]{color:var(--tc-bar-ink);border-bottom-color:var(--tc-acc)}
+:root[data-theme] .tabind{background:var(--tc-acc)}
+:root[data-theme] .owner-badge{border-radius:0}
+
+/* нижнее меню */
+:root[data-theme] nav.bottom{background:var(--surface);border-top:1.5px solid var(--tc-frame);backdrop-filter:none;-webkit-backdrop-filter:none}
+:root[data-theme] nav.bottom button{font:500 10.5px var(--f-mono);text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+:root[data-theme] nav.bottom button[aria-selected="true"]{color:var(--ink);box-shadow:inset 0 3px 0 var(--amber)}
+
+/* базовые блоки: рамка 1.5px, прямые углы */
+:root[data-theme] .card,:root[data-theme] .entry,:root[data-theme] .feature,:root[data-theme] .artstrip,:root[data-theme] .logbtn,:root[data-theme] .tgcard,:root[data-theme] .welcome,:root[data-theme] .fig,:root[data-theme] .table,:root[data-theme] .sym,:root[data-theme] .lampc,:root[data-theme] .fblock,:root[data-theme] .detail .box{border-radius:0;box-shadow:none}
+:root[data-theme] .card,:root[data-theme] .feature,:root[data-theme] .artstrip,:root[data-theme] .logbtn,:root[data-theme] .entry,:root[data-theme] .welcome{background:var(--surface);border:1.5px solid var(--tc-frame)}
+:root[data-theme] .card:hover,:root[data-theme] .feature:hover,:root[data-theme] .artstrip:hover,:root[data-theme] .logbtn:hover{border-color:var(--amber);transform:none}
+:root[data-theme] .ico{border-radius:0;background:transparent;border:1px solid var(--line-2)}
+:root[data-theme] .ico svg{stroke:var(--ink)}
+:root[data-theme] .feature .ico svg,:root[data-theme] .logbtn .ico svg,:root[data-theme] .artstrip .ico svg{stroke:var(--amber)}
+:root[data-theme] .pill{border-radius:0;background:transparent;border:1px solid var(--line-2);color:var(--ink);font:500 11.5px/1.6 var(--f-mono);text-transform:none;letter-spacing:0}
+:root[data-theme] .btn{border-radius:0;background:var(--ink);color:var(--bg);font:600 13px var(--f-mono);text-transform:uppercase;letter-spacing:.05em}
+:root[data-theme] .btn:hover{background:var(--amber);color:var(--amber-ink)}
+:root[data-theme] .startbtn{border-radius:0;background:var(--amber);color:var(--amber-ink);box-shadow:none}
+:root[data-theme] .startbtn svg{fill:var(--amber-ink)}
+:root[data-theme] .startbtn small{color:color-mix(in srgb,var(--amber-ink) 75%,transparent)}
+:root[data-theme] .back{border-radius:0;font:500 12px var(--f-mono);text-transform:uppercase;letter-spacing:.06em}
+:root[data-theme] .linkbtn{color:var(--amber)}
+:root[data-theme] .search input{border-radius:0;background:var(--surface);border:1.5px solid var(--tc-frame);font-size:16px;padding-block:14px}
+:root[data-theme] .search input:focus{outline:2px solid var(--amber);outline-offset:0}
+:root[data-theme] .gh{font:700 19px/1.2 var(--f-body);text-transform:none;letter-spacing:-.01em;padding:0 0 9px;border-left:0;border-bottom:1.5px solid var(--tc-frame);margin:0 0 0}
+:root[data-theme] .gh span{border-radius:0;background:transparent;border:0;color:var(--muted);font:500 11.5px var(--f-mono);margin-left:auto;text-transform:uppercase;letter-spacing:.07em}
+:root[data-theme] .group{margin-top:30px}
+:root[data-theme] .list{gap:0;border:1.5px solid var(--tc-frame);border-top:0;background:var(--surface);grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+:root[data-theme] .list .card{border:0;border-bottom:1px solid var(--line);border-right:1px solid var(--line);background:transparent}
+:root[data-theme] .list .card:hover{background:var(--raised)}
+:root[data-theme] .tip{border-radius:0;border-left:3px solid var(--amber)}
+:root[data-theme] .warn{border-radius:0}
+:root[data-theme] ol.steps li::before{border-radius:0;font-family:var(--f-mono)}
+:root[data-theme] .fseg button{font:500 12px var(--f-mono);text-transform:uppercase;letter-spacing:.05em;border-radius:0}
+:root[data-theme] .fseg{border-radius:0;border:1.5px solid var(--tc-frame)}
+:root[data-theme] .fseg button[aria-selected="true"]{color:var(--ink);box-shadow:inset 0 -3px 0 var(--amber)}
+:root[data-theme] .fammenu{border-radius:0;border:1.5px solid var(--tc-frame)}
+:root[data-theme] .toast{border-radius:0}
+:root[data-theme] .cookiebar{border-top:1.5px solid var(--tc-frame)}
+:root[data-theme] .cookiebar .btn{background:var(--amber);color:var(--amber-ink)}
+
+/* главная */
+:root[data-theme] .tc-hero{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:start;padding:28px 0 8px}
+:root[data-theme] .tc-lbl{font:500 11.5px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+:root[data-theme] .tc-title{font:800 40px/1.08 var(--f-body);letter-spacing:-.025em;margin:14px 0 14px;text-wrap:balance}
+:root[data-theme] .tc-lead{font-size:17px;color:var(--muted);margin:0 0 22px;max-width:560px;line-height:1.5}
+:root[data-theme] .tc-hero .search{margin:0}
+:root[data-theme] .tc-spec{background:var(--surface);border:1.5px solid var(--tc-frame)}
+:root[data-theme] .tc-spec .top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;border-bottom:1.5px solid var(--tc-frame)}
+:root[data-theme] .tc-spec .top b{font-size:15px;line-height:1.3}
+:root[data-theme] .tc-spec .top .tc-lbl{white-space:nowrap}
+:root[data-theme] .tc-spec dl{margin:0;padding:4px 16px 8px}
+:root[data-theme] .tc-spec .r{display:flex;align-items:baseline;gap:8px;padding:9px 0;border-bottom:1px dashed var(--line-2);font-size:14.5px}
+:root[data-theme] .tc-spec .r:last-child{border-bottom:0}
+:root[data-theme] .tc-spec dt{white-space:nowrap}
+:root[data-theme] .tc-spec .r i{flex:1;min-width:12px;border-bottom:1px dotted var(--dim);transform:translateY(-4px)}
+:root[data-theme] .tc-spec dd{margin:0;font:600 13.5px/1.35 var(--f-mono);text-align:right;max-width:60%}
+:root[data-theme] .tc-spec dd.u{color:var(--dim);font-weight:500}
+:root[data-theme] .tc-spec .ft{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px;border-top:1.5px solid var(--tc-frame)}
+:root[data-theme] .tc-spec .ft button,:root[data-theme] .tc-spec .ft a{background:none;border:0;padding:0;cursor:pointer;font:600 12px var(--f-mono);color:var(--amber);letter-spacing:.06em;text-transform:uppercase;text-decoration:none}
+:root[data-theme] .tc-sec{margin-top:34px}
+:root[data-theme] .tc-sh{display:flex;align-items:baseline;gap:12px;border-bottom:1.5px solid var(--tc-frame);padding-bottom:9px}
+:root[data-theme] .tc-sh .n{font:700 13px var(--f-mono);color:var(--amber);background:none;padding:0;border-radius:0}
+:root[data-theme] .n{border-radius:0}
+:root[data-theme] .trail button,:root[data-theme] .trail .tr-chip{border-radius:0}
+:root[data-theme] .trail .tr-chip.cur{border-color:var(--amber)}
+:root[data-theme] .tc-sh h2{margin:0;font:700 21px/1.2 var(--f-body);letter-spacing:-.01em}
+:root[data-theme] .tc-sh .tc-lbl{margin-left:auto}
+:root[data-theme] .tc-models{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border:1.5px solid var(--tc-frame);border-top:0}
+:root[data-theme] .tc-models button{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;padding:15px 16px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;cursor:pointer;min-width:0}
+:root[data-theme] .tc-models button:hover{background:var(--raised)}
+:root[data-theme] .tc-models b{font-size:16px;line-height:1.25}
+:root[data-theme] .tc-models small{font:12px/1.4 var(--f-mono);color:var(--muted);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+:root[data-theme] .tc-under{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:10px;font-size:14px;color:var(--muted)}
+:root[data-theme] .tc-nav{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border:1.5px solid var(--tc-frame);border-top:0}
+:root[data-theme] .tc-nav > *{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;padding:15px 16px;border:0;border-right:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;cursor:pointer;text-decoration:none}
+:root[data-theme] .tc-nav > *:last-child{border-right:0}
+:root[data-theme] .tc-nav > *:hover{background:var(--raised)}
+:root[data-theme] .tc-nav .k{font:600 11.5px var(--f-mono);color:var(--amber)}
+:root[data-theme] .tc-nav b{font-size:15.5px}
+:root[data-theme] .tc-nav small{color:var(--muted);font-size:13px;line-height:1.35}
+:root[data-theme] .tc-trust{display:grid;grid-template-columns:auto 1fr;gap:14px;border:1.5px dashed var(--tc-frame);padding:16px 18px;background:var(--surface);margin-top:34px}
+:root[data-theme] .tc-trust svg{width:22px;height:22px;stroke:var(--amber)}
+:root[data-theme] .tc-trust p{margin:6px 0 0;color:var(--muted);font-size:14.5px}
+:root[data-theme] .tc-trust .tc-lbl{color:var(--amber)}
+:root[data-theme] .footlinks{margin-top:30px;padding-top:16px;border-top:1.5px solid var(--tc-frame);justify-content:flex-start;font:500 12px var(--f-mono);text-transform:uppercase;letter-spacing:.05em}
+:root[data-theme] .footlinks a,:root[data-theme] .footlinks .linkbtn{color:var(--muted)}
+
+/* компьютер: шапка в одну строку — логотип, разделы, кнопки, машина */
+@media (min-width:641px){
+  :root[data-theme] .head{flex-direction:row;align-items:center;flex-wrap:wrap;gap:0 16px;padding-block:0;min-height:62px}
+  :root[data-theme] .wrap{max-width:1120px}
+  :root[data-theme] .brand{display:contents}
+  :root[data-theme] .brandlink{order:1;margin-right:0}
+  :root[data-theme] .owner-badge{order:1}
+  :root[data-theme] .tabs{order:2;flex:1;align-self:stretch;gap:0}
+  :root[data-theme] .tabs button{padding:0 9px;border-bottom-width:3px}
+  :root[data-theme] .tg{order:3;padding:7px}
+  :root[data-theme] .tg span{display:none}
+  :root[data-theme] .tg.tg-art{padding:6px 10px}
+  :root[data-theme] .tg.tg-art span{display:inline}
+  :root[data-theme] .famsel{order:4}
+  :root[data-theme] .famcur{max-width:170px}
+  :root[data-theme] .famcur small{display:none}
+}
+@media (min-width:641px) and (max-width:1359px){:root[data-theme] .famcur{display:none}}
+@media (min-width:641px) and (max-width:1023px){
+  :root[data-theme] .brandlink{margin-right:auto}
+  :root[data-theme] .tabs{order:5;flex:0 0 100%;height:42px;border-top:1px solid var(--tc-bar-line)}
+  :root[data-theme] .head{padding-top:10px}
+}
+@media (max-width:640px){
+  :root[data-theme] .brand h1{font-size:16px}
+  :root[data-theme] .tg{color:var(--tc-bar-muted)}
+  :root[data-theme] .fambtn{font-size:12px;padding:7px 10px 7px 12px}
+  :root[data-theme] .tc-hero{grid-template-columns:1fr;gap:22px;padding:14px 0 0}
+  :root[data-theme] .tc-title{font-size:29px;margin:10px 0}
+  :root[data-theme] .tc-lead{font-size:15.5px;margin-bottom:16px}
+  :root[data-theme] .tc-sec{margin-top:26px}
+  :root[data-theme] .tc-sh h2{font-size:19px}
+  :root[data-theme] .tc-models{grid-template-columns:1fr 1fr}
+  :root[data-theme] .tc-models button{padding:12px 13px}
+  :root[data-theme] .tc-models button:nth-child(2n){border-right:0}
+  :root[data-theme] .tc-nav{grid-template-columns:1fr 1fr}
+  :root[data-theme] .tc-nav > *{border-bottom:1px solid var(--line);padding:12px 13px}
+  :root[data-theme] .tc-nav > *:nth-child(2n){border-right:0}
+  :root[data-theme] .list{grid-template-columns:1fr}
+  :root[data-theme] .list .card{border-right:0}
+  :root[data-theme] .group{margin-top:24px}
+  :root[data-theme] .tc-sh .tc-lbl{display:none}
+}
+
+/*TC-END*/
 </style>
 </head>
 <body>
@@ -3608,25 +3788,31 @@ function renderList(){
   const findJobs = () => JOBS.filter(j => (!j.fams || j.fams.includes(fam)) && !(j.id === "valves" && !isChain()) && match(j.title, j.desc, j.steps.map(s => s.t || s).join(" ")));
   match(); let jobs = query && !qT.length ? [] : findJobs();
   if(query && !jobs.length && !globalHits()){ qRelax = true; jobs = findJobs(); }
-  const welcome = query || famChosen ? "" : `<section class="welcome" aria-labelledby="wh"><h2 id="wh">ТО Лады своими руками — по шагам</h2>
-    <p>Пошаговые инструкции, поломки по симптомам и точные цифры: объёмы, моменты, ключи. Выбери свою машину — цифры подстроятся под неё.</p>
-    <div class="wfams">${MODELS.map(x => `<button type="button" data-model="${x.id}"><b>${esc(x.name)}</b><small>${esc(x.gens.length > 1 ? x.gens.map(y => y.name).join(", ") : x.gens[0].years)}</small></button>`).join("")}</div>
-    <p class="wvin">Не знаешь поколение или мотор? <button type="button" class="linkbtn" data-openvin>Определи по VIN</button></p>
-    <button type="button" class="linkbtn wskip" data-wskip>Выберу позже</button></section>`;
-  const features = query ? "" : `<div class="features">
-    <button type="button" class="feature" data-goto="schedule">${icon("schedule")}<span><b>Регламент ТО</b><small>Что и когда менять по пробегу</small></span></button>
-    <button type="button" class="feature" data-goto="symptoms">${icon("symptoms")}<span><b>Что случилось?</b><small>Найти причину по симптому</small></span></button>
-    <button type="button" class="feature" data-goto="numbers">${icon("numbers")}<span><b>Справочник по машине</b><small>Объёмы, моменты, ключи — на одной странице</small></span></button>
-  </div><a class="artstrip" href="stati/"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5M8 7h8M8 11h6"/></svg></span><span><b>Статьи о ТО Лады</b><small>Регламент, объёмы масла и антифриза, моменты затяжки, ГРМ, подготовка к зиме</small></span><span class="go" aria-hidden="true">→</span></a>`;
+  const home = !query;
+  const nModels = MODELS.length, nArts = ARTS.length;
+  const hero = home ? `<section class="tc-hero"><div><span class="tc-lbl">Справочник · ТО и ремонт Лады</span>
+    <h2 class="tc-title">ТО и ремонт Лады своими руками — по шагам и с точными цифрами</h2>
+    <p class="tc-lead">Пошаговые инструкции, поиск причины по симптому, объёмы, моменты затяжки и ключи — под конкретную модель и мотор.</p>
+    ${searchBox("Масло, не заводится, P0300…")}</div>${tcSpec()}</section>` : searchBox("Масло, не заводится, P0300…");
+  let sn = 0; const num = () => String(++sn).padStart(2, "0");
+  const welcome = home && !famChosen ? `<section class="tc-sec" aria-labelledby="wh"><div class="tc-sh"><span class="n">${num()}</span><h2 id="wh">Модель</h2><span class="tc-lbl">${nModels} ${plural(nModels,"модель","модели","моделей")} · ${nArts} ${plural(nArts,"статья","статьи","статей")}</span></div>
+    <div class="tc-models">${MODELS.map(x => `<button type="button" data-model="${x.id}"><b>${esc(x.name)}</b><small>${esc(x.gens.length > 1 ? x.gens.map(y => y.name).join(" · ") : x.gens[0].years)}</small></button>`).join("")}</div>
+    <div class="tc-under"><span>Не знаешь поколение или мотор? <button type="button" class="linkbtn" data-openvin>Определи по VIN</button></span><button type="button" class="linkbtn" data-wskip>Выберу позже</button></div></section>` : "";
+  const features = home ? `<section class="tc-sec"><div class="tc-sh"><span class="n">${num()}</span><h2>Разделы</h2></div><div class="tc-nav">
+    <button type="button" data-goto="schedule"><span class="k">По пробегу</span><b>Регламент ТО</b><small>Что и когда менять</small></button>
+    <button type="button" data-goto="symptoms"><span class="k">Поломки</span><b>Что случилось?</b><small>Причина по симптому, лампы, коды</small></button>
+    <button type="button" data-goto="numbers"><span class="k">Цифры</span><b>Справочник по машине</b><small>Объёмы, моменты, ключи</small></button>
+    <a href="stati/"><span class="k">Статьи</span><b>Статьи о ТО Лады</b><small>${nArts} ${plural(nArts,"статья","статьи","статей")}: ГРМ, масло, зима</small></a>
+  </div></section><section class="tc-sec"><div class="tc-sh"><span class="n">${num()}</span><h2>Работы</h2><span class="tc-lbl">${jobs.length} ${plural(jobs.length,"инструкция","инструкции","инструкций")}</span></div></section>` : "";
   const other = query ? globalHits() : "";
-  return searchBox("Поиск: масло, не заводится, P0300…") + welcome + features + other +
+  return hero + welcome + features + other +
     (jobs.length ? JOB_GROUPS.map(([gname, ids]) => { const gj = jobs.filter(j => ids.includes(j.id)); return gj.length ? `<section class="group"><h2 class="gh">${esc(gname)}<span>${gj.length}</span></h2><div class="list">${gj.map(j => {
       const n = vidsFor(j.id).length;
       return `<button type="button" class="card" data-job="${j.id}">
         ${icon(j.id)}<h3>${esc(j.title)}</h3><p>${esc(j.desc)}</p>
         <div class="meta"><span class="pill cdiff">${diffBar(j.diff || (j.lvl === 1 ? 2 : 4))}</span>
         <span class="pill">${esc(j.time)}</span>${n?`<span class="pill vid">Видео: ${n}</span>`:""}</div></button>`;
-    }).join("")}</div></section>` : ""; }).join("") : other ? "" : `<div class="empty"><p>Ничего не нашлось по «${esc(query)}».</p><p>Попробуй описать проще: <b>стучит</b>, <b>не заводится</b>, <b>горит лампа</b> — или загляни в <button type="button" class="linkbtn" data-goto="symptoms">поломки по симптомам</button>.</p></div>`) + (query ? "" : aboutLinks());
+    }).join("")}</div></section>` : ""; }).join("") : other ? "" : `<div class="empty"><p>Ничего не нашлось по «${esc(query)}».</p><p>Попробуй описать проще: <b>стучит</b>, <b>не заводится</b>, <b>горит лампа</b> — или загляни в <button type="button" class="linkbtn" data-goto="symptoms">поломки по симптомам</button>.</p></div>`) + (query ? "" : tcTrust() + aboutLinks());
 }
 function tgCard(){
   return `<a class="tgcard" href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer">
@@ -3637,6 +3823,20 @@ function tgCard(){
 /* почта собирается в браузере — в исходнике сайта целого адреса нет, спам-боты его не соберут */
 const MAIL = ["garazhnik.lada", "gmail.com"].join("@");
 const mailA = (txt, subj) => `<a href="mailto:${MAIL}${subj ? "?subject=" + encodeURIComponent(subj) : ""}">${esc(txt || MAIL)}</a>`;
+const plural = (n, a, b, c) => { const m = n % 100, k = n % 10; return m > 10 && m < 20 ? c : k === 1 ? a : k > 1 && k < 5 ? b : c; };
+function tcSpec(){
+  const f = F(), g = genOf(), e = engOf(fam);
+  const short = v => { if(v == null) return null; v = String(v); if(/^уточняется/.test(v) || /^см\./.test(v)) return null;
+    v = v.split(" — ")[0]; if(!v.includes(" · ")) v = v.split(" (")[0]; if(v.length > 36){ const c = v.search(/[;:]|\. /); v = c > 0 ? v.slice(0, c) : v.slice(0, 34) + "…"; } return v; };
+  const rows = [["Масло, объём", f.oil], ["Антифриз", f.coolant], ["Свечи: ключ", f.plugKey], ["Свечи: момент", f.plugTorque], ["Колёса: момент", f.wheelTorque]]
+    .map(([k, v]) => { const x = short(v); return `<div class="r"><dt>${k}</dt><i></i><dd${x ? "" : ' class="u"'}>${esc(x || "уточняется")}</dd></div>`; }).join("");
+  const name = (g ? g.name : f.name) + (e ? " · " + engShort(e) : "");
+  return `<aside class="tc-spec" aria-label="Цифры по машине"><div class="top"><b>${esc(name)}</b><span class="tc-lbl">${famPicked ? "Моя машина" : "Пример карты"}</span></div>
+    <dl>${rows}</dl><div class="ft"><span class="tc-lbl">${famPicked ? "Цифры для твоего мотора" : "Выбери свою — цифры подстроятся"}</span>${famPicked ? `<button type="button" data-goto="numbers">Вся карта →</button>` : `<button type="button" data-openfam>Выбрать →</button>`}</div></aside>`;
+}
+function tcTrust(){
+  return `<section class="tc-trust"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 7v6c0 4.5 3.8 7.5 9 8.5 5.2-1 9-4 9-8.5V7z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><div><span class="tc-lbl">Как мы проверяем цифры</span><p>Каждое значение сверяем минимум по двум независимым источникам. Если второго нет, пишем «уточняется» — тогда сверь с сервисной книжкой.</p></div></section>`;
+}
 function aboutLinks(){
   return `<div class="footlinks"><a href="stati/">Статьи</a><span>·</span><button type="button" class="linkbtn" data-goto="about">О сайте</button><span>·</span><a href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer">Нашёл ошибку? Напиши</a><span>·</span>${mailA("Почта для связи")}</div>`;
 }
@@ -4302,6 +4502,7 @@ document.addEventListener("click", e => {
   const b = e.target.closest("button");
   if(!b){ if(!e.target.closest(".famsel")) famMenu(false); return; }
   const d = b.dataset;
+  if(b.hasAttribute("data-openfam")){ scrollTo({top:0}); $("#famBtn").click(); return; }
   if(b.id === "famBtn"){ if($("#famMenu").hidden){ wiz = 0; wizShown = -1; renderFam(); } famMenu($("#famMenu").hidden); return; }
   if(!b.closest(".famsel")) famMenu(false);
   if(d.model){ const mm = MODELS.find(x => x.id === d.model); if(mm){ const cur = genOf(); chooseGen(cur && cur.model.id === mm.id ? cur.id : mm.gens[mm.gens.length - 1].id); wiz = wizAfterModel(); } const y = scrollY; render(); scrollTo(0,y); famMenu(true); wizFocus(); }
