@@ -93,7 +93,7 @@ html body::before{display:none}
 :root[data-theme] .abrand b{font:800 18px/1 var(--f-body);text-transform:uppercase;letter-spacing:.07em;color:#fff}
 :root[data-theme] .abrand small{display:none}
 :root[data-theme] .abrand .logo{width:28px;height:28px;border-radius:0;background:transparent;border:2px solid var(--tc-acc)}
-:root[data-theme] .abrand .logo svg{width:16px;height:16px;stroke:var(--tc-acc)}
+:root[data-theme] .abrand .logo svg{width:22px;height:22px;stroke:var(--tc-acc)}
 :root[data-theme] .anav a{font:500 12px var(--f-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--tc-bar-muted)}
 :root[data-theme] .anav a:hover{color:#fff}
 :root[data-theme] .anav .tg,:root[data-theme] .anav .themebtn{background:transparent;border:1px solid var(--tc-bar-line);border-radius:0;color:var(--tc-bar-muted)}

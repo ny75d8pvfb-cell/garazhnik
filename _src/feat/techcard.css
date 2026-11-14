@@ -33,7 +33,7 @@ header::after{display:none}
 .brand h1{font:800 18px/1 var(--f-body);text-transform:uppercase;letter-spacing:.07em;color:var(--tc-bar-ink)}
 .brand .sub{display:none}
 .logo{width:28px;height:28px;border-radius:0;background:transparent;border:2px solid var(--tc-acc)}
-.logo svg{width:16px;height:16px;stroke:var(--tc-acc)}
+.logo svg{width:22px;height:22px;stroke:var(--tc-acc)}
 .tg{background:transparent;color:var(--tc-bar-muted);border:1px solid var(--tc-bar-line);border-radius:0;font:500 11.5px var(--f-mono);text-transform:uppercase;letter-spacing:.06em}
 .tg:hover{color:var(--tc-bar-ink);border-color:var(--tc-bar-muted)}
 .themebtn[aria-pressed="true"],.tg.themebtn{background:transparent}
