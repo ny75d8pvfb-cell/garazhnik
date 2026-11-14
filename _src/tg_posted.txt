@@ -52,3 +52,4 @@ stati/lada-priora.html
 stati/motor-troit.html
 stati/lampa-akkumulyatora.html
 stati/starter-shchelkaet.html
+stati/davlenie-v-shinah-zimoy.html

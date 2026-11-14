@@ -4465,7 +4465,7 @@ function route(){
 let firstRoute = true;
 function swap(fn){
   if(firstRoute || REDUCE()){ firstRoute = false; fn(); return; }
-  if(document.startViewTransition){ document.startViewTransition(fn); return; }
+  if(document.startViewTransition){ const vt = document.startViewTransition(fn); vt.ready.catch(() => {}); vt.finished.catch(() => {}); return; }
   fn(); const m = $("#main"); m.classList.remove("enter"); void m.offsetWidth; m.classList.add("enter");
 }
 /* логотип: на главный экран */
@@ -4528,7 +4528,7 @@ document.addEventListener("click", e => {
       const H = document.documentElement; H.classList.add("vt-theme");
       const vt = document.startViewTransition(apply);
       vt.ready.then(() => H.animate({clipPath:[`circle(0px at ${x}px ${y}px)`, `circle(${R}px at ${x}px ${y}px)`]}, {duration:520, easing:"cubic-bezier(.22,.8,.24,1)", pseudoElement:"::view-transition-new(root)"})).catch(() => {});
-      vt.finished.finally(() => H.classList.remove("vt-theme")); } }
+      vt.finished.catch(() => {}).finally(() => H.classList.remove("vt-theme")); } }
   else if(d.tab){ query = ""; go(d.tab); }
   else if(d.goto){ query = ""; go(d.goto); }
   else if(d.gs){ if(d.fmod2){ fuseModel = d.fmod2; try{ localStorage.setItem("garazh-fuse", d.fmod2); }catch(_){} query = ""; } go(d.gs); }
