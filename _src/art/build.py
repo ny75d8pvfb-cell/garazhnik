@@ -115,6 +115,7 @@ css = D["css"]
 css += open(os.path.join(os.path.dirname(__file__), "article.css")).read()
 css += open(os.path.join(os.path.dirname(__file__), "article-strict.css")).read()
 css += open(os.path.join(os.path.dirname(__file__), "article-calm.css")).read()
+css += open(os.path.join(os.path.dirname(__file__), "article-round.css")).read()
 open(os.path.join(OUT, "stati", "style.css"), "w").write(css)
 
 # sitemap

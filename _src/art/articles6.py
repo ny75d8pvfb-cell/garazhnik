@@ -50,7 +50,7 @@ def _jobs(gid, fam):
          ("timing", "ГРМ"), ("altbelt", "Ремень генератора"), ("battery", "Аккумулятор"), ("bulbs", "Лампы")]
     if fam in ("kpg", "vesta"): J += [("stablink", "Стойки стабилизатора"), ("hub", "Ступичный подшипник")]
     return ul([f'<a class="inlink" href="../?gen={gid}#{j}">{E(t)}</a>' for j, t in J]) + \
-        f'<p>Что-то сломалось — <a class="inlink" href="../?gen={gid}#symptoms">поломки по симптомам</a>, <a class="inlink" href="../?gen={gid}#lamps">лампы на панели</a>, <a class="inlink" href="../?gen={gid}#codes">коды ошибок</a>.</p>'
+        f'<p>Что-то сломалось — <a class="inlink" href="../?gen={gid}#symptoms">неисправности по симптомам</a>, <a class="inlink" href="../?gen={gid}#lamps">лампы на панели</a>, <a class="inlink" href="../?gen={gid}#codes">коды ошибок</a>.</p>'
 
 
 def _sched(fam):

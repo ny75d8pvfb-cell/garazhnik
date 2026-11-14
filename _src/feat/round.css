@@ -1,0 +1,50 @@
+/* ===== 14.11 (вечер): скругления и акценты поверх «Технической карты». Исходник: _src/feat/round.css,
+   вставляется в index.html скриптом _src/feat/round_patch.py после блока TC (префикс :root[data-theme]). ===== */
+:root{--rr:16px;--rr-m:12px;--rr-s:9px}
+/*P*/
+/* шапка */
+.logo{border-radius:9px}
+.tg{border-radius:var(--rr-s)}
+.fambtn{border-radius:var(--rr-s);box-shadow:0 2px 0 rgba(0,0,0,.18)}
+.owner-badge{border-radius:999px}
+/* кнопки и поля */
+.btn,.back,.startbtn{border-radius:var(--rr-m)}
+.search input{border-radius:var(--rr)}
+.cookiebar .btn{border-radius:var(--rr-s)}
+.trail button,.trail .tr-chip{border-radius:999px}
+.pill{border-radius:999px;padding-inline:11px}
+.ico{border-radius:var(--rr-s)}
+/* карточки и блоки */
+.card,.entry,.feature,.artstrip,.logbtn,.tgcard,.welcome,.fig,.table,.sym,.lampc,.fblock,.detail .box,.tc-trust{border-radius:var(--rr)}
+.card,.feature,.artstrip,.logbtn,.entry{transition:border-color .2s,box-shadow .2s,transform .2s}
+.card:hover,.feature:hover,.artstrip:hover,.logbtn:hover{box-shadow:0 8px 22px -12px rgba(0,0,0,.35)}
+.table{overflow:hidden}
+/* сетки под заголовком: теперь цельные скруглённые блоки */
+.gh,.tc-sh{border-bottom:0;padding-bottom:10px}
+.list,.tc-models,.tc-nav{border-top:1.5px solid var(--tc-frame);border-radius:var(--rr);overflow:hidden}
+.list .card{border-radius:0}
+.tc-spec{border-radius:var(--rr);overflow:hidden}
+.fseg{border-radius:var(--rr-m);overflow:hidden}
+.fseg button{border-radius:0}
+.fammenu{border-radius:var(--rr);overflow:hidden}
+.toast{border-radius:var(--rr-m)}
+/* шаги и подсказки */
+ol.steps li::before{border-radius:50%}
+.tip{border-radius:var(--rr-m)}
+.warn{border-radius:var(--rr)}
+.callout{border-radius:var(--rr-s);padding:10px 13px}
+.jh span{border-radius:50%}
+/* цифры — плашки */
+.n{border-radius:6px;font-weight:700;padding:1px 7px}
+.tc-sh .n{background:var(--amber-soft);color:var(--amber);border-radius:999px;padding:2px 9px;font-size:12px}
+
+/* ===== акценты в тексте ===== */
+.lead-in{font-weight:700;color:var(--ink)}
+.callout b{font-weight:800;text-transform:uppercase;font-size:12px;letter-spacing:.06em}
+.callout.att b{color:var(--amber)}
+.callout.dang b{color:var(--warn)}
+.warn b,.warn strong{font-weight:800}
+.tc-title .acc{color:var(--amber)}
+.jtitle{letter-spacing:-.02em!important}
+.sym h3,.card h3,.entry h3{font-weight:700}
+.tc-lead b{color:var(--ink);font-weight:600}

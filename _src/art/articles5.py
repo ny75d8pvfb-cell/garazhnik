@@ -89,7 +89,7 @@ def _model_page(fk, slug, gen, short, words):
          f"<p>В приложении Гаражника каждая работа расписана по шагам. Ссылки откроют её сразу с цифрами для модели «{E(f['name'])}»:</p>" +
          ul([f'<a class="inlink" href="../?fam={fk}#{j}">{E(t)}</a>' for j, t in jobs])),
         ("polomki", "Если что-то сломалось",
-         ul([f'<a class="inlink" href="../?fam={fk}#symptoms">Поломки по симптомам</a> — стучит, не заводится, дымит, пахнет: что проверить в первую очередь',
+         ul([f'<a class="inlink" href="../?fam={fk}#symptoms">Неисправности по симптомам</a> — стучит, не заводится, дымит, пахнет: что проверить в первую очередь',
              f'<a class="inlink" href="lampy-na-paneli.html">Лампы на панели</a> — какая горит, можно ли ехать',
              f'<a class="inlink" href="../?fam={fk}#codes">Коды ошибок</a> — если есть разъём OBD-II и сканер ELM327'] +
             [f'<a class="inlink" href="{a["slug"]}.html">{E(a["title"])}</a>' for a in fuses])),

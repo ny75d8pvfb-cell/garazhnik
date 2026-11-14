@@ -1160,3 +1160,24 @@ html body::before{display:none}
 :root[data-theme] .afoot a,:root[data-theme] .afoot b{color:#fff}
 :root[data-theme] .cookiebar .btn{background:var(--amber);color:var(--amber-ink);border-radius:0}
 @media (max-width:640px){:root[data-theme] .art h1,:root[data-theme] .ihero h1{font-size:28px}:root[data-theme] .anav .btn-app{padding:8px 10px;font-size:11px!important}}
+/* ===== 14.11 (вечер): скругления и акценты в статьях — поверх «Технической карты» ===== */
+:root[data-theme] .abrand .logo{border-radius:9px}
+:root[data-theme] .anav .tg,:root[data-theme] .anav .themebtn,:root[data-theme] .anav .btn-app,:root[data-theme] .cookiebar .btn{border-radius:9px}
+:root[data-theme] .toc,:root[data-theme] .acard,:root[data-theme] .afig,:root[data-theme] .stepfig,:root[data-theme] .ecard{border-radius:16px}
+:root[data-theme] .tip{border-radius:12px}
+:root[data-theme] .warn{border-radius:16px}
+:root[data-theme] .table,:root[data-theme] .art table{border-radius:14px;overflow:hidden}
+:root[data-theme] .acard{transition:border-color .2s,box-shadow .2s}
+:root[data-theme] .acard:hover{box-shadow:0 8px 22px -12px rgba(0,0,0,.35)}
+:root[data-theme] .art .num,:root[data-theme] .art .n{border-radius:6px}
+/* акценты в тексте */
+:root[data-theme] .art .lead{font-size:18.5px;line-height:1.55;font-weight:500;color:var(--ink);padding-left:14px;border-left:3px solid var(--amber)}
+:root[data-theme] .art h2{border-bottom:0;padding-bottom:0;position:relative}
+:root[data-theme] .art h2::after{content:"";display:block;width:44px;height:3px;border-radius:3px;background:var(--amber);margin-top:9px}
+:root[data-theme] .art b,:root[data-theme] .art strong{font-weight:700;color:var(--ink)}
+:root[data-theme] .art li > b:first-child{color:var(--ink)}
+:root[data-theme] .art .tip b,:root[data-theme] .art .warn b{font-weight:800}
+:root[data-theme] .art .warn{border-width:1.5px}
+:root[data-theme] .art ol.asteps li > div > b:first-child{color:var(--amber)}
+@media (max-width:640px){:root[data-theme] .art .lead{font-size:17px}}
+:root[data-theme] ol.asteps>li::before{border-radius:50%}

@@ -1379,6 +1379,59 @@ ol.steps li::before{font-family:var(--f-round);font-weight:800}
 }
 
 /*TC-END*/
+/*RD-BEGIN*/
+/* ===== 14.11 (вечер): скругления и акценты поверх «Технической карты». Исходник: _src/feat/round.css,
+   вставляется в index.html скриптом _src/feat/round_patch.py после блока TC (префикс :root[data-theme]). ===== */
+:root{--rr:16px;--rr-m:12px;--rr-s:9px}
+
+/* шапка */
+:root[data-theme] .logo{border-radius:9px}
+:root[data-theme] .tg{border-radius:var(--rr-s)}
+:root[data-theme] .fambtn{border-radius:var(--rr-s);box-shadow:0 2px 0 rgba(0,0,0,.18)}
+:root[data-theme] .owner-badge{border-radius:999px}
+/* кнопки и поля */
+:root[data-theme] .btn,:root[data-theme] .back,:root[data-theme] .startbtn{border-radius:var(--rr-m)}
+:root[data-theme] .search input{border-radius:var(--rr)}
+:root[data-theme] .cookiebar .btn{border-radius:var(--rr-s)}
+:root[data-theme] .trail button,:root[data-theme] .trail .tr-chip{border-radius:999px}
+:root[data-theme] .pill{border-radius:999px;padding-inline:11px}
+:root[data-theme] .ico{border-radius:var(--rr-s)}
+/* карточки и блоки */
+:root[data-theme] .card,:root[data-theme] .entry,:root[data-theme] .feature,:root[data-theme] .artstrip,:root[data-theme] .logbtn,:root[data-theme] .tgcard,:root[data-theme] .welcome,:root[data-theme] .fig,:root[data-theme] .table,:root[data-theme] .sym,:root[data-theme] .lampc,:root[data-theme] .fblock,:root[data-theme] .detail .box,:root[data-theme] .tc-trust{border-radius:var(--rr)}
+:root[data-theme] .card,:root[data-theme] .feature,:root[data-theme] .artstrip,:root[data-theme] .logbtn,:root[data-theme] .entry{transition:border-color .2s,box-shadow .2s,transform .2s}
+:root[data-theme] .card:hover,:root[data-theme] .feature:hover,:root[data-theme] .artstrip:hover,:root[data-theme] .logbtn:hover{box-shadow:0 8px 22px -12px rgba(0,0,0,.35)}
+:root[data-theme] .table{overflow:hidden}
+/* сетки под заголовком: теперь цельные скруглённые блоки */
+:root[data-theme] .gh,:root[data-theme] .tc-sh{border-bottom:0;padding-bottom:10px}
+:root[data-theme] .list,:root[data-theme] .tc-models,:root[data-theme] .tc-nav{border-top:1.5px solid var(--tc-frame);border-radius:var(--rr);overflow:hidden}
+:root[data-theme] .list .card{border-radius:0}
+:root[data-theme] .tc-spec{border-radius:var(--rr);overflow:hidden}
+:root[data-theme] .fseg{border-radius:var(--rr-m);overflow:hidden}
+:root[data-theme] .fseg button{border-radius:0}
+:root[data-theme] .fammenu{border-radius:var(--rr);overflow:hidden}
+:root[data-theme] .toast{border-radius:var(--rr-m)}
+/* шаги и подсказки */
+:root[data-theme] ol.steps li::before{border-radius:50%}
+:root[data-theme] .tip{border-radius:var(--rr-m)}
+:root[data-theme] .warn{border-radius:var(--rr)}
+:root[data-theme] .callout{border-radius:var(--rr-s);padding:10px 13px}
+:root[data-theme] .jh span{border-radius:50%}
+/* цифры — плашки */
+:root[data-theme] .n{border-radius:6px;font-weight:700;padding:1px 7px}
+:root[data-theme] .tc-sh .n{background:var(--amber-soft);color:var(--amber);border-radius:999px;padding:2px 9px;font-size:12px}
+
+/* ===== акценты в тексте ===== */
+:root[data-theme] .lead-in{font-weight:700;color:var(--ink)}
+:root[data-theme] .callout b{font-weight:800;text-transform:uppercase;font-size:12px;letter-spacing:.06em}
+:root[data-theme] .callout.att b{color:var(--amber)}
+:root[data-theme] .callout.dang b{color:var(--warn)}
+:root[data-theme] .warn b,:root[data-theme] .warn strong{font-weight:800}
+:root[data-theme] .tc-title .acc{color:var(--amber)}
+:root[data-theme] .jtitle{letter-spacing:-.02em!important}
+:root[data-theme] .sym h3,:root[data-theme] .card h3,:root[data-theme] .entry h3{font-weight:700}
+:root[data-theme] .tc-lead b{color:var(--ink);font-weight:600}
+
+/*RD-END*/
 </style>
 </head>
 <body>
@@ -1396,7 +1449,7 @@ ol.steps li::before{font-family:var(--f-round);font-weight:800}
     <div class="famsel"><div class="famrow"><button type="button" id="famBtn" class="fambtn" aria-haspopup="true" aria-expanded="false">Моя машина<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><span class="famcur" id="famCur"></span></div><div id="famMenu" class="fammenu" hidden></div></div>
     <div class="tabs" role="tablist">
       <button role="tab" data-tab="to" id="tab-to">Работы</button>
-      <button role="tab" data-tab="faults" id="tab-faults">Поломки</button>
+      <button role="tab" data-tab="faults" id="tab-faults">Неисправности</button>
       <button role="tab" data-tab="garage" id="tab-garage">Мой гараж</button>
       <button role="tab" data-tab="tools" id="tab-tools">Инструмент</button>
       <button role="tab" data-tab="parts" id="tab-parts">Запчасти</button>
@@ -1411,7 +1464,7 @@ ol.steps li::before{font-family:var(--f-round);font-weight:800}
 <div class="cookiebar" id="cookiebar" hidden><p>Используем cookies и Яндекс Метрику для статистики. <button type="button" class="linkbtn" data-goto="about">Подробнее</button></p><button type="button" class="btn" id="cookieOk">Хорошо</button></div>
 <nav class="bottom" role="tablist" aria-label="Разделы">
   <button role="tab" data-tab="to"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6M9 4a1 1 0 0 0-1 1v1h8V5a1 1 0 0 0-1-1M8 5H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2M9 12l2 2 4-4M9 17h6"/></svg>Работы</button>
-  <button role="tab" data-tab="faults"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4.5M12 17v.3"/></svg>Поломки</button>
+  <button role="tab" data-tab="faults"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4.5M12 17v.3"/></svg>Неисправности</button>
   <button role="tab" data-tab="garage"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M7 21v-8h10v8M7 17h10"/></svg>Гараж</button>
   <button role="tab" data-tab="tools"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.6 17.2a1.6 1.6 0 0 0 2.3 2.3l5.7-5.7a4 4 0 0 0 5.2-5.4l-2.4 2.4-2.2-.4-.4-2.2z"/></svg>Инструмент</button>
   <button role="tab" data-tab="parts"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg>Запчасти</button>
@@ -3761,12 +3814,12 @@ function globalHits(){
     const mm = MODELS.find(x => x.id === mid), g = genOf();
     if(mm && !(g && g.model.id === mid)) out.push(["Моя машина", "Выбрать: " + mm.name, "", "", "", "", mid]);
     const fm = fid && FUSE_M.find(m => m.id === fid);
-    if(fm && (!txt || /предохран|реле|прикур|не работ|печк|фар|свет|поворот|дворн/.test(nrm(query)))) out.push(["Поломки · предохранители", fm.title, "fuses", "", "", fid]);
+    if(fm && (!txt || /предохран|реле|прикур|не работ|печк|фар|свет|поворот|дворн/.test(nrm(query)))) out.push(["Неисправности · предохранители", fm.title, "fuses", "", "", fid]);
   });
-  if(!qModels.length && /предохран|реле|прикуривател|не работает/i.test(query)) out.push(["Поломки · предохранители", "Предохранители и реле: где стоят и за что отвечают", "fuses"]);
+  if(!qModels.length && /предохран|реле|прикуривател|не работает/i.test(query)) out.push(["Неисправности · предохранители", "Предохранители и реле: где стоят и за что отвечают", "fuses"]);
   if(txt){
-    SYMPTOMS.filter(x => match(x.t, x.c.join(" "), x.k || "")).sort((a, b) => (match(b.t, b.k || "") ? 1 : 0) - (match(a.t, a.k || "") ? 1 : 0)).slice(0,4).forEach(x => out.push(["Поломки · симптом", x.t, "symptoms"]));
-    LAMPS.filter(x => match(x.name, x.means)).slice(0,3).forEach(x => out.push(["Поломки · лампа", x.name, "lamps"]));
+    SYMPTOMS.filter(x => match(x.t, x.c.join(" "), x.k || "")).sort((a, b) => (match(b.t, b.k || "") ? 1 : 0) - (match(a.t, a.k || "") ? 1 : 0)).slice(0,4).forEach(x => out.push(["Неисправности · симптом", x.t, "symptoms"]));
+    LAMPS.filter(x => match(x.name, x.means)).slice(0,3).forEach(x => out.push(["Неисправности · лампа", x.name, "lamps"]));
     CODE_GROUPS.flatMap(g => g[1]).filter(c => match(c[0], c[1])).slice(0,4).forEach(c => out.push(["Код ошибки", c[0] + " — " + c[1], "codes"]));
     PARTS.filter(x => match(x.name, x.prem.flat().join(" "), x.eco.flat().join(" "))).slice(0,3).forEach(x => out.push(["Запчасти", x.name, "parts"]));
     TOOLS.filter(x => match(x.name, x.what)).slice(0,3).forEach(x => out.push(["Инструмент", x.name, "tools"]));
@@ -3791,7 +3844,7 @@ function renderList(){
   const home = !query;
   const nModels = MODELS.length, nArts = ARTS.length;
   const hero = home ? `<section class="tc-hero"><div><span class="tc-lbl">Справочник · ТО и ремонт Лады</span>
-    <h2 class="tc-title">ТО и ремонт Лады своими руками — по шагам и с точными цифрами</h2>
+    <h2 class="tc-title">ТО и ремонт Лады своими руками — <span class="acc">по шагам и с точными цифрами</span></h2>
     <p class="tc-lead">Пошаговые инструкции, поиск причины по симптому, объёмы, моменты затяжки и ключи — под конкретную модель и мотор.</p>
     ${searchBox("Масло, не заводится, P0300…")}</div>${tcSpec()}</section>` : searchBox("Масло, не заводится, P0300…");
   let sn = 0; const num = () => String(++sn).padStart(2, "0");
@@ -3800,7 +3853,7 @@ function renderList(){
     <div class="tc-under"><span>Не знаешь поколение или мотор? <button type="button" class="linkbtn" data-openvin>Определи по VIN</button></span><button type="button" class="linkbtn" data-wskip>Выберу позже</button></div></section>` : "";
   const features = home ? `<section class="tc-sec"><div class="tc-sh"><span class="n">${num()}</span><h2>Разделы</h2></div><div class="tc-nav">
     <button type="button" data-goto="schedule"><span class="k">По пробегу</span><b>Регламент ТО</b><small>Что и когда менять</small></button>
-    <button type="button" data-goto="symptoms"><span class="k">Поломки</span><b>Что случилось?</b><small>Причина по симптому, лампы, коды</small></button>
+    <button type="button" data-goto="symptoms"><span class="k">Неисправности</span><b>Что случилось?</b><small>Причина по симптому, лампы, коды</small></button>
     <button type="button" data-goto="numbers"><span class="k">Цифры</span><b>Справочник по машине</b><small>Объёмы, моменты, ключи</small></button>
     <a href="stati/"><span class="k">Статьи</span><b>Статьи о ТО Лады</b><small>${nArts} ${plural(nArts,"статья","статьи","статей")}: ГРМ, масло, зима</small></a>
   </div></section><section class="tc-sec"><div class="tc-sh"><span class="n">${num()}</span><h2>Работы</h2><span class="tc-lbl">${jobs.length} ${plural(jobs.length,"инструкция","инструкции","инструкций")}</span></div></section>` : "";
@@ -3812,7 +3865,7 @@ function renderList(){
         ${icon(j.id)}<h3>${esc(j.title)}</h3><p>${esc(j.desc)}</p>
         <div class="meta"><span class="pill cdiff">${diffBar(j.diff || (j.lvl === 1 ? 2 : 4))}</span>
         <span class="pill">${esc(j.time)}</span>${n?`<span class="pill vid">Видео: ${n}</span>`:""}</div></button>`;
-    }).join("")}</div></section>` : ""; }).join("") : other ? "" : `<div class="empty"><p>Ничего не нашлось по «${esc(query)}».</p><p>Попробуй описать проще: <b>стучит</b>, <b>не заводится</b>, <b>горит лампа</b> — или загляни в <button type="button" class="linkbtn" data-goto="symptoms">поломки по симптомам</button>.</p></div>`) + (query ? "" : tcTrust() + aboutLinks());
+    }).join("")}</div></section>` : ""; }).join("") : other ? "" : `<div class="empty"><p>Ничего не нашлось по «${esc(query)}».</p><p>Попробуй описать проще: <b>стучит</b>, <b>не заводится</b>, <b>горит лампа</b> — или загляни в <button type="button" class="linkbtn" data-goto="symptoms">неисправности по симптомам</button>.</p></div>`) + (query ? "" : tcTrust() + aboutLinks());
 }
 function tgCard(){
   return `<a class="tgcard" href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer">
@@ -3867,12 +3920,14 @@ function jobTrail(j){
 }
 function jobGroup(id){ const g = JOB_GROUPS.find(([,ids]) => ids.includes(id)); return g ? g[0] : "Работы"; }
 const diffBar = d => `<span class="diff" aria-label="Сложность ${d} из 5">${[1,2,3,4,5].map(i => `<i class="${i <= d ? "on" : ""}"></i>`).join("")}</span><b>${d} из 5</b>`;
+/* «Осмотр: …», «Замена: …» — вводное слово до двоеточия жирным */
+const leadIn = h => h.replace(/^([А-ЯЁA-Z][^:.<{}]{1,28}):(\s)/, '<b class="lead-in">$1:</b>$2');
 function stepHtml(j, s, i){
   const kk = s.key || (j.keys && j.keys[i]), aa = s.att || (j.atts && j.atts[i]);
   const key = kk ? `<span class="keytag">${esc(kk)}</span>` : "";
   const att = aa ? `<p class="callout att"><b>Внимание.</b> ${esc(aa)}</p>` : "";
   const wx = s.warnx ? `<p class="callout dang"><b>Предупреждение.</b> ${esc(s.warnx)}</p>` : "";
-  return `<li><div>${fill(s.t || s)}${key}${att}${wx}${stepFig(j.id, i)}${photoStrip(j.id, String(i), "", true)}</div></li>`;
+  return `<li><div>${leadIn(fill(s.t || s))}${key}${att}${wx}${stepFig(j.id, i)}${photoStrip(j.id, String(i), "", true)}</div></li>`;
 }
 function renderJob(j){
   const f = F();
@@ -4006,7 +4061,7 @@ function renderSymptoms(){
   </div>`;
 }
 
-/* ---------- раздел «Поломки»: симптомы, лампы на панели, коды ошибок ---------- */
+/* ---------- раздел «Неисправности»: симптомы, лампы на панели, коды ошибок ---------- */
 const LAMP_ICO = {
  oil:'<path d="M3 15h11l5-4 2 1-6 6H5a2 2 0 0 1-2-2z"/><path d="M8 15v-3h4v3M10 12V9.5M8.5 9.5h3"/><path d="M20.5 15.5c0 .9.6 1.4.6 2.1a.6.6 0 0 1-1.2 0c0-.7.6-1.2.6-2.1z"/>',
  temp:'<path d="M12 3v10"/><circle cx="12" cy="16" r="2.5"/><path d="M12 6h3M12 9h3"/><path d="M3 21c1.5-1 3-1 4.5 0s3 1 4.5 0 3-1 4.5 0 3 1 4.5 0"/>',
@@ -4112,7 +4167,7 @@ const SEV = [["Ехать можно","sev0"],["Аккуратно, скорее
 let faultQ = "";
 function faultsNav(cur){
   const it = [["symptoms","Симптомы"],["lamps","Лампы на панели"],["codes","Коды ошибок"],["fuses","Предохранители"]];
-  return `<div class="fseg" role="tablist" aria-label="Поломки">${it.map(([id,t]) => `<button type="button" role="tab" data-goto="${id}" aria-selected="${cur === id}">${t}</button>`).join("")}</div>`;
+  return `<div class="fseg" role="tablist" aria-label="Неисправности">${it.map(([id,t]) => `<button type="button" role="tab" data-goto="${id}" aria-selected="${cur === id}">${t}</button>`).join("")}</div>`;
 }
 
 /* ---------- предохранители ---------- */
