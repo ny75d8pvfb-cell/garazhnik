@@ -1169,6 +1169,36 @@ ol.steps li::before{font-family:var(--f-round);font-weight:800}
 .tr-sep svg{width:14px;height:14px;stroke:var(--dim);display:block}
 :root[data-theme="light"] .trail .tr-chip.cur b{color:var(--ink)}
 @media (max-width:640px){.trail{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -16px 14px;padding:2px 16px;gap:4px}.trail::-webkit-scrollbar{display:none}.trail button{flex:none;padding:5px 10px}.trail b{font-size:12.5px;max-width:170px}.trail .tr-home{padding:5px 10px 5px 6px}.tr-sep{flex:none}}
+
+/* 14.11: удобство — компактная шапка, подписи кнопок, cookies полоской, ровные карточки моделей */
+.cookiebar,.cookiebar:not([hidden]){left:0;right:0;transform:none;width:auto;bottom:0;border-radius:0;border:0;border-top:1px solid var(--line-2);box-shadow:0 -6px 18px rgba(0,0,0,.08);padding:8px max(16px,calc((100% - 1100px)/2));gap:12px;background:var(--surface)}
+.cookiebar p{font-size:12.5px;line-height:1.35}
+.cookiebar .linkbtn{font-size:12.5px}
+.cookiebar .btn{padding:6px 16px;font-size:13.5px}
+@media (prefers-reduced-motion:no-preference){@keyframes barIn{from{opacity:0;transform:translateY(100%)}to{opacity:1;transform:none}}}
+.wfams{grid-auto-rows:1fr}
+.wfams button{justify-content:flex-start;min-width:0}
+.wfams b{line-height:1.25}
+.wfams small{display:block;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.famcur.none b{color:var(--muted);font-weight:700}
+@media (max-width:640px){
+  .cookiebar,.cookiebar:not([hidden]){bottom:calc(var(--navh,64px) + env(safe-area-inset-bottom,0px));padding:7px 12px}
+  .head{gap:8px;padding-block:8px}
+  .brand{gap:6px;flex-wrap:nowrap}
+  .brandlink{gap:9px}
+  .logo{width:32px;height:32px}
+  .logo svg{width:19px;height:19px}
+  .brand h1{font-size:22px}
+  .tg{flex-direction:column;gap:2px;padding:4px 6px 3px;min-width:48px;justify-content:center}
+  .tg svg{width:17px;height:17px}
+  .tg span{display:block;font-size:10.5px;line-height:1.1;font-weight:600}
+  .fambtn{padding:6px 10px 6px 12px;font-size:14px}
+  .famcur b{font-size:15px}
+  .famcur small{font-size:12px}
+  header{transition:transform .28s var(--ease,ease)}
+  header.hid{transform:translateY(calc(-100% - env(safe-area-inset-top,0px)))}
+}
+@media (prefers-reduced-motion:reduce){header{transition:none}}
 </style>
 </head>
 <body>
@@ -1179,9 +1209,9 @@ ol.steps li::before{font-family:var(--f-round);font-weight:800}
       <a class="brandlink" href="./" aria-label="Гаражник — на главный экран"><div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.6 17.2a1.6 1.6 0 0 0 2.3 2.3l5.7-5.7a4 4 0 0 0 5.2-5.4l-2.4 2.4-2.2-.4-.4-2.2z"/></svg></div>
       <div class="t"><h1>Гаражник</h1><span class="sub">твой помощник в ТО</span></div></a>
       <span id="ownerBadge" class="owner-badge" hidden>редактор</span>
-      <a class="tg tg-art" href="stati/" aria-label="Статьи"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5M8 7h8M8 11h6"/></svg><span>Статьи</span></a>
-      <button type="button" class="tg themebtn" id="themeBtn" aria-label="Сменить тему"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span>Тема</span></button>
-      <a class="tg" href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer" aria-label="Telegram-канал Гаражника"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4 2.8 11.1c-.9.4-.9 1.2.1 1.5l4.6 1.4 1.8 5.5c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8L22.9 5.5c.3-1.3-.5-1.9-1.9-1.5z"/><path d="m7.5 14 9.5-6"/></svg><span>Канал</span></a>
+      <a class="tg tg-art" href="stati/" aria-label="Статьи" title="Все статьи"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5M8 7h8M8 11h6"/></svg><span>Статьи</span></a>
+      <button type="button" class="tg themebtn" id="themeBtn" aria-label="Сменить тему" title="Светлая или тёмная тема"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span>Тема</span></button>
+      <a class="tg" href="https://t.me/garage4to" target="_blank" rel="noopener noreferrer" aria-label="Telegram-канал Гаражника" title="Наш Telegram-канал"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4 2.8 11.1c-.9.4-.9 1.2.1 1.5l4.6 1.4 1.8 5.5c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8L22.9 5.5c.3-1.3-.5-1.9-1.9-1.5z"/><path d="m7.5 14 9.5-6"/></svg><span>Канал</span></a>
     </div>
     <div class="famsel"><div class="famrow"><button type="button" id="famBtn" class="fambtn" aria-haspopup="true" aria-expanded="false">Моя машина<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><span class="famcur" id="famCur"></span></div><div id="famMenu" class="fammenu" hidden></div></div>
     <div class="tabs" role="tablist">
@@ -1198,7 +1228,7 @@ ol.steps li::before{font-family:var(--f-round);font-weight:800}
 <input type="file" id="photoInput" accept="image/*" multiple hidden>
 <div class="lightbox" id="lightbox" hidden><button type="button" class="lbx" data-lbclose aria-label="Закрыть">×</button><div class="lbin" data-lbclose><img alt=""><p></p></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<div class="cookiebar" id="cookiebar" hidden><p>Сайт использует cookies и Яндекс Метрику, чтобы понимать, какие инструкции полезны. <button type="button" class="linkbtn" data-goto="about">Подробнее</button></p><button type="button" class="btn" id="cookieOk">Понятно</button></div>
+<div class="cookiebar" id="cookiebar" hidden><p>Используем cookies и Яндекс Метрику для статистики. <button type="button" class="linkbtn" data-goto="about">Подробнее</button></p><button type="button" class="btn" id="cookieOk">Хорошо</button></div>
 <nav class="bottom" role="tablist" aria-label="Разделы">
   <button role="tab" data-tab="to"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6M9 4a1 1 0 0 0-1 1v1h8V5a1 1 0 0 0-1-1M8 5H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2M9 12l2 2 4-4M9 17h6"/></svg>Работы</button>
   <button role="tab" data-tab="faults"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4.5M12 17v.3"/></svg>Поломки</button>
@@ -3301,6 +3331,7 @@ let garage = {cars:[], log:[]}, activeCar = null, gStore = "local", gUid = null,
 try{ const s = localStorage.getItem("garazh-fam"); if(s && FAM[s]) fam = s; }catch(e){}
 try{ const ug = new URLSearchParams(location.search).get("gen"); if(ug){ localStorage.setItem("garazh-gen", ug); genSel = ug; const g = GENS.find(x => x.id === ug); if(g){ fam = g.fam; localStorage.setItem("garazh-fam", g.fam); const e = (ENG[g.fam] || []).find(x => x.id === engSel[g.fam]); if(!e || !g.engs.includes(e.id)) setEng(g.fam, g.engs[0]); } history.replaceState(null, "", location.pathname + location.hash); } }catch(e){}
 try{ const u = new URLSearchParams(location.search).get("fam"); if(u && FAM[u]){ fam = u; localStorage.setItem("garazh-fam", u); history.replaceState(null, "", location.pathname + location.hash); } }catch(e){}
+let famPicked = false; try{ famPicked = !!localStorage.getItem("garazh-fam"); }catch(e){}
 let famChosen = false; try{ famChosen = !!localStorage.getItem("garazh-fam") || !!localStorage.getItem("garazh-welcome"); }catch(e){}
 
 const $ = s => document.querySelector(s);
@@ -3317,7 +3348,7 @@ const rub = n => Number(n).toLocaleString("ru-RU") + " ₽";
 const isoToday = () => { const d = new Date(); return new Date(d - d.getTimezoneOffset()*60000).toISOString().slice(0,10); };
 const ruDate = iso => iso ? iso.split("-").reverse().join(".") : "";
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
-const setFam = k => { if(!FAM[k]) return; fam = k; famChosen = true; try{ localStorage.setItem("garazh-fam", fam); }catch(_){} };
+const setFam = k => { if(!FAM[k]) return; fam = k; famChosen = true; famPicked = true; try{ localStorage.setItem("garazh-fam", fam); }catch(_){} };
 
 function platform(url){
   try{
@@ -3339,7 +3370,8 @@ function wizAfterModel(){ const g = genOf(); if(!g) return 1; if(g.model.gens.le
 function wizAfterGen(){ const g = genOf(); return g && g.engs.length > 1 ? 2 : 3; }
 function renderFam(){
   const f = F(), e = engOf(fam), g = genOf();
-  $("#famCur").innerHTML = `<b>${esc(g ? g.name : f.name)}</b><small>${esc(e ? e.name : f.models)}</small>`;
+  const cur = $("#famCur"); cur.classList.toggle("none", !famPicked);
+  cur.innerHTML = famPicked ? `<b>${esc(g ? g.name : f.name)}</b><small>${esc(e ? e.name : f.models)}</small>` : `<b>Машина не выбрана</b><small>Выбери — цифры подстроятся</small>`;
   const m = g ? g.model : null;
   if(!m && wiz > 0) wiz = 0;
   const job = openJob && JOBS.find(j => j.id === openJob);
@@ -3586,7 +3618,7 @@ function renderList(){
     <button type="button" class="feature" data-goto="numbers">${icon("numbers")}<span><b>Справочник по машине</b><small>Объёмы, моменты, ключи — на одной странице</small></span></button>
   </div><a class="artstrip" href="stati/"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5M8 7h8M8 11h6"/></svg></span><span><b>Статьи о ТО Лады</b><small>Регламент, объёмы масла и антифриза, моменты затяжки, ГРМ, подготовка к зиме</small></span><span class="go" aria-hidden="true">→</span></a>`;
   const other = query ? globalHits() : "";
-  return welcome + searchBox("Поиск по сайту: работа, поломка, код ошибки, запчасть…") + features + other +
+  return searchBox("Поиск: масло, не заводится, P0300…") + welcome + features + other +
     (jobs.length ? JOB_GROUPS.map(([gname, ids]) => { const gj = jobs.filter(j => ids.includes(j.id)); return gj.length ? `<section class="group"><h2 class="gh">${esc(gname)}<span>${gj.length}</span></h2><div class="list">${gj.map(j => {
       const n = vidsFor(j.id).length;
       return `<button type="button" class="card" data-job="${j.id}">
@@ -4523,6 +4555,15 @@ initStore();
   const bar = document.getElementById("cookiebar"); if(!seen) bar.hidden = false;
   document.getElementById("cookieOk").addEventListener("click", () => { bar.hidden = true; try{ localStorage.setItem("garazh-cookie", "1"); }catch(e){} }); })();
 if("serviceWorker" in navigator && location.protocol === "https:"){ window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {})); }
+
+(function(){ const h = document.querySelector("header"), nav = document.querySelector("nav.bottom"), mq = matchMedia("(max-width:640px)");
+  let y0 = scrollY;
+  const navh = () => { if(nav) document.documentElement.style.setProperty("--navh", nav.offsetHeight + "px"); };
+  navh(); addEventListener("resize", navh);
+  addEventListener("scroll", () => { const y = scrollY, d = y - y0;
+    if(!mq.matches || y < 90 || !document.getElementById("famMenu").hidden || document.activeElement?.matches?.("input")) h.classList.remove("hid");
+    else if(d > 8) h.classList.add("hid"); else if(d < -8) h.classList.remove("hid");
+    if(Math.abs(d) > 8 || y < 90) y0 = y; }, {passive:true}); })();
 </script>
 
 </body>
