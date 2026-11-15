@@ -1184,4 +1184,4 @@ html body::before{display:none}
 /* буквы-детали в названии (15.11) */
 .gl{display:inline-block;height:.727em;vertical-align:0;overflow:visible;fill:none;stroke:currentColor;stroke-linecap:butt;margin-right:.07em}.gl-acc{color:var(--tc-acc,var(--amber))}.gl-cut{stroke:var(--tc-bar)}.tc-title .gl{margin-right:.03em}.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 /* слоган с колесом (15.11) */
-.gl.wheel{width:1.12em;height:1.12em;vertical-align:-.24em;margin:0 .03em 0 .04em;overflow:visible}:root[data-theme] .abrand small{display:block;color:var(--tc-bar-muted);font:500 10.5px/1.25 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;margin-top:3px;white-space:nowrap}
+.gl.wheel{width:1.04em;height:1.04em;vertical-align:-.19em;margin:0 .03em 0 .04em;overflow:visible}:root[data-theme] .abrand small{display:block;color:var(--tc-bar-muted);font:500 10.5px/1.25 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;margin-top:3px;white-space:nowrap}
