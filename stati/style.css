@@ -1183,5 +1183,5 @@ html body::before{display:none}
 :root[data-theme] ol.asteps>li::before{border-radius:50%}
 /* буквы-детали в названии (15.11) */
 .gl{display:inline-block;height:.727em;vertical-align:0;overflow:visible;fill:none;stroke:currentColor;stroke-linecap:butt;margin-right:.07em}.gl-acc{color:var(--tc-acc,var(--amber))}.gl-cut{stroke:var(--tc-bar)}.tc-title .gl{margin-right:.03em}.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-/* название из букв-деталей (15.11) */
-.wmsvg{display:inline-block;height:.74em;vertical-align:0;overflow:visible}.wmsvg .f{fill:currentColor}.wmsvg .eo{fill-rule:evenodd}.wmsvg .p{fill:var(--tc-acc,var(--amber))}.wmsvg .th{stroke:var(--tc-bar,#1D2024);stroke-width:2.2;fill:none}:root[data-theme] .abrand b{font-size:22px}@media (min-width:641px){:root[data-theme] .abrand b{font-size:24px}}
+/* слоган с колесом (15.11) */
+.gl.wheel{width:1.12em;height:1.12em;vertical-align:-.24em;margin:0 .03em 0 .04em;overflow:visible}:root[data-theme] .abrand small{display:block;color:var(--tc-bar-muted);font:500 10.5px/1.25 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;margin-top:3px;white-space:nowrap}
