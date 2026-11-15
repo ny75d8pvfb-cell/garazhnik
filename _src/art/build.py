@@ -45,7 +45,7 @@ def head(title, desc, canon, extra=""):
 </head>
 <body>
 <header class="ahead"><div class="wrap ahead-in">
-  <a class="abrand" href="../"><span class="logo" aria-hidden="true">{LOGO}</span><span><b>Гаражник</b><small>твой помощник в ТО</small></span></a>
+  <a class="abrand" href="../"><span class="logo" aria-hidden="true">{LOGO}</span><span><b><span class="wm" aria-hidden="true"><svg class="gl gl-acc" viewBox="0 0 64 100" style="width:0.465em" aria-hidden="true"><path d="M18.5 100V38Q18.5 11.5 45 11.5H62" stroke-width="23"/></svg>аражник</span><span class="vh">Гаражник</span></b><small>твой помощник в ТО</small></span></a>
   <nav class="anav"><a href="index.html">Статьи</a><button type="button" class="tg themebtn" id="themeBtn" aria-label="Сменить тему"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button><a class="tg" href="https://t.me/garage4to" target="_blank" rel="noopener" aria-label="Telegram-канал">{TG}</a><a class="btn-app" href="../">Открыть Гаражник</a></nav>
 </div></header>
 '''

@@ -1431,6 +1431,8 @@ ol.steps li::before{font-family:var(--f-round);font-weight:800}
 :root[data-theme] .sym h3,:root[data-theme] .card h3,:root[data-theme] .entry h3{font-weight:700}
 :root[data-theme] .tc-lead b{color:var(--ink);font-weight:600}
 
+/* буквы-детали (15.11) */
+.gl{display:inline-block;height:.727em;vertical-align:0;overflow:visible;fill:none;stroke:currentColor;stroke-linecap:butt;margin-right:.07em}.gl-acc{color:var(--tc-acc,var(--amber))}.gl-cut{stroke:var(--bg)}.tc-title .gl{margin-right:.03em}.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 /*RD-END*/
 </style>
 </head>
@@ -1440,7 +1442,7 @@ ol.steps li::before{font-family:var(--f-round);font-weight:800}
   <div class="wrap head">
     <div class="brand">
       <a class="brandlink" href="./" aria-label="Гаражник — на главный экран"><div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 15v-2.5c0-.6.4-1.1 1-1.1L7 11l1.7-3.7c.2-.4.5-.6.9-.6h5.5c.4 0 .7.2.9.6L17.7 11l3.8.3c.6 0 1 .5 1 1.1V15"/><path d="M1.5 15h2.3M8.2 15h7.6M20.2 15h2.3"/><circle cx="6" cy="15.2" r="2.1"/><circle cx="18" cy="15.2" r="2.1"/><path d="M12.2 6.8V11"/></svg></div>
-      <div class="t"><h1>Гаражник</h1><span class="sub">твой помощник в ТО</span></div></a>
+      <div class="t"><h1><span class="wm" aria-hidden="true"><svg class="gl gl-acc" viewBox="0 0 64 100" style="width:0.465em" aria-hidden="true"><path d="M18.5 100V38Q18.5 11.5 45 11.5H62" stroke-width="23"/></svg>аражник</span><span class="vh">Гаражник</span></h1><span class="sub">твой помощник в ТО</span></div></a>
       <span id="ownerBadge" class="owner-badge" hidden>редактор</span>
       <a class="tg tg-art" href="stati/" aria-label="Статьи" title="Все статьи"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5M8 7h8M8 11h6"/></svg><span>Статьи</span></a>
       <button type="button" class="tg themebtn" id="themeBtn" aria-label="Сменить тему" title="Светлая или тёмная тема"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span>Тема</span></button>
@@ -3844,7 +3846,7 @@ function renderList(){
   const home = !query;
   const nModels = MODELS.length, nArts = ARTS.length;
   const hero = home ? `<section class="tc-hero"><div><span class="tc-lbl">Справочник · ТО и ремонт Лады</span>
-    <h2 class="tc-title">ТО и ремонт Лады своими руками — <span class="acc">по шагам и с точными цифрами</span></h2>
+    <h2 class="tc-title"><span aria-hidden="true"><svg class="gl " viewBox="0 0 78 100" style="width:0.567em" aria-hidden="true"><path d="M6 4h66a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4z" fill="currentColor" stroke="none"/><path class="gl-cut" d="M8 11.5h62M8 17.5h62" stroke-width="2.4"/><path d="M39 24V76" stroke-width="17"/><circle cx="39" cy="86" r="10.5" stroke-width="8.5"/></svg><svg class="gl gl-acc" viewBox="0 0 100 100" style="width:0.727em" aria-hidden="true"><path d="M88.3 42.5L99.5 43.0L99.5 57.0L88.3 57.5L85.4 66.4L94.2 73.4L85.9 84.8L76.5 78.6L69.0 84.1L72.0 94.9L58.6 99.3L54.6 88.7L45.4 88.7L41.4 99.3L28.0 94.9L31.0 84.1L23.5 78.6L14.1 84.8L5.8 73.4L14.6 66.4L11.7 57.5L0.5 57.0L0.5 43.0L11.7 42.5L14.6 33.6L5.8 26.6L14.1 15.2L23.5 21.4L31.0 15.9L28.0 5.1L41.4 0.7L45.4 11.3L54.6 11.3L58.6 0.7L72.0 5.1L69.0 15.9L76.5 21.4L85.9 15.2L94.2 26.6L85.4 33.6ZM65 50A15 15 0 1 0 35 50A15 15 0 1 0 65 50Z" fill="currentColor" stroke="none" fill-rule="evenodd"/></svg></span><span class="vh">ТО</span> и ремонт Лады своими руками — <span class="acc">по шагам и с точными цифрами</span></h2>
     <p class="tc-lead">Пошаговые инструкции, поиск причины по симптому, объёмы, моменты затяжки и ключи — под конкретную модель и мотор.</p>
     ${searchBox("Масло, не заводится, P0300…")}</div>${tcSpec()}</section>` : searchBox("Масло, не заводится, P0300…");
   let sn = 0; const num = () => String(++sn).padStart(2, "0");
