@@ -53,3 +53,4 @@ stati/motor-troit.html
 stati/lampa-akkumulyatora.html
 stati/starter-shchelkaet.html
 stati/davlenie-v-shinah-zimoy.html
+stati/obsluzhivanie-vaz-2110.html
