@@ -54,3 +54,4 @@ stati/lampa-akkumulyatora.html
 stati/starter-shchelkaet.html
 stati/davlenie-v-shinah-zimoy.html
 stati/obsluzhivanie-vaz-2110.html
+stati/omyvatel-stekla-zimoy.html
