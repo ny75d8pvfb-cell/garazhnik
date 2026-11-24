@@ -61,3 +61,4 @@ stati/vaz-2110.html
 stati/vaz-2114.html
 stati/obsluzhivanie-vaz-2114.html
 stati/chto-dolzhno-byt-v-mashine.html
+stati/ne-zavoditsya-v-moroz.html
