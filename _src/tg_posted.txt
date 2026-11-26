@@ -64,3 +64,4 @@ stati/chto-dolzhno-byt-v-mashine.html
 stati/ne-zavoditsya-v-moroz.html
 stati/pechka-duet-holodnym.html
 stati/peregrev-dvigatelya.html
+stati/progrev-dvigatelya-zimoy.html
