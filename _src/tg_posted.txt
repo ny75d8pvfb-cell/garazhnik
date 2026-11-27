@@ -65,3 +65,4 @@ stati/ne-zavoditsya-v-moroz.html
 stati/pechka-duet-holodnym.html
 stati/peregrev-dvigatelya.html
 stati/progrev-dvigatelya-zimoy.html
+stati/obsluzhivanie-vesta-largus.html
